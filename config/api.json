@@ -1,0 +1,7 @@
+{
+	"hosts" : {
+		"web" : "snake.fedevot.meilishuo.com"
+		,"im" : "snake.fedevot.meilishuo.com"
+	}
+	,"timeout" : 15000
+}
