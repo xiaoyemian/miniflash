@@ -9,7 +9,6 @@ div{color:red;}
 
 
 <script>
-require('vue')
 
 var data2 = {
 	message:'444'
