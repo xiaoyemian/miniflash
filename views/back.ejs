@@ -1,32 +1,9 @@
 <% include head5.ejs %>
 
-<script src="http://cdn.jsdelivr.net/vue/1.0.8/vue.min.js"></script>
-
 <app></app>
 
 
-<script>
-
-var data2 = {
-	message:'444'
-}
-
-var App = Vue.extend({
-  template: '<div>{{ message }}</div>',
-  data:function(){ 
-		return data2
-	}
-})
-
-Vue.component('app', App)
-
-new Vue({
-  el: 'body'
-})
-</script>
-
-
-<script src="http://xhxiaoyemian.cello.com/dist/loader.js" data-main="demo"></script>
-<script src="http://xhxiaoyemian.cello.com/dist/demo.js"></script>
+<script src="http://xhxiaoyemian.cello.com/dist/loader.js" data-main="back"></script>
+<script src="http://xhxiaoyemian.cello.com/dist/back.js"></script>
 
 <% include foot.ejs %>
