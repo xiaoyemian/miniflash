@@ -4,10 +4,11 @@
 
 
 <script>
+var data = '666666666'
 return {
   data:function(){ 
 		return {
-			message:'333'
+			message:data
 		}
 	}
 }
