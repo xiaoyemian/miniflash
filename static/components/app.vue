@@ -5,23 +5,23 @@ div{color:red;}
 
 <template>
 <div>{{ message }}</div>
+<bbb></bbb>
 </template>
 
 
 <script>
 
-var data2 = {
-	message:'444'
-}
+var bbb = require('a.vue')
 
-var App = Vue.extend({
-  template: template,
+return {
   data:function(){ 
-		return data2
+		return {
+			message:'444'
+		}
 	}
-})
-
-Vue.component('app', App)
-
+  ,components: {
+    bbb:bbb
+  }
+}
 </script>
 
