@@ -1,16 +1,24 @@
+<style scoped>
+</style>
+
 <template>
-<div>{{ message }}</div>
+<div>{{name}}{{msg}}{{message}}</div>
 </template>
 
 
 <script>
-var data = '666666666'
 return {
   data:function(){ 
+		console.log(this)
 		return {
-			message:data
-		}
+			message:this.$parent.message
+			,msg:'component!'
+		} 
 	}
+	,props:['user', 'name']
+	,created: function(){
+		console.log(this.name)
+  }
 }
 </script>
 

@@ -4,23 +4,28 @@ div{color:red;}
 </style>
 
 <template>
-<div>{{ message }}</div>
-<bbb></bbb>
+<input v-model="name">
+<div>{{name}}{{ message }}</div>
+<aaa :name="name"></aaa>
 </template>
 
 
 <script>
 
-var bbb = require('a.vue')
+var aaa = require('a.vue')
 
 return {
   data:function(){ 
 		return {
-			message:'444'
-		}
+			message:333
+		} 
 	}
+	,props:['user', 'name']
   ,components: {
-    bbb:bbb
+    aaa:aaa
+  }
+	,created: function(){
+		console.log(this.name)
   }
 }
 </script>

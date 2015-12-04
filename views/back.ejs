@@ -1,11 +1,17 @@
 <% include head5.ejs %>
 
-<app></app>
-<bbb></bbb>
+<app name="888"></app>
+<aaa name="666"></aaa>
+
+<div>
+  <input v-model="parentMsg">
+  <br>
+  <child :msg="parentMsg"></child>
+</div>
 
 
 <script src="http://xhxiaoyemian.cello.com/dist/vue.js"></script>
-<script src="http://xhxiaoyemian.cello.com/dist/loader.js" data-main="back"></script>
-<script src="http://xhxiaoyemian.cello.com/dist/back.js"></script>
+<script src="http://xhxiaoyemian.cello.com/dist/loader.js" data-main="page/back"></script>
+<script src="http://xhxiaoyemian.cello.com/dist/page/back.js"></script>
 
 <% include foot.ejs %>
