@@ -2,22 +2,19 @@
 </style>
 
 <template>
-<div>{{name}}{{msg}}{{message}}</div>
+<div>user:{{user}},name:{{name}},message:{{message}},msg:{{msg}}</div>
 </template>
 
 
 <script>
 return {
   data:function(){ 
-		console.log(this)
 		return {
-			message:this.$parent.message
-			,msg:'component!'
+			msg:'component!'
 		} 
 	}
 	,props:['user', 'name']
 	,created: function(){
-		console.log(this.name)
   }
 }
 </script>

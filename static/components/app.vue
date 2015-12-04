@@ -5,8 +5,8 @@ div{color:red;}
 
 <template>
 <input v-model="name">
-<div>{{name}}{{ message }}</div>
-<aaa :name="name"></aaa>
+<div>user:{{user}},name:{{name}},message:{{ message }}</div>
+<aaa :user="user" :name="name"></aaa>
 </template>
 
 
@@ -17,15 +17,15 @@ var aaa = require('a.vue')
 return {
   data:function(){ 
 		return {
-			message:333
+			message:'444444444444444444'
+			, name:'22222222222'
 		} 
 	}
-	,props:['user', 'name']
+	,props:['user']
   ,components: {
     aaa:aaa
   }
 	,created: function(){
-		console.log(this.name)
   }
 }
 </script>

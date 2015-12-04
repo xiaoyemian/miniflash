@@ -2,21 +2,17 @@ var app = require('app.vue')
 var aaa = require('a.vue')
 
 var child = Vue.component('child', {
-  // 声明 prop
   props: ['msg'],
-  // prop 可以在模板内部被使用，
-  // 也可以类似 `this.msg` 这样来赋值
-  template: '<span>{{msg}}</span>'
+  template: '<div>{{msg}}</div>'
 })
-
-
 
 var vm = new Vue({
   el: 'body'
 	,data:{
 		message:'hello world'
 		, name:555555555
-		, user:{name:'xuhui'}
+		, user:'xuhui'
+		, msg:222
 	}
   ,components: {
     app: app
@@ -24,7 +20,7 @@ var vm = new Vue({
 		, child:child
   }
 	,created: function(){
-		console.log(this.user, this.name)
+		console.log(this)
   }
 })
 

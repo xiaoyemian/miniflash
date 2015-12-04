@@ -1,12 +1,11 @@
 <% include head5.ejs %>
 
-<app name="888"></app>
-<aaa name="666"></aaa>
+<app :name="name" :user="user"></app>
+<aaa :name="name" :user="user"></aaa>
 
 <div>
-  <input v-model="parentMsg">
-  <br>
-  <child :msg="parentMsg"></child>
+  <input v-model="msg">
+  <child :msg="msg"></child>
 </div>
 
 
