@@ -1,7 +1,6 @@
 <style scoped>
 .bgc(#fff);
-.w(750px/2);.h(1334px/2);
-margin:10px;
+.w(7.5rem);.h(13.34rem);
 </style>
 
 
