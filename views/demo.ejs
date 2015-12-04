@@ -1,0 +1,16 @@
+<% include head5.ejs %>
+
+<app :name="name" :user="user"></app>
+<aaa :name="name" :user="user"></aaa>
+
+<div>
+  <input v-model="msg">
+  <child :msg="msg"></child>
+</div>
+
+
+<script src="http://xhxiaoyemian.cello.com/dist/vue.js"></script>
+<script src="http://xhxiaoyemian.cello.com/dist/loader.js" data-main="page/demo"></script>
+<script src="http://xhxiaoyemian.cello.com/dist/page/demo.js"></script>
+
+<% include foot.ejs %>
