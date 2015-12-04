@@ -9,7 +9,6 @@ body{
 </style>
 
 <template>
-{{pages[number].items | json}}
 <view v-ref:view :items="pages[number].items"></view>
 </template>
 

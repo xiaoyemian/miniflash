@@ -5,7 +5,6 @@ margin:10px;
 </style>
 
 <template>
-<div>{{items | json}}</div>
 <item v-ref:item v-for="item in items" :item="item"></item>
 </template>
 
