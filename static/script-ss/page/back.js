@@ -15,16 +15,21 @@ var pages = [
 		]
 	}	
 ]
+var number = 0
 
-var vm = new Vue({
+var app = new Vue({
   el: 'body'
 	,data:{
-		page:pages[0]
+		pages:pages
+		,number:number
 	}
   ,components: {
 		app:app
   }
 })
 
-console.log(vm)
+window.pages = pages
+window.app = app
+
+console.log(app)
 

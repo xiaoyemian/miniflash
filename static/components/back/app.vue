@@ -9,8 +9,8 @@ body{
 </style>
 
 <template>
-{{page.items | json}}
-<view v-ref:view :items="page.items"></view>
+{{pages[number].items | json}}
+<view v-ref:view :items="pages[number].items"></view>
 </template>
 
 
@@ -18,12 +18,12 @@ body{
 var view = require('back/view.vue')
 
 return {
-	props:['page']
+	props:['pages', 'number']
   ,components: {
     view:view
   }
 	,created: function(){
-		console.log(this.page)
+		console.log(this.pages, this.number)
 		console.log(this)
   }
 }
