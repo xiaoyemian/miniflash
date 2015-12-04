@@ -1,4 +1,5 @@
-var app = require('back/app.vue')
+var view = require('back/view.vue')
+var menu = require('back/menu.vue')
 
 Vue.config.debug = true
 
@@ -24,12 +25,10 @@ var app = new Vue({
 		,number:number
 	}
   ,components: {
-		app:app
+		view:view
+		,menu:menu
   }
 })
-
-window.pages = pages
-window.app = app
 
 console.log(app)
 

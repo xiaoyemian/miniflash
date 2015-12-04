@@ -1,10 +1,12 @@
 <% include head5.ejs %>
+<link rel="stylesheet" type="text/css" href="<%= JCSTATIC_BASE %>css/cssresetwww.css"/>
 
-<app :pages="pages" :number="number"></app>
+<view v-ref:view :page="pages[number]"></view>
+<menu v-ref:menu></menu>
 
 
-<script src="http://xhxiaoyemian.cello.com/dist/vue.js"></script>
-<script src="http://xhxiaoyemian.cello.com/dist/loader.js" data-main="page/back"></script>
-<script src="http://xhxiaoyemian.cello.com/dist/page/back.js"></script>
+<script src="<%= JCSTATIC_BASE %>dist/vue.js"></script>
+<script src="<%= JCSTATIC_BASE %>dist/loader.js" data-main="page/back"></script>
+<script src="<%= JCSTATIC_BASE %>dist/page/back.js"></script>
 
 <% include foot.ejs %>

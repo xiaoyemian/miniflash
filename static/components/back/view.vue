@@ -4,8 +4,9 @@
 margin:10px;
 </style>
 
+
 <template>
-<item v-ref:item v-for="item in items" :item="item"></item>
+<item v-ref:item v-for="item in page.items" :item="item"></item>
 </template>
 
 
@@ -13,7 +14,7 @@ margin:10px;
 var item = require('back/item.vue')
 
 return {
-	props:['items']
+	props:['page']
   ,components: {
     item:item
   }
