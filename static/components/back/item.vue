@@ -1,17 +1,17 @@
 <style scoped>
 .item{
-	.pa;
+//	.pa;
 }
 </style>
 
 <template>
-<div class="item">{{itemdata}}</div>
+<div class="item">{{item | json}}</div>
 </template>
 
 
 <script>
 return {
-	props:['itemdata']
+	props:['item']
 	, created:function(){
 		console.log(this)
 	}

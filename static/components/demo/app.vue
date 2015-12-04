@@ -6,7 +6,7 @@ div{color:red;}
 <template>
 <input v-model="name">
 <div>user:{{user}},name:{{name}},message:{{ message }}</div>
-<aaa :user="user" :name="name"></aaa>
+<aaa v-ref:bbb :user="user" :name="name"></aaa>
 </template>
 
 

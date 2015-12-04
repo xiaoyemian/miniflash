@@ -3,7 +3,10 @@ var aaa = require('demo/a.vue')
 
 var child = Vue.component('child', {
   props: ['msg'],
-  template: '<div>{{msg}}</div>'
+  template: '<div>{{msg}}</div><aaa v-ref="ddddd"></aaa>'
+  ,components: {
+    aaa:aaa 
+	}
 })
 
 var vm = new Vue({

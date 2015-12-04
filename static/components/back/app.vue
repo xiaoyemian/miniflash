@@ -9,23 +9,22 @@ body{
 </style>
 
 <template>
-<view></view>
+{{page.items | json}}
+<view v-ref:view :items="page.items"></view>
 </template>
 
 
 <script>
-
 var view = require('back/view.vue')
 
 return {
-  data:function(){ 
-		return {
-		} 
-	}
+	props:['page']
   ,components: {
     view:view
   }
 	,created: function(){
+		console.log(this.page)
+		console.log(this)
   }
 }
 </script>

@@ -1,11 +1,11 @@
 <% include head5.ejs %>
 
 <app :user="user"></app>
-<aaa :name="name" :user="user"></aaa>
+<aaa v-ref:aaa :name="name" :user="user"></aaa>
 
 <div>
   <input v-model="msg">
-  <child :msg="msg"></child>
+  <child v-ref:child :msg="msg"></child>
 </div>
 
 

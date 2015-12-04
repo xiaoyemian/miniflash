@@ -5,7 +5,8 @@ margin:10px;
 </style>
 
 <template>
-<item v-for="item in items" :itemdata="item|json"></item>
+<div>{{items | json}}</div>
+<item v-ref:item v-for="item in items" :item="item"></item>
 </template>
 
 
@@ -13,17 +14,12 @@ margin:10px;
 var item = require('back/item.vue')
 
 return {
-  data:function(){ 
-		return {
-			items: [
-				{ message: 'Foo' },
-				{ message: 'Bar' }
-			]	
-		} 
-	}
-	, props:['itemdata']
+	props:['items']
   ,components: {
     item:item
+  }
+	,created: function(){
+		console.log(this)
   }
 }
 </script>
