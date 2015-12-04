@@ -1,30 +1,15 @@
-var app = require('app.vue')
-var aaa = require('a.vue')
+var app = require('back/app.vue')
 
-var child = Vue.component('child', {
-  props: ['msg'],
-  template: '<div>{{msg}}</div>'
-})
+Vue.config.debug = true
 
 var vm = new Vue({
   el: 'body'
 	,data:{
-		message:'hello world'
-		, name:555555555
-		, user:'xuhui'
-		, msg:222
 	}
   ,components: {
-    app: app
-    ,aaa:aaa 
-		, child:child
-  }
-	,created: function(){
-		console.log(this)
+		app:app
   }
 })
-
-
 
 console.log(vm)
 
