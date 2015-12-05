@@ -4,8 +4,7 @@ html{font-size:40px;}
 body{font-size:0.5rem;}
 </style>
 
-<view v-ref:view :page="pages[number]"></view>
-<menu v-ref:menu></menu>
+<app v-ref:app :pages="pages" :number="number"></app>
 
 
 <script src="<%= JCSTATIC_BASE %>dist/vue.js"></script>

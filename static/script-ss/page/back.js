@@ -1,5 +1,4 @@
-var view = require('back/view.vue')
-var menu = require('back/menu.vue')
+var app = require('back/app.vue')
 
 Vue.config.debug = true
 
@@ -18,17 +17,16 @@ var pages = [
 ]
 var number = 0
 
-var app = new Vue({
+var vm = new Vue({
   el: 'body'
 	,data:{
 		pages:pages
 		,number:number
 	}
   ,components: {
-		view:view
-		,menu:menu
+		app:app
   }
 })
 
-console.log(app)
+console.log(vm)
 

@@ -4,25 +4,23 @@ body{
 }
 </style>
 
-<style lang="less" scoped>
-.pa;top:0px;bottom:0px;left:0px;right:0px;
-</style>
-
 <template>
-<view v-ref:view :items="pages[number].items"></view>
+<view v-ref:view :page="pages[number]"></view>
+<menu v-ref:menu></menu>
 </template>
 
 
 <script>
 var view = require('back/view.vue')
+var menu = require('back/menu.vue')
 
 return {
-	props:['pages', 'number']
+	props:['pages','number']
   ,components: {
-    view:view
+		view:view
+		, menu:menu
   }
 	,created: function(){
-		console.log(this.pages, this.number)
 		console.log(this)
   }
 }
