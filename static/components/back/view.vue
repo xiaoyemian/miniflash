@@ -1,9 +1,9 @@
 <style scoped>
 .bgc(#fff);
-.w(7.5rem);.h(13.34rem);
+.w(6.4rem);.h(11.36rem);
 .pa;
-top:50%;.mt(13.34rem/-2);
-left:50%;.ml(7.5rem/-2);
+top:50%;.mt(11.36rem/-2);
+left:50%;.ml(6.4rem/-2);
 
 </style>
 
