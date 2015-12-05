@@ -1,6 +1,10 @@
 <style scoped>
 .bgc(#fff);
 .w(7.5rem);.h(13.34rem);
+.pa;
+top:50%;.mt(13.34rem/-2);
+left:50%;.ml(7.5rem/-2);
+
 </style>
 
 
