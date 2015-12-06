@@ -13,7 +13,7 @@
 </style>
 
 <template>
-<div class="item" :class="{focus : focus ? (focus.item_id == item.item_id) : false}" v-on:click="doFocus" :style="[style, background]">
+<div class="item" :class="{focus : focus ? (focus.item_id == item.item_id) : false}" v-on:click="updateFocus" :style="[style, background]">
 	<div class="handle"></div>
 </div>
 </template>
@@ -44,8 +44,15 @@ return {
 
 	}
 	, methods : {
-		doFocus : function(){
+		updateFocus : function(){
 			this.$dispatch('updateFocus', this.item)
+		}
+		, updateItem : function(opts){
+			var viewSize = this.$parent.size
+
+			this.item.style.top = opts.position.top /parseInt(viewSize.height) * 100
+			this.item.style.left = opts.position.left / parseInt(viewSize.width) * 100
+
 		}
 	}
 	, ready : function(){
@@ -53,15 +60,11 @@ return {
 
 		$(this.$el).draggable({
 			start : function(event){
-				mSelf.doFocus.call(mSelf, event)
+				mSelf.updateFocus()
 			}
 			, drag : function(event, opts){
-				var viewSize = mSelf.$parent.size
-
-				mSelf.item.style.top = opts.position.top /parseInt(viewSize.height) * 100
-				mSelf.item.style.left = opts.position.left / parseInt(viewSize.width) * 100
-
-				mSelf.$dispatch('updateFocus', mSelf.item)
+				mSelf.updateItem(opts)
+				mSelf.updateFocus()
 			}
 		})
 	}
