@@ -7,9 +7,9 @@
 
 
 <template>
-<menu :settings="settings"></menu>
+<menu :focus="focus"></menu>
 <div class="view" :style="[size, position]">
-	<item v-for="(index, item) in page.items" :item="item" :focus_id="focus_id"></item>
+	<item v-for="(index, item) in page.items" :item="item" :focus="focus"></item>
 </div>
 </template>
 
@@ -19,7 +19,6 @@ var item = require('back/item.vue')
 var menu = require('back/menu.vue')
 
 var scale = 0.5
-
 
 return {
   components : {
@@ -41,14 +40,14 @@ return {
 		}
 
 		return {
-			focus_id : '' 
+			focus : null 
 			, size : size
 			, position : position
 		}
 	}
 	, events : {
-		updateFocus : function(item_id){
-			this.focus_id = item_id
+		updateFocus : function(item){
+			this.focus = item
 		}
 	}
 }

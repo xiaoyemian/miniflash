@@ -13,7 +13,7 @@
 </style>
 
 <template>
-<div class="item" :class="{focus : (focus_id == item.item_id)}" v-on:click="focus" :style="[position, size, background]">
+<div class="item" :class="{focus : focus ? (focus.item_id == item.item_id) : false}" v-on:click="doFocus" :style="[position, size, background]">
 	<div class="handle"></div>
 </div>
 </template>
@@ -23,7 +23,7 @@
 require('jqui/draggable')
 
 return {
-	props:['item', 'focus_id']
+	props:['item', 'focus']
 	, data:function(){
 		var item = this.item
 
@@ -49,8 +49,8 @@ return {
 
 	}
 	, methods : {
-		focus : function(){
-			this.$dispatch('updateFocus', this.item.item_id)
+		doFocus : function(){
+			this.$dispatch('updateFocus', this.item)
 		}
 	}
 	, ready : function(){
@@ -60,7 +60,7 @@ return {
 			drag : function(){
 			}
 			, start : function(event){
-				mSelf.focus.call(mSelf, event)
+				mSelf.doFocus.call(mSelf, event)
 			}
 			, stop : function(event, opts){
 				var viewSize = mSelf.$parent.size
