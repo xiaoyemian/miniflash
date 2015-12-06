@@ -6,9 +6,7 @@
 
 <template>
 <div class="menu">
-<span>图片</span>
-<span>文字</span>
-<span>多媒体</span>
+	<div v-for="(key, value) in settings"><label for="settings-{{key}}">{{key}}</label>:<input id="settings-{{key}}" placeholder="{{key}}" value="{{value}}"/></div>
 </div>
 </template>
 
@@ -16,7 +14,14 @@
 <script>
 
 return {
-	created: function(){
+	data : function(){
+		return {
+			settings : {
+				left:'100%'
+			}
+		}
+	}
+	, created: function(){
   }
 }
 </script>

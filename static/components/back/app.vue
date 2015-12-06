@@ -5,7 +5,7 @@ body{
 </style>
 
 <template>
-<view v-ref:view :page="pages[number]"></view>
+<view :page="pages[number]"></view>
 </template>
 
 
@@ -18,7 +18,6 @@ return {
   }
 	, props:['pages','number']
 	, created: function(){
-		console.log(this)
   }
 }
 </script>
