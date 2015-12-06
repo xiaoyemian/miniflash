@@ -25,21 +25,8 @@ require('jqui/draggable')
 return {
 	props:['item', 'focus']
 	, data:function(){
-		var item = this.item
-
-		var style = {
-			width : item.style['width'] + '%'
-			, 'padding-top' : item.style['padding-top'] + '%' 
-			, top : item.style['top'] + '%'
-			, left : item.style['left'] + '%'
-		}
-		, background = {
-			'background-image' : 'url("' + item.background.image + '")' 
-		}
 
 		return {
-			background : background 
-			, style : style
 		}
 
 	}
@@ -52,8 +39,21 @@ return {
 
 			this.item.style.top = opts.position.top /parseInt(viewSize.height) * 100
 			this.item.style.left = opts.position.left / parseInt(viewSize.width) * 100
-
 		}
+		, resetItem : function(item){
+			this.style = {
+				width : item.style['width'] + '%'
+				, 'padding-top' : item.style['padding-top'] + '%' 
+				, top : item.style['top'] + '%'
+				, left : item.style['left'] + '%'
+			}
+			this.background = {
+				'background-image' : 'url("' + item.background.image + '")' 
+			}
+		}
+	}
+	, created : function(){
+		this.resetItem(this.item)
 	}
 	, ready : function(){
 		var mSelf = this
@@ -64,7 +64,6 @@ return {
 			}
 			, drag : function(event, opts){
 				mSelf.updateItem(opts)
-				mSelf.updateFocus()
 			}
 		})
 	}
