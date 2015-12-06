@@ -1,8 +1,11 @@
 <style>
-.item{
+.itemBox{
 	.pa;
+}
+.item{
 	background-size:100%;
 	background-repeat:no-repeat;
+	.pa;top:0px;left:0px;right:0px;bottom:0px;
 }
 .focus{
 	.handle{
@@ -13,7 +16,8 @@
 </style>
 
 <template>
-<div class="item" :class="{focus : (focus_id == item.item_id)}" v-on:click="focus" :style="[background, style]">
+<div class="itemBox" :class="{focus : (focus_id == item.item_id)}" v-on:click="focus" :style="[position, size]">
+	<div class="item" :style="[background]"></div>
 	<div class="handle"></div>
 </div>
 </template>
@@ -35,10 +39,12 @@ return {
 			background : {
 				'background-image' : 'url("' + background.image + '")' 
 			}
-			, style : {
+			, position : {
 				top : style['top'] + '%'
 				, left : style['left'] + '%'
-				, width : style['width'] + '%'
+			}
+			, size : {
+				width : style['width'] + '%'
 				, 'padding-top' : style['padding-top'] + '%' 
 			}
 		}
@@ -62,8 +68,8 @@ return {
 				var viewSize = mSelf.$parent.size
 				var position = $(this).position()
 
-				mSelf.style.top = position.top /parseInt(viewSize.height) * 100 + '%'
-				mSelf.style.left = position.left / parseInt(viewSize.width) * 100 + '%'
+				mSelf.position.top = position.top /parseInt(viewSize.height) * 100 + '%'
+				mSelf.position.left = position.left / parseInt(viewSize.width) * 100 + '%'
 
 			}
 		})
