@@ -5,8 +5,9 @@
 </style>
 
 <template>
-<div class="menu">
-	<div v-for="(key, value) in size"><label for="settings-{{key}}">{{key}}</label>:<input id="settings-{{key}}" placeholder="{{key}}" value="{{value}}"/></div>
+<div class="menu" v-if="item">
+	<div v-for="(key, value) in item.background"><label for="settings-background-{{key}}">{{key}}</label>:<input id="settings-background-{{key}}" placeholder="{{key}}" value="{{value}}"/></div>
+	<div v-for="(key, value) in item.style"><label for="settings-style-{{key}}">{{key}}</label>:<input id="settings-style-{{key}}" placeholder="{{key}}" value="{{value}}"/></div>
 </div>
 </template>
 
@@ -14,37 +15,10 @@
 <script>
 
 return {
-	props : ['focus']
+	props : ['item']
 	, data : function(){
 
-		if(this.focus){
-
-			var item = this.focus
-
-			return {
-				size : {
-					width : item.style['width'] + '%'
-					, 'padding-top' : item.style['padding-top'] + '%' 
-				}
-				, position : {
-					top : item.style['top'] + '%'
-					, left : item.style['left'] + '%'
-				}
-				, background : {
-					'background-image' : 'url("' + item.background.image + '")' 
-				}
-				, scale : item.scale
-				, cr : item.cr 
-				, biz : item.biz 
-			}
-
-		}else{
-			return {
-				background : {} 
-				, size : {}
-				, position : {}
-			}
-
+		return {
 		}
 	}
 	, created: function(){

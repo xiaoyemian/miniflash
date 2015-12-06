@@ -7,7 +7,7 @@
 
 
 <template>
-<menu :focus="focus"></menu>
+<menu :item="focus"></menu>
 <div class="view" :style="[size, position]">
 	<item v-for="(index, item) in page.items" :item="item" :focus="focus"></item>
 </div>

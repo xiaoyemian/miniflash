@@ -13,7 +13,7 @@
 </style>
 
 <template>
-<div class="item" :class="{focus : focus ? (focus.item_id == item.item_id) : false}" v-on:click="doFocus" :style="[position, size, background]">
+<div class="item" :class="{focus : focus ? (focus.item_id == item.item_id) : false}" v-on:click="doFocus" :style="[style, background]">
 	<div class="handle"></div>
 </div>
 </template>
@@ -27,24 +27,19 @@ return {
 	, data:function(){
 		var item = this.item
 
-		var size = {
+		var style = {
 			width : item.style['width'] + '%'
 			, 'padding-top' : item.style['padding-top'] + '%' 
-		}
-		, position = {
-			top : item.style['top'] + '%'
+			, top : item.style['top'] + '%'
 			, left : item.style['left'] + '%'
 		}
 		, background = {
 			'background-image' : 'url("' + item.background.image + '")' 
 		}
-		, biz = item.cr 
-		, scale = item.scale
 
 		return {
 			background : background 
-			, size : size 
-			, position : position 
+			, style : style
 		}
 
 	}
@@ -57,17 +52,16 @@ return {
 		var mSelf = this
 
 		$(this.$el).draggable({
-			drag : function(){
-			}
-			, start : function(event){
+			start : function(event){
 				mSelf.doFocus.call(mSelf, event)
 			}
-			, stop : function(event, opts){
+			, drag : function(event, opts){
 				var viewSize = mSelf.$parent.size
 
-				mSelf.position.top = opts.position.top /parseInt(viewSize.height) * 100 + '%'
-				mSelf.position.left = opts.position.left / parseInt(viewSize.width) * 100 + '%'
+				mSelf.item.style.top = opts.position.top /parseInt(viewSize.height) * 100
+				mSelf.item.style.left = opts.position.left / parseInt(viewSize.width) * 100
 
+				mSelf.$dispatch('updateFocus', mSelf.item)
 			}
 		})
 	}
