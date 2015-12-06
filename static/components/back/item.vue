@@ -1,11 +1,8 @@
 <style>
-.itemBox{
-	.pa;
-}
 .item{
 	background-size:100%;
 	background-repeat:no-repeat;
-	.pa;top:0px;left:0px;right:0px;bottom:0px;
+	.pa;
 }
 .focus{
 	.handle{
@@ -16,8 +13,7 @@
 </style>
 
 <template>
-<div class="itemBox" :class="{focus : (focus_id == item.item_id)}" v-on:click="focus" :style="[position, size]">
-	<div class="item" :style="[background]"></div>
+<div class="item" :class="{focus : (focus_id == item.item_id)}" v-on:click="focus" :style="[position, size, background]">
 	<div class="handle"></div>
 </div>
 </template>
@@ -64,12 +60,11 @@ return {
 			, start : function(event){
 				mSelf.focus.call(mSelf, event)
 			}
-			, stop : function(){
+			, stop : function(event, opts){
 				var viewSize = mSelf.$parent.size
-				var position = $(this).position()
 
-				mSelf.position.top = position.top /parseInt(viewSize.height) * 100 + '%'
-				mSelf.position.left = position.left / parseInt(viewSize.width) * 100 + '%'
+				mSelf.position.top = opts.position.top /parseInt(viewSize.height) * 100 + '%'
+				mSelf.position.left = opts.position.left / parseInt(viewSize.width) * 100 + '%'
 
 			}
 		})
