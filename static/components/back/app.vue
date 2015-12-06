@@ -1,4 +1,4 @@
-<style lang="less">
+<style>
 body{
 	.bgc(#393939);
 }
