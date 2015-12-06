@@ -2,14 +2,20 @@
 .item{
 	.pa;
 	background-size:100%;
+	background-repeat:no-repeat;
 }
 .focus{
-	border:10px solid #f69;
+	.handle{
+		.pa;top:0px;left:0px;right:0px;bottom:0px;
+		border:10px solid #f69;
+	}
 }
 </style>
 
 <template>
-<div class="item" :class="{focus : (focus_id == item.item_id)}" v-on:click="focus" :style="[background, style]"></div>
+<div class="item" :class="{focus : (focus_id == item.item_id)}" v-on:click="focus" :style="[background, style]">
+	<div class="handle"></div>
+</div>
 </template>
 
 
