@@ -17,7 +17,6 @@
 
 return {
 	created: function(){
-		console.log(this)
   }
 }
 </script>

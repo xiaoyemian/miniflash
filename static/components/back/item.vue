@@ -3,35 +3,30 @@
 	.pa;
 	background-size:100%;
 }
+.focus{
+	border:10px solid #f69;
+}
 </style>
 
 <template>
-<div class="item" v-on:click="focus" item_id="{{item_id}}" :style="[background, style]"></div>
+<div class="item" :class="{focus : (focus_id == item.item_id)}" v-on:click="focus" :style="[background, style]"></div>
 </template>
 
 
 <script>
 require('jqui/draggable')
 
-function focus(){
-	console.log(this)
-	console.log(event)
-}
-
-
-
 return {
-	props:['item']
+	props:['item', 'focus_id']
 	, data:function(){
-		var item_id = this.item.item_id
-			, style = this.item.style
-			, background = this.item.background
-			, biz = this.item.cr 
-			, scale = this.item.scale
+		var item = this.item
+			, style = item.style
+			, background = item.background
+			, biz = item.cr 
+			, scale = item.scale
 
 		return {
-			item_id : item_id
-			, background : {
+			background : {
 				'background-image' : 'url("' + background.image + '")' 
 			}
 			, style : {
@@ -44,7 +39,9 @@ return {
 
 	}
 	, methods : {
-		focus : focus
+		focus : function(){
+			this.$dispatch('updateFocus', this.item.item_id)
+		}
 	}
 	, ready : function(){
 		var mSelf = this
@@ -52,8 +49,8 @@ return {
 		$(this.$el).draggable({
 			drag : function(){
 			}
-			, start : function(){
-				focus.apply(mSelf, arguments)
+			, start : function(event){
+				mSelf.focus.call(mSelf, event)
 			}
 			, stop : function(){
 				var viewSize = mSelf.$parent.size
@@ -62,7 +59,6 @@ return {
 				mSelf.style.top = position.top /parseInt(viewSize.height) * 100 + '%'
 				mSelf.style.left = position.left / parseInt(viewSize.width) * 100 + '%'
 
-				console.log(mSelf)
 			}
 		})
 	}

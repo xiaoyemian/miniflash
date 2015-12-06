@@ -15,12 +15,12 @@ var view = require('back/view.vue')
 var menu = require('back/menu.vue')
 
 return {
-	props:['pages','number']
-  ,components: {
+  components: {
 		view:view
 		, menu:menu
   }
-	,created: function(){
+	, props:['pages','number']
+	, created: function(){
 		console.log(this)
   }
 }
