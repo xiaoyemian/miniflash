@@ -7,16 +7,16 @@
 
 
 <template>
+<menu v-ref:menu></menu>
 <div class="view" :style="[size, position]">
-<item v-for="item in page.items" :item="item" :focus_id="focus_id"></item>
+	<item v-for="item in page.items" :item="item" :focus_id="focus_id"></item>
 </div>
 </template>
 
 
 <script>
 var item = require('back/item.vue')
-
-var focus_id = 'item1429603485765'
+var menu = require('back/menu.vue')
 
 var scale = 0.5
 var size = {
@@ -32,12 +32,13 @@ var position = {
 
 return {
   components : {
-    item:item
+    item : item
+		, menu : menu
   }
 	, props:['page']
 	, data : function(){
 		return {
-			focus_id : focus_id
+			focus_id : '' 
 			, size : size
 			, position : position
 			, scale : scale

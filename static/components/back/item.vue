@@ -26,23 +26,25 @@ return {
 	props:['item', 'focus_id']
 	, data:function(){
 		var item = this.item
-			, style = item.style
-			, background = item.background
-			, biz = item.cr 
-			, scale = item.scale
+
+		var size = {
+			width : item.style['width'] + '%'
+			, 'padding-top' : item.style['padding-top'] + '%' 
+		}
+		, position = {
+			top : item.style['top'] + '%'
+			, left : item.style['left'] + '%'
+		}
+		, background = {
+			'background-image' : 'url("' + item.background.image + '")' 
+		}
+		, biz = item.cr 
+		, scale = item.scale
 
 		return {
-			background : {
-				'background-image' : 'url("' + background.image + '")' 
-			}
-			, position : {
-				top : style['top'] + '%'
-				, left : style['left'] + '%'
-			}
-			, size : {
-				width : style['width'] + '%'
-				, 'padding-top' : style['padding-top'] + '%' 
-			}
+			background : background 
+			, size : size 
+			, position : position 
 		}
 
 	}
