@@ -71,7 +71,6 @@ return {
 					, width : viewSize.width * itemdata.style['width']/100
 					, height : viewSize.width * itemdata.style['padding-top']/100 
 				}
-				delete itemdata.style['padding-top']
 			}
 
 			this.style = {

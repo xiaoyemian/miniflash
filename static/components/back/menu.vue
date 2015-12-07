@@ -7,7 +7,7 @@
 <template>
 <div class="menu" v-if="focus">
 	<div v-for="(key, value) in focus.itemdata.background"><label for="background|{{key}}">{{label.background[key]}}</label><input id="background|{{key}}" placeholder="{{placeholder.background[key]}}" value="{{value}}"/></div>
-	<div v-for="(key, value) in focus.itemdata.style"><label for="style|{{key}}">{{label.style[key]}}</label><input @keyup="updateItem" id="style|{{key}}" placeholder="{{placeholder.style[key]}}" value="{{value}}"/></div>
+	<div v-for="(key, value) in focus.itemdata.style"><label for="style|{{key}}">{{label.style[key]}}</label><input type="number" @keyup="updateItem" id="style|{{key}}" placeholder="{{placeholder.style[key]}}" value="{{value}}"/></div>
 </div>
 </template>
 
