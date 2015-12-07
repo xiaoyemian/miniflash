@@ -1,5 +1,6 @@
 <style>
 .menu{
+	z-index:900;
 	.f(12px);.fc(#ccc);
 	.pf;top:26px;left:0px;right:0px;
 	input{
@@ -20,6 +21,7 @@
 	}
 }
 .itemMenu{
+	.pa;top:0px;left:0px;right:0px;
 	border:1px solid #222;
 	.bgc(#333);
 	.inputBox{
@@ -29,7 +31,7 @@
 	}
 }
 .typeMenu{
-	.left;.mt(10px);
+	.pa;top:40px;left:0px;
 	border:1px solid #222;
 	.bgc(#333);
 	padding:4px;
