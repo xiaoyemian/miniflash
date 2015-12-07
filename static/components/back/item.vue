@@ -54,8 +54,6 @@ return {
 		this.reloadItem()
 
 		return {
-			style : this.style
-			, background:this.background
 		}
 	}
 	, methods : {
