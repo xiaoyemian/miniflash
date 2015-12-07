@@ -13,7 +13,7 @@
 </style>
 
 <template>
-<div class="item" :class="{focus : focus ? (focus.item.item_id == item.item_id) : false}" v-on:click="updateFocus" :style="[style, background]">
+<div class="item" :class="{focus : focus ? (focus.itemdata.item_id == itemdata.item_id) : false}" v-on:click="updateFocus" :style="[style, background]">
 	<div class="handle"></div>
 </div>
 </template>
@@ -23,14 +23,14 @@
 require('jqui/draggable')
 
 return {
-	props:['item', 'focus']
+	props:['itemdata', 'focus']
 	, data:function(){
+		this.reloadItem()
 
 		return {
 			style:this.style
 			, background:this.background
 		}
-
 	}
 	, methods : {
 		updateFocus : function(){
@@ -38,23 +38,22 @@ return {
 		}
 		, updateItem : function(opts){
 			var viewSize = this.$parent.size
-			this.item.style.top = opts.position.top /parseInt(viewSize.height) * 100
-			this.item.style.left = opts.position.left / parseInt(viewSize.width) * 100
+			var itemdata = this.itemdata
+			itemdata.style.top = opts.position.top /parseInt(viewSize.height) * 100
+			itemdata.style.left = opts.position.left / parseInt(viewSize.width) * 100
 		}
 		, reloadItem : function(){
+			var itemdata = this.itemdata
 			this.style = {
-				width : this.item.style['width'] + '%'
-				, 'padding-top' : this.item.style['padding-top'] + '%' 
-				, top : this.item.style['top'] + '%'
-				, left : this.item.style['left'] + '%'
+				width : itemdata.style['width'] + '%'
+				, 'padding-top' : itemdata.style['padding-top'] + '%' 
+				, top : itemdata.style['top'] + '%'
+				, left : itemdata.style['left'] + '%'
 			}
 			this.background = {
-				'background-image' : 'url("' + this.item.background.image + '")' 
+				'background-image' : 'url("' + itemdata.background.image + '")' 
 			}
 		}
-	}
-	, created : function(){
-		this.reloadItem()
 	}
 	, ready : function(){
 		var mSelf = this
@@ -70,8 +69,6 @@ return {
 				mSelf.reloadItem()
 			}
 		})
-	}
-	, watch: {
 	}
 }
 </script>
