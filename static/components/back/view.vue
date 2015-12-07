@@ -7,7 +7,7 @@
 
 
 <template>
-<menu :item="focus"></menu>
+<menu :focus="focus"></menu>
 <div class="view" :style="[size, position]">
 	<item v-for="(index, item) in page.items" :item="item" :focus="focus"></item>
 </div>
@@ -48,6 +48,9 @@ return {
 	, events : {
 		updateFocus : function(item){
 			this.focus = item
+		}
+		, updateItem : function(item){
+			this.focus.reloadItem()
 		}
 	}
 }

@@ -5,9 +5,9 @@
 </style>
 
 <template>
-<div class="menu" v-if="item">
-	<div v-for="(key, value) in item.background"><label for="background-{{key}}">{{key}}</label>:<input id="background-{{key}}" placeholder="{{key}}" value="{{value}}"/></div>
-	<div v-for="(key, value) in item.style"><label for="style-{{key}}">{{key}}</label>:<input @keyup="updateItem" id="style-{{key}}" placeholder="{{key}}" value="{{value}}"/></div>
+<div class="menu" v-if="focus">
+	<div v-for="(key, value) in focus.item.background"><label for="background-{{key}}">{{key}}</label>:<input id="background-{{key}}" placeholder="{{key}}" value="{{value}}"/></div>
+	<div v-for="(key, value) in focus.item.style"><label for="style-{{key}}">{{key}}</label>:<input @keyup="updateItem" id="style-{{key}}" placeholder="{{key}}" value="{{value}}"/></div>
 </div>
 </template>
 
@@ -15,24 +15,21 @@
 <script>
 
 return {
-	props : ['item']
+	props : ['focus']
 	, data : function(){
 
 		return {
 		}
 	}
 	, methods : {
-		updateFocus : function(){
-			this.$dispatch('updateFocus', this.item)
-		}
-		, updateItem : function(event){
+		updateItem : function(event){
 			var setting = event.target
 			var type = setting.id.split('-')
 			var value = setting.value
 
-			this.item[type[0]][type[1]] = value|0
+			this.focus.item[type[0]][type[1]] = value|0
 
-			this.updateFocus()
+			this.$dispatch('updateItem', this.focus)
 		}
 	}
 }

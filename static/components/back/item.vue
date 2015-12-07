@@ -13,7 +13,7 @@
 </style>
 
 <template>
-<div class="item" :class="{focus : focus ? (focus.item_id == item.item_id) : false}" v-on:click="updateFocus" :style="[style, background]">
+<div class="item" :class="{focus : focus ? (focus.item.item_id == item.item_id) : false}" v-on:click="updateFocus" :style="[style, background]">
 	<div class="handle"></div>
 </div>
 </template>
@@ -27,45 +27,51 @@ return {
 	, data:function(){
 
 		return {
+			style:this.style
+			, background:this.background
 		}
 
 	}
 	, methods : {
 		updateFocus : function(){
-			this.$dispatch('updateFocus', this.item)
+			this.$dispatch('updateFocus', this)
 		}
 		, updateItem : function(opts){
 			var viewSize = this.$parent.size
-
 			this.item.style.top = opts.position.top /parseInt(viewSize.height) * 100
 			this.item.style.left = opts.position.left / parseInt(viewSize.width) * 100
 		}
-		, resetItem : function(item){
+		, reloadItem : function(){
 			this.style = {
-				width : item.style['width'] + '%'
-				, 'padding-top' : item.style['padding-top'] + '%' 
-				, top : item.style['top'] + '%'
-				, left : item.style['left'] + '%'
+				width : this.item.style['width'] + '%'
+				, 'padding-top' : this.item.style['padding-top'] + '%' 
+				, top : this.item.style['top'] + '%'
+				, left : this.item.style['left'] + '%'
 			}
 			this.background = {
-				'background-image' : 'url("' + item.background.image + '")' 
+				'background-image' : 'url("' + this.item.background.image + '")' 
 			}
 		}
 	}
 	, created : function(){
-		this.resetItem(this.item)
+		this.reloadItem()
 	}
 	, ready : function(){
 		var mSelf = this
 
 		$(this.$el).draggable({
-			start : function(event){
+			start : function(event, opts){
 				mSelf.updateFocus()
 			}
 			, drag : function(event, opts){
 				mSelf.updateItem(opts)
 			}
+			, stop : function(event, opts){
+				mSelf.reloadItem()
+			}
 		})
+	}
+	, watch: {
 	}
 }
 </script>
