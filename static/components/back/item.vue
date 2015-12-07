@@ -63,8 +63,8 @@ return {
 			this.$dispatch('setFocus', this)
 		}
 		, aspectRatio : function(){
-			console.log(this.itemdata)	
-
+			this.itemdata.style.height = this.itemdata.style.width*this.itemdata.scale
+			this.reloadItem()	
 		}
 		, updateItem : function(opts){
 			if(opts.position){
