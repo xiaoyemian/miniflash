@@ -8,6 +8,11 @@
 	.handle{
 		.pa;top:0px;left:0px;right:0px;bottom:0px;
 		border:10px solid #f69;
+	
+		.aspectRatioBtn{
+			.pa;right:-30px;top:-10px;.w(20px);.h(20px);.bgc(red);
+			.cursor;
+		}
 	}
 	.ui-resizable{
 		&-se, &-e, &-s{
@@ -32,7 +37,9 @@
 
 <template>
 <div class="item" :class="{focus : focus ? (focus.itemdata.item_id == itemdata.item_id) : false}" v-on:click="setFocus" :style="[style, background]">
-	<div class="handle"></div>
+	<div class="handle">
+		<div v-on:click="aspectRatio" class="aspectRatioBtn"></div>
+	</div>
 </div>
 </template>
 
@@ -55,10 +62,21 @@ return {
 		setFocus : function(){
 			this.$dispatch('setFocus', this)
 		}
+		, aspectRatio : function(){
+			console.log(this.itemdata)	
+
+		}
 		, updateItem : function(opts){
 			var itemdata = this.itemdata
-			itemdata.style.top = opts.position.top
-			itemdata.style.left = opts.position.left
+
+			if(opts.position){
+				itemdata.style.top = opts.position.top
+				itemdata.style.left = opts.position.left
+			}
+			if(opts.size){
+				itemdata.style.height = opts.size.height
+				itemdata.style.width = opts.size.width
+			}
 		}
 		, reloadItem : function(){
 			var viewSize = this.$parent.size
@@ -91,9 +109,16 @@ return {
 		var $item = $(this.$el)
 
 		$item.resizable({
-			start : function(){
-				console.log(arguments)
+			start : function(event, opts){
+				mSelf.setFocus()
 			}
+			, resize : function(event, opts){
+				mSelf.updateItem(opts)
+			}
+			, stop : function(event, opts){
+				mSelf.reloadItem()
+			}
+			//, aspectRatio: true
 		})
 
 		$item.draggable({
