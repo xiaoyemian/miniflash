@@ -36,9 +36,9 @@
 </style>
 
 <template>
-<div class="item" :class="{focus : focus ? (focus.itemdata.item_id == itemdata.item_id) : false}" v-on:click="setFocus" :style="[style, background]">
+<div class="item" :class="{focus : focus ? (focus.itemdata.item_id == itemdata.item_id) : false}" @click.stop.prevent="setFocus" :style="[style, background]">
 	<div class="handle">
-		<div v-on:click="aspectRatio" class="aspectRatioBtn"></div>
+		<div @click.stop.prevent="aspectRatio" class="aspectRatioBtn"></div>
 	</div>
 </div>
 </template>

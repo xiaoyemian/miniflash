@@ -1,15 +1,21 @@
 <style>
 .view{
-	.bgc(#fff);
 	.pa;
+	top:0px;bottom:0px;left:0px;right:0px;
+	.page {
+		.bgc(#fff);
+		.pa;
+	}
 }
 </style>
 
 
 <template>
 <menu :focus="focus"></menu>
-<div class="view" :style="[style]">
-	<item v-for="(index, itemdata) in pagedata.items" :itemdata="itemdata" :focus="focus"></item>
+<div class="view" @click="deleteFocus">
+	<div class="page" :style="[style]">
+		<item v-for="(index, itemdata) in pagedata.items" :itemdata="itemdata" :focus="focus"></item>
+	</div>
 </div>
 </template>
 
@@ -48,9 +54,17 @@ return {
 			}
 		}
 	}
+	, methods : {
+		deleteFocus : function(){
+			this.focus = null 
+		}
+		, setFocus : function(item){
+			this.focus = item
+		}
+	}
 	, events : {
 		setFocus : function(item){
-			this.focus = item
+			this.setFocus(item)
 		}
 		, updateItem : function(){
 			this.focus.reloadItem()
