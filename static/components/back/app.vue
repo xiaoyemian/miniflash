@@ -2,6 +2,7 @@
 body{
 	.bgc(#393939);
 	.f(12px);
+	.hidden;
 }
 .headtop{
 	z-index: 998;
