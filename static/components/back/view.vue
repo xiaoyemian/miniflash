@@ -1,8 +1,7 @@
 <style>
 .view{
 	.pa;
-	top:10%;bottom:10%;left:0px;right:0px;
-	.mt(36px);.mb(220px);
+	top:26px;bottom:220px;left:0px;right:0px;
 
 	.page{
 		.pa;
@@ -61,6 +60,7 @@ return {
 			, style : {
 				width : size.width + 'px'
 				, height : size.height + 'px'
+				, top : 10 + '%'
 				, left : 50 + '%'
 				, 'margin-left' : size.width * -0.5 + 'px'
 			}
