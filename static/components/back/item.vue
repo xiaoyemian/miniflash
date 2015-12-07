@@ -54,6 +54,8 @@ return {
 		this.reloadItem()
 
 		return {
+			style : this.style
+			, background : this.background
 		}
 	}
 	, methods : {
@@ -84,6 +86,7 @@ return {
 					, top : viewSize.height * this.itemdata.style['top']/100
 					, left : viewSize.width * this.itemdata.style['left']/100
 				}
+
 			}
 
 			this.style = {
