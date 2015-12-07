@@ -11,7 +11,7 @@
 
 
 <template>
-<menu :focus="focus"></menu>
+<itemsetting :focus="focus"></itemsetting>
 <div class="view" @click="deleteFocus">
 	<div class="page" :style="[style]">
 		<item v-for="(index, itemdata) in pagedata.items" :itemdata="itemdata" :focus="focus"></item>
@@ -23,7 +23,7 @@
 <script>
 require('jquery')
 var item = require('back/item.vue')
-var menu = require('back/menu.vue')
+var itemsetting = require('back/itemsetting.vue')
 
 var width = 640
 var height = 1136
@@ -33,7 +33,7 @@ var scale = ($(window).height()-220)/height*.8
 return {
   components : {
     item : item
-		, menu : menu
+		, itemsetting : itemsetting
   }
 	, props:['pagedata']
 	, data : function(){

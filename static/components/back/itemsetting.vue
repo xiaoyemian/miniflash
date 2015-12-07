@@ -1,5 +1,5 @@
 <style>
-.menu{
+.itemsetting{
 	z-index:900;
 	.f(12px);.fc(#ccc);
 	.pf;top:26px;left:0px;right:0px;
@@ -20,7 +20,7 @@
 		.tr;
 	}
 }
-.itemMenu{
+.itemStyle{
 	.pa;top:0px;left:0px;right:0px;
 	border:1px solid #222;
 	.bgc(#333);
@@ -30,7 +30,7 @@
 		.i_block;
 	}
 }
-.typeMenu{
+.itemType{
 	.pa;top:40px;left:0px;
 	border:1px solid #222;
 	.bgc(#333);
@@ -39,12 +39,12 @@
 </style>
 
 <template>
-<div class="menu">
-	<div class="itemMenu" v-if="focus">
+<div class="itemsetting">
+	<div class="itemStyle" v-if="focus">
 		<div class="inputBox" v-for="(key, value) in focus.itemdata.style"><label for="style|{{key}}">{{label.style[key]}}</label><input type="number" @keyup="updateItem" id="style|{{key}}" placeholder="" value="{{value}}"/>px</div>
 	</div>
 
-	<div class="typeMenu" v-if="focus">
+	<div class="itemType" v-if="focus">
 			<div v-for="(key, value) in focus.itemdata.background"><label for="background|{{key}}">{{label.background[key]}}</label><input type="text" id="background|{{key}}" placeholder="" value="{{value}}"/></div>
 	</div>
 

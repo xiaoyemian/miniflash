@@ -1,8 +1,8 @@
 <style>
 .item{
+	.pa;
 	background-size:100% 100%;
 	background-repeat:no-repeat;
-	.pa;
 }
 .focus{
 	.handle{
