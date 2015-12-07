@@ -1,7 +1,7 @@
 <style>
 .view{
 	.pa;
-	top:0px;bottom:0px;left:0px;right:0px;
+	top:26px;bottom:60px;left:0px;right:0px;
 	.page {
 		.bgc(#fff);
 		.pa;
@@ -26,7 +26,7 @@ var menu = require('back/menu.vue')
 
 var width = 640
 var height = 1136
-var scale = 0.5
+var scale = 0.4
 
 return {
   components : {

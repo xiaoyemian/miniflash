@@ -10,7 +10,7 @@
 		border:10px solid #f69;
 	
 		.aspectRatioBtn{
-			.pa;right:-30px;top:-10px;.w(20px);.h(20px);.bgc(red);
+			.pa;left:50%;top:0%;.ml(-10px);.w(20px);.h(20px);.bgc(red);
 			.cursor;
 		}
 	}
@@ -21,15 +21,15 @@
 		}
 		&-se{
 			cursor: se-resize;
-			bottom:0px;right:0px;.w(10px);.h(10px);
+			bottom:-10px;right:-10px;.w(20px);.h(20px);
 		}
 		&-e{
 			cursor: e-resize;
-			top:0px;bottom:10px;right:0px;.w(10px);
+			top:0px;bottom:10px;right:-10px;.w(20px);
 		}
 		&-s{
 			cursor: s-resize;
-			left:0px;right:10px;bottom:0px;.h(10px);
+			left:0px;right:10px;bottom:-10px;.h(20px);
 		}
 	}
 }
@@ -115,6 +115,7 @@ return {
 			, stop : function(event, opts){
 				mSelf.reloadItem()
 			}
+			, containment: "document"
 		})
 	
 		$item.resizable({

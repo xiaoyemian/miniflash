@@ -1,18 +1,54 @@
 <style>
 .menu{
-	.bgc(#535353);
+	.f(12px);.fc(#ccc);
+	.pf;top:26px;left:0px;right:0px;
+	input{
+		&[type="text"],&[type="number"]{
+			.i_block;.fc(#ccc);.bgc(#3a3a3a);padding:2px 6px;
+			border:1px solid #2e2e2e;
+		}
+		&[type="text"]{
+      .w(100px);
+    }
+    &[type="number"]{
+      .c;.w(44px);
+    }		
+	}
+	label {
+		.i_block;
+		.tr;
+	}
+}
+.itemMenu{
+	border:1px solid #222;
+	.bgc(#333);
+	.inputBox{
+		padding:4px;
+		.mr(4px);
+		.i_block;
+	}
+}
+.typeMenu{
+	.left;.mt(10px);
+	border:1px solid #222;
+	.bgc(#333);
+	padding:4px;
 }
 </style>
 
 <template>
-<div class="menu" v-if="focus">
-	<div v-for="(key, value) in focus.itemdata.background"><label for="background|{{key}}">{{label.background[key]}}</label><input id="background|{{key}}" placeholder="{{placeholder.background[key]}}" value="{{value}}"/></div>
+<div class="menu">
+	<div class="itemMenu" v-if="focus">
+		<div class="inputBox" v-for="(key, value) in focus.itemdata.style"><label for="style|{{key}}">{{label.style[key]}}</label><input type="number" @keyup="updateItem" id="style|{{key}}" placeholder="" value="{{value}}"/>px</div>
+	</div>
 
-	<div v-for="(key, value) in focus.itemdata.style"><label for="style|{{key}}">{{label.style[key]}}</label><input type="number" @keyup="updateItem" id="style|{{key}}" placeholder="{{placeholder.style[key]}}" value="{{value}}"/></div>
+	<div class="typeMenu" v-if="focus">
+			<div v-for="(key, value) in focus.itemdata.background"><label for="background|{{key}}">{{label.background[key]}}</label><input type="text" id="background|{{key}}" placeholder="" value="{{value}}"/></div>
+	</div>
 
 </div>
-</template>
 
+</template>
 
 <script>
 
@@ -24,22 +60,11 @@ return {
 				style : {
 					width : '宽度:'
 					, height : '高度:'
-					, top : '顶部距离:'
-					, left : '左边距离:'
+					, top : 'x:'
+					, left : 'y:'
 				}
 				, background : {
-					image : '背景图片url:'
-				}
-			}
-			, placeholder : {
-				style : {
-					width : '宽度'
-					, height : '高度'
-					, top : '顶部距离'
-					, left : '左边距离'
-				}
-				, background : {
-					image : '背景图片url'
+					image : '背景图片:'
 				}
 			}
 		}
