@@ -31,6 +31,9 @@ var width = 640
 var height = 1136
 
 var scale = ($(window).height()-180)/height*.8
+if(scale >= 0.4)
+	scale = 0.4
+
 
 return {
   components : {
