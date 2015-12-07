@@ -17,6 +17,7 @@
 		<item v-for="(index, itemdata) in pagedata.items" :itemdata="itemdata" :focus="focus"></item>
 	</div>
 </div>
+<actionsetting :focus="focus"></actionsetting>
 </template>
 
 
@@ -24,16 +25,18 @@
 require('jquery')
 var item = require('back/item.vue')
 var itemsetting = require('back/itemsetting.vue')
+var actionsetting = require('back/actionsetting.vue')
 
 var width = 640
 var height = 1136
 
-var scale = ($(window).height()-220)/height*.8
+var scale = ($(window).height()-180)/height*.8
 
 return {
   components : {
     item : item
 		, itemsetting : itemsetting
+    , action : action
   }
 	, props:['pagedata']
 	, data : function(){
