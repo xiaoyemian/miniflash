@@ -9,7 +9,7 @@
 <template>
 <menu :focus="focus"></menu>
 <div class="view" :style="[size, position]">
-	<item v-for="(index, itemdata) in page.items" :itemdata="itemdata" :focus="focus"></item>
+	<item v-for="(index, itemdata) in pagedata.items" :itemdata="itemdata" :focus="focus"></item>
 </div>
 </template>
 
@@ -25,7 +25,7 @@ return {
     item : item
 		, menu : menu
   }
-	, props:['page']
+	, props:['pagedata']
 	, data : function(){
 
 		var size = {

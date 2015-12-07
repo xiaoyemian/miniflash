@@ -6,8 +6,8 @@
 
 <template>
 <div class="menu" v-if="focus">
-	<div v-for="(key, value) in focus.itemdata.background"><label for="background|{{key}}">{{key}}</label>:<input id="background|{{key}}" placeholder="{{key}}" value="{{value}}"/></div>
-	<div v-for="(key, value) in focus.itemdata.style"><label for="style|{{key}}">{{key}}</label>:<input @keyup="updateItem" id="style|{{key}}" placeholder="{{key}}" value="{{value}}"/></div>
+	<div v-for="(key, value) in focus.itemdata.background"><label for="background|{{key}}">{{label.background[key]}}</label><input id="background|{{key}}" placeholder="{{placeholder.background[key]}}" value="{{value}}"/></div>
+	<div v-for="(key, value) in focus.itemdata.style"><label for="style|{{key}}">{{label.style[key]}}</label><input @keyup="updateItem" id="style|{{key}}" placeholder="{{placeholder.style[key]}}" value="{{value}}"/></div>
 </div>
 </template>
 
@@ -18,6 +18,28 @@ return {
 	props : ['focus']
 	, data : function(){
 		return {
+			label : {
+				style : {
+					top : '顶部距离:'
+					,left : '左边距离:'
+					,width : '宽度:'
+					, 'padding-top' : '高度:'
+				}
+				, background : {
+					image : '背景图片url:'
+				}
+			}
+			, placeholder : {
+				style : {
+					top : '顶部距离'
+					,left : '左边距离'
+					,width : '宽度'
+					, 'padding-top' : '高度'
+				}
+				, background : {
+					image : '背景图片url'
+				}
+			}
 		}
 	}
 	, methods : {

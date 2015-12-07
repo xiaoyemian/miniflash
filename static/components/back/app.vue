@@ -5,7 +5,7 @@ body{
 </style>
 
 <template>
-<view :page="pages[number]"></view>
+<view :pagedata="pages[number]"></view>
 </template>
 
 

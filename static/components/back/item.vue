@@ -9,12 +9,17 @@
 		.pa;top:0px;left:0px;right:0px;bottom:0px;
 		border:10px solid #f69;
 	}
+	.resizeBtn{
+		.pa;bottom:-10px;right:-10px;.w(20px);.h(20px);.bgc(red);
+	}
 }
 </style>
 
 <template>
 <div class="item" :class="{focus : focus ? (focus.itemdata.item_id == itemdata.item_id) : false}" v-on:click="updateFocus" :style="[style, background]">
-	<div class="handle"></div>
+	<div class="handle">
+		<span class="resizeBtn"></span>
+	</div>
 </div>
 </template>
 
