@@ -36,7 +36,7 @@ return {
   components : {
     item : item
 		, itemsetting : itemsetting
-    , action : action
+    , actionsetting : actionsetting 
   }
 	, props:['pagedata']
 	, data : function(){
