@@ -1,10 +1,12 @@
 <style>
 .view{
 	.pa;
-	top:26px;bottom:160px;left:0px;right:0px;
-	.page {
-		.bgc(#fff);
+	top:10%;bottom:10%;left:0px;right:0px;
+	.mt(36px);.mb(220px);
+
+	.page{
 		.pa;
+		.bgc(#fff);
 	}
 }
 </style>
@@ -12,12 +14,16 @@
 
 <template>
 <itemsetting :focus="focus"></itemsetting>
+
 <div class="view" @click="deleteFocus">
 	<div class="page" :style="[style]">
 		<item v-for="(index, itemdata) in pagedata.items" :itemdata="itemdata" :focus="focus"></item>
 	</div>
 </div>
-<actionsetting :focus="focus"></actionsetting>
+
+<div class="actionsetting">
+</div>
+
 </template>
 
 
@@ -30,7 +36,7 @@ var actionsetting = require('back/actionsetting.vue')
 var width = 640
 var height = 1136
 
-var scale = ($(window).height()-180)/height*.8
+var scale = ($(window).height()-220)/height*.8
 if(scale >= 0.4)
 	scale = 0.4
 
@@ -55,9 +61,7 @@ return {
 			, style : {
 				width : size.width + 'px'
 				, height : size.height + 'px'
-				, top : 50 + '%'
 				, left : 50 + '%'
-				, 'margin-top' : size.height * -0.5 + 'px'
 				, 'margin-left' : size.width * -0.5 + 'px'
 			}
 		}

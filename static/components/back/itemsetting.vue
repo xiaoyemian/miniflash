@@ -34,7 +34,12 @@
 	.pa;top:40px;left:0px;
 	border:1px solid #222;
 	.bgc(#333);
-	padding:4px;
+	.w(200px);
+	.inputBox{
+		padding:4px;
+		.mr(4px);
+		.i_block;
+	}
 }
 </style>
 
@@ -45,7 +50,7 @@
 	</div>
 
 	<div class="itemType" v-if="focus">
-			<div v-for="(key, value) in focus.itemdata.background"><label for="background|{{key}}">{{label.background[key]}}</label><input type="text" id="background|{{key}}" placeholder="" value="{{value}}"/></div>
+			<div class="inputBox" v-for="(key, value) in focus.itemdata.background"><label for="background|{{key}}">{{label.background[key]}}</label><input type="text" id="background|{{key}}" placeholder="" value="{{value}}"/></div>
 	</div>
 
 </div>

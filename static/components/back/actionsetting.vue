@@ -1,7 +1,7 @@
 <style>
 .actionsetting{
 	.pf;left:0px;right:0px;bottom:0px;
-	.h(160px);
+	.h(200px);
 }
 </style>
 
