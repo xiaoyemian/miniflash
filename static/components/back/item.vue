@@ -49,7 +49,7 @@ require('jqui/draggable')
 require('jqui/resizable')
 
 return {
-	props:['itemdata', 'focus']
+	props:['focus', 'itemdata']
 	, data:function(){
 		this.reloadItem()
 

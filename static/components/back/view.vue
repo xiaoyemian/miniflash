@@ -20,7 +20,8 @@
 	</div>
 </div>
 
-<div class="actionsetting">
+<div class="tracksetting">
+	<track v-for="(index, trackdata) in pagedata.track" :trackdata="trackdata" :focus="focus"></track>
 </div>
 
 </template>
@@ -30,7 +31,7 @@
 require('jquery')
 var item = require('back/item.vue')
 var itemsetting = require('back/itemsetting.vue')
-var actionsetting = require('back/actionsetting.vue')
+var track = require('back/track.vue')
 
 var width = 640
 var height = 1136
@@ -43,8 +44,8 @@ if(scale >= 0.4)
 return {
   components : {
     item : item
+		, track : track
 		, itemsetting : itemsetting
-    , actionsetting : actionsetting 
   }
 	, props:['pagedata']
 	, data : function(){
