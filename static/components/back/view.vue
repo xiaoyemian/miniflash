@@ -8,7 +8,7 @@
 
 <template>
 <menu :focus="focus"></menu>
-<div class="view" :style="[size, position]">
+<div class="view" :style="[style]">
 	<item v-for="(index, itemdata) in pagedata.items" :itemdata="itemdata" :focus="focus"></item>
 </div>
 </template>
@@ -18,6 +18,8 @@
 var item = require('back/item.vue')
 var menu = require('back/menu.vue')
 
+var width = 640
+var height = 1136
 var scale = 0.5
 
 return {
@@ -29,24 +31,25 @@ return {
 	, data : function(){
 
 		var size = {
-			width : 640 * scale + 'px'
-			, height : 1136 * scale + 'px'
-		}
-		var position = {
-			top : 50 + '%'
-			, left : 50 + '%'
-			, 'margin-top' : parseInt(size.height) * -0.5 + 'px'
-			, 'margin-left' : parseInt(size.width) * -0.5 + 'px'
+			width : width * scale 
+			, height : height * scale
 		}
 
 		return {
 			focus : null 
 			, size : size
-			, position : position
+			, style : {
+				width : size.width + 'px'
+				, height : size.height + 'px'
+				, top : 50 + '%'
+				, left : 50 + '%'
+				, 'margin-top' : size.height * -0.5 + 'px'
+				, 'margin-left' : size.width * -0.5 + 'px'
+			}
 		}
 	}
 	, events : {
-		updateFocus : function(item){
+		setFocus : function(item){
 			this.focus = item
 		}
 		, updateItem : function(){

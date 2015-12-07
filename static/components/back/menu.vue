@@ -21,9 +21,9 @@ return {
 			label : {
 				style : {
 					top : '顶部距离:'
-					,left : '左边距离:'
-					,width : '宽度:'
-					, 'padding-top' : '高度:'
+					, left : '左边距离:'
+					, width : '宽度:'
+					, height : '高度:'
 				}
 				, background : {
 					image : '背景图片url:'
@@ -32,9 +32,9 @@ return {
 			, placeholder : {
 				style : {
 					top : '顶部距离'
-					,left : '左边距离'
-					,width : '宽度'
-					, 'padding-top' : '高度'
+					, left : '左边距离'
+					, width : '宽度'
+					, height : '高度'
 				}
 				, background : {
 					image : '背景图片url'
