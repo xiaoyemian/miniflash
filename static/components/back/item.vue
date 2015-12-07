@@ -54,7 +54,7 @@ return {
 		this.reloadItem()
 
 		return {
-			style:this.style
+			style : this.style
 			, background:this.background
 		}
 	}
@@ -67,40 +67,36 @@ return {
 
 		}
 		, updateItem : function(opts){
-			var itemdata = this.itemdata
-
 			if(opts.position){
-				itemdata.style.top = opts.position.top
-				itemdata.style.left = opts.position.left
+				this.itemdata.style.top = opts.position.top
+				this.itemdata.style.left = opts.position.left
 			}
 			if(opts.size){
-				itemdata.style.height = opts.size.height
-				itemdata.style.width = opts.size.width
+				this.itemdata.style.width = opts.size.width
+				this.itemdata.style.height = opts.size.height
 			}
 		}
 		, reloadItem : function(){
 			var viewSize = this.$parent.size
-			var itemdata = this.itemdata
 
-			if(itemdata.style['padding-top']){
-				itemdata.style = {
-					top : viewSize.height * itemdata.style['top']/100
-					, left : viewSize.width * itemdata.style['left']/100
-					, width : viewSize.width * itemdata.style['width']/100
-					, height : viewSize.width * itemdata.style['padding-top']/100 
+			if(this.itemdata.style['padding-top']){
+				this.itemdata.style = {
+					width : viewSize.width * this.itemdata.style['width']/100
+					, height : viewSize.width * this.itemdata.style['padding-top']/100 
+					, top : viewSize.height * this.itemdata.style['top']/100
+					, left : viewSize.width * this.itemdata.style['left']/100
 				}
 			}
 
 			this.style = {
-				top : itemdata.style['top'] + 'px'
-				, left : itemdata.style['left'] + 'px'
-				, width : itemdata.style['width'] + 'px'
-				, height : itemdata.style['height'] + 'px' 
+				width : this.itemdata.style['width'] + 'px'
+				, height : this.itemdata.style['height'] + 'px' 
+				, top : this.itemdata.style['top'] + 'px'
+				, left : this.itemdata.style['left'] + 'px'
 			}
 
-
 			this.background = {
-				'background-image' : 'url("' + itemdata.background.image + '")' 
+				'background-image' : 'url("' + this.itemdata.background.image + '")' 
 			}
 		}
 	}
@@ -108,6 +104,18 @@ return {
 		var mSelf = this
 		var $item = $(this.$el)
 
+		$item.draggable({
+			start : function(event, opts){
+				mSelf.setFocus()
+			}
+			, drag : function(event, opts){
+				mSelf.updateItem(opts)
+			}
+			, stop : function(event, opts){
+				mSelf.reloadItem()
+			}
+		})
+	
 		$item.resizable({
 			start : function(event, opts){
 				mSelf.setFocus()
@@ -121,18 +129,6 @@ return {
 			//, aspectRatio: true
 		})
 
-		$item.draggable({
-			start : function(event, opts){
-				mSelf.setFocus()
-			}
-			, drag : function(event, opts){
-				mSelf.updateItem(opts)
-			}
-			, stop : function(event, opts){
-				mSelf.reloadItem()
-			}
-		})
-		
 	}
 }
 </script>
