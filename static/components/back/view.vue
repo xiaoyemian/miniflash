@@ -18,7 +18,7 @@
 
 
 <template>
-<itemsetting :itemdata="pagedata.items[focus.item]"></itemsetting>
+<itemsetting :itemdata="pagedata.items[focus.item_id]"></itemsetting>
 <div class="view" @click="deleteItemFocus">
 	<div class="page" :style="style">
 		<item v-for="(item_id, itemdata) in pagedata.items" :itemdata="itemdata" :focus="focus"></item>
@@ -52,8 +52,8 @@ return {
 
 		return {
 			focus : {
-				item : null
-				, frame : null
+				item_id : null
+				, frame_id : null
 			} 
 			, size : this.size
 			, style : this.style
@@ -90,10 +90,10 @@ return {
 			}
 		}
 		, deleteItemFocus : function(){
-			this.focus.item = null 
+			this.focus.item_id = null 
 		}
 		, deleteFrameFocus : function(){
-			this.focus.frame = null 
+			this.focus.frame_id = null 
 		}
 
 	}
@@ -102,10 +102,10 @@ return {
 			this.$broadcast('updateItem')
 		}
 		, setItemFocus : function(item_id){
-			this.focus.item = item_id
+			this.focus.item_id = item_id
 		}
 		, setFrameFocus : function(frame_id){
-			this.focus.frame = frame_id
+			this.focus.frame_id = frame_id
 		}
 	}
 	, ready : function(){

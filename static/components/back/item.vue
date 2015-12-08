@@ -36,7 +36,7 @@
 </style>
 
 <template>
-<div class="item" :class="{focus : focus.item ? (focus.item == itemdata.item_id) : false}" @click.stop="setItemFocus" :style="style">
+<div class="item" :class="{focus : focus.item_id ? (focus.item_id == itemdata.item_id) : false}" @click.stop="setItemFocus" :style="style">
 	<div class="handle">
 		<div @click.stop="aspectRatio" class="aspectRatioBtn"></div>
 	</div>

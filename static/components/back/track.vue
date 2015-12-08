@@ -24,7 +24,7 @@
 
 <template>
 <% var framelength = 2000; %>
-<div class="track" v-if="trackdata" :class="{focus : focus.item ? (focus.item == itemdata.item_id) : false}" @click="setItemFocus">
+<div class="track" v-if="trackdata" :class="{focus : focus.item_id ? (focus.item_id == itemdata.item_id) : false}" @click="setItemFocus">
 	<div class="trackname">{{trackdata.item_id}}</div>
 	<div class="trackframe">
 		<%for(var i = 0 ; i<= framelength; i+= 100){%>
