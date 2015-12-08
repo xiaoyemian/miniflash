@@ -48,10 +48,7 @@ return {
 
 			var framedata = this.framedata
 
-			if(framedata.style){
-//				this.$set('framedata.style.height', 100)	
-
-			}else{
+			if(!framedata.style){
 				this.$set('framedata.style', {})
 
 			}
