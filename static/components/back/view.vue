@@ -94,11 +94,13 @@ return {
 	}
 	, events : {
 		doUpdateItem : function(style){
-			console.log(style)
+			this.$set('focus.style', style)
 
 			if(style && style['padding-top']){
 				var size = this.size
-				style.height = size.width * style['padding-top']/100
+
+				this.$set('focus.style.height', size.width * style['padding-top']/100)
+
 				style.width = size.width * style['width']/100
 				style.top = size.height * style['top']/100
 				style.left = size.width * style['left']/100
@@ -106,7 +108,6 @@ return {
 				delete style['padding-top']
 			}
 
-			this.$set('focus.style', style)
 			
 			this.$broadcast('updateItem')
 		}
