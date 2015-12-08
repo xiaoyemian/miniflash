@@ -13,17 +13,21 @@
 <div class="track" :class="{focus : focus ? (focus.itemdata.item_id == trackdata.item_id) : false}">
 	<div class="name">{{trackdata.item_id}}</div>
 	<div class="frames">
-		<%for(var i = 0 ; i<= 10000; i+= 100)%>
-		<frame :framenumber="<%= i %>" :framedata="trackdata[i]"></frame>
+		<%for(var i = 0 ; i<= 10000; i+= 100){%>
+		<frameitem :framenumber="<%= i %>" :framedata="trackdata[i]"></frameitem>
 		<%}%>
 	</div>
 </div>
 </template>
 
 <script>
+var frame = require('back/frame.vue')
 
 return {
-	props : ['focus', 'trackdata']
+  components : {
+    frameitem : frame
+	}
+	, props : ['focus', 'trackdata']
 	, data : function(){
 		return {
 		}
