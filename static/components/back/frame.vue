@@ -22,7 +22,7 @@
 </style>
 
 <template>
-<div class="frame" :class="framedata ? (framedata.type || 'keyframe') : ''" @click.stop.prevent="setFocus"></div>
+<div class="frame" :class="framedata ? (framedata.type || 'keyframe') : ''" @click.stop="setFocus"></div>
 </template>
 
 
