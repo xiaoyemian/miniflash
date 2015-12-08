@@ -73,19 +73,19 @@ return {
 		}
 	}
 	, events : {
-		updateItem : function(){
-			if(this.focus.item_id != this.itemdata.item_id)
-				return;
+		updateItem : function(item_id){
+			if(this.focus.item_id == this.itemdata.item_id || item_id == this.itemdata.item_id){
 
-			var style = this.focus.style
-			var background = this.itemdata.background
+				var style = this.focus.style
+				var background = this.itemdata.background
 
-			this.style = {
-				width : style.width + 'px'
-				, height : style.height + 'px'
-				, top : style.top + 'px'
-				, left : style.left + 'px'
-				, 'background-image' : 'url("' + background.image + '")' 
+				this.style = {
+					width : style.width + 'px'
+					, height : style.height + 'px'
+					, top : style.top + 'px'
+					, left : style.left + 'px'
+					, 'background-image' : 'url("' + background.image + '")' 
+				}
 			}
 
 		}

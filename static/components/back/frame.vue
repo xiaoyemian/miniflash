@@ -46,19 +46,24 @@ return {
 		selectFrame : function(){
 			this.$dispatch('setFocus', this.item_id, this.frame_id)
 
-			var framedata = this.framedata
-
-			if(!framedata.style){
+			if(!this.framedata.style){
 				this.$set('framedata.style', {})
 
 			}
 
-			this.$dispatch('doUpdateItem', framedata.style)
+			this.$dispatch('doUpdateItem', this.framedata.style)
 		}
 	}
 	, events : {
 		updateItem : function(style){
 		}
+	}
+	, created : function(){
+			
+		if(this.frame_id == 0)
+			this.$dispatch('doUpdateItem', this.framedata.style, this.item_id)
+			
+
 	}
 }
 </script>
