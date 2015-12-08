@@ -1,4 +1,7 @@
 <style>
+.framemenu{
+	.pa;
+}
 .frame{
 	.w(12px);.h(24px);
 	.left;
@@ -22,7 +25,8 @@
 </style>
 
 <template>
-<div class="frame" :class="framedata ? (framedata.type || 'keyframe') : ''" @click.stop="setFocus"></div>
+<div class="frame" :class="framedata ? (framedata.type || 'keyframe') : ''" @click.stop="selectFrame($event)"></div>
+<div v-if="" class="framemenu">menu</div>
 </template>
 
 
@@ -35,8 +39,12 @@ return {
 		}
 	}
 	, methods : {
-		setFocus : function(){
-			this.$dispatch('setFocus', this.itemdata.item_id)
+		selectFrame : function($event){
+		}
+		, setItemFocus : function(){
+			this.$dispatch('setItemFocus', this.itemdata.item_id)
+		}
+		, showMenu : function(){
 		}
 	}
 }

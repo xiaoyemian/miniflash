@@ -36,7 +36,7 @@
 </style>
 
 <template>
-<div class="item" :class="{focus : focus_id ? (focus_id == itemdata.item_id) : false}" @click.stop="setFocus" :style="style">
+<div class="item" :class="{focus : focus_id ? (focus_id == itemdata.item_id) : false}" @click.stop="setItemFocus" :style="style">
 	<div class="handle">
 		<div @click.stop="aspectRatio" class="aspectRatioBtn"></div>
 	</div>
@@ -71,8 +71,8 @@ return {
 		}
 	}
 	, methods : {
-		setFocus : function(){
-			this.$dispatch('setFocus', this.itemdata.item_id)
+		setItemFocus : function(){
+			this.$dispatch('setItemFocus', this.itemdata.item_id)
 		}
 		, aspectRatio : function(){
 			var style = this.itemdata.style
@@ -122,7 +122,7 @@ return {
 
 		$item.draggable({
 			start : function(event, opts){
-				mSelf.setFocus()
+				mSelf.setItemFocus()
 			}
 			, drag : function(event, opts){
 				mSelf.setItem(opts.position)
@@ -135,7 +135,7 @@ return {
 	
 		$item.resizable({
 			start : function(event, opts){
-				mSelf.setFocus()
+				mSelf.setItemFocus()
 			}
 			, resize : function(event, opts){
 				mSelf.setItem(opts.size)
