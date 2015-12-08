@@ -27,14 +27,14 @@
 <%
 	var framelength = 4000;
 %>
-<div v-if="trackdata" class="track" :class="{focus : focusitem ? (focusitem.itemdata.item_id == trackdata.item_id) : false}">
+<div v-if="trackdata" @click="setFocus" class="track" :class="{focus : focusitem ? (focusitem.itemdata.item_id == trackdata.item_id) : false}">
 
 	<div class="trackname">{{trackdata.item_id}}</div>
 
 	<div class="trackframe">
 		<%for(var i = 0 ; i<= framelength; i+= 100){%>
 
-		<frameitem :framenumber="<%= i %>" :framedata="trackdata.frames[<%= i %>]" :focusitem="focusitem"></frameitem>
+		<frameitem :framenumber="<%= i %>" :itemdata="itemdata" :framedata="trackdata.frames[<%= i %>]" :focusitem="focusitem"></frameitem>
 
 		<%}%>
 	</div>
@@ -60,10 +60,15 @@ return {
   components : {
     frameitem : frame
 	}
-	, props : ['focusitem', 'trackdata']
+	, props : ['itemdata', 'focusitem', 'trackdata']
 	, data : function(){
-		console.log(this.trackdata)
+		console.log(this.trackdata, this.itemdata)
 		return {
+		}
+	}
+	, methods : {
+		setFocus : function(){
+			console.log(this)
 		}
 	}
 	, ready : function(){

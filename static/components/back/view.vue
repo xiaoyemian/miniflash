@@ -29,7 +29,7 @@
 
 <div class="flash">
 	<track></track>
-	<track v-for="(item_id, trackdata) in pagedata.track" :trackdata="trackdata" :focusitem="focusitem"></track>
+	<track v-for="(item_id, trackdata) in pagedata.track" :itemdata="pagedata.items[item_id]" :focusitem="focusitem" :trackdata="trackdata"></track>
 </div>
 
 </template>
@@ -84,6 +84,7 @@ return {
 	}
 	, events : {
 		setFocus : function(item){
+			console.log(item)
 			this.setFocus(item)
 		}
 		, updateItem : function(){
