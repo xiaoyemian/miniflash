@@ -48,12 +48,18 @@ return {
 			var framedata = this.framedata
 			var itemdata = this.itemdata
 
+			console.log(framedata)
+
 			this.$dispatch('setItemFocus', itemdata.item_id)
 			this.$dispatch('setFrameFocus', this.frame_id)
 
 			if(framedata.style){
 				itemdata.style = framedata.style
 				this.$dispatch('updateItem')
+
+			}else{
+				framedata.style = itemdata.style
+
 			}
 		}
 	}
