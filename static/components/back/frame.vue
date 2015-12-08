@@ -52,7 +52,7 @@ return {
 			if(!framedata.style){
 				framedata.style = {}
 			}
-			console.log(framedata.style)
+			console.log(framedata)
 
 			this.$dispatch('doUpdateItem', framedata.style)
 		}
