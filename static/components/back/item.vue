@@ -51,7 +51,7 @@ require('jqui/resizable')
 return {
 	props:['focus', 'itemdata']
 	, data:function(){
-		this.updateItem()	
+		this.style = {}
 
 		return {
 			style : this.style
