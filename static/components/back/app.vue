@@ -14,7 +14,7 @@ body{
 </style>
 
 <template>
-<div class="headtop">Cooper</div>
+<div class="headtop"></div>
 <view :pagedata="pages[number]"></view>
 </template>
 
