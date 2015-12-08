@@ -1,8 +1,12 @@
 <style>
 .itemsetting{
 	z-index:900;
-	.f(12px);.fc(#ccc);
-	.pf;top:26px;left:0px;right:0px;
+	.pa;top:26px;left:0px;right:0px;
+
+	.inputBox{
+		.f(12px);.fc(#ccc);
+		padding:4px; .mr(4px); .i_block;
+	}
 	input{
 		&[type="text"],&[type="number"]{
 			.i_block;.fc(#ccc);.bgc(#3a3a3a);padding:2px 6px;
@@ -22,16 +26,10 @@
 .itemStyle{
 	.bgc(#333); .pa;top:0px;left:0px;right:0px;
 	border:1px solid #222;
-	.inputBox{
-		padding:4px; .mr(4px); .i_block;
-	}
 }
 .itemType{
 	.bgc(#333); .pa;top:40px;left:0px;
 	border:1px solid #222;
-	.inputBox{
-		padding:4px; .mr(4px); .i_block;
-	}
 }
 </style>
 

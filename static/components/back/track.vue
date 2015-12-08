@@ -1,17 +1,21 @@
 <style>
 .track{
-	.h(30px);.l(30px);
+	.h(24px);.l(24px);
 	.fc(#ccc);
-	.name{.left;.w(100px);}
-	.frames{.ml(120px);}
+	.name{.left;.w(160px);}
+	.frames{.ml(160px);}
+	.focus{
+	}
 }
 </style>
 
 <template>
-<div class="track">
-	<div class="name">{{item_id}}</div>
+<div class="track" :class="{focus : focus ? (focus.itemdata.item_id == trackdata.item_id) : false}">
+	<div class="name">{{trackdata.item_id}}</div>
 	<div class="frames">
-		123
+		<%for(var i = 0 ; i<= 10000; i+= 100)%>
+		<frame :framenumber="<%= i %>" :framedata="trackdata[i]"></frame>
+		<%}%>
 	</div>
 </div>
 </template>
@@ -19,8 +23,12 @@
 <script>
 
 return {
-	props : ['focus', 'trackdata', 'item_id']
-	, created : function(){
+	props : ['focus', 'trackdata']
+	, data : function(){
+		return {
+		}
+	}
+	, ready : function(){
 		console.log(this.trackdata)
 	}
 }

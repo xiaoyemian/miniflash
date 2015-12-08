@@ -1,7 +1,6 @@
 <style>
 .view{
-	.pa;
-	top:26px;bottom:220px;left:0px;right:0px;
+	.pa;top:26px;bottom:160px;left:0px;right:0px;
 
 	.page{
 		.pa;
@@ -10,6 +9,7 @@
 }
 .flash{
 	.pf;left:0px;right:0px;bottom:0px;
+	.h(160px);
 }
 </style>
 
@@ -18,7 +18,7 @@
 <itemsetting :focus="focus"></itemsetting>
 <div class="view" @click="deleteFocus">
 	<div class="page" :style="[style]">
-		<item v-for="(item_id, itemdata) in pagedata.items" :item_id="item_id" :itemdata="itemdata" :focus="focus"></item>
+		<item v-for="(item_id, itemdata) in pagedata.items" :itemdata="itemdata" :focus="focus"></item>
 	</div>
 
 </div>
@@ -27,7 +27,7 @@
 	<div class="tracksitting">
 	</div>
 	<div class="tracks">
-		<track v-for="(item_id, trackdata) in pagedata.track" :item_id="item_id" :trackdata="trackdata" :focus="focus"></track>
+		<track v-for="(item_id, trackdata) in pagedata.track" :trackdata="trackdata" :focus="focus"></track>
 	</div>
 </div>
 
@@ -43,7 +43,7 @@ var track = require('back/track.vue')
 var width = 640
 var height = 1136
 
-var scale = ($(window).height()-220)/height*.8
+var scale = ($(window).height()-160)/height*.8
 if(scale >= 0.4)
 	scale = 0.4
 
@@ -91,6 +91,7 @@ return {
 		}
 	}
 	, created : function(){
+/*
 		if(Array.isArray(this.pagedata.items)){
 			var items = this.pagedata.items
 			this.pagedata.items = {}
@@ -99,9 +100,11 @@ return {
 				this.pagedata.items[item.item_id] = item
 			}
 		}
+*/
 
-		this.pagedata.track = {
-			'item1429603376791' : {
+		this.pagedata.track = [{
+			item_id : 'item1429603376791'
+			, frames : {
 				0 : {
 					style : {
 						left:0,top:0,width:100,height:200
@@ -109,7 +112,28 @@ return {
 					, type : ''
 				}
 			}
-		}
+		}, {
+			item_id : 'item1429603485765'
+			, frames : {
+				0 : {
+					style : {
+						left:0,top:0,width:100,height:200
+					}
+					, type : ''
+				}
+			}
+		}, {
+			item_id : 'item1429603376791'
+			, frames : {
+				0 : {
+					style : {
+						left:0,top:0,width:100,height:200
+					}
+					, type : ''
+				}
+			}
+
+		}]
 	}
 }
 </script>
