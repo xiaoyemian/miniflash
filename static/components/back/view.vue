@@ -65,10 +65,10 @@ return {
 			this.$broadcast('reloadItem', val, oldVal)
 		}
 		, 'focus.item_id' : function(){
-			console.log(arguments)
+			//console.log(arguments)
 		}
 		, 'focus.frame_id' : function(){
-			console.log(arguments)
+			//console.log(arguments)
 		}
 	}
 	, methods : {

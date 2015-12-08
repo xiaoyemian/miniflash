@@ -44,7 +44,6 @@ return {
 	}
 	, props : ['focus', 'itemdata', 'trackdata']
 	, data : function(){
-		console.log(this.trackdata, this.itemdata)
 		return {
 		}
 	}
