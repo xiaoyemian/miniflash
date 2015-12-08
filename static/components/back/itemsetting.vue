@@ -58,8 +58,8 @@ return {
 				style : {
 					width : '宽度:'
 					, height : '高度:'
-					, top : 'y:'
-					, left : 'x:'
+					, top : 'top:'
+					, left : 'left:'
 				}
 				, background : {
 					image : '背景图片:'

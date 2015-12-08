@@ -53,13 +53,15 @@ return {
 	, data:function(){
 		if(this.itemdata.style['padding-top']){
 			var size = this.$parent.size
+			var style = this.itemdata.style
 
-			this.$set('itemdata.style.height', size.width * this.itemdata.style['padding-top']/100) 
-			this.$set('itemdata.style.width', size.width * this.itemdata.style['width']/100) 
-			this.$set('itemdata.style.top', size.height * this.itemdata.style['top']/100)
-			this.$set('itemdata.style.left', size.width * this.itemdata.style['left']/100)
+			this.$set('itemdata.style.height', size.width * style['padding-top']/100) 
 
-			delete this.itemdata.style['padding-top']
+			style.width = size.width * style['width']/100
+			style.top = size.height * style['top']/100
+			style.left = size.width * style['left']/100
+
+			delete style['padding-top']
 		}
 
 		this.updateItem()	
@@ -73,26 +75,30 @@ return {
 			this.$dispatch('setFocus', this.itemdata.item_id)
 		}
 		, aspectRatio : function(){
-			this.itemdata.style.height = this.itemdata.style.width*this.itemdata.scale
+			var style = this.itemdata.style
+			style.height = style.width*this.itemdata.scale
 			this.updateItem()	
 		}
 		, setItem : function(opts){
+			var style = this.itemdata.style
 			if(opts.position){
-				this.itemdata.style.top = opts.position.top
-				this.itemdata.style.left = opts.position.left
+				style.top = opts.position.top
+				style.left = opts.position.left
 			}
 			if(opts.size){
-				this.itemdata.style.width = opts.size.width
-				this.itemdata.style.height = opts.size.height
+				style.width = opts.size.width
+				style.height = opts.size.height
 			}
 		}
 		, updateItem : function(){
+			var style = this.itemdata.style
+			var background = this.itemdata.background
 			this.style = {
-				width : this.itemdata.style.width + 'px'
-				, height : this.itemdata.style.height + 'px'
-				, top : this.itemdata.style.top + 'px'
-				, left : this.itemdata.style.left + 'px'
-				, 'background-image' : 'url("' + this.itemdata.background.image + '")' 
+				width : style.width + 'px'
+				, height : style.height + 'px'
+				, top : style.top + 'px'
+				, left : style.left + 'px'
+				, 'background-image' : 'url("' + background.image + '")' 
 			}
 
 		}
