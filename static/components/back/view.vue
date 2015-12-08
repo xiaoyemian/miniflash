@@ -91,56 +91,26 @@ return {
 		}
 	}
 	, created : function(){
-/*
 		if(Array.isArray(this.pagedata.items)){
 			var items = this.pagedata.items
 			this.pagedata.items = {}
+			this.pagedata.track = {}
+
 			for(var i in items){
 				var item = items[i]
 				this.pagedata.items[item.item_id] = item
+
+				this.pagedata.track[item.item_id] = {
+					item_id : item.item_id
+					, frames : {
+						0 : {
+							style : item.style 
+							, type : ''
+						}
+					}
+				}
 			}
 		}
-*/
-
-		this.pagedata.track = [{
-			item_id : 'item1429603376791'
-			, frames : {
-				0 : {
-					style : {
-						left:0,top:0,width:100,height:200
-					}
-					, type : ''
-				}
-				, 500 : {
-					style : {
-						left:0,top:0,width:100,height:200
-					}
-					, type : ''
-				}
-
-			}
-		}, {
-			item_id : 'item1429603485765'
-			, frames : {
-				300 : {
-					style : {
-						left:0,top:0,width:100,height:200
-					}
-					, type : ''
-				}
-			}
-		}, {
-			item_id : 'item1429603376791'
-			, frames : {
-				500 : {
-					style : {
-						left:0,top:0,width:100,height:200
-					}
-					, type : ''
-				}
-			}
-
-		}]
 	}
 }
 </script>

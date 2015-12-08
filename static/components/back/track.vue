@@ -25,7 +25,7 @@
 
 <template>
 <%
-	var framelength = 5000;
+	var framelength = 4000;
 %>
 <div v-if="trackdata" class="track" :class="{focus : focusitem ? (focusitem.itemdata.item_id == trackdata.item_id) : false}">
 

@@ -17,8 +17,7 @@
 </style>
 
 <template>
-<div class="frame">
-</div>
+<div class="frame" @click.stop.prevent="setFocus"></div>
 </template>
 
 
@@ -29,6 +28,12 @@ return {
 	props : ['focusitem', 'framenumber', 'framedata']
 	, data : function(){
 		return {
+		}
+	}
+	, methods : {
+		setFocus : function(){
+			console.log(this)
+			//this.$dispatch('setFocus', this)
 		}
 	}
 	, ready : function(){
