@@ -9,6 +9,8 @@
 }
 .flash{
 	.pf;left:0px;right:0px;bottom:0px;
+	.bgc(#333);
+	border:1px solid #222;
 	.h(160px);
 }
 </style>
@@ -24,11 +26,8 @@
 </div>
 
 <div class="flash">
-	<div class="tracksitting">
-	</div>
-	<div class="tracks">
-		<track v-for="(item_id, trackdata) in pagedata.track" :trackdata="trackdata" :focusitem="focusitem"></track>
-	</div>
+	<div class="tracksetting"></div>
+	<track v-for="(item_id, trackdata) in pagedata.track" :trackdata="trackdata" :focusitem="focusitem"></track>
 </div>
 
 </template>

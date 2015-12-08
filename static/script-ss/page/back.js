@@ -18,7 +18,9 @@ var vm = new Vue({
 
 window.vm = vm
 
-console.log(vm)
-console.log(pages)
+vm.$log()
+
+//console.log(vm)
+//console.log(pages)
 
 

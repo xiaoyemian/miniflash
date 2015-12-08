@@ -1,10 +1,20 @@
 <style>
 .track{
-	.h(24px);.l(24px);
+	.l(24px);
 	.fc(#ccc);
-	.trackname{.left;.w(160px);}
-	.trackframe{.ml(160px);}
+	.hidden;
+	.mt(-1px);
+	border-bottom:1px solid #222;
+
+	.trackname{
+		.left;.w(160px);
+		.h(100%);
+	}
+	.trackframe{
+		.ml(160px);
+	}
 	.focus{
+
 	}
 }
 </style>
@@ -15,10 +25,10 @@
 	<div class="trackname">{{trackdata.item_id}}</div>
 
 	<div class="trackframe">
-		<% var framelength = 6000; 
+		<% var framelength = 8000; 
 		for(var i = 0 ; i<= framelength; i+= 100){%>
 
-		<frameitem :framenumber="<%= i %>" :framedata="trackdata.frames[<%=i%>]"></frameitem>
+		<frameitem :framenumber="<%= i %>" :framedata="trackdata.frames[<%= i %>]" :focusitem="focusitem"></frameitem>
 
 		<%}%>
 	</div>
