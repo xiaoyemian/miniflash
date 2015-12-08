@@ -53,8 +53,6 @@
 return {
 	props : ['itemdata', 'focus']
 	, data : function(){
-		console.log(this.itemdata)
-
 		return {
 			label : {
 				style : {
@@ -75,9 +73,10 @@ return {
 			var type = setting.id.split('|')
 			var value = setting.value
 
-			this.focus.style[type[1]] = value|0
+			var style = this.focus.style
+			style[type[1]] = value|0
 
-			this.$dispatch('doUpdateItem')
+			this.$dispatch('doUpdateItem', style)
 		}
 	}
 }

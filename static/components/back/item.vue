@@ -58,7 +58,9 @@ return {
 	, methods : {
 		aspectRatio : function(){
 			var style = this.focus.style
-			style.height = style.width*this.itemdata.scale
+			this.$set('focus.style.height', style.width*this.itemdata.scale)
+			this.$emit('updateItem')
+
 		}
 		, setItemStyle : function(opts){
 			if(this.focus.item_id != this.itemdata.item_id)
