@@ -16,29 +16,22 @@
     }		
 	}
 	label {
-		.i_block;
-		.tr;
+		.i_block; .tr;
 	}
 }
 .itemStyle{
-	.pa;top:0px;left:0px;right:0px;
+	.bgc(#333); .pa;top:0px;left:0px;right:0px;
 	border:1px solid #222;
-	.bgc(#333);
 	.inputBox{
-		padding:4px;
-		.mr(4px);
-		.i_block;
+		padding:4px; .mr(4px); .i_block;
 	}
 }
 .itemType{
-	.pa;top:40px;left:0px;
+	.bgc(#333); .pa;top:40px;left:0px;
 	border:1px solid #222;
-	.bgc(#333);
 	.w(200px);
 	.inputBox{
-		padding:4px;
-		.mr(4px);
-		.i_block;
+		padding:4px; .mr(4px); .i_block;
 	}
 }
 </style>

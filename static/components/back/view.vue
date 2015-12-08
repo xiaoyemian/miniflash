@@ -8,20 +8,27 @@
 		.bgc(#fff);
 	}
 }
+.flash{
+	.pf;left:0px;right:0px;bottom:0px;
+}
 </style>
 
 
 <template>
 <itemsetting :focus="focus"></itemsetting>
-
 <div class="view" @click="deleteFocus">
 	<div class="page" :style="[style]">
-		<item v-for="(index, itemdata) in pagedata.items" :itemdata="itemdata" :focus="focus"></item>
+		<item v-for="(item_id, itemdata) in pagedata.items" :item_id="item_id" :itemdata="itemdata" :focus="focus"></item>
 	</div>
+
 </div>
 
-<div class="tracksetting">
-	<track v-for="(index, trackdata) in pagedata.track" :trackdata="trackdata" :focus="focus"></track>
+<div class="flash">
+	<div class="tracksitting">
+	</div>
+	<div class="tracks">
+		<track v-for="(item_id, trackdata) in pagedata.track" :item_id="item_id" :trackdata="trackdata" :focus="focus"></track>
+	</div>
 </div>
 
 </template>
@@ -81,6 +88,30 @@ return {
 		}
 		, updateItem : function(){
 			this.focus.reloadItem()
+		}
+	}
+	, created : function(){
+		if(Array.isArray(this.pagedata.items)){
+			var items = this.pagedata.items
+			this.pagedata.items = {}
+			for(var i in items){
+				var item = items[i]
+				this.pagedata.items[item.item_id] = item
+			}
+		}
+
+		console.log(this.pagedata.items)
+		
+
+		this.pagedata.track = {
+			'item1429603376791' : {
+				0 : {
+					style : {
+						left:0,top:0,width:100,height:200
+					}
+					, type : ''
+				}
+			}
 		}
 	}
 }

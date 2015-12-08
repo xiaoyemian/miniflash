@@ -1,35 +1,37 @@
 <style>
-.item{
-	.pa;
-	background-size:100% 100%;
-	background-repeat:no-repeat;
-}
-.focus{
-	.handle{
-		.pa;top:0px;left:0px;right:0px;bottom:0px;
-		border:10px solid #f69;
-	
-		.aspectRatioBtn{
-			.pa;left:50%;top:0%;.ml(-10px);.w(20px);.h(20px);.bgc(red);
-			.cursor;
-		}
+.view{
+	.item{
+		.pa;
+		background-size:100% 100%;
+		background-repeat:no-repeat;
 	}
-	.ui-resizable{
-		&-se, &-e, &-s{
-			.pa;
-			z-index:90;
+	.focus{
+		.handle{
+			.pa;top:0px;left:0px;right:0px;bottom:0px;
+			border:10px solid #f69;
+		
+			.aspectRatioBtn{
+				.pa;left:50%;top:0%;.ml(-10px);.w(20px);.h(20px);.bgc(red);
+				.cursor;
+			}
 		}
-		&-se{
-			cursor: se-resize;
-			bottom:-10px;right:-10px;.w(20px);.h(20px);
-		}
-		&-e{
-			cursor: e-resize;
-			top:0px;bottom:10px;right:-10px;.w(20px);
-		}
-		&-s{
-			cursor: s-resize;
-			left:0px;right:10px;bottom:-10px;.h(20px);
+		.ui-resizable{
+			&-se, &-e, &-s{
+				.pa;
+				z-index:90;
+			}
+			&-se{
+				cursor: se-resize;
+				bottom:-10px;right:-10px;.w(20px);.h(20px);
+			}
+			&-e{
+				cursor: e-resize;
+				top:0px;bottom:10px;right:-10px;.w(20px);
+			}
+			&-s{
+				cursor: s-resize;
+				left:0px;right:10px;bottom:-10px;.h(20px);
+			}
 		}
 	}
 }
