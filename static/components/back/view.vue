@@ -50,10 +50,6 @@ return {
 
 		this.updateView(640, 1136)
 
-		var mSelf = this
-
-		var t =setTimeout(function(){mSelf.updateView(840, 1136)}, 3000)
-
 		return {
 			focus_id : null 
 			, size : this.size
@@ -68,6 +64,8 @@ return {
 	}
 	, methods : {
 		updateView : function(width, height){
+			width = width || 640
+			height = height || 1136
 
 			var scale = ($(window).height()-160)/height*.8
 			if(scale >= 0.4)
@@ -99,6 +97,14 @@ return {
 		, updateItem : function(){
 			this.$broadcast('updateItem')
 		}
+	}
+	, ready : function(){
+		var mSelf = this
+
+		$(window).on('resize', function(){
+			mSelf.updateView()
+		})
+
 	}
 }
 </script>
