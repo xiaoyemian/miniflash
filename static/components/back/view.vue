@@ -88,30 +88,29 @@ return {
 			this.setFocus(item)
 		}
 		, updateItem : function(){
-			this.focusitem.reloadItem()
+			this.$broadcast('reloadItem')
 		}
 	}
 	, created : function(){
-		if(Array.isArray(this.pagedata.items)){
-			var items = this.pagedata.items
-			this.pagedata.items = {}
-			this.pagedata.track = {}
+/*
+		var size = this.size
+		for(var i in this.pagedata.items){
+			var itemdata = this.pagedata.items[i]
+			var key = 'this.pagedata.items["' + i + '"].style'
 
-			for(var i in items){
-				var item = items[i]
-				this.pagedata.items[item.item_id] = item
+			if(this.pagedata.items[i].style['padding-top']){
+				this.$set(key + '.height', size.width * itemdata.style['padding-top']/100) 
+				this.$set(key + '.width', size.width * itemdata.style['width']/100) 
+				this.$set(key + '.top', size.height * itemdata.style['top']/100)
+				this.$set(key + '.left', size.width * itemdata.style['left']/100)
 
-				this.pagedata.track[item.item_id] = {
-					item_id : item.item_id
-					, frames : {
-						0 : {
-							style : item.style 
-							, type : ''
-						}
-					}
-				}
+				delete itemdata.style['padding-top']
 			}
 		}
+
+		console.log('items', this.pagedata.items)
+*/
+
 	}
 }
 </script>

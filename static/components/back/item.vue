@@ -38,7 +38,7 @@
 </style>
 
 <template>
-<div class="item" :class="{focus : focusitem ? (focusitem.itemdata.item_id == itemdata.item_id) : false}" @click.stop.prevent="setFocus" :style="[style, background]">
+<div class="item" :class="{focus : focusitem ? (focusitem.itemdata.item_id == itemdata.item_id) : false}" @click.stop.prevent="setFocus" :style="style">
 	<div class="handle">
 		<div @click.stop.prevent="aspectRatio" class="aspectRatioBtn"></div>
 	</div>
@@ -53,11 +53,10 @@ require('jqui/resizable')
 return {
 	props:['focusitem', 'itemdata']
 	, data:function(){
-		this.reloadItem()
+		this.reloadItem()	
 
 		return {
 			style : this.style
-			, background : this.background
 		}
 	}
 	, methods : {
@@ -79,28 +78,30 @@ return {
 			}
 		}
 		, reloadItem : function(){
-			var viewSize = this.$parent.size
-
 			if(this.itemdata.style['padding-top']){
-				this.itemdata.style = {
-					width : viewSize.width * this.itemdata.style['width']/100
-					, height : viewSize.width * this.itemdata.style['padding-top']/100 
-					, top : viewSize.height * this.itemdata.style['top']/100
-					, left : viewSize.width * this.itemdata.style['left']/100
-				}
+				var size = this.$parent.size
 
+				this.$set('itemdata.style.height', size.width * this.itemdata.style['padding-top']/100) 
+				this.$set('itemdata.style.width', size.width * this.itemdata.style['width']/100) 
+				this.$set('itemdata.style.top', size.height * this.itemdata.style['top']/100)
+				this.$set('itemdata.style.left', size.width * this.itemdata.style['left']/100)
+
+				delete this.itemdata.style['padding-top']
 			}
 
 			this.style = {
-				width : this.itemdata.style['width'] + 'px'
-				, height : this.itemdata.style['height'] + 'px' 
-				, top : this.itemdata.style['top'] + 'px'
-				, left : this.itemdata.style['left'] + 'px'
+				width : this.itemdata.style.width + 'px'
+				, height : this.itemdata.style.height + 'px'
+				, top : this.itemdata.style.top + 'px'
+				, left : this.itemdata.style.left + 'px'
+				, 'background-image' : 'url("' + this.itemdata.background.image + '")' 
 			}
 
-			this.background = {
-				'background-image' : 'url("' + this.itemdata.background.image + '")' 
-			}
+		}
+	}
+	, events : {
+		reloadItem : function(){
+			this.reloadItem()
 		}
 	}
 	, ready : function(){
@@ -133,6 +134,19 @@ return {
 			//, aspectRatio: true
 		})
 
+	}
+	, created : function(){
+/*
+		var size = this.$parent.size
+		if(this.itemdata.style['padding-top']){
+			this.$set('itemdata.style.height', size.width * this.itemdata.style['padding-top']/100) 
+			this.$set('itemdata.style.width', size.width * this.itemdata.style['width']/100) 
+			this.$set('itemdata.style.top', size.height * this.itemdata.style['top']/100)
+			this.$set('itemdata.style.left', size.width * this.itemdata.style['left']/100)
+
+			delete this.itemdata.style['padding-top']
+		}
+*/
 	}
 }
 </script>

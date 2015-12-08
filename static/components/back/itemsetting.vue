@@ -52,13 +52,14 @@
 return {
 	props : ['focusitem']
 	, data : function(){
+		console.log(this.focusitem)
 		return {
 			label : {
 				style : {
 					width : '宽度:'
 					, height : '高度:'
-					, top : 'x:'
-					, left : 'y:'
+					, top : 'y:'
+					, left : 'x:'
 				}
 				, background : {
 					image : '背景图片:'

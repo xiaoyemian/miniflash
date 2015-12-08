@@ -22,6 +22,7 @@ body{
 <script>
 var view = require('back/view.vue')
 
+
 return {
   components: {
 		view:view
