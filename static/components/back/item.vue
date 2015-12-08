@@ -1,11 +1,9 @@
 <style>
-.view{
-	.item{
-		.pa;
-		background-size:100% 100%;
-		background-repeat:no-repeat;
-	}
-	.focus{
+.item{
+	.pa;
+	background-size:100% 100%;
+	background-repeat:no-repeat;
+	&.focus{
 		.handle{
 			.pa;top:0px;left:0px;right:0px;bottom:0px;
 			border:10px solid #f69;

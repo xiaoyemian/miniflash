@@ -11,31 +11,23 @@
 		.h(100%);
 	}
 	.trackframe{
+		.opacity(96);
+		
 		.ml(140px);
 	}
-	.focus{
-
+	&.focus{
+		.bgc(#f69);
 	}
-}
-.trackbar{
-	.bgc(#3a3a3a);
-	.frame{.bgnone;border-color:#3a3a3a;}
 }
 </style>
 
 <template>
-<%
-	var framelength = 4000;
-%>
-<div v-if="trackdata" @click="setFocus" class="track">
-
+<% var framelength = 4000; %>
+<div class="track" v-if="trackdata" :class="{focus : focus_id ? (focus_id == itemdata.item_id) : false}" @click="setFocus">
 	<div class="trackname">{{trackdata.item_id}}</div>
-
 	<div class="trackframe">
 		<%for(var i = 0 ; i<= framelength; i+= 100){%>
-
 		<frameitem :framenumber="<%= i %>" :itemdata="itemdata" :framedata="trackdata.frames[<%= i %>]"></frameitem>
-
 		<%}%>
 	</div>
 </div>
@@ -49,7 +41,7 @@ return {
   components : {
     frameitem : frame
 	}
-	, props : ['itemdata', 'trackdata']
+	, props : ['focus_id', 'itemdata', 'trackdata']
 	, data : function(){
 		console.log(this.trackdata, this.itemdata)
 		return {
