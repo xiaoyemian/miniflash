@@ -18,17 +18,17 @@
 
 
 <template>
-<itemsetting :focusitem="focusitem"></itemsetting>
+<itemsetting :itemdata="pagedata.items[focus_id]"></itemsetting>
 <div class="view" @click="deleteFocus">
 	<div class="page" :style="[style]">
-		<item v-for="(item_id, itemdata) in pagedata.items" :itemdata="itemdata" :focusitem="focusitem"></item>
+		<item v-for="(item_id, itemdata) in pagedata.items" :itemdata="itemdata" :focus_id="focus_id"></item>
 	</div>
 
 </div>
 
 <div class="flash">
 	<track></track>
-	<track v-for="(item_id, trackdata) in pagedata.track" :itemdata="pagedata.items[item_id]" :focusitem="focusitem" :trackdata="trackdata"></track>
+	<track v-for="(item_id, trackdata) in pagedata.track" :itemdata="pagedata.items[item_id]" :focus_id="focus_id" :trackdata="trackdata"></track>
 </div>
 
 </template>
@@ -62,7 +62,7 @@ return {
 		}
 
 		return {
-			focusitem : null 
+			focus_id : null 
 			, size : size
 			, style : {
 				width : size.width + 'px'
@@ -75,41 +75,19 @@ return {
 	}
 	, methods : {
 		deleteFocus : function(){
-			this.focusitem = null 
+			this.focus_id = null 
 		}
-		, setFocus : function(item){
-			this.focusitem = item
+		, setFocus : function(item_id){
+			this.focus_id = item_id
 		}
 	}
 	, events : {
-		setFocus : function(item){
-			console.log(item)
-			this.setFocus(item)
+		setFocus : function(item_id){
+			this.setFocus(item_id)
 		}
 		, updateItem : function(){
 			this.$broadcast('updateItem')
 		}
-	}
-	, created : function(){
-/*
-		var size = this.size
-		for(var i in this.pagedata.items){
-			var itemdata = this.pagedata.items[i]
-			var key = 'this.pagedata.items["' + i + '"].style'
-
-			if(this.pagedata.items[i].style['padding-top']){
-				this.$set(key + '.height', size.width * itemdata.style['padding-top']/100) 
-				this.$set(key + '.width', size.width * itemdata.style['width']/100) 
-				this.$set(key + '.top', size.height * itemdata.style['top']/100)
-				this.$set(key + '.left', size.width * itemdata.style['left']/100)
-
-				delete itemdata.style['padding-top']
-			}
-		}
-
-		console.log('items', this.pagedata.items)
-*/
-
 	}
 }
 </script>

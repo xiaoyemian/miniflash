@@ -34,13 +34,13 @@
 </style>
 
 <template>
-<div class="itemsetting" v-if="focusitem">
+<div class="itemsetting" v-if="itemdata">
 	<div class="itemStyle">
-		<div class="inputBox" v-for="(key, value) in focusitem.itemdata.style"><label for="style|{{key}}">{{label.style[key]}}</label><input type="number" @keyup="updateItem" id="style|{{key}}" placeholder="" value="{{value}}"/>px</div>
+		<div class="inputBox" v-for="(key, value) in itemdata.style"><label for="style|{{key}}">{{label.style[key]}}</label><input type="number" @keyup="updateItem" id="style|{{key}}" placeholder="" value="{{value}}"/>px</div>
 	</div>
 
 	<div class="itemType">
-			<div class="inputBox" v-for="(key, value) in focusitem.itemdata.background"><label for="background|{{key}}">{{label.background[key]}}</label><input type="text" id="background|{{key}}" placeholder="" value="{{value}}"/></div>
+			<div class="inputBox" v-for="(key, value) in itemdata.background"><label for="background|{{key}}">{{label.background[key]}}</label><input type="text" id="background|{{key}}" placeholder="" value="{{value}}"/></div>
 	</div>
 
 </div>
@@ -50,9 +50,9 @@
 <script>
 
 return {
-	props : ['focusitem']
+	props : ['itemdata']
 	, data : function(){
-		console.log(this.focusitem)
+
 		return {
 			label : {
 				style : {
@@ -73,9 +73,9 @@ return {
 			var type = setting.id.split('|')
 			var value = setting.value
 
-			this.focusitem.itemdata[type[0]][type[1]] = value|0
+			this.itemdata[type[0]][type[1]] = value|0
 
-			this.$dispatch('updateItem', this.focusitem)
+			this.$dispatch('updateItem', this.itemdata.item_id)
 		}
 	}
 }
