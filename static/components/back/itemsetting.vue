@@ -75,7 +75,7 @@ return {
 
 			this.itemdata[type[0]][type[1]] = value|0
 
-			this.$dispatch('updateItem', this.itemdata.item_id)
+			this.$dispatch('updateItem')
 		}
 	}
 }

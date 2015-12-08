@@ -29,7 +29,7 @@
 </style>
 
 <template>
-<div class="frame" :class="{keyframe : framedata, focus : this.focus.item_id == this.itemdata.item_id && this.focus.frame_id == this.frame_id}" @click.stop="selectFrame($event)"></div>
+<div class="frame" :class="{keyframe : framedata.style, focus : this.focus.item_id == this.itemdata.item_id && this.focus.frame_id == this.frame_id}" @click.stop="selectFrame($event)"></div>
 <div v-if="" class="framemenu">menu</div>
 </template>
 
@@ -45,10 +45,16 @@ return {
 	}
 	, methods : {
 		selectFrame : function($event){
+			var framedata = this.framedata
+			var itemdata = this.itemdata
 
-			this.$dispatch('setItemFocus', this.itemdata.item_id)
+			this.$dispatch('setItemFocus', itemdata.item_id)
 			this.$dispatch('setFrameFocus', this.frame_id)
 
+			if(framedata.style){
+				itemdata.style = framedata.style
+				this.$dispatch('updateItem')
+			}
 		}
 	}
 }
