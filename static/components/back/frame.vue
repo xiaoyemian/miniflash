@@ -5,17 +5,18 @@
 	.pr;
 	.bgc(#333);
 	border:1px solid #222;
-	.ml(-1px);.mb(-1px);
+	.ml(-1px);.mt(-1px);.mb(-1px);
 
 	&:nth-child(5n+1){
 		.bgc(#3a3a3a);
 	}
 	
-}
-.keyframe{
-	&:before{
-		content:'';.pa;top:50%;left:50%;.w(6px);.h(6px);.mt(-3px);.ml(-3px);.bgc(#000);
-		.border-r(8px);
+	&.keyframe{
+		.bgc(#696);
+		&:before{
+			content:'';.pa;top:50%;left:50%;.w(6px);.h(6px);.mt(-3px);.ml(-3px);.bgc(#000);
+			.border-r(8px);
+		}
 	}
 }
 </style>
@@ -38,9 +39,6 @@ return {
 			this.$dispatch('setFocus', this.itemdata.item_id)
 		}
 	}
-	, ready : function(){
-	}
-
 }
 </script>
 

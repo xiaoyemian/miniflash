@@ -5,6 +5,7 @@
 	.hidden;
 	.mt(-1px);
 	border-bottom:1px solid #222;
+	border-top:1px solid #222;
 
 	.trackname{
 		.left;.w(140px);
