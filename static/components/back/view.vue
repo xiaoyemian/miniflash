@@ -105,7 +105,7 @@ return {
 				delete style['padding-top']
 			}
 
-			this.focus.style = style
+			this.$set('focus.style', style)
 			
 			this.$broadcast('updateItem')
 		}
