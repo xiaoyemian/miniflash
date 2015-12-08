@@ -21,11 +21,15 @@
 			.border-r(8px);
 		}
 	}
+
+	&.focus{
+		.bgc(#f69);
+	}
 }
 </style>
 
 <template>
-<div class="frame" :class="{keyframe : framedata}" :class="{focus : focus.item_id == itemdata.item_id && focus.frame_id == frame_id}" @click.stop="selectFrame($event)"></div>
+<div class="frame" :class="{keyframe : framedata, focus : this.focus.item_id == this.itemdata.item_id && this.focus.frame_id == this.frame_id}" @click.stop="selectFrame($event)"></div>
 <div v-if="" class="framemenu">menu</div>
 </template>
 
@@ -41,8 +45,10 @@ return {
 	}
 	, methods : {
 		selectFrame : function($event){
+
 			this.$dispatch('setItemFocus', this.itemdata.item_id)
 			this.$dispatch('setFrameFocus', this.frame_id)
+
 		}
 	}
 }
