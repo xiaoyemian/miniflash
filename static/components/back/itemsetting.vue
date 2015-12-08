@@ -29,7 +29,6 @@
 .itemType{
 	.bgc(#333); .pa;top:40px;left:0px;
 	border:1px solid #222;
-	.w(200px);
 	.inputBox{
 		padding:4px; .mr(4px); .i_block;
 	}

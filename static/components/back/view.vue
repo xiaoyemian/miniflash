@@ -100,9 +100,6 @@ return {
 			}
 		}
 
-		console.log(this.pagedata.items)
-		
-
 		this.pagedata.track = {
 			'item1429603376791' : {
 				0 : {

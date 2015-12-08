@@ -2,8 +2,8 @@
 .track{
 	.h(30px);.l(30px);
 	.fc(#ccc);
-	.name{.left;.w(180px);}
-	.frames{.ml(200px);}
+	.name{.left;.w(100px);}
+	.frames{.ml(120px);}
 }
 </style>
 
