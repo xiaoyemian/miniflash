@@ -18,16 +18,16 @@
 
 
 <template>
-<itemsetting :itemdata="pagedata.items[focus_id]"></itemsetting>
+<itemsetting :itemdata="pagedata.items[focus.item]"></itemsetting>
 <div class="view" @click="deleteItemFocus">
 	<div class="page" :style="style">
-		<item v-for="(item_id, itemdata) in pagedata.items" :itemdata="itemdata" :focus_id="focus_id"></item>
+		<item v-for="(item_id, itemdata) in pagedata.items" :itemdata="itemdata" :focus="focus"></item>
 	</div>
 
 </div>
 
 <div class="flash">
-	<track v-for="(item_id, trackdata) in pagedata.track" :itemdata="pagedata.items[item_id]" :focus_id="focus_id" :frame_id="frame_id" :trackdata="trackdata"></track>
+	<track v-for="(item_id, trackdata) in pagedata.track" :itemdata="pagedata.items[item_id]" :focus="focus" :trackdata="trackdata"></track>
 </div>
 
 </template>
@@ -51,8 +51,10 @@ return {
 		this.updateView(640, 1136)
 
 		return {
-			focus_id : null 
-			, frame_id : null 
+			focus : {
+				item : null
+				, frame : null
+			} 
 			, size : this.size
 			, style : this.style
 		}
@@ -62,10 +64,7 @@ return {
 		size : function(val, oldVal){
 			this.$broadcast('reloadItem', val, oldVal)
 		}
-		, focus_id : function(){
-			console.log(arguments)
-		}
-		, frame_id : function(){
+		, focus : function(){
 			console.log(arguments)
 		}
 	}
@@ -91,10 +90,10 @@ return {
 			}
 		}
 		, deleteItemFocus : function(){
-			this.focus_id = null 
+			this.focus.item = null 
 		}
 		, deleteFrameFocus : function(){
-			this.frame_id = null 
+			this.focus.frame = null 
 		}
 
 	}
@@ -103,10 +102,10 @@ return {
 			this.$broadcast('updateItem')
 		}
 		, setItemFocus : function(item_id){
-			this.focus_id = item_id
+			this.focus.item = item_id
 		}
 		, setFrameFocus : function(frame_id){
-			this.frame_id = frame_id
+			this.focus.frame = frame_id
 		}
 	}
 	, ready : function(){
