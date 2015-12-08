@@ -53,7 +53,18 @@ require('jqui/resizable')
 return {
 	props:['focusitem', 'itemdata']
 	, data:function(){
-		this.reloadItem()	
+		if(this.itemdata.style['padding-top']){
+			var size = this.$parent.size
+
+			this.$set('itemdata.style.height', size.width * this.itemdata.style['padding-top']/100) 
+			this.$set('itemdata.style.width', size.width * this.itemdata.style['width']/100) 
+			this.$set('itemdata.style.top', size.height * this.itemdata.style['top']/100)
+			this.$set('itemdata.style.left', size.width * this.itemdata.style['left']/100)
+
+			delete this.itemdata.style['padding-top']
+		}
+
+		this.updateItem()	
 
 		return {
 			style : this.style
@@ -65,9 +76,9 @@ return {
 		}
 		, aspectRatio : function(){
 			this.itemdata.style.height = this.itemdata.style.width*this.itemdata.scale
-			this.reloadItem()	
+			this.updateItem()	
 		}
-		, updateItem : function(opts){
+		, setItem : function(opts){
 			if(opts.position){
 				this.itemdata.style.top = opts.position.top
 				this.itemdata.style.left = opts.position.left
@@ -77,18 +88,7 @@ return {
 				this.itemdata.style.height = opts.size.height
 			}
 		}
-		, reloadItem : function(){
-			if(this.itemdata.style['padding-top']){
-				var size = this.$parent.size
-
-				this.$set('itemdata.style.height', size.width * this.itemdata.style['padding-top']/100) 
-				this.$set('itemdata.style.width', size.width * this.itemdata.style['width']/100) 
-				this.$set('itemdata.style.top', size.height * this.itemdata.style['top']/100)
-				this.$set('itemdata.style.left', size.width * this.itemdata.style['left']/100)
-
-				delete this.itemdata.style['padding-top']
-			}
-
+		, updateItem : function(){
 			this.style = {
 				width : this.itemdata.style.width + 'px'
 				, height : this.itemdata.style.height + 'px'
@@ -100,8 +100,8 @@ return {
 		}
 	}
 	, events : {
-		reloadItem : function(){
-			this.reloadItem()
+		updateItem : function(){
+			this.updateItem()
 		}
 	}
 	, ready : function(){
@@ -113,10 +113,10 @@ return {
 				mSelf.setFocus()
 			}
 			, drag : function(event, opts){
-				mSelf.updateItem(opts)
+				mSelf.setItem(opts)
 			}
 			, stop : function(event, opts){
-				mSelf.reloadItem()
+				mSelf.updateItem()
 			}
 			, containment: "document"
 		})
@@ -126,27 +126,13 @@ return {
 				mSelf.setFocus()
 			}
 			, resize : function(event, opts){
-				mSelf.updateItem(opts)
+				mSelf.setItem(opts)
 			}
 			, stop : function(event, opts){
-				mSelf.reloadItem()
+				mSelf.updateItem()
 			}
-			//, aspectRatio: true
 		})
 
-	}
-	, created : function(){
-/*
-		var size = this.$parent.size
-		if(this.itemdata.style['padding-top']){
-			this.$set('itemdata.style.height', size.width * this.itemdata.style['padding-top']/100) 
-			this.$set('itemdata.style.width', size.width * this.itemdata.style['width']/100) 
-			this.$set('itemdata.style.top', size.height * this.itemdata.style['top']/100)
-			this.$set('itemdata.style.left', size.width * this.itemdata.style['left']/100)
-
-			delete this.itemdata.style['padding-top']
-		}
-*/
 	}
 }
 </script>

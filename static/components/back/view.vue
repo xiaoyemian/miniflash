@@ -1,7 +1,6 @@
 <style>
 .view{
 	.pa;top:26px;bottom:160px;left:0px;right:0px;
-
 	.page{
 		.pa;
 		.bgc(#fff);
@@ -88,7 +87,7 @@ return {
 			this.setFocus(item)
 		}
 		, updateItem : function(){
-			this.$broadcast('reloadItem')
+			this.$broadcast('updateItem')
 		}
 	}
 	, created : function(){
