@@ -23,12 +23,12 @@
 </style>
 
 <template>
-<% var framelength = 4000; %>
+<% var framelength = 2000; %>
 <div class="track" v-if="trackdata" :class="{focus : focus_id ? (focus_id == itemdata.item_id) : false}" @click="setItemFocus">
 	<div class="trackname">{{trackdata.item_id}}</div>
 	<div class="trackframe">
 		<%for(var i = 0 ; i<= framelength; i+= 100){%>
-		<frameitem :framenumber="<%= i %>" :itemdata="itemdata" :framedata="trackdata.frames[<%= i %>]"></frameitem>
+		<frameitem :framenumber="<%= i %>" :frame_id="frame_id" :itemdata="itemdata" :framedata="trackdata.frames[<%= i %>]"></frameitem>
 		<%}%>
 	</div>
 </div>

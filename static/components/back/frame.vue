@@ -35,18 +35,16 @@
 return {
 	props : ['frame_id', 'itemdata', 'framenumber', 'framedata']
 	, data : function(){
+
+		console.log(this.framenumber, this.framedata)
+		
 		return {
 		}
 	}
 	, methods : {
 		selectFrame : function($event){
-			this.setItemFocus()
-			this.showMenu()
-		}
-		, setItemFocus : function(){
 			this.$dispatch('setItemFocus', this.itemdata.item_id)
-		}
-		, showMenu : function(){
+			this.$dispatch('setFrameFocus', this.framenumber)
 		}
 	}
 }
