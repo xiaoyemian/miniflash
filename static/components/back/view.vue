@@ -62,6 +62,12 @@ return {
 		size : function(val, oldVal){
 			this.$broadcast('reloadItem', val, oldVal)
 		}
+		, focus_id : function(){
+			console.log(arguments)
+		}
+		, frame_id : function(){
+			console.log(arguments)
+		}
 	}
 	, methods : {
 		updateView : function(width, height){
