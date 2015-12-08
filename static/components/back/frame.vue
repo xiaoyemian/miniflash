@@ -28,14 +28,14 @@
 <script>
 
 return {
-	props : ['itemdata', 'focusitem', 'framenumber', 'framedata']
+	props : ['itemdata', 'framenumber', 'framedata']
 	, data : function(){
 		return {
 		}
 	}
 	, methods : {
 		setFocus : function(){
-			this.$dispatch('setFocus', this.item)
+			this.$dispatch('setFocus', this.itemdata.item_id)
 		}
 	}
 	, ready : function(){
