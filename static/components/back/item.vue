@@ -81,14 +81,12 @@ return {
 		}
 		, setItem : function(opts){
 			var style = this.itemdata.style
-			if(opts.position){
-				style.top = opts.position.top
-				style.left = opts.position.left
+			opts = opts || {}
+
+			for(var i in opts){
+				style[i] = opts[i]
 			}
-			if(opts.size){
-				style.width = opts.size.width
-				style.height = opts.size.height
-			}
+
 		}
 		, updateItem : function(){
 			var style = this.itemdata.style
@@ -107,6 +105,16 @@ return {
 		updateItem : function(){
 			this.updateItem()
 		}
+		, reloadItem : function(size, oldsize){
+			var style = this.itemdata.style
+			var scale = size.width/oldsize.width
+
+			for(var i in style){
+				style[i] *= scale
+			}
+
+			this.updateItem()
+		}
 	}
 	, ready : function(){
 		var mSelf = this
@@ -117,7 +125,7 @@ return {
 				mSelf.setFocus()
 			}
 			, drag : function(event, opts){
-				mSelf.setItem(opts)
+				mSelf.setItem(opts.position)
 			}
 			, stop : function(event, opts){
 				mSelf.updateItem()
@@ -130,7 +138,7 @@ return {
 				mSelf.setFocus()
 			}
 			, resize : function(event, opts){
-				mSelf.setItem(opts)
+				mSelf.setItem(opts.size)
 			}
 			, stop : function(event, opts){
 				mSelf.updateItem()

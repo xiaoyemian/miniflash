@@ -20,7 +20,7 @@
 <template>
 <itemsetting :itemdata="pagedata.items[focus_id]"></itemsetting>
 <div class="view" @click="deleteFocus">
-	<div class="page" :style="[style]">
+	<div class="page" :style="style">
 		<item v-for="(item_id, itemdata) in pagedata.items" :itemdata="itemdata" :focus_id="focus_id"></item>
 	</div>
 
@@ -39,13 +39,6 @@ var item = require('back/item.vue')
 var itemsetting = require('back/itemsetting.vue')
 var track = require('back/track.vue')
 
-var width = 640
-var height = 1136
-
-var scale = ($(window).height()-160)/height*.8
-if(scale >= 0.4)
-	scale = 0.4
-
 return {
   components : {
     item : item
@@ -55,25 +48,44 @@ return {
 	, props:['pagedata']
 	, data : function(){
 
-		var size = {
-			width : width * scale 
-			, height : height * scale
-		}
+		this.updateView(640, 1136)
+
+		var mSelf = this
+
+		var t =setTimeout(function(){mSelf.updateView(840, 1136)}, 3000)
 
 		return {
 			focus_id : null 
-			, size : size
-			, style : {
-				width : size.width + 'px'
-				, height : size.height + 'px'
-				, top : 10 + '%'
-				, left : 50 + '%'
-				, 'margin-left' : size.width * -0.5 + 'px'
-			}
+			, size : this.size
+			, style : this.style
+		}
+
+	}
+	, watch : {
+		size : function(val, oldVal){
+			this.$broadcast('reloadItem', val, oldVal)
 		}
 	}
 	, methods : {
-		deleteFocus : function(){
+		updateView : function(width, height){
+
+			var scale = ($(window).height()-160)/height*.8
+			if(scale >= 0.4)
+				scale = 0.4
+
+			this.size = {
+				width : width * scale 
+				, height : height * scale
+			}
+			this.style = {
+				width : this.size.width + 'px'
+				, height : this.size.height + 'px'
+				, top : 10 + '%'
+				, left : 50 + '%'
+				, 'margin-left' : this.size.width * -0.5 + 'px'
+			}
+		}
+		, deleteFocus : function(){
 			this.focus_id = null 
 		}
 		, setFocus : function(item_id){
