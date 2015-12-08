@@ -24,7 +24,7 @@
 
 <template>
 <% var framelength = 2000; %>
-<div class="track" v-if="trackdata" :class="{focus : focus.item_id == item_id}" @click="setItemFocus">
+<div class="track" v-if="trackdata" :class="{focus : focus.item_id == item_id}">
 	<div class="trackname">{{item_id}}</div>
 	<div class="trackframe">
 		<%for(var i = 0 ; i<= framelength; i+= 100){%>
@@ -48,9 +48,6 @@ return {
 		}
 	}
 	, methods : {
-		setItemFocus : function(){
-			this.$dispatch('setItemFocus', this.item_id)
-		}
 	}
 	, ready : function(){
 	}

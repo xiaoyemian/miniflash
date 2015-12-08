@@ -34,12 +34,12 @@
 </style>
 
 <template>
-<div class="itemsetting" v-if="itemdata">
-	<div class="itemStyle">
-		<div class="inputBox" v-for="(key, value) in itemdata.style"><label for="style|{{key}}">{{label.style[key]}}</label><input type="number" @keyup="updateItem" id="style|{{key}}" placeholder="" value="{{value}}"/>px</div>
+<div class="itemsetting">
+	<div class="itemStyle" v-if="focus.style">
+		<div class="inputBox" v-for="(key, value) in focus.style"><label for="style|{{key}}">{{label.style[key]}}</label><input type="number" @keyup="updateItem" id="style|{{key}}" placeholder="" value="{{value}}"/>px</div>
 	</div>
 
-	<div class="itemType">
+	<div class="itemType" v-if="itemdata && itemdata.background">
 			<div class="inputBox" v-for="(key, value) in itemdata.background"><label for="background|{{key}}">{{label.background[key]}}</label><input type="text" id="background|{{key}}" placeholder="" value="{{value}}"/></div>
 	</div>
 
@@ -50,8 +50,9 @@
 <script>
 
 return {
-	props : ['itemdata']
+	props : ['itemdata', 'focus']
 	, data : function(){
+		console.log(this.itemdata)
 
 		return {
 			label : {
@@ -73,9 +74,9 @@ return {
 			var type = setting.id.split('|')
 			var value = setting.value
 
-			this.itemdata[type[0]][type[1]] = value|0
+			this.focus.style[type[1]] = value|0
 
-			this.$dispatch('updateItem')
+			this.$dispatch('doUpdateItem')
 		}
 	}
 }

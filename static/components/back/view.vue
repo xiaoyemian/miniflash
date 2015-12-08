@@ -18,8 +18,8 @@
 
 
 <template>
-<itemsetting :itemdata="pagedata.items[focus.item_id]"></itemsetting>
-<div class="view" @click="deleteItemFocus">
+<itemsetting :focus="focus" :itemdata="pagedata.items[focus.item_id]"></itemsetting>
+<div class="view" @click="clearFocus">
 	<div class="page" :style="style">
 		<item v-for="(item_id, itemdata) in pagedata.items" :itemdata="itemdata" :focus="focus"></item>
 	</div>
@@ -48,15 +48,13 @@ return {
 	, props:['pagedata']
 	, data : function(){
 
+		this.focus = {}
 		this.updateView(640, 1136)
 
 		return {
-			focus : {
-				item_id : null
-				, frame_id : null
-			} 
-			, size : this.size
+			size : this.size
 			, style : this.style
+			, focus : this.focus
 		}
 
 	}
@@ -64,11 +62,8 @@ return {
 		size : function(val, oldVal){
 			this.$broadcast('reloadItem', val, oldVal)
 		}
-		, 'focus.item_id' : function(){
-			//console.log(arguments)
-		}
-		, 'focus.frame_id' : function(){
-			//console.log(arguments)
+		, 'focus' : function(){
+			console.log(arguments)
 		}
 	}
 	, methods : {
@@ -92,31 +87,36 @@ return {
 				, 'margin-left' : this.size.width * -0.5 + 'px'
 			}
 		}
-		, deleteItemFocus : function(){
-			this.focus.item_id = null 
-		}
-		, deleteFrameFocus : function(){
-			this.focus.frame_id = null 
+		, clearFocus : function(){
+			this.$set('focus', {})
 		}
 
 	}
 	, events : {
-		updateItem : function(style){
+		doUpdateItem : function(style){
+			style = style || {}
+
 			if(style && style['padding-top']){
-				style.height = this.size.width * style['padding-top']/100
-				style.width = this.size.width * style['width']/100
-				style.top = this.size.height * style['top']/100
-				style.left = this.size.width * style['left']/100
+				var size = this.size
+				style.height = size.width * style['padding-top']/100
+				style.width = size.width * style['width']/100
+				style.top = size.height * style['top']/100
+				style.left = size.width * style['left']/100
 
 				delete style['padding-top']
 			}
-			this.$broadcast('updateItem', style)
+
+			for(var i in this.focus.style){
+				style[i] = style[i] || this.focus.style[i]
+			}
+
+			this.$set('focus.style', style)
+			
+			this.$broadcast('updateItem')
 		}
-		, setItemFocus : function(item_id){
-			this.focus.item_id = item_id
-		}
-		, setFrameFocus : function(frame_id){
-			this.focus.frame_id = frame_id
+		, setFocus : function(item_id, frame_id){
+			this.$set('focus.item_id', item_id)
+			this.$set('focus.frame_id', frame_id)
 		}
 	}
 	, ready : function(){

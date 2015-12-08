@@ -36,7 +36,7 @@
 </style>
 
 <template>
-<div class="item" :class="{focus : focus.item_id == itemdata.item_id}" @click.stop="setItemFocus" :style="style">
+<div class="item" :class="{focus : focus.item_id == itemdata.item_id}" :style="style">
 	<div class="handle">
 		<div @click.stop="aspectRatio" class="aspectRatioBtn"></div>
 	</div>
@@ -51,23 +51,20 @@ require('jqui/resizable')
 return {
 	props:['focus', 'itemdata']
 	, data:function(){
-		this.style = {}
-
 		return {
 			style : this.style
 		}
 	}
 	, methods : {
-		setItemFocus : function(){
-			this.$dispatch('setItemFocus', this.itemdata.item_id)
-		}
-		, aspectRatio : function(){
-			var style = this.itemdata.style
+		aspectRatio : function(){
+			var style = this.focus.style
 			style.height = style.width*this.itemdata.scale
-			this.updateItem()	
 		}
 		, setItemStyle : function(opts){
-			var style = this.itemdata.style
+			if(this.focus.item_id != this.itemdata.item_id)
+				return;
+
+			var style = this.focus.style
 			opts = opts || {}
 
 			for(var i in opts){
@@ -75,8 +72,7 @@ return {
 			}
 		}
 		, updateItem : function(){
-
-			var style = this.itemdata.style
+			var style = this.focus.style
 			var background = this.itemdata.background
 
 			this.style = {
@@ -90,22 +86,15 @@ return {
 		}
 	}
 	, events : {
-		updateItem : function(style){
-			if(style && this.focus.item_id == this.itemdata.item_id){
-				this.itemdata.style = style
-			}
+		updateItem : function(){
+			if(this.focus.item_id != this.itemdata.item_id)
+				return;
 
 			this.updateItem()
 		}
 		, reloadItem : function(size, oldsize){
-			var style = this.itemdata.style
 			var scale = size.width/oldsize.width
 
-			for(var i in style){
-				style[i] *= scale
-			}
-
-			this.updateItem()
 		}
 	}
 	, ready : function(){
@@ -114,26 +103,22 @@ return {
 
 		$item.draggable({
 			start : function(event, opts){
-				mSelf.setItemFocus()
 			}
 			, drag : function(event, opts){
 				mSelf.setItemStyle(opts.position)
 			}
 			, stop : function(event, opts){
-				mSelf.updateItem()
 			}
 			, containment: "document"
 		})
 	
 		$item.resizable({
 			start : function(event, opts){
-				mSelf.setItemFocus()
 			}
 			, resize : function(event, opts){
 				mSelf.setItemStyle(opts.size)
 			}
 			, stop : function(event, opts){
-				mSelf.updateItem()
 			}
 		})
 

@@ -47,11 +47,10 @@ return {
 		selectFrame : function($event){
 			var framedata = this.framedata
 
-			this.$dispatch('setItemFocus', this.item_id)
-			this.$dispatch('setFrameFocus', this.frame_id)
+			this.$dispatch('setFocus', this.item_id, this.frame_id)
 
 			if(framedata.style){
-				this.$dispatch('updateItem', framedata.style)
+				this.$dispatch('doUpdateItem', framedata.style)
 
 			}else{
 				this.$dispatch('addKeyFrame')
@@ -60,7 +59,8 @@ return {
 		}
 	}
 	, events : {
-
+		updateItem : function(style){
+		}
 	}
 }
 </script>
