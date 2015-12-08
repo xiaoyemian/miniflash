@@ -33,7 +33,7 @@
 <script>
 
 return {
-	props : ['frame_id', 'itemdata', 'framenumber', 'framedata']
+	props : ['focus', 'itemdata', 'framenumber', 'framedata']
 	, data : function(){
 
 		console.log(this.framenumber, this.framedata)

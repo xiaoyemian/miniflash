@@ -36,7 +36,7 @@
 </style>
 
 <template>
-<div class="item" :class="{focus : focus_id ? (focus_id == itemdata.item_id) : false}" @click.stop="setItemFocus" :style="style">
+<div class="item" :class="{focus : focus.item ? (focus.item == itemdata.item_id) : false}" @click.stop="setItemFocus" :style="style">
 	<div class="handle">
 		<div @click.stop="aspectRatio" class="aspectRatioBtn"></div>
 	</div>
@@ -49,7 +49,7 @@ require('jqui/draggable')
 require('jqui/resizable')
 
 return {
-	props:['focus_id', 'itemdata']
+	props:['focus', 'itemdata']
 	, data:function(){
 		if(this.itemdata.style['padding-top']){
 			var size = this.$parent.size
