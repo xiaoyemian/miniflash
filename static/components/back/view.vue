@@ -15,10 +15,10 @@
 
 
 <template>
-<itemsetting :focus="focus"></itemsetting>
+<itemsetting :focusitem="focusitem"></itemsetting>
 <div class="view" @click="deleteFocus">
 	<div class="page" :style="[style]">
-		<item v-for="(item_id, itemdata) in pagedata.items" :itemdata="itemdata" :focus="focus"></item>
+		<item v-for="(item_id, itemdata) in pagedata.items" :itemdata="itemdata" :focusitem="focusitem"></item>
 	</div>
 
 </div>
@@ -27,7 +27,7 @@
 	<div class="tracksitting">
 	</div>
 	<div class="tracks">
-		<track v-for="(item_id, trackdata) in pagedata.track" :trackdata="trackdata" :focus="focus"></track>
+		<track v-for="(item_id, trackdata) in pagedata.track" :trackdata="trackdata" :focusitem="focusitem"></track>
 	</div>
 </div>
 
@@ -63,7 +63,7 @@ return {
 		}
 
 		return {
-			focus : null 
+			focusitem : null 
 			, size : size
 			, style : {
 				width : size.width + 'px'
@@ -76,10 +76,10 @@ return {
 	}
 	, methods : {
 		deleteFocus : function(){
-			this.focus = null 
+			this.focusitem = null 
 		}
 		, setFocus : function(item){
-			this.focus = item
+			this.focusitem = item
 		}
 	}
 	, events : {
@@ -87,7 +87,7 @@ return {
 			this.setFocus(item)
 		}
 		, updateItem : function(){
-			this.focus.reloadItem()
+			this.focusitem.reloadItem()
 		}
 	}
 	, created : function(){
@@ -111,11 +111,18 @@ return {
 					}
 					, type : ''
 				}
+				, 500 : {
+					style : {
+						left:0,top:0,width:100,height:200
+					}
+					, type : ''
+				}
+
 			}
 		}, {
 			item_id : 'item1429603485765'
 			, frames : {
-				0 : {
+				300 : {
 					style : {
 						left:0,top:0,width:100,height:200
 					}
@@ -125,7 +132,7 @@ return {
 		}, {
 			item_id : 'item1429603376791'
 			, frames : {
-				0 : {
+				500 : {
 					style : {
 						left:0,top:0,width:100,height:200
 					}

@@ -38,7 +38,7 @@
 </style>
 
 <template>
-<div class="item" :class="{focus : focus ? (focus.itemdata.item_id == itemdata.item_id) : false}" @click.stop.prevent="setFocus" :style="[style, background]">
+<div class="item" :class="{focus : focusitem ? (focusitem.itemdata.item_id == itemdata.item_id) : false}" @click.stop.prevent="setFocus" :style="[style, background]">
 	<div class="handle">
 		<div @click.stop.prevent="aspectRatio" class="aspectRatioBtn"></div>
 	</div>
@@ -51,7 +51,7 @@ require('jqui/draggable')
 require('jqui/resizable')
 
 return {
-	props:['focus', 'itemdata']
+	props:['focusitem', 'itemdata']
 	, data:function(){
 		this.reloadItem()
 

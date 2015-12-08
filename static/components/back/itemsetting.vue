@@ -35,12 +35,12 @@
 
 <template>
 <div class="itemsetting">
-	<div class="itemStyle" v-if="focus">
-		<div class="inputBox" v-for="(key, value) in focus.itemdata.style"><label for="style|{{key}}">{{label.style[key]}}</label><input type="number" @keyup="updateItem" id="style|{{key}}" placeholder="" value="{{value}}"/>px</div>
+	<div class="itemStyle" v-if="focusitem">
+		<div class="inputBox" v-for="(key, value) in focusitem.itemdata.style"><label for="style|{{key}}">{{label.style[key]}}</label><input type="number" @keyup="updateItem" id="style|{{key}}" placeholder="" value="{{value}}"/>px</div>
 	</div>
 
-	<div class="itemType" v-if="focus">
-			<div class="inputBox" v-for="(key, value) in focus.itemdata.background"><label for="background|{{key}}">{{label.background[key]}}</label><input type="text" id="background|{{key}}" placeholder="" value="{{value}}"/></div>
+	<div class="itemType" v-if="focusitem">
+			<div class="inputBox" v-for="(key, value) in focusitem.itemdata.background"><label for="background|{{key}}">{{label.background[key]}}</label><input type="text" id="background|{{key}}" placeholder="" value="{{value}}"/></div>
 	</div>
 
 </div>
@@ -50,7 +50,7 @@
 <script>
 
 return {
-	props : ['focus']
+	props : ['focusitem']
 	, data : function(){
 		return {
 			label : {
@@ -72,9 +72,9 @@ return {
 			var type = setting.id.split('|')
 			var value = setting.value
 
-			this.focus.itemdata[type[0]][type[1]] = value|0
+			this.focusitem.itemdata[type[0]][type[1]] = value|0
 
-			this.$dispatch('updateItem', this.focus)
+			this.$dispatch('updateItem', this.focusitem)
 		}
 	}
 }

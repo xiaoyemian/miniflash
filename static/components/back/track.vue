@@ -10,11 +10,12 @@
 </style>
 
 <template>
-<div class="track" :class="{focus : focus ? (focus.itemdata.item_id == trackdata.item_id) : false}">
+<div class="track" :class="{focus : focusitem ? (focusitem.itemdata.item_id == trackdata.item_id) : false}">
 	<div class="name">{{trackdata.item_id}}</div>
 	<div class="frames">
-		<%for(var i = 0 ; i<= 10000; i+= 100){%>
-		<frameitem :framenumber="<%= i %>" :framedata="trackdata[i]"></frameitem>
+		<% var framelength = 6000; %>
+		<%for(var i = 0 ; i<= framelength; i+= 100){%>
+		<frameitem :framenumber="<%= i %>" :framedata="trackdata.frames[<%=i%>]"></frameitem>
 		<%}%>
 	</div>
 </div>
@@ -27,13 +28,13 @@ return {
   components : {
     frameitem : frame
 	}
-	, props : ['focus', 'trackdata']
+	, props : ['focusitem', 'trackdata']
 	, data : function(){
+		console.log(this.trackdata.frames)
 		return {
 		}
 	}
 	, ready : function(){
-		console.log(this.trackdata)
 	}
 }
 </script>
