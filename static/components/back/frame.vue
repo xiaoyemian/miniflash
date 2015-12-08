@@ -49,13 +49,12 @@ return {
 
 			this.$dispatch('setFocus', this.item_id, this.frame_id)
 
-			if(framedata.style){
-				this.$dispatch('doUpdateItem', framedata.style)
-
-			}else{
-				this.$dispatch('addKeyFrame')
-
+			if(!framedata.style){
+				framedata.style = {}
 			}
+			console.log(framedata.style)
+
+			this.$dispatch('doUpdateItem', framedata.style)
 		}
 	}
 	, events : {

@@ -71,7 +71,12 @@ return {
 				style[i] = opts[i]
 			}
 		}
-		, updateItem : function(){
+	}
+	, events : {
+		updateItem : function(){
+			if(this.focus.item_id != this.itemdata.item_id)
+				return;
+
 			var style = this.focus.style
 			var background = this.itemdata.background
 
@@ -83,14 +88,6 @@ return {
 				, 'background-image' : 'url("' + background.image + '")' 
 			}
 
-		}
-	}
-	, events : {
-		updateItem : function(){
-			if(this.focus.item_id != this.itemdata.item_id)
-				return;
-
-			this.updateItem()
 		}
 		, reloadItem : function(size, oldsize){
 			var scale = size.width/oldsize.width
