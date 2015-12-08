@@ -59,6 +59,9 @@ return {
 			}
 		}
 	}
+	, events : {
+
+	}
 }
 </script>
 

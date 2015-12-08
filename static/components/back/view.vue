@@ -102,6 +102,14 @@ return {
 	}
 	, events : {
 		updateItem : function(style){
+			if(style && style['padding-top']){
+				style.height = this.size.width * style['padding-top']/100
+				style.width = this.size.width * style['width']/100
+				style.top = this.size.height * style['top']/100
+				style.left = this.size.width * style['left']/100
+
+				delete style['padding-top']
+			}
 			this.$broadcast('updateItem', style)
 		}
 		, setItemFocus : function(item_id){

@@ -74,21 +74,6 @@ return {
 				style[i] = opts[i]
 			}
 		}
-		, formatData : function(){
-			if(this.itemdata.style['padding-top']){
-				var size = this.$parent.size
-				var style = this.itemdata.style
-
-				this.$set('itemdata.style.height', size.width * style['padding-top']/100) 
-
-				style.width = size.width * style['width']/100
-				style.top = size.height * style['top']/100
-				style.left = size.width * style['left']/100
-
-				delete style['padding-top']
-			}
-
-		}
 		, updateItem : function(){
 
 			var style = this.itemdata.style
@@ -108,7 +93,6 @@ return {
 		updateItem : function(style){
 			if(style && this.focus.item_id == this.itemdata.item_id){
 				this.itemdata.style = style
-				this.formatData()
 			}
 
 			this.updateItem()
