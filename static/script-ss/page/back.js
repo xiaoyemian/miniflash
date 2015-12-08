@@ -15,7 +15,6 @@ for(var no in pages){
 
 		for(var i in items){
 			var item = items[i]
-			pagedata.items[item.item_id] = item
 
 			pagedata.track[item.item_id] = {
 				0 : {
@@ -23,11 +22,13 @@ for(var no in pages){
 					, type : ''
 				}
 			}
+
+			item.style = {} 
+
+			pagedata.items[item.item_id] = item
 		}
 	}
 }
-
-
 
 
 var vm = new Vue({
@@ -45,7 +46,5 @@ window.vm = vm
 
 vm.$log()
 
-//console.log(vm)
-//console.log(pages)
 
 

@@ -27,7 +27,7 @@
 </div>
 
 <div class="flash">
-	<track v-for="(item_id, trackdata) in pagedata.track" :itemdata="pagedata.items[item_id]" :focus="focus" :trackdata="trackdata"></track>
+	<track v-for="(item_id, trackdata) in pagedata.track" :item_id="item_id" :focus="focus" :trackdata="trackdata"></track>
 </div>
 
 </template>
@@ -101,8 +101,8 @@ return {
 
 	}
 	, events : {
-		updateItem : function(){
-			this.$broadcast('updateItem')
+		updateItem : function(style){
+			this.$broadcast('updateItem', style)
 		}
 		, setItemFocus : function(item_id){
 			this.focus.item_id = item_id

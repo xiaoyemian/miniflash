@@ -51,19 +51,6 @@ require('jqui/resizable')
 return {
 	props:['focus', 'itemdata']
 	, data:function(){
-		if(this.itemdata.style['padding-top']){
-			var size = this.$parent.size
-			var style = this.itemdata.style
-
-			this.$set('itemdata.style.height', size.width * style['padding-top']/100) 
-
-			style.width = size.width * style['width']/100
-			style.top = size.height * style['top']/100
-			style.left = size.width * style['left']/100
-
-			delete style['padding-top']
-		}
-
 		this.updateItem()	
 
 		return {
@@ -87,9 +74,26 @@ return {
 				style[i] = opts[i]
 			}
 		}
+		, formatData : function(){
+			if(this.itemdata.style['padding-top']){
+				var size = this.$parent.size
+				var style = this.itemdata.style
+
+				this.$set('itemdata.style.height', size.width * style['padding-top']/100) 
+
+				style.width = size.width * style['width']/100
+				style.top = size.height * style['top']/100
+				style.left = size.width * style['left']/100
+
+				delete style['padding-top']
+			}
+
+		}
 		, updateItem : function(){
+
 			var style = this.itemdata.style
 			var background = this.itemdata.background
+
 			this.style = {
 				width : style.width + 'px'
 				, height : style.height + 'px'
@@ -101,7 +105,12 @@ return {
 		}
 	}
 	, events : {
-		updateItem : function(){
+		updateItem : function(style){
+			if(style && this.focus.item_id == this.itemdata.item_id){
+				this.itemdata.style = style
+				this.formatData()
+			}
+
 			this.updateItem()
 		}
 		, reloadItem : function(size, oldsize){
