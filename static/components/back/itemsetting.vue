@@ -40,7 +40,11 @@
 	</div>
 
 	<div class="itemType" v-if="itemdata && itemdata.background">
-			<div class="inputBox" v-for="(key, value) in itemdata.background"><label for="background|{{key}}">{{label.background[key]}}</label><input type="text" id="background|{{key}}" placeholder="" value="{{value}}"/></div>
+		<div class="inputBox" v-for="(key, value) in itemdata.background"><label for="background|{{key}}">{{label.background[key]}}</label><input type="text" id="background|{{key}}" placeholder="" value="{{value}}"/></div>
+		<div class="inputBox">
+		{{focus|json}}
+		</div>
+
 	</div>
 
 </div>

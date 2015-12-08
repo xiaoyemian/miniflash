@@ -68,7 +68,7 @@ return {
 			opts = opts || {}
 
 			for(var i in opts){
-				style[i] = opts[i]
+				this.$set('focus.style.' + i, opts[i])
 			}
 		}
 	}

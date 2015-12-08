@@ -50,7 +50,7 @@ return {
 			this.$dispatch('setFocus', this.item_id, this.frame_id)
 
 			if(!framedata.style){
-				framedata.style = {}
+				this.$set('framedata.style', {})
 			}
 			console.log(framedata)
 
