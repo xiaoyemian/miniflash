@@ -34,7 +34,7 @@
 	<div class="trackframe">
 		<%for(var i = 0 ; i<= framelength; i+= 100){%>
 
-		<frameitem :framenumber="<%= i %>" :itemdata="itemdata" :framedata="trackdata.frames[<%= i %>]" :focus_id="focus_id"></frameitem>
+		<frameitem :framenumber="<%= i %>" :itemdata="itemdata" :framedata="trackdata.frames[<%= i %>]"></frameitem>
 
 		<%}%>
 	</div>
@@ -49,7 +49,7 @@ return {
   components : {
     frameitem : frame
 	}
-	, props : ['itemdata', 'focus_id', 'trackdata']
+	, props : ['itemdata', 'trackdata']
 	, data : function(){
 		console.log(this.trackdata, this.itemdata)
 		return {
@@ -57,7 +57,7 @@ return {
 	}
 	, methods : {
 		setFocus : function(){
-			console.log(this)
+			this.$dispatch('setFocus', this.itemdata.item_id)
 		}
 	}
 	, ready : function(){
