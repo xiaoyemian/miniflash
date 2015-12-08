@@ -1,8 +1,14 @@
 <style>
+.track{
+	.frame{
+
+	}
+}
 </style>
 
 <template>
-<div class="frame"></div>
+<div class="frame">
+</div>
 </template>
 
 
