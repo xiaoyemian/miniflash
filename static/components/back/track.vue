@@ -42,7 +42,7 @@ return {
   components : {
     frameitem : frame
 	}
-	, props : ['focus_id', 'itemdata', 'trackdata']
+	, props : ['focus_id', 'frame_id', 'itemdata', 'trackdata']
 	, data : function(){
 		console.log(this.trackdata, this.itemdata)
 		return {

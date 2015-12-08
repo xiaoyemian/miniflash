@@ -79,14 +79,13 @@ return {
 			style.height = style.width*this.itemdata.scale
 			this.updateItem()	
 		}
-		, setItem : function(opts){
+		, setItemStyle : function(opts){
 			var style = this.itemdata.style
 			opts = opts || {}
 
 			for(var i in opts){
 				style[i] = opts[i]
 			}
-
 		}
 		, updateItem : function(){
 			var style = this.itemdata.style
@@ -125,7 +124,7 @@ return {
 				mSelf.setItemFocus()
 			}
 			, drag : function(event, opts){
-				mSelf.setItem(opts.position)
+				mSelf.setItemStyle(opts.position)
 			}
 			, stop : function(event, opts){
 				mSelf.updateItem()
@@ -138,7 +137,7 @@ return {
 				mSelf.setItemFocus()
 			}
 			, resize : function(event, opts){
-				mSelf.setItem(opts.size)
+				mSelf.setItemStyle(opts.size)
 			}
 			, stop : function(event, opts){
 				mSelf.updateItem()

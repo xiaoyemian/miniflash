@@ -33,13 +33,15 @@
 <script>
 
 return {
-	props : ['itemdata', 'framenumber', 'framedata']
+	props : ['frame_id', 'itemdata', 'framenumber', 'framedata']
 	, data : function(){
 		return {
 		}
 	}
 	, methods : {
 		selectFrame : function($event){
+			this.setItemFocus()
+			this.showMenu()
 		}
 		, setItemFocus : function(){
 			this.$dispatch('setItemFocus', this.itemdata.item_id)

@@ -27,7 +27,7 @@
 </div>
 
 <div class="flash">
-	<track v-for="(item_id, trackdata) in pagedata.track" :itemdata="pagedata.items[item_id]" :focus_id="focus_id" :trackdata="trackdata"></track>
+	<track v-for="(item_id, trackdata) in pagedata.track" :itemdata="pagedata.items[item_id]" :focus_id="focus_id" :frame_id="frame_id" :trackdata="trackdata"></track>
 </div>
 
 </template>
@@ -84,12 +84,6 @@ return {
 				, 'margin-left' : this.size.width * -0.5 + 'px'
 			}
 		}
-		, setItemFocus : function(item_id){
-			this.focus_id = item_id
-		}
-		, setFrameFocus : function(frame_id){
-			this.frame_id = frame_id
-		}
 		, deleteItemFocus : function(){
 			this.focus_id = null 
 		}
@@ -99,11 +93,14 @@ return {
 
 	}
 	, events : {
-		setItemFocus : function(item_id){
-			this.setItemFocus(item_id)
-		}
-		, updateItem : function(){
+		updateItem : function(){
 			this.$broadcast('updateItem')
+		}
+		, setItemFocus : function(item_id){
+			this.focus_id = item_id
+		}
+		, setFrameFocus : function(frame_id){
+			this.frame_id = frame_id
 		}
 	}
 	, ready : function(){
