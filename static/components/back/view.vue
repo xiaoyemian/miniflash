@@ -94,6 +94,7 @@ return {
 	}
 	, events : {
 		doUpdateItem : function(style){
+			console.log(style)
 
 			if(style && style['padding-top']){
 				var size = this.size
