@@ -64,7 +64,10 @@ return {
 		size : function(val, oldVal){
 			this.$broadcast('reloadItem', val, oldVal)
 		}
-		, focus : function(){
+		, 'focus.item_id' : function(){
+			console.log(arguments)
+		}
+		, 'focus.frame_id' : function(){
 			console.log(arguments)
 		}
 	}

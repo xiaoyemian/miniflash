@@ -16,13 +16,11 @@ for(var no in pages){
 		for(var i in items){
 			var item = items[i]
 			pagedata.items[item.item_id] = item
+
 			pagedata.track[item.item_id] = {
-				item_id : item.item_id
-				, frames : {
-					0 : {
-						style : item.style 
-						, type : ''
-					}
+				0 : {
+					style : item.style 
+					, type : ''
 				}
 			}
 		}
