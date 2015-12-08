@@ -9,9 +9,11 @@
 }
 .flash{
 	.pf;left:0px;right:0px;bottom:0px;
+	overflow:auto;
+	.h(160px);
 	.bgc(#333);
 	border:1px solid #222;
-	.h(160px);
+	border-bottom:0 none;
 }
 </style>
 
@@ -26,7 +28,7 @@
 </div>
 
 <div class="flash">
-	<div class="tracksetting"></div>
+	<track></track>
 	<track v-for="(item_id, trackdata) in pagedata.track" :trackdata="trackdata" :focusitem="focusitem"></track>
 </div>
 
@@ -45,7 +47,6 @@ var height = 1136
 var scale = ($(window).height()-160)/height*.8
 if(scale >= 0.4)
 	scale = 0.4
-
 
 return {
   components : {

@@ -1,7 +1,7 @@
 <style>
 .itemsetting{
 	z-index:900;
-	.pa;top:26px;left:0px;right:0px;
+	.pf;top:26px;left:0px;right:0px;
 
 	.inputBox{
 		.f(12px);.fc(#ccc);
@@ -34,12 +34,12 @@
 </style>
 
 <template>
-<div class="itemsetting">
-	<div class="itemStyle" v-if="focusitem">
+<div class="itemsetting" v-if="focusitem">
+	<div class="itemStyle">
 		<div class="inputBox" v-for="(key, value) in focusitem.itemdata.style"><label for="style|{{key}}">{{label.style[key]}}</label><input type="number" @keyup="updateItem" id="style|{{key}}" placeholder="" value="{{value}}"/>px</div>
 	</div>
 
-	<div class="itemType" v-if="focusitem">
+	<div class="itemType">
 			<div class="inputBox" v-for="(key, value) in focusitem.itemdata.background"><label for="background|{{key}}">{{label.background[key]}}</label><input type="text" id="background|{{key}}" placeholder="" value="{{value}}"/></div>
 	</div>
 
