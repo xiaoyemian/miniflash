@@ -111,7 +111,7 @@ return {
 			
 			this.$broadcast('updateItem', item_id)
 		}
-		, setFocus : function(item_id, frame_id, style){
+		, setFocus : function(style, item_id, frame_id){
 			this.$set('focus.item_id', item_id)
 			this.$set('focus.frame_id', frame_id)
 			this.$emit('doUpdateItem', style)
