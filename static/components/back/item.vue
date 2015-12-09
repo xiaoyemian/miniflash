@@ -69,7 +69,6 @@ return {
 	, events : {
 		updateItem : function(){
 			if(this.itemdata.item_id == this.focus.item_id){
-
 				this.itemdata.frame_id = this.focus.frame_id 
 
 				var style = this.focus.style
@@ -82,9 +81,7 @@ return {
 					, left : style.left + 'px'
 					, 'background-image' : 'url("' + background.image + '")' 
 				}
-
 			}
-
 		}
 		, reloadItem : function(size, oldsize){
 			var scale = size.width/oldsize.width
