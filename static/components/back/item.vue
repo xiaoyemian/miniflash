@@ -45,6 +45,8 @@ return {
 	}
 	, methods : {
 		selectItem : function(){
+			console.log(this.itemdata.item_id, this.itemdata.frame_id)
+
 			if(this.focus.item_id == this.itemdata.item_id)
 				return;
 
@@ -69,10 +71,10 @@ return {
 		}
 	}
 	, events : {
-		updateItem : function(item_id){
+		updateItem : function(item_id, frame_id){
 			if(this.focus.item_id == this.itemdata.item_id || item_id == this.itemdata.item_id){
 
-				this.itemdata.frame_id = this.focus.frame_id
+				this.itemdata.frame_id = frame_id || this.focus.frame_id || 0
 
 				var style = this.focus.style
 				var background = this.itemdata.background
