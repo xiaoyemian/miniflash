@@ -53,7 +53,7 @@ return {
 		}
 	}
 	, ready : function(){
-		this.$dispatch('setFocusByFrame', this.item_id)
+		this.$dispatch('setFocus', this.item_id)
 		this.$dispatch('clearFocus')
 	}
 }
