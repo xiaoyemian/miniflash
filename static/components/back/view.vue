@@ -49,11 +49,12 @@ return {
 	, data : function(){
 
 		this.updateView(640, 1136)
+
+		this.focus = {}
 		this.clearFocus()
 
 		return {
 		}
-
 	}
 	, watch : {
 		size : function(val, oldVal){
@@ -85,7 +86,6 @@ return {
 			}
 		}
 		, clearFocus : function(){
-			this.focus = {}
 			Vue.set(this.focus, 'item_id', null)
 			Vue.set(this.focus, 'frame_id', null)
 			Vue.set(this.focus, 'style', {})
