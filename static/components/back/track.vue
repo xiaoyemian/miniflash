@@ -27,11 +27,11 @@
 	var trackLength = 2000
 		, frameStep = 100
  %>
-<div class="track" @click.stop="selectItem" v-if="trackdata" :class="{focus : focus.item_id == item_id}">
-	<div class="trackname">{{item_id}}</div>
+<div class="track" @click.stop="selectItem" v-if="trackdata" :class="{focus : focus.item_id == itemdata.item_id}">
+	<div class="trackname">{{itemdata.item_id}}</div>
 	<div class="trackframe">
 		<%for(var i = 0 ; i<= trackLength; i+= frameStep){%>
-		<frameitem :frame_id="<%= i %>" :frame_step="<%= frameStep %>" :focus="focus" :item_id="item_id" :trackdata="trackdata"></frameitem>
+		<frameitem :frame_id="<%= i %>" :frame_step="<%= frameStep %>" :focus="focus" :item_id="itemdata.item_id" :trackdata="trackdata"></frameitem>
 		<%}%>
 	</div>
 </div>
@@ -45,18 +45,34 @@ return {
   components : {
     frameitem : frame
 	}
-	, props : ['focus', 'item_id', 'trackdata']
+	, props : ['focus', 'itemdata', 'trackdata']
 	, data : function(){
 		return {
 		}
 	}
 	, methods : {
 		selectItem : function(){
-			this.$dispatch('setFocus', this.item_id)
+			this.$dispatch('setFocus', this.itemdata.item_id)
+		}
+	}
+	, events : {
+		addFrame : function(frame_id, style){
+			frame_id = frame_id || 0 
+
+			if(!style){
+				style = {}
+				var framedata = this.trackdata[this.itemdata.frame_id || 0]
+
+				for(var i in framedata.style){
+					style[i] = framedata.style[i]
+				}
+			}
+
+			Vue.set(this.trackdata, frame_id, {style:style})
 		}
 	}
 	, ready : function(){
-		this.$dispatch('setFocus', this.item_id)
+		this.$dispatch('setFocus', this.itemdata.item_id)
 		this.$dispatch('clearFocus')
 	}
 }

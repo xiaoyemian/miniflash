@@ -27,7 +27,7 @@
 </div>
 
 <div class="flash">
-	<track v-for="(item_id, trackdata) in pagedata.track" :item_id="item_id" :focus="focus" :trackdata="trackdata"></track>
+	<track v-for="(item_id, trackdata) in pagedata.track" :focus="focus" :itemdata="pagedata.items[item_id]" :trackdata="trackdata"></track>
 </div>
 
 </template>
