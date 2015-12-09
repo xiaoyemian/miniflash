@@ -53,6 +53,12 @@ return {
 			this.$dispatch('setFocus', this.item_id, this.frame_id, this.framedata.style)
 		}
 	}
+	, events : {
+		selectFrame : function(item_id, frame_id){
+			if(item_id == this.item_id && frame_id == this.frame_id)
+				this.selectFrame()
+		}
+	}
 }
 </script>
 

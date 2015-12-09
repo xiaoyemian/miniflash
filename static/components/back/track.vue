@@ -49,11 +49,11 @@ return {
 	}
 	, methods : {
 		selectItem : function(){
-			this.$dispatch('setFocus', this.item_id, 0)
+			this.$dispatch('setFocus', this.item_id)
 		}
 	}
 	, ready : function(){
-			this.$dispatch('updateItemByFrame', this.item_id, 0)
+			this.$dispatch('setFocusByFrame', this.item_id)
 	}
 }
 </script>

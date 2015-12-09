@@ -48,13 +48,10 @@ return {
 	, props:['pagedata']
 	, data : function(){
 
-		this.focus = {}
 		this.updateView(640, 1136)
+		this.clearFocus()
 
 		return {
-			size : this.size
-			, style : this.style
-			, focus : this.focus
 		}
 
 	}
@@ -88,7 +85,10 @@ return {
 			}
 		}
 		, clearFocus : function(){
-			this.$set('focus', {})
+			this.focus = {}
+			Vue.set(this.focus, 'item_id', null)
+			Vue.set(this.focus, 'frame_id', null)
+			Vue.set(this.focus, 'style', {})
 		}
 
 	}
@@ -97,40 +97,27 @@ return {
 			if(item_id == this.focus.item_id && frame_id == this.focus.frame_id)
 				return;
 
-			this.$set('focus.item_id', item_id)
-			this.$set('focus.frame_id', frame_id || 0)
-
 			console.log(style)
 
-			if(style){
-				this.$emit('updateItemByStyle', style, item_id, frame_id)
+			if(!style){
+				this.$emit('setFocusByFrame', item_id, frame_id)
 
 			}else{
-				this.$emit('updateItemByFrame', item_id, frame_id)
-
+				this.$emit('setFocusByStyle', style, item_id, frame_id)
 			}
-
 		}
-		, updateItemByFrame : function(item_id, frame_id){
-			item_id = item_id || this.focus.item_id
-			frame_id = frame_id || this.focus.frame_id || 0
-
-			var framedata = this.pagedata.track[item_id][frame_id] || {}
-
-			Vue.set(framedata, 'style', framedata.style || {})
-
-			this.$emit('updateItemByStyle', framedata.style, item_id, frame_id)
+		, setFocusByFrame : function(item_id, frame_id){
+			this.$broadcast('selectFrame', item_id, frame_id || 0)
 		}
-		, updateItemByStyle : function(style, item_id, frame_id){
-			item_id = item_id || this.focus.item_id
-			frame_id = frame_id || this.focus.frame_id || 0
-
-			this.$set('focus.style', style)
+		, setFocusByStyle : function(style, item_id, frame_id){
+			Vue.set(this.focus, 'item_id', item_id)
+			Vue.set(this.focus, 'frame_id', frame_id || 0)
+			Vue.set(this.focus, 'style', style)
 
 			if(style && style['padding-top']){
 				var size = this.size
 
-				this.$set('focus.style.height', size.width * style['padding-top']/100)
+				Vue.set(this.focus.style, 'height', size.width * style['padding-top']/100)
 
 				style.width = size.width * style['width']/100
 				style.top = size.height * style['top']/100
@@ -138,8 +125,8 @@ return {
 
 				delete style['padding-top']
 			}
-			
-			this.$broadcast('updateItem', item_id, frame_id)
+
+			this.$broadcast('updateItem')
 		}
 
 	}

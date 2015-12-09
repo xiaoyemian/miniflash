@@ -51,27 +51,26 @@ return {
 		}
 		, aspectRatio : function(){
 			var style = this.focus.style
-			this.$set('focus.style.height', style.width*this.itemdata.scale)
+			Vue.set(this.focus.style, 'height', style.width*this.itemdata.scale)
 			this.$emit('updateItem')
 
 		}
 		, setItemStyle : function(opts){
-			if(this.focus.item_id == this.itemdata.item_id){
-
+			if(this.itemdata.item_id == this.focus.item_id){
 				var style = this.focus.style
 				opts = opts || {}
 
 				for(var i in opts){
-					this.$set('focus.style.' + i, opts[i])
+					Vue.set(this.focus.style, i, opts[i])
 				}
 			}
 		}
 	}
 	, events : {
-		updateItem : function(item_id, frame_id){
-			if(this.focus.item_id == this.itemdata.item_id || item_id == this.itemdata.item_id){
+		updateItem : function(){
+			if(this.itemdata.item_id == this.focus.item_id){
 
-				this.itemdata.frame_id = frame_id 
+				this.itemdata.frame_id = this.focus.frame_id 
 
 				var style = this.focus.style
 				var background = this.itemdata.background
