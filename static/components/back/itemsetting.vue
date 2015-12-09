@@ -34,8 +34,8 @@
 </style>
 
 <template>
-<div class="itemsetting">
-	<div class="itemStyle" v-if="focus.style">
+<div class="itemsetting" v-if="focus.item_id">
+	<div class="itemStyle">
 		<div class="inputBox" v-for="(key, value) in label.style"><label for="style|{{key}}">{{value}}</label><input type="number" @keyup="updateItem" id="style|{{key}}" placeholder="" value="{{focus.style[key]}}"/>px</div>
 	</div>
 
