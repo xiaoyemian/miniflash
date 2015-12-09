@@ -114,23 +114,8 @@ return {
 				this.$set('pagedata.track[this.focus.item_id][0].style', {})
 			}
 			
-			var style = framedata.style
+			this.$emit('updateItemByStyle', framedata.style, item_id)
 
-			this.$set('focus.style', style)
-
-			if(style && style['padding-top']){
-				var size = this.size
-
-				this.$set('focus.style.height', size.width * style['padding-top']/100)
-
-				style.width = size.width * style['width']/100
-				style.top = size.height * style['top']/100
-				style.left = size.width * style['left']/100
-
-				delete style['padding-top']
-			}
-			
-			this.$broadcast('updateItem', item_id)
 		}
 		, updateItemByStyle : function(style, item_id){
 			this.$set('focus.style', style)
