@@ -114,12 +114,8 @@ return {
 		, updateItemByFrame : function(item_id, frame_id){
 			item_id = item_id || this.focus.item_id
 			frame_id = frame_id || this.focus.frame_id || 0
-			console.log(frame_id)
-
 
 			var framedata = this.pagedata.track[item_id][frame_id] || {}
-			console.log(this.pagedata.track[item_id])
-			console.log(2222,framedata)
 
 			Vue.set(framedata, 'style', framedata.style || {})
 
