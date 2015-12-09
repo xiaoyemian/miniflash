@@ -48,6 +48,8 @@ return {
 	, props : ['focus', 'itemdata', 'trackdata']
 	, data : function(){
 		return {
+			'trackLength' : 2000
+			, 'frameStep' : 100
 		}
 	}
 	, methods : {
@@ -72,7 +74,7 @@ return {
 		}
 	}
 	, ready : function(){
-		this.$dispatch('updataFocusStyle', this.trackdata[0].style, this.itemdata.item_id)
+		this.$dispatch('updataItemStyle', this.trackdata[0].style, this.itemdata.item_id)
 	}
 }
 </script>

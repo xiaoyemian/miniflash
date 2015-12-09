@@ -103,10 +103,10 @@ return {
 			}else{
 				Vue.set(this.focus, 'item_id', item_id)
 				Vue.set(this.focus, 'frame_id', frame_id || 0)
-				this.$emit('updataFocusStyle', style)
+				this.$emit('updataItemStyle', style)
 			}
 		}
-		, updataFocusStyle : function(style, item_id){
+		, updataItemStyle : function(style, item_id){
 			Vue.set(this.focus, 'style', style)
 
 			if(style && style['padding-top']){

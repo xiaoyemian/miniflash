@@ -76,7 +76,7 @@ return {
 			var style = this.focus.style
 			style[type[1]] = value|0
 
-			this.$dispatch('updataFocusStyle', style)
+			this.$dispatch('updataItemStyle', style)
 		}
 	}
 }
