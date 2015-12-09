@@ -100,6 +100,8 @@ return {
 			if(style)
 				this.$emit('updateItemByStyle', style, item_id, frame_id)
 
+			console.log(style)
+
 		}
 		, updateItemByFrame : function(item_id, frame_id){
 			item_id = item_id || this.focus.item_id
