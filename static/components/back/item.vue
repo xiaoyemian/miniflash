@@ -39,17 +39,14 @@ require('jqui/resizable')
 return {
 	props:['focus', 'itemdata']
 	, data:function(){
+		this.itemdata.frame_id = 0
+
 		return {
 			style : this.style
 		}
 	}
 	, methods : {
 		selectItem : function(){
-			console.log(this.itemdata.item_id, this.itemdata.frame_id)
-
-			if(this.focus.item_id == this.itemdata.item_id)
-				return;
-
 			this.$dispatch('setFocus', this.itemdata.item_id, this.itemdata.frame_id)
 		}
 		, aspectRatio : function(){
@@ -74,7 +71,7 @@ return {
 		updateItem : function(item_id, frame_id){
 			if(this.focus.item_id == this.itemdata.item_id || item_id == this.itemdata.item_id){
 
-				this.itemdata.frame_id = frame_id || this.focus.frame_id || 0
+				this.itemdata.frame_id = frame_id 
 
 				var style = this.focus.style
 				var background = this.itemdata.background
@@ -101,6 +98,7 @@ return {
 
 		$item.draggable({
 			start : function(event, opts){
+				mSelf.selectItem()
 			}
 			, drag : function(event, opts){
 				mSelf.setItemStyle(opts.position)
@@ -112,6 +110,7 @@ return {
 	
 		$item.resizable({
 			start : function(event, opts){
+				mSelf.selectItem()
 			}
 			, resize : function(event, opts){
 				mSelf.setItemStyle(opts.size)
