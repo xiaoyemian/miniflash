@@ -50,7 +50,7 @@ return {
 
 			}
 
-			this.$dispatch('setFocus', this.framedata.style, this.item_id, this.frame_id)
+			this.$dispatch('setFocus', this.item_id, this.frame_id, this.framedata.style)
 		}
 	}
 	, events : {

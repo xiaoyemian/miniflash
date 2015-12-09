@@ -93,7 +93,17 @@ return {
 
 	}
 	, events : {
-		updateItemByStyle : function(style, item_id){
+		setFocus : function(item_id, frame_id, style){
+			this.$set('focus.item_id', item_id)
+			this.$set('focus.frame_id', frame_id)
+
+			if(style)
+				this.$emit('updateItemByStyle', style)
+			else
+				this.$emit('updateItemByFrame')
+
+		}
+		, updateItemByStyle : function(style, item_id){
 			this.$set('focus.style', style)
 
 			if(style && style['padding-top']){
@@ -107,15 +117,27 @@ return {
 
 				delete style['padding-top']
 			}
-
 			
 			this.$broadcast('updateItem', item_id)
 		}
-		, setFocus : function(style, item_id, frame_id){
-			this.$set('focus.item_id', item_id)
-			this.$set('focus.frame_id', frame_id)
-			this.$emit('updateItemByStyle', style)
+		, updateItemByStyle : function(style, item_id){
+			this.$set('focus.style', style)
+
+			if(style && style['padding-top']){
+				var size = this.size
+
+				this.$set('focus.style.height', size.width * style['padding-top']/100)
+
+				style.width = size.width * style['width']/100
+				style.top = size.height * style['top']/100
+				style.left = size.width * style['left']/100
+
+				delete style['padding-top']
+			}
+			
+			this.$broadcast('updateItem', item_id)
 		}
+
 	}
 	, ready : function(){
 		var mSelf = this
