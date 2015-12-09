@@ -103,7 +103,19 @@ return {
 				this.$emit('updateItemByFrame')
 
 		}
-		, updateItemByStyle : function(style, item_id){
+		, updateItemByFrame : function(item_id, frame_id){
+			item_id = item_id || this.focus.item_id
+			frame_id = frame_id || 0
+
+			var framedata = this.pagedata.track[item_id][frame_id]
+			console.log(framedata)
+
+			if(!framedata.style){
+				this.$set('pagedata.track[this.focus.item_id][0].style', {})
+			}
+			
+			var style = framedata.style
+
 			this.$set('focus.style', style)
 
 			if(style && style['padding-top']){

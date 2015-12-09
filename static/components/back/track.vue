@@ -50,6 +50,7 @@ return {
 	, methods : {
 	}
 	, ready : function(){
+			this.$dispatch('updateItemByFrame', this.item_id, 0)
 	}
 }
 </script>

@@ -24,7 +24,7 @@
 </style>
 
 <template>
-<div class="item" :class="{focus : focus.item_id == itemdata.item_id}" :style="style">
+<div class="item" @click.stop="selectItem" :class="{focus : focus.item_id == itemdata.item_id}" :style="style">
 	<div class="handle">
 		<div @click.stop="aspectRatio" class="aspectRatioBtn"></div>
 	</div>
@@ -44,21 +44,26 @@ return {
 		}
 	}
 	, methods : {
-		aspectRatio : function(){
+		selectItem : function(){
+			if(this.focus.item_id == this.itemdata.item_id)
+				return;
+			this.$dispatch('setFocus', this.itemdata.item_id, 0)
+		}
+		, aspectRatio : function(){
 			var style = this.focus.style
 			this.$set('focus.style.height', style.width*this.itemdata.scale)
 			this.$emit('updateItem')
 
 		}
 		, setItemStyle : function(opts){
-			if(this.focus.item_id != this.itemdata.item_id)
-				return;
+			if(this.focus.item_id == this.itemdata.item_id){
 
-			var style = this.focus.style
-			opts = opts || {}
+				var style = this.focus.style
+				opts = opts || {}
 
-			for(var i in opts){
-				this.$set('focus.style.' + i, opts[i])
+				for(var i in opts){
+					this.$set('focus.style.' + i, opts[i])
+				}
 			}
 		}
 	}

@@ -47,22 +47,10 @@ return {
 
 			if(!this.framedata.style){
 				this.$set('framedata.style', {})
-
 			}
 
 			this.$dispatch('setFocus', this.item_id, this.frame_id, this.framedata.style)
 		}
-	}
-	, events : {
-		updateItem : function(style){
-		}
-	}
-	, created : function(){
-			
-		if(this.frame_id == 0)
-			this.$dispatch('updateItemByStyle', this.framedata.style, this.item_id)
-			
-
 	}
 }
 </script>
