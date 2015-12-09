@@ -29,7 +29,7 @@
 </style>
 
 <template>
-<div class="frame" :class="{keyframe : framedata.style, focus : focus.item_id == item_id && focus.frame_id == frame_id}" @click.stop="selectFrame"></div>
+<div class="frame" :class="{keyframe : framedata && framedata.style, focus : focus.item_id == item_id && focus.frame_id == frame_id}" @click.stop="selectFrame"></div>
 <div v-if="" class="framemenu">menu</div>
 </template>
 
@@ -45,8 +45,9 @@ return {
 	, methods : {
 		selectFrame : function(){
 
-			if(!this.framedata.style){
-				this.$set('framedata.style', {})
+			if(!this.framedata){
+				this.framedata = {}
+				Vue.set(this.framedata, 'style', {})
 			}
 
 			this.$dispatch('setFocus', this.item_id, this.frame_id, this.framedata.style)
