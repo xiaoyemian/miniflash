@@ -100,18 +100,23 @@ return {
 			if(style)
 				this.$emit('updateItemByStyle', style)
 			else
-				this.$emit('updateItemByFrame')
+				this.$emit('updateItemByFrame', item_id, frame_id)
 
 		}
 		, updateItemByFrame : function(item_id, frame_id){
 			item_id = item_id || this.focus.item_id
 			frame_id = frame_id || 0
 
-			var framedata = this.pagedata.track[item_id][frame_id]
-			console.log(framedata)
+			var trackdata = this.pagedata.track[item_id]
+			var framedata = trackdata[frame_id]
 
+			if(!framedata){
+				framedata = {}
+				this.$set('pagedata.track[item_id][frame_id]', {})
+			}
 			if(!framedata.style){
-				this.$set('pagedata.track[this.focus.item_id][0].style', {})
+				framedata.style = {}
+				this.$set('pagedata.track[item_id][frame_id].style', {})
 			}
 			
 			this.$emit('updateItemByStyle', framedata.style, item_id)

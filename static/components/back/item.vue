@@ -47,7 +47,8 @@ return {
 		selectItem : function(){
 			if(this.focus.item_id == this.itemdata.item_id)
 				return;
-			this.$dispatch('setFocus', this.itemdata.item_id, 0)
+
+			this.$dispatch('setFocus', this.itemdata.item_id, this.itemdata.frame_id)
 		}
 		, aspectRatio : function(){
 			var style = this.focus.style
@@ -71,6 +72,8 @@ return {
 		updateItem : function(item_id){
 			if(this.focus.item_id == this.itemdata.item_id || item_id == this.itemdata.item_id){
 
+				this.itemdata.frame_id = this.focus.frame_id
+
 				var style = this.focus.style
 				var background = this.itemdata.background
 
@@ -81,6 +84,7 @@ return {
 					, left : style.left + 'px'
 					, 'background-image' : 'url("' + background.image + '")' 
 				}
+
 			}
 
 		}
