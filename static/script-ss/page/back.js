@@ -43,8 +43,7 @@ var vm = new Vue({
 })
 
 window.vm = vm
-
-vm.$log()
+window.pages = pages
 
 
 

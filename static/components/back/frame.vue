@@ -37,18 +37,23 @@
 <script>
 
 return {
-	props : ['focus', 'item_id', 'frame_id', 'framedata']
+	props : ['focus', 'item_id', 'frame_id', 'trackdata']
 	, data : function(){
 		return {
+			framedata : this.trackdata[this.frame_id]
 		}
 	}
 	, methods : {
 		selectFrame : function(){
 
 			if(!this.framedata){
-				this.framedata = {}
-				Vue.set(this.framedata, 'style', {})
+				Vue.set(this.trackdata, this.frame_id, {})
+				Vue.set(this.trackdata[this.frame_id], 'style', {})
+
+				this.framedata = this.trackdata[this.frame_id]
 			}
+
+			console.log(this.framedata, this.trackdata[this.frame_id])
 
 			this.$dispatch('setFocus', this.item_id, this.frame_id, this.framedata.style)
 		}

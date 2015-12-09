@@ -28,7 +28,7 @@
 	<div class="trackname">{{item_id}}</div>
 	<div class="trackframe">
 		<%for(var i = 0 ; i<= framelength; i+= 100){%>
-		<frameitem :frame_id="<%= i %>" :focus="focus" :item_id="item_id" :framedata="trackdata[<%= i %>]"></frameitem>
+		<frameitem :frame_id="<%= i %>" :focus="focus" :item_id="item_id" :trackdata="trackdata"></frameitem>
 		<%}%>
 	</div>
 </div>
@@ -53,7 +53,8 @@ return {
 		}
 	}
 	, ready : function(){
-			this.$dispatch('setFocusByFrame', this.item_id)
+		this.$dispatch('setFocusByFrame', this.item_id)
+		this.$dispatch('clearFocus')
 	}
 }
 </script>

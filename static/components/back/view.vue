@@ -128,6 +128,9 @@ return {
 
 			this.$broadcast('updateItem')
 		}
+		, clearFocus : function(){
+			this.clearFocus()
+		}
 
 	}
 	, ready : function(){
