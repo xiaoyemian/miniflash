@@ -20,7 +20,6 @@ for(var no in pages){
 				0 : {
 					style : item.style 
 					, type : ''
-					, item_id : item.item_id
 				}
 			}
 
