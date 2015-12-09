@@ -60,7 +60,7 @@ return {
 	, created : function(){
 			
 		if(this.frame_id == 0)
-			this.$dispatch('doUpdateItem', this.framedata.style, this.item_id)
+			this.$dispatch('updateItemByStyle', this.framedata.style, this.item_id)
 			
 
 	}

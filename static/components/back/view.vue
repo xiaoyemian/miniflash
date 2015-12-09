@@ -93,7 +93,7 @@ return {
 
 	}
 	, events : {
-		doUpdateItem : function(style, item_id){
+		updateItemByStyle : function(style, item_id){
 			this.$set('focus.style', style)
 
 			if(style && style['padding-top']){
@@ -114,7 +114,7 @@ return {
 		, setFocus : function(style, item_id, frame_id){
 			this.$set('focus.item_id', item_id)
 			this.$set('focus.frame_id', frame_id)
-			this.$emit('doUpdateItem', style)
+			this.$emit('updateItemByStyle', style)
 		}
 	}
 	, ready : function(){
