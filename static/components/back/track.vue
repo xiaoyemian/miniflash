@@ -72,8 +72,7 @@ return {
 		}
 	}
 	, ready : function(){
-		this.$dispatch('setFocus', this.itemdata.item_id)
-		this.$dispatch('clearFocus')
+		this.$dispatch('updataFocusStyle', this.trackdata[0].style, this.itemdata.item_id)
 	}
 }
 </script>

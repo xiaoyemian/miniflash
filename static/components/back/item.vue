@@ -67,8 +67,8 @@ return {
 		}
 	}
 	, events : {
-		updateItem : function(){
-			if(this.itemdata.item_id == this.focus.item_id){
+		updateItem : function(item_id){
+			if(this.itemdata.item_id == this.focus.item_id || this.itemdata.item_id == item_id){
 				this.itemdata.frame_id = this.focus.frame_id 
 
 				var style = this.focus.style
@@ -81,7 +81,6 @@ return {
 					, left : style.left + 'px'
 					, 'background-image' : 'url("' + background.image + '")' 
 				}
-				console.log(this.style.top)
 			}
 		}
 		, reloadItem : function(size, oldsize){

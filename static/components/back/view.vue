@@ -98,18 +98,15 @@ return {
 				return;
 
 			if(!style){
-				this.$emit('setFocusByFrame', item_id, frame_id)
+				this.$broadcast('selectFrame', item_id, frame_id || 0)
 
 			}else{
-				this.$emit('setFocusByStyle', style, item_id, frame_id)
+				Vue.set(this.focus, 'item_id', item_id)
+				Vue.set(this.focus, 'frame_id', frame_id || 0)
+				this.$emit('updataFocusStyle', style)
 			}
 		}
-		, setFocusByFrame : function(item_id, frame_id){
-			this.$broadcast('selectFrame', item_id, frame_id || 0)
-		}
-		, setFocusByStyle : function(style, item_id, frame_id){
-			Vue.set(this.focus, 'item_id', item_id)
-			Vue.set(this.focus, 'frame_id', frame_id || 0)
+		, updataFocusStyle : function(style, item_id){
 			Vue.set(this.focus, 'style', style)
 
 			if(style && style['padding-top']){
@@ -124,7 +121,7 @@ return {
 				delete style['padding-top']
 			}
 
-			this.$broadcast('updateItem')
+			this.$broadcast('updateItem', item_id)
 		}
 		, clearFocus : function(){
 			this.clearFocus()
