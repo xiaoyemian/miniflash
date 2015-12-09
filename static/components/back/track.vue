@@ -23,16 +23,10 @@
 </style>
 
 <template>
-<%
-	var trackLength = 2000
-		, frameStep = 100
- %>
 <div class="track" @click.stop="selectItem" v-if="trackdata" :class="{focus : focus.item_id == itemdata.item_id}">
 	<div class="trackname">{{itemdata.item_id}}</div>
 	<div class="trackframe">
-		<%for(var i = 0 ; i<= trackLength; i+= frameStep){%>
-		<frameitem :frame_id="<%= i %>" :frame_step="<%= frameStep %>" :focus="focus" :item_id="itemdata.item_id" :trackdata="trackdata"></frameitem>
-		<%}%>
+		<frameitem v-for="frame_id in tracklength/framestep" :frame_id="frame_id*framestep" :focus="focus" :item_id="itemdata.item_id" :trackdata="trackdata"></frameitem>
 	</div>
 </div>
 
@@ -48,8 +42,8 @@ return {
 	, props : ['focus', 'itemdata', 'trackdata']
 	, data : function(){
 		return {
-			'trackLength' : 2000
-			, 'frameStep' : 100
+			tracklength : 2000
+			, framestep : 100
 		}
 	}
 	, methods : {
