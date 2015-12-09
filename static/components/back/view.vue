@@ -94,11 +94,8 @@ return {
 	}
 	, events : {
 		setFocus : function(item_id, frame_id, style){
-			console.log(item_id , this.focus.item_id, frame_id , this.focus.frame_id)
 			if(item_id == this.focus.item_id && frame_id == this.focus.frame_id)
 				return;
-
-			console.log(style)
 
 			if(!style){
 				this.$emit('setFocusByFrame', item_id, frame_id)
