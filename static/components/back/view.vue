@@ -94,34 +94,30 @@ return {
 	}
 	, events : {
 		setFocus : function(item_id, frame_id, style){
+			console.log(style)
 			this.$set('focus.item_id', item_id)
 			this.$set('focus.frame_id', frame_id || 0)
 
-			if(!style){
-				var framedata = this.pagedata.track[item_id][frame_id] || {}
-				Vue.set(framedata, 'style', {})
-				style = framedata.style
+			if(style){
+				this.$emit('updateItemByStyle', style, item_id, frame_id)
+
+			}else{
+				
+				this.$emit('updateItemByFrame', item_id, frame_id)
 			}
 
-			this.$emit('updateItemByStyle', style, item_id, frame_id)
 
 		}
 		, updateItemByFrame : function(item_id, frame_id){
 			item_id = item_id || this.focus.item_id
 			frame_id = frame_id || this.focus.frame_id || 0
 
-			var trackdata = this.pagedata.track[item_id]
-			var framedata = trackdata[frame_id]
 
-			if(!framedata){
-				framedata = {}
-				this.$set('pagedata.track[item_id][frame_id]', {})
-			}
-			if(!framedata.style){
-				framedata.style = {}
-				this.$set('pagedata.track[item_id][frame_id].style', {})
-			}
-			
+			var framedata = this.pagedata.track[item_id][frame_id] || {}
+			console.log(framedata)
+
+			Vue.set(framedata, 'style', framedata.style || {})
+
 			this.$emit('updateItemByStyle', framedata.style, item_id, frame_id)
 		}
 		, updateItemByStyle : function(style, item_id, frame_id){
