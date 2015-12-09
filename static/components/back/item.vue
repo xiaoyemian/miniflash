@@ -65,22 +65,31 @@ return {
 				}
 			}
 		}
+		, updateStyle : function(style){
+			var background = this.itemdata.background
+
+			this.style = {
+				width : style.width + 'px'
+				, height : style.height + 'px'
+				, top : style.top + 'px'
+				, left : style.left + 'px'
+				, 'background-image' : 'url("' + background.image + '")' 
+			}
+		}
 	}
 	, events : {
-		updateItem : function(item_id){
-			if(this.itemdata.item_id == this.focus.item_id || this.itemdata.item_id == item_id){
-				this.itemdata.frame_id = this.focus.frame_id 
-
-				var style = this.focus.style
-				var background = this.itemdata.background
-
-				this.style = {
-					width : style.width + 'px'
-					, height : style.height + 'px'
-					, top : style.top + 'px'
-					, left : style.left + 'px'
-					, 'background-image' : 'url("' + background.image + '")' 
+		updateItem : function(opts){
+			if(opts && opts.item_id){
+				if(opts.item_id == this.itemdata.item_id){
+					this.updateStyle(opts.style)
 				}
+
+			}else{
+				if(this.itemdata.item_id == this.focus.item_id){
+					this.itemdata.frame_id = this.focus.frame_id 
+					this.updateStyle(this.focus.style)
+				}
+
 			}
 		}
 		, reloadItem : function(size, oldsize){

@@ -103,16 +103,18 @@ return {
 			}else{
 				Vue.set(this.focus, 'item_id', item_id)
 				Vue.set(this.focus, 'frame_id', frame_id || 0)
-				this.$emit('updataItemStyle', style)
+				Vue.set(this.focus, 'style', style)
+				this.$emit('updataItemStyle')
 			}
 		}
 		, updataItemStyle : function(style, item_id){
-			Vue.set(this.focus, 'style', style)
+			if(!style)
+				style = this.focus.style
 
-			if(style && style['padding-top']){
+			if(style['padding-top']){
 				var size = this.size
 
-				Vue.set(this.focus.style, 'height', size.width * style['padding-top']/100)
+				Vue.set(style, 'height', size.width * style['padding-top']/100)
 
 				style.width = size.width * style['width']/100
 				style.top = size.height * style['top']/100
@@ -121,7 +123,7 @@ return {
 				delete style['padding-top']
 			}
 
-			this.$broadcast('updateItem', item_id)
+			this.$broadcast('updateItem', {style:style, item_id:item_id})
 		}
 		, clearFocus : function(){
 			this.clearFocus()
