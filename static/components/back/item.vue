@@ -81,6 +81,7 @@ return {
 					, left : style.left + 'px'
 					, 'background-image' : 'url("' + background.image + '")' 
 				}
+				console.log(this.style.top)
 			}
 		}
 		, reloadItem : function(size, oldsize){
@@ -100,6 +101,7 @@ return {
 				mSelf.setItemStyle(opts.position)
 			}
 			, stop : function(event, opts){
+				mSelf.$emit('updateItem')
 			}
 			, containment: "document"
 		})
@@ -112,6 +114,7 @@ return {
 				mSelf.setItemStyle(opts.size)
 			}
 			, stop : function(event, opts){
+				mSelf.$emit('updateItem')
 			}
 		})
 
