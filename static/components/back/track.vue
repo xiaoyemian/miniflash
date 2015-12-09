@@ -52,7 +52,7 @@ return {
 	}
 	, methods : {
 		selectItem : function(){
-			this.$dispatch('setFocus', this.itemdata.item_id)
+			this.$dispatch('setFocus', this.itemdata.item_id, this.itemdata.frame_id)
 		}
 	}
 	, events : {
