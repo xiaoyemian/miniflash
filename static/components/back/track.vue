@@ -44,7 +44,6 @@ return {
 	}
 	, methods : {
 		selectItem : function(){
-			console.log(this.focus[this.item_id])
 			this.$dispatch('setFocus', this.item_id)
 		}
 	}
