@@ -1,13 +1,21 @@
 <% include head5.ejs %>
 
-<app :user="user"></app>
-<aaa v-ref:aaa :name="name" :user="user"></aaa>
+<div id="demo">
+	<app :user="user"></app>
+	<aaa v-ref:aaa :name="name" :user="user"></aaa>
 
-<div>
-  <input v-model="msg">
-  <child v-ref:child :msg="msg"></child>
+	<div>
+		<input v-model="msg">
+		<child v-ref:child :msg="msg"></child>
+	</div>
 </div>
 
+
+<ul id="example-2">
+  <li v-for="item in items">
+    {{ parentMessage }} - {{ $index }} - {{ item.message }}
+  </li>
+</ul>
 
 <script src="http://xhxiaoyemian.cello.com/dist/vue.js"></script>
 <script src="http://xhxiaoyemian.cello.com/dist/loader.js" data-main="page/demo"></script>

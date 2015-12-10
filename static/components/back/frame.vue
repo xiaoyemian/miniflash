@@ -83,7 +83,7 @@ return {
 	}
 	, methods : {
 		selectFrame : function(){
-		//	console.log(this.index)
+			console.log(this.index)
 
 			if(!this.framedata){
 				this.$dispatch('addFrame', this.frame_id)

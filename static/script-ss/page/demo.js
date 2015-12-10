@@ -3,14 +3,14 @@ var aaa = require('demo/a.vue')
 
 var child = Vue.component('child', {
   props: ['msg'],
-  template: '<div>{{msg}}</div><aaa v-ref="ddddd"></aaa>'
+  template: '<div>{{msg}}</div><aaa></aaa>'
   ,components: {
     aaa:aaa 
 	}
 })
 
 var vm = new Vue({
-  el: 'body'
+  el: '#demo'
 	,data:{
 		message:'hello world'
 		, name:555555555
@@ -31,4 +31,17 @@ var vm = new Vue({
 
 console.log(vm)
 
+var items = [
+	{ message: 'Foo' },
+	{ message: 'Bar' }
+]
 
+var example2 = new Vue({
+  el: '#example-2',
+  data: {
+    parentMessage: 'Parent',
+    items: items 
+  }
+})
+
+window.items = items
