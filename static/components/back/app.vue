@@ -67,11 +67,11 @@ return {
         return;
 
       if(typeof frame_id == 'undefined'){
-        frame_id = this.focus[item_id]|0 + ''
+        frame_id = this.focus[item_id]
         this.$broadcast('selectFrame', item_id, frame_id)
 
       }else{
-        frame_id = frame_id|0 + ''
+        frame_id = frame_id|0
         Vue.set(this.focus, 'item_id', item_id)
         Vue.set(this.focus, 'frame_id', frame_id)
 
@@ -81,7 +81,7 @@ return {
       }
     }
 		, setCurrent : function(item_id, frame_id){
-			frame_id = frame_id|0 + ''
+			frame_id = frame_id|0
 
 			if(this.focus[item_id] == frame_id)
 				return
