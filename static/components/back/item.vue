@@ -75,17 +75,12 @@ return {
 	}
 	, events : {
 		updateItem : function(opts){
-			if(opts && opts.item_id){
-				if(opts.item_id == this.itemdata.item_id){
-					this.updateStyle(opts.style)
-				}
+			var focus = (opts && opts.item_id) ? opts : this.focus
 
-			}else{
-				if(this.itemdata.item_id == this.focus.item_id){
-					this.updateStyle(this.focus.style)
-				}
-
+			if(this.itemdata.item_id == focus.item_id){
+				this.updateStyle(focus.style)
 			}
+
 		}
 		, reloadItem : function(size, oldsize){
 			var scale = size.width/oldsize.width
