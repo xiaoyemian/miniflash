@@ -33,25 +33,25 @@
 }
 
 .flash{
+	border:1px solid #222;
 	.pa;left:0px;right:0px;top:0px;
-	.h(160px);
+	overflow:auto;
 	.bgc(#333);
+	box-sizing:border-box;
 }
 
 .view{
 	.pa;left:0px;right:0px;bottom:0px;
-	top:160px;
 	.page{
-		.pr;
+		.pa;
 		.bgc(#fff);
-		.auto;
 	}
 }
 </style>
 
 
 <template>
-<div class="flash">
+<div class="flash" :style="flashstyle">
 	<track v-for="(item_id, trackdata) in pagedata.tracks" :focus="focus" :item_id="item_id" :trackdata="trackdata"></track>
 </div>
 
@@ -59,7 +59,7 @@
 	<itemsetting :focus="focus" :itemdata="pagedata.items[focus.item_id]"></itemsetting>
 </div>
 
-<div class="view" @click="clearFocus">
+<div class="view" @click="clearFocus" :style="viewstyle">
 	<div class="page" :style="pagestyle">
 		<item v-for="(item_id, itemdata) in pagedata.items" :itemdata="itemdata" :focus="focus"></item>
 	</div>
@@ -82,19 +82,14 @@ return {
   }
 	, props:['pagedata', 'pagesize', 'flashsize', 'viewsize']
 	, data : function(){
-		var pagestyle = {
-			width : this.pagesize.width + 'px'
-			, height : this.pagesize.height + 'px'
-		}
-		var itemsettingstyle = {
-			top : this.flashsize.height + 'px'
-		}
-		console.log(itemsettingstyle)
+		this.updateAppView() 
 
 		return {
 			focus : {} 
-			, pagestyle : pagestyle
-			, itemsettingstyle : itemsettingstyle
+			, pagestyle : {}
+			, itemsettingstyle : {} 
+			, flashstyle : {}
+			, viewstyle : {}
 		}
 	}
 	, watch : {
@@ -108,7 +103,25 @@ return {
 			Vue.set(this.focus, 'frame_id', null)
 			Vue.set(this.focus, 'style', {})
 		}
-
+		, updateAppView : function(){
+			this.pagestyle = {
+				width : this.pagesize.width + 'px'
+				, height : this.pagesize.height + 'px'
+				, left : '50%'
+				, top : '50%'
+				, 'margin-top' : this.pagesize.height/-2 + 'px'
+				, 'margin-left' : this.pagesize.width/-2 + 'px'
+			}
+			this.itemsettingstyle = {
+				top : this.flashsize.height + 'px'
+			}
+			this.flashstyle = {
+				height : this.flashsize.height + 'px'
+			}
+			this.viewstyle = {
+				top : this.flashsize.height + 'px'
+			}
+		}
 	}
 	, events : {
 		setFocus : function(item_id, frame_id){
@@ -153,7 +166,8 @@ return {
 		}
 
 	}
-	, ready : function(){
+	, created : function(){
+		this.updateAppView()
 	}
 }
 </script>
