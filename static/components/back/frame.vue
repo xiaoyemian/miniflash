@@ -80,7 +80,7 @@ return {
 		//	console.log(this.index)
 
 			if(!this.framedata){
-				this.$dispatch('addFrame', this.frame_id)
+				this.$dispatch('addKeyFrame', this.frame_id)
 			}
 
 			this.$dispatch('setFocus', this.item_id, this.frame_id)

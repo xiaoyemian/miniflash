@@ -49,7 +49,7 @@ return {
 		}
 	}
 	, events : {
-		addFrame : function(frame_id, style){
+		addKeyFrame : function(frame_id, style){
 			frame_id = frame_id|0 + ''
 
 			if(!style){
@@ -63,6 +63,7 @@ return {
 
 			Vue.set(this.trackdata, frame_id, {style:style})
 		}
+
 	}
 	, ready : function(){
 		var frame_id = '0'
