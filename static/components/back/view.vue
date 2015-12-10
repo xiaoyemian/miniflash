@@ -25,7 +25,7 @@
 </div>
 
 <div class="flash">
-	<track v-for="(item_id, trackdata) in pagedata.track" :focus="focus" :item_id="item_id" :trackdata="trackdata"></track>
+	<track v-for="(item_id, trackdata) in pagedata.tracks" :focus="focus" :item_id="item_id" :trackdata="trackdata"></track>
 </div>
 
 </template>
@@ -89,20 +89,22 @@ return {
 
 	}
 	, events : {
-		setFocus : function(item_id, frame_id, style){
+		setFocus : function(item_id, frame_id){
 			if(item_id == this.focus.item_id && frame_id == this.focus.frame_id)
 				return;
 
-			if(!style){
-				this.$broadcast('selectFrame', item_id, this.focus[item_id] || 0)
+			if(typeof frame_id == 'undefined'){
+				frame_id = this.focus[item_id]|0 + ''
+				this.$broadcast('selectFrame', item_id, frame_id)
 
 			}else{
+				frame_id = frame_id|0 + ''
 				Vue.set(this.focus, 'item_id', item_id)
-				Vue.set(this.focus, 'frame_id', frame_id || 0)
-				Vue.set(this.focus, 'style', style)
-				Vue.set(this.focus, item_id, frame_id || 0)
+				Vue.set(this.focus, 'frame_id', frame_id)
 
-				console.log(this.focus)
+				Vue.set(this.focus, 'style', this.pagedata.tracks[item_id][frame_id].style)
+				Vue.set(this.focus, item_id, frame_id)
+
 				this.$emit('updataItemStyle')
 			}
 		}

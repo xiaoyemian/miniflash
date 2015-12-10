@@ -11,12 +11,12 @@ for(var no in pages){
 	if(Array.isArray(pagedata.items)){
 		var items = pagedata.items
 		pagedata.items = {}
-		pagedata.track = {}
+		pagedata.tracks = {}
 
 		for(var i in items){
 			var item = items[i]
 
-			pagedata.track[item.item_id] = {
+			pagedata.tracks[item.item_id] = {
 				0 : {
 					style : item.style 
 					, type : ''
