@@ -1,4 +1,38 @@
 <style>
+.itemsetting{
+	z-index:900;
+	.pa;
+	right:0px;
+
+	.w(130px);
+	padding:0px 10px 10px 10px;
+
+	&>div{.hidden;.mt(10px);padding:2px;}
+
+	.inputBox{
+		.f(12px);.fc(#ccc);
+		padding:2px;
+		.l(20px);
+		.left;
+	}
+	input{
+		&[type="text"],&[type="number"]{
+			.i_block;.fc(#ccc);.bgc(#3a3a3a);padding:2px 6px;
+			border:1px solid #2e2e2e;
+		}
+		&[type="text"]{
+      .w(100px);
+    }
+    &[type="number"]{
+      .c;.w(44px);
+    }		
+	}
+	label {
+		.i_block; .tr;
+	}
+}
+
+
 .itemStyle{
 	.bgc(#333);
 	border:1px solid #222;
@@ -51,6 +85,21 @@ return {
 
 			this.$dispatch('updataItemStyle', style)
 		}
+	}
+	, ready : function(){
+		console.log(this)
+
+		$('.itemsetting').draggable({
+			start : function(event, opts){
+			}
+			, drag : function(event, opts){
+			}
+			, stop : function(event, opts){
+			}
+			, containment : "parent"
+			, scroll : false
+		})
+	
 	}
 }
 </script>

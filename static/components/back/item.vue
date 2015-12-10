@@ -27,8 +27,6 @@
 
 
 <script>
-require('jqui/draggable')
-require('jqui/resizable')
 
 return {
 	props:['focus', 'itemdata']
