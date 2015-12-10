@@ -35,7 +35,8 @@ return {
   }
 	, data : function(){
 		return {
-			flashsize : {}
+			printsize : {}	
+			, flashsize : {}
 			, viewsize : {} 
 			, pagesize : {}
 		}
@@ -45,24 +46,27 @@ return {
 		clearFocus : function(){
 			this.$broadcast('clearFocus')
 		}
-		, updateFlash : function(height){
-			Vue.set(this.flashsize, 'height', height)
-		}
-		, updatePage : function(width, height){
-			var scale = 0.4
-
-			Vue.set(this.pagesize, 'width', width * scale)
-			Vue.set(this.pagesize, 'height', height * scale)
-		}
 	}
 	, events : {
 		updateFlash : function(height){
-			this.updateFlash(height)
+			Vue.set(this.flashsize, 'height', height)
+			this.$broadcast('updateAppView')
+		}
+		, updatePage : function(width, height){
+			width = width || 640
+			height = height || 1136
+			Vue.set(this.printsize, 'width', width)
+			Vue.set(this.printsize, 'height', height)
+			
+			Vue.set(this.pagesize, 'width', this.printsize.width * 0.4)
+			Vue.set(this.pagesize, 'height', this.printsize.height * 0.4)
+
+			this.$broadcast('updateAppView')
 		}
 	}
 	, created: function(){
-		this.updatePage(640, 1136)
-		this.updateFlash(75)
+		this.$emit('updatePage', 640, 1136)
+		this.$emit('updateFlash', 75)
   }
 }
 </script>

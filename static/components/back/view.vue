@@ -69,7 +69,6 @@ return {
   }
 	, props:['pagedata', 'pagesize', 'flashsize', 'viewsize']
 	, data : function(){
-		this.updateAppView() 
 
 		return {
 			focus : {} 
@@ -89,25 +88,6 @@ return {
 			Vue.set(this.focus, 'item_id', null)
 			Vue.set(this.focus, 'frame_id', null)
 			Vue.set(this.focus, 'style', {})
-		}
-		, updateAppView : function(){
-			this.pagestyle = {
-				width : this.pagesize.width + 'px'
-				, height : this.pagesize.height + 'px'
-				, left : '50%'
-				, top : '50%'
-				, 'margin-top' : this.pagesize.height/-2 + 'px'
-				, 'margin-left' : this.pagesize.width/-2 + 'px'
-			}
-			this.itemsettingstyle = {
-				top : this.flashsize.height + 'px'
-			}
-			this.flashstyle = {
-				height : this.flashsize.height + 'px'
-			}
-			this.viewstyle = {
-				top : this.flashsize.height + 'px'
-			}
 		}
 	}
 	, events : {
@@ -151,10 +131,28 @@ return {
 		, clearFocus : function(){
 			this.clearFocus()
 		}
-
+		, updateAppView : function(){
+			this.pagestyle = {
+				width : this.pagesize.width + 'px'
+				, height : this.pagesize.height + 'px'
+				, left : '50%'
+				, top : '50%'
+				, 'margin-top' : this.pagesize.height/-2 + 'px'
+				, 'margin-left' : this.pagesize.width/-2 + 'px'
+			}
+			this.itemsettingstyle = {
+				top : this.flashsize.height + 'px'
+			}
+			this.flashstyle = {
+				height : this.flashsize.height + 'px'
+			}
+			this.viewstyle = {
+				height : $('.app').height() - this.flashsize.height + 'px'
+			}
+		}
 	}
 	, ready : function(){
-		this.updateAppView()
+		this.$emit('updateAppView')
 
 		var mSelf = this
 
@@ -166,7 +164,7 @@ return {
 			, resize : function(event, opts){
 			}
 			, stop : function(event, opts){
-				console.log(opts.size.height)
+
 				mSelf.$dispatch('updateFlash', opts.size.height)
 			}
 			, maxHeight: 250
