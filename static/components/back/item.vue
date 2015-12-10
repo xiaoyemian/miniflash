@@ -13,12 +13,6 @@
 				.cursor;
 			}
 		}
-		.ui-resizable{
-			&-se, &-e, &-s{ .pa; z-index:90; }
-			&-se{ cursor: se-resize; bottom:-10px;right:-10px;.w(20px);.h(20px); }
-			&-e{ cursor: e-resize; top:0px;bottom:10px;right:-10px;.w(20px); }
-			&-s{ cursor: s-resize; left:0px;right:10px;bottom:-10px;.h(20px); }
-		}
 	}
 }
 </style>

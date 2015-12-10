@@ -1,8 +1,27 @@
 <style>
+.ui-resizable{
+	&-se, &-e, &-s{ .pa; z-index:90; }
+	&-se{ cursor: se-resize; bottom:-10px;right:-10px;.w(20px);.h(20px); }
+	&-e{ cursor: e-resize; top:0px;bottom:-10px;right:-10px;.w(20px); }
+	&-s{ cursor: s-resize; left:0px;right:-10px;bottom:-10px;.h(20px); }
+}
+
+.flash{
+	z-index:900;
+	.pa;left:0px;right:0px;top:0px;
+	.bgc(#333);
+
+	.tracks{
+		overflow:auto;
+		.h(100%);
+	}
+	border:1px solid #222;
+}
+
 .itemsetting{
 	z-index:900;
 	.pa;
-	left:0px;
+	right:0px;
 
 	.w(130px);
 	padding:4px;
@@ -32,14 +51,6 @@
 	}
 }
 
-.flash{
-	border:1px solid #222;
-	.pa;left:0px;right:0px;top:0px;
-	overflow:auto;
-	.bgc(#333);
-	box-sizing:border-box;
-}
-
 .view{
 	.pa;left:0px;right:0px;bottom:0px;
 	.page{
@@ -51,8 +62,10 @@
 
 
 <template>
-<div class="flash" :style="flashstyle">
-	<track v-for="(item_id, trackdata) in pagedata.tracks" :focus="focus" :item_id="item_id" :trackdata="trackdata"></track>
+<div class="flash" :style="flashstyle" v-el:flash>
+	<div class="tracks">
+		<track v-for="(item_id, trackdata) in pagedata.tracks" :focus="focus" :item_id="item_id" :trackdata="trackdata"></track>
+	</div>
 </div>
 
 <div class="itemsetting" :style="itemsettingstyle" v-if="focus.item_id">
@@ -166,8 +179,21 @@ return {
 		}
 
 	}
-	, created : function(){
+	, ready : function(){
 		this.updateAppView()
+		var $flash = $('.flash')
+
+		$flash.resizable({
+			start : function(event, opts){
+			}
+			, resize : function(event, opts){
+			}
+			, stop : function(event, opts){
+			}
+			, maxHeight: 250
+			, minHeight: 100
+			, grid: [ 0, 25 ]
+		})
 	}
 }
 </script>

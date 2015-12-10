@@ -20,7 +20,7 @@ body{
 <template>
 <div class="app">
 	<div class="headtop"></div>
-	<view :pagedata="pages[number]" :pagesize="pagesize" :flashsize="flashsize" :viewsize="viewsize"></view>
+	<view v-ref:view :pagedata="pages[number]" :pagesize="pagesize" :flashsize="flashsize" :viewsize="viewsize"></view>
 </div>
 </template>
 
@@ -57,7 +57,7 @@ return {
 	}
 	, created: function(){
 		this.updatePage(640, 1136)
-		this.updateFlash(160)
+		this.updateFlash(100)
   }
 }
 </script>
