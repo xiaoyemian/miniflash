@@ -17,7 +17,7 @@
 
 
 <template>
-<tracksetting :style="tracksettingstyle" :tracksdata="pagedata.tracks" :focus="focus"></tracksetting>
+<flash :style="flashstyle" :tracksdata="pagedata.tracks" :focus="focus"></flash>
 
 <itemsetting :focus="focus" :itemdata="pagedata.items[focus.item_id]" :itemsettingstyle="itemsettingstyle"></itemsetting>
 
@@ -37,22 +37,22 @@ require('jqui/resizable')
 
 var item = require('back/item.vue')
 var itemsetting = require('back/itemsetting.vue')
-var tracksetting = require('back/tracksetting.vue')
+var flash = require('back/flash.vue')
 
 return {
   components : {
     item : item
-		, tracksetting : tracksetting 
+		, flash : flash 
 		, itemsetting : itemsetting
   }
-	, props:['pagedata', 'pagesize', 'tracksettingsize', 'viewsize']
+	, props:['pagedata', 'pagesize', 'flashsize', 'viewsize']
 	, data : function(){
 
 		return {
 			focus : {} 
 			, pagestyle : {}
 			, itemsettingstyle : {} 
-			, tracksettingstyle : {}
+			, flashstyle : {}
 			, viewstyle : {}
 		}
 	}
@@ -119,13 +119,13 @@ return {
 				, 'margin-left' : this.pagesize.width/-2 + 'px'
 			}
 			this.itemsettingstyle = {
-				top : this.tracksettingsize.height + 'px'
+				top : this.flashsize.height + 'px'
 			}
-			this.tracksettingstyle = {
-				height : this.tracksettingsize.height + 'px'
+			this.flashstyle = {
+				height : this.flashsize.height + 'px'
 			}
 			this.viewstyle = {
-				height : $('.app').height() - this.tracksettingsize.height + 'px'
+				height : $('.app').height() - this.flashsize.height + 'px'
 			}
 		}
 	}

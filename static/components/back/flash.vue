@@ -1,5 +1,5 @@
 <style>
-.tracksetting{
+.flash{
 	z-index:900;
 	.pa;left:0px;right:0px;top:0px;
 	.bgc(#333);
@@ -19,7 +19,7 @@
 
 
 <template>
-<div class="tracksetting" :style="tracksettingstyle">
+<div class="flash" :style="flashstyle">
 	<div class="tracks">
 		<track v-for="(item_id, trackdata) in tracksdata" :focus="focus" :item_id="item_id" :trackdata="trackdata"></track>
 	</div>
@@ -35,7 +35,7 @@ return {
   components : {
 		track : track
   }
-	, props:['focus', 'tracksdata', 'tracksettingstyle']
+	, props:['focus', 'tracksdata', 'flashstyle']
 	, data : function(){
 
 		return {
