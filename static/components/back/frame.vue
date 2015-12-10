@@ -70,7 +70,7 @@
 <script>
 
 return {
-	props : ['focus', 'item_id', 'frame_id', 'framedata', 'frame_step', 'index']
+	props : ['focus', 'item_id', 'frame_id', 'framedata', 'index']
 	, data : function(){
 		return {
 		}
