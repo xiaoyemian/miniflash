@@ -23,7 +23,7 @@
 
 <div class="view" @click="clearFocus" :style="viewstyle">
 	<div class="page" :style="pagestyle">
-		<item v-for="(item_id, itemdata) in pagedata.items" :itemdata="itemdata" :focus="focus"></item>
+		<item v-for="(index, itemdata) in pagedata.items" :itemdata="itemdata" :focus="focus"></item>
 	</div>
 </div>
 
