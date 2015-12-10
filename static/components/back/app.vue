@@ -23,7 +23,7 @@ body{
 
 	<flash :style="flashstyle" :tracksdata="pagedata.tracks" :focus="focus"></flash>
 
-	<view :focus="focus" :pagedata="pagedata" :pagesize="pagesize" :pagestyle="pagestyle" :viewstyle="viewstyle" :itemsettingstyle="itemsettingstyle"></view>
+	<view :focus="focus" :pagedata="pagedata" :pagestyle="pagestyle" :viewstyle="viewstyle" :itemsettingstyle="itemsettingstyle"></view>
 
 </div>
 </template>

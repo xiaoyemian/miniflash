@@ -39,7 +39,7 @@ return {
     item : item
 		, itemsetting : itemsetting
   }
-	, props:['focus', 'pagedata', 'pagesize', 'pagestyle', 'viewstyle', 'itemsettingstyle']
+	, props:['focus', 'pagedata', 'pagestyle', 'viewstyle', 'itemsettingstyle']
 	, data : function(){
 		return {
 		}
