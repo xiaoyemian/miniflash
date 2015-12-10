@@ -65,13 +65,25 @@ return {
 
 			Vue.set(this.trackdata, frame_id, {style:style})
 		}
+		, deleteFrame : function(frame_id){
+			frame_id = frame_id|0 + ''
+			Vue.delete(mSelf.trackdata, '0')
 
+			//mSelf.$children[2].$remove()
+			console.log(this)
+		}
 	}
 	, ready : function(){
 		var frame_id = '0'
 		this.$dispatch('updataItemStyle', this.trackdata[frame_id].style, this.item_id)
 		this.$dispatch('setCurrent', this.item_id, frame_id)
 
+		var mSelf = this
+		setTimeout(function(){
+
+			
+
+		}, 4000)
 	}
 }
 </script>
