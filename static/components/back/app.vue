@@ -4,18 +4,24 @@ body{
 	.f(12px);
 	.hidden;
 }
+.app{
+	.pa;
+	bottom:0px;left:0px;top:26px;right:0px;
+}
 .headtop{
 	z-index:998;
 	.f(14px);
-	.l(26px);.h(26px);.pf;top:0px;left:0px;right:0px;.pl(4px);.pr(4px);
+	.l(26px);.h(26px);.pf;top:-26px;left:0px;right:0px;.pl(4px);.pr(4px);
 	.bgc(#535353);
 	.fc(white);
 }
 </style>
 
 <template>
-<div class="headtop"></div>
-<view :pagedata="pages[number]"></view>
+<div class="app">
+	<div class="headtop"></div>
+	<view :pagedata="pages[number]" :pagesize="pagesize" :flashsize="flashsize" :viewsize="viewsize"></view>
+</div>
 </template>
 
 
@@ -27,8 +33,31 @@ return {
   components: {
 		view:view
   }
+	, data : function(){
+		return {
+			flashsize : {}
+			, viewsize : {} 
+			, pagesize : {}
+		}
+	}
 	, props:['pages','number']
+	, methods : {
+		clearFocus : function(){
+			this.$broadcast('clearFocus')
+		}
+		, updateFlash : function(height){
+			Vue.set(this.flashsize, 'height', height)
+		}
+		, updatePage : function(width, height){
+			var scale = 0.4
+
+			Vue.set(this.pagesize, 'width', width * scale)
+			Vue.set(this.pagesize, 'height', height * scale)
+		}
+	}
 	, created: function(){
+		this.updatePage(640, 1136)
+		this.updateFlash(160)
   }
 }
 </script>

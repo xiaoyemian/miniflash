@@ -1,31 +1,68 @@
 <style>
-.view{
-	.pa;top:26px;bottom:40px;left:0px;right:0px;
-	.page{
-		.pa;
-		.bgc(#fff);
+.itemsetting{
+	z-index:900;
+	.pa;
+	left:0px;
+
+	.w(130px);
+	padding:4px;
+
+	&>div{.hidden;.mt(10px);padding:2px;}
+
+	.inputBox{
+		.f(12px);.fc(#ccc);
+		padding:2px;
+		.l(20px);
+		.left;
+	}
+	input{
+		&[type="text"],&[type="number"]{
+			.i_block;.fc(#ccc);.bgc(#3a3a3a);padding:2px 6px;
+			border:1px solid #2e2e2e;
+		}
+		&[type="text"]{
+      .w(100px);
+    }
+    &[type="number"]{
+      .c;.w(44px);
+    }		
+	}
+	label {
+		.i_block; .tr;
 	}
 }
+
 .flash{
-	.pa;right:0px;bottom:0px;left:0px;
-	z-index:99;
+	.pa;left:0px;right:0px;top:0px;
+	.h(160px);
 	.bgc(#333);
-	border:1px solid #222;
+}
+
+.view{
+	.pa;left:0px;right:0px;bottom:0px;
+	top:160px;
+	.page{
+		.pr;
+		.bgc(#fff);
+		.auto;
+	}
 }
 </style>
 
 
 <template>
-<itemsetting :focus="focus" :itemdata="pagedata.items[focus.item_id]"></itemsetting>
-<div class="view" @click="clearFocus">
-	<div class="page" :style="style">
-		<item v-for="(item_id, itemdata) in pagedata.items" :itemdata="itemdata" :focus="focus"></item>
-	</div>
-
-</div>
-
 <div class="flash">
 	<track v-for="(item_id, trackdata) in pagedata.tracks" :focus="focus" :item_id="item_id" :trackdata="trackdata"></track>
+</div>
+
+<div class="itemsetting" :style="itemsettingstyle" v-if="focus.item_id">
+	<itemsetting :focus="focus" :itemdata="pagedata.items[focus.item_id]"></itemsetting>
+</div>
+
+<div class="view" @click="clearFocus">
+	<div class="page" :style="pagestyle">
+		<item v-for="(item_id, itemdata) in pagedata.items" :itemdata="itemdata" :focus="focus"></item>
+	</div>
 </div>
 
 </template>
@@ -43,45 +80,30 @@ return {
 		, track : track
 		, itemsetting : itemsetting
   }
-	, props:['pagedata']
+	, props:['pagedata', 'pagesize', 'flashsize', 'viewsize']
 	, data : function(){
-
-		this.updateView(640, 1136)
-
-		this.focus = {}
-		this.clearFocus()
+		var pagestyle = {
+			width : this.pagesize.width + 'px'
+			, height : this.pagesize.height + 'px'
+		}
+		var itemsettingstyle = {
+			top : this.flashsize.height + 'px'
+		}
+		console.log(itemsettingstyle)
 
 		return {
+			focus : {} 
+			, pagestyle : pagestyle
+			, itemsettingstyle : itemsettingstyle
 		}
 	}
 	, watch : {
-		size : function(val, oldVal){
-			this.$broadcast('reloadItem', val, oldVal)
-		}
-		, 'focus' : function(){
+		'focus' : function(){
 			console.log(arguments)
 		}
 	}
 	, methods : {
-		updateView : function(width, height){
-			width = width || 640
-			height = height || 1136
-
-			var scale = 0.4
-
-			this.size = {
-				width : width * scale 
-				, height : height * scale
-			}
-			this.style = {
-				width : this.size.width + 'px'
-				, height : this.size.height + 'px'
-				, top : 10 + '%'
-				, left : 50 + '%'
-				, 'margin-left' : this.size.width * -0.5 + 'px'
-			}
-		}
-		, clearFocus : function(){
+		clearFocus : function(){
 			Vue.set(this.focus, 'item_id', null)
 			Vue.set(this.focus, 'frame_id', null)
 			Vue.set(this.focus, 'style', {})
@@ -113,13 +135,13 @@ return {
 				style = this.focus.style
 
 			if(style['padding-top']){
-				var size = this.size
+				var pagesize = this.pagesize
 
-				Vue.set(style, 'height', size.width * style['padding-top']/100)
+				Vue.set(style, 'height', pagesize.width * style['padding-top']/100)
 
-				style.width = size.width * style['width']/100
-				style.top = size.height * style['top']/100
-				style.left = size.width * style['left']/100
+				style.width = pagesize.width * style['width']/100
+				style.top = pagesize.height * style['top']/100
+				style.left = pagesize.width * style['left']/100
 
 				delete style['padding-top']
 			}
@@ -132,12 +154,6 @@ return {
 
 	}
 	, ready : function(){
-		var mSelf = this
-
-		$(window).on('resize', function(){
-			mSelf.updateView()
-		})
-
 	}
 }
 </script>

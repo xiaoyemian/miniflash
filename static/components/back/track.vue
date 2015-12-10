@@ -4,6 +4,9 @@
 	.fc(#ccc);
 	.hidden;
 	border-bottom:1px solid #222;
+	&:nth-child(1){
+		border-top:1px solid #222;
+	}
 
 	.trackname{
 		.left;.w(140px);
