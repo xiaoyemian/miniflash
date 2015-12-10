@@ -55,6 +55,11 @@ return {
 			Vue.set(this.pagesize, 'height', height * scale)
 		}
 	}
+	, events : {
+		updateFlash : function(height){
+			this.updateFlash(height)
+		}
+	}
 	, created: function(){
 		this.updatePage(640, 1136)
 		this.updateFlash(75)

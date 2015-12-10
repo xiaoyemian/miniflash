@@ -155,6 +155,9 @@ return {
 	}
 	, ready : function(){
 		this.updateAppView()
+
+		var mSelf = this
+
 		var $flash = $('.flash')
 
 		$flash.resizable({
@@ -163,6 +166,8 @@ return {
 			, resize : function(event, opts){
 			}
 			, stop : function(event, opts){
+				console.log(opts.size.height)
+				mSelf.$dispatch('updateFlash', opts.size.height)
 			}
 			, maxHeight: 250
 			, minHeight: 75
