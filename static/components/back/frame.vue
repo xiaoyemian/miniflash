@@ -27,18 +27,6 @@
 
 	}
 
-	&.current{
-		.handel{
-			.opacity(100);
-		}
-	}
-
-	&.focus{
-		.handel{
-			.opacity(100);
-		}
-	}
-
 	&.animateframe{
 		.handel{
 			.bgc(#5CADD6);
@@ -54,6 +42,21 @@
 			.border-r(8px);
 		}
 	}
+
+
+	&.current{
+		.handel{
+			.opacity(100);
+		}
+	}
+
+	&.focus{
+		.handel{
+			.opacity(100);
+			.bgc(#f69);
+		}
+	}
+
 
 }
 </style>
