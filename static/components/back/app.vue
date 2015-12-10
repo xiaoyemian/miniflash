@@ -11,7 +11,7 @@ body{
 .headtop{
 	z-index:998;
 	.f(14px);
-	.l(26px);.h(26px);.pf;top:-26px;left:0px;right:0px;.pl(4px);.pr(4px);
+	.l(26px);.h(26px);.pf;top:0px;left:0px;right:0px;.pl(4px);.pr(4px);
 	.bgc(#535353);
 	.fc(white);
 }
@@ -57,7 +57,7 @@ return {
 	}
 	, created: function(){
 		this.updatePage(640, 1136)
-		this.updateFlash(100)
+		this.updateFlash(75)
   }
 }
 </script>

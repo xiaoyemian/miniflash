@@ -165,7 +165,7 @@ return {
 			, stop : function(event, opts){
 			}
 			, maxHeight: 250
-			, minHeight: 100
+			, minHeight: 75
 			, grid: [ 0, 25 ]
 		})
 	}
