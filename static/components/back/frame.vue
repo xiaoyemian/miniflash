@@ -28,7 +28,7 @@
 </style>
 
 <template>
-<div class="frame" :class="{keyframe : trackdata[frame_id] && trackdata[frame_id].style, focus : focus.item_id == item_id && focus.frame_id == frame_id}" @click.stop="selectFrame"></div>
+<div class="frame" :class="{keyframe : framedata && framedata.style, focus : focus.item_id == item_id && focus.frame_id == frame_id}" @click.stop="selectFrame"></div>
 <div v-if="" class="framemenu">menu</div>
 </template>
 
@@ -36,21 +36,20 @@
 <script>
 
 return {
-	props : ['focus', 'item_id', 'frame_id', 'trackdata', 'frame_step', 'index']
+	props : ['focus', 'item_id', 'frame_id', 'framedata', 'frame_step', 'index']
 	, data : function(){
 		return {
-			framedata : this.trackdata[this.frame_id]
 		}
 	}
 	, methods : {
 		selectFrame : function(){
 		//	console.log(this.index)
 
-			if(!this.trackdata[this.frame_id]){
+			if(!this.framedata){
 				this.$dispatch('addFrame', this.frame_id)
 			}
 
-			this.$dispatch('setFocus', this.item_id, this.frame_id, this.trackdata[this.focus[this.item_id] || 0].style)
+			this.$dispatch('setFocus', this.item_id, this.frame_id)
 		}
 	}
 	, events : {
