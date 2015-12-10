@@ -109,6 +109,7 @@ return {
 			}
 			, containment : "document"
 			, snap : '.page'
+			, snapTolerance : '10'
 		})
 	
 		$item.resizable({
