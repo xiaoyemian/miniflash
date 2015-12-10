@@ -10,7 +10,7 @@ for(var no in pages){
 	
 	if(Array.isArray(pagedata.items)){
 		var items = pagedata.items
-		pagedata.items = {}
+//		pagedata.items = {}
 		pagedata.tracks = {}
 
 		for(var i in items){
@@ -25,7 +25,7 @@ for(var no in pages){
 
 			item.style = {} 
 
-			pagedata.items[item.item_id] = item
+//			pagedata.items[item.item_id] = item
 		}
 	}
 }

@@ -19,7 +19,7 @@
 
 
 <template>
-<itemsetting :focus="focus" :itemdata="pagedata.items[focus.item_id]" :itemsettingstyle="itemsettingstyle"></itemsetting>
+<itemsetting :focus="focus" :itemsettingstyle="itemsettingstyle"></itemsetting>
 
 <div class="view" @click="clearFocus" :style="viewstyle">
 	<div class="page" :style="pagestyle">

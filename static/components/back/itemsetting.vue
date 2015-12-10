@@ -50,7 +50,7 @@
 		<div class="inputBox" v-for="(key, value) in label.style"><label for="style|{{key}}">{{value}}</label><input type="number" @keyup="updateItem" id="style|{{key}}" placeholder="" value="{{focus.style[key]}}"/>px</div>
 	</div>
 
-	<div class="itemType" v-if="itemdata && itemdata.background">
+	<div class="itemType" v-if="0 && itemdata.background">
 		<div class="inputBox" v-for="(key, value) in label.background"><label for="background|{{key}}">{{value}}</label><input type="text" id="background|{{key}}" placeholder="" value="{{itemdata.background[key]}}"/></div>
 
 	</div>
@@ -60,7 +60,7 @@
 <script>
 
 return {
-	props : ['itemdata', 'focus', 'itemsettingstyle']
+	props : ['focus', 'itemsettingstyle']
 	, data : function(){
 		return {
 			label : {
