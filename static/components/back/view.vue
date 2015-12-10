@@ -25,7 +25,7 @@
 </div>
 
 <div class="flash">
-	<track v-for="(item_id, trackdata) in pagedata.track" :focus="focus" :itemdata="pagedata.items[item_id]" :trackdata="trackdata"></track>
+	<track v-for="(item_id, trackdata) in pagedata.track" :focus="focus" :item_id="item_id" :trackdata="trackdata"></track>
 </div>
 
 </template>
@@ -67,11 +67,6 @@ return {
 			width = width || 640
 			height = height || 1136
 
-/*
-			var scale = ($(window).height()-160)/height*.8
-			if(scale >= 0.4)
-				scale = 0.4
-*/
 			var scale = 0.4
 
 			this.size = {

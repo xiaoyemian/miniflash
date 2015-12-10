@@ -39,7 +39,6 @@ require('jqui/resizable')
 return {
 	props:['focus', 'itemdata']
 	, data:function(){
-		this.itemdata.frame_id = 0
 
 		return {
 			style : {} 
@@ -85,7 +84,6 @@ return {
 
 			}else{
 				if(this.itemdata.item_id == this.focus.item_id){
-					this.itemdata.frame_id = this.focus.frame_id 
 					this.updateStyle(this.focus.style)
 				}
 

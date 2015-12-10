@@ -19,10 +19,10 @@
 </style>
 
 <template>
-<div class="track" @click.stop="selectItem" v-if="trackdata" :class="{focus : focus.item_id == itemdata.item_id}">
-	<div class="trackname">{{itemdata.item_id}}</div>
+<div class="track" @click.stop="selectItem" v-if="trackdata" :class="{focus : focus.item_id == item_id}">
+	<div class="trackname">{{item_id}}</div>
 	<div class="trackframe">
-		<frameitem v-for="index in tracklength/framestep" :frame_id="index*framestep" :focus="focus" :item_id="itemdata.item_id" :trackdata="trackdata" :index="$index"></frameitem>
+		<frameitem v-for="index in tracklength/framestep" :frame_id="index*framestep" :focus="focus" :item_id="item_id" :trackdata="trackdata" :index="$index"></frameitem>
 	</div>
 </div>
 
@@ -35,7 +35,7 @@ return {
   components : {
     frameitem : frame
 	}
-	, props : ['focus', 'itemdata', 'trackdata']
+	, props : ['focus', 'item_id', 'trackdata']
 	, data : function(){
 		return {
 			tracklength : 4000
@@ -44,8 +44,8 @@ return {
 	}
 	, methods : {
 		selectItem : function(){
-			console.log(this.focus[this.itemdata.item_id])
-			this.$dispatch('setFocus', this.itemdata.item_id)
+			console.log(this.focus[this.item_id])
+			this.$dispatch('setFocus', this.item_id)
 		}
 	}
 	, events : {
@@ -54,7 +54,7 @@ return {
 
 			if(!style){
 				style = {}
-				var framedata = this.trackdata[this.focus[this.itemdata.item_id] || 0]
+				var framedata = this.trackdata[this.focus[this.item_id] || 0]
 
 				for(var i in framedata.style){
 					style[i] = framedata.style[i]
@@ -65,7 +65,7 @@ return {
 		}
 	}
 	, ready : function(){
-		this.$dispatch('updataItemStyle', this.trackdata[0].style, this.itemdata.item_id)
+		this.$dispatch('updataItemStyle', this.trackdata[0].style, this.item_id)
 	}
 }
 </script>
