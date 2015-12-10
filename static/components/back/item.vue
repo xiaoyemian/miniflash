@@ -109,7 +109,8 @@ return {
 			, stop : function(event, opts){
 				mSelf.$emit('updateItem')
 			}
-			, containment: "document"
+			, containment : "document"
+			, snap : '.page'
 		})
 	
 		$item.resizable({
@@ -122,6 +123,7 @@ return {
 			, stop : function(event, opts){
 				mSelf.$emit('updateItem')
 			}
+			, ghost: true
 		})
 
 	}

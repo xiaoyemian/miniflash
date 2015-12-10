@@ -3,21 +3,17 @@
 	.l(24px);
 	.fc(#ccc);
 	.hidden;
-	.mt(-1px);
 	border-bottom:1px solid #222;
-	border-top:1px solid #222;
 
 	.trackname{
 		.left;.w(140px);
 		.h(100%);
 	}
 	.trackframe{
-		.opacity(96);
-		
 		.ml(140px);
+		display:-webkit-box;
 	}
 	&.focus{
-		.bgc(#f69);
 	}
 }
 </style>
@@ -42,7 +38,7 @@ return {
 	, props : ['focus', 'itemdata', 'trackdata']
 	, data : function(){
 		return {
-			tracklength : 2000
+			tracklength : 4000
 			, framestep : 100
 		}
 	}

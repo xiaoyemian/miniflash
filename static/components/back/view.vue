@@ -1,18 +1,16 @@
 <style>
 .view{
-	.pa;top:26px;bottom:160px;left:0px;right:0px;
+	.pa;top:26px;bottom:40px;left:0px;right:0px;
 	.page{
 		.pa;
 		.bgc(#fff);
 	}
 }
 .flash{
-	.pf;left:0px;right:0px;bottom:0px;
-	overflow:auto;
-	.h(160px);
+	.pa;right:0px;bottom:0px;left:0px;
+	z-index:99;
 	.bgc(#333);
 	border:1px solid #222;
-	border-bottom:0 none;
 }
 </style>
 
@@ -69,9 +67,12 @@ return {
 			width = width || 640
 			height = height || 1136
 
+/*
 			var scale = ($(window).height()-160)/height*.8
 			if(scale >= 0.4)
 				scale = 0.4
+*/
+			var scale = 0.4
 
 			this.size = {
 				width : width * scale 

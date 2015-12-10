@@ -3,12 +3,11 @@
 	.pa;
 }
 .frame{
-	.w(12px);.h(24px);
-	.left;
+	.w(12px);
+	.h(24px);
+	border-left:1px solid #222;
 	.pr;
 	.bgc(#333);
-	border:1px solid #222;
-	.ml(-1px);.mt(-1px);.mb(-1px);
 
 	&:nth-child(5n+1){
 		.bgc(#3a3a3a);
