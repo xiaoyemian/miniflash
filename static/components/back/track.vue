@@ -49,11 +49,13 @@ return {
 		}
 	}
 	, events : {
-		addKeyFrame : function(frame_id, style){
+		addFrame : function(frame_id, style){
 			frame_id = frame_id|0 + ''
 
 			if(!style){
-				style = {}
+				style = {
+					type : 'blank'
+				}
 				var framedata = this.trackdata[this.focus[this.item_id] || 0]
 
 				for(var i in framedata.style){

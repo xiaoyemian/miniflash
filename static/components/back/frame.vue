@@ -27,19 +27,22 @@
 
 	}
 
-	&.animateframe{
-		.handel{
-			.bgc(#5CADD6);
-		}
-	}
-	&.keyframe{
+	&.keyframe, &.blankframe{
 		.handel{
 			.bgc(#5CD685);
 		}
+	}
 
+	&.keyframe{
 		&:before{
 			top:50%;left:50%;.w(6px);.h(6px);.mt(-3px);.ml(-3px);.bgc(#000);
 			.border-r(8px);
+		}
+	}
+
+	&.animateframe{
+		.handel{
+			.bgc(#5CADD6);
 		}
 	}
 
@@ -62,7 +65,7 @@
 </style>
 
 <template>
-<div class="frame" :class="{keyframe : framedata && framedata.style, focus : focus.item_id == item_id && focus.frame_id == frame_id , current : focus[item_id] == frame_id}" @click.stop="selectFrame">
+<div class="frame" :class="{keyframe : framedata && framedata.type == 'keyframe', blankframe : framedata && (!framedata.type || framedata.type == 'blankframe'), focus : focus.item_id == item_id && focus.frame_id == frame_id , current : focus[item_id] == frame_id}" @click.stop="selectFrame">
 	<div class="handel"></div>
 
 </div>
@@ -83,7 +86,7 @@ return {
 		//	console.log(this.index)
 
 			if(!this.framedata){
-				this.$dispatch('addKeyFrame', this.frame_id)
+				this.$dispatch('addFrame', this.frame_id)
 			}
 
 			this.$dispatch('setFocus', this.item_id, this.frame_id)

@@ -19,7 +19,7 @@ for(var no in pages){
 			pagedata.tracks[item.item_id] = {
 				0 : {
 					style : item.style 
-					, type : ''
+					, type : 'keyframe'
 				}
 			}
 
