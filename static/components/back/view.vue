@@ -1,9 +1,9 @@
 <style>
 .ui-resizable{
 	&-se, &-e, &-s{ .pa; z-index:90; }
-	&-se{ cursor: se-resize; bottom:-10px;right:-10px;.w(20px);.h(20px); }
-	&-e{ cursor: e-resize; top:0px;bottom:-10px;right:-10px;.w(20px); }
-	&-s{ cursor: s-resize; left:0px;right:-10px;bottom:-10px;.h(20px); }
+	&-se{ cursor: se-resize; bottom:-0px;right:-0px;.w(10px);.h(10px); }
+	&-e{ cursor: e-resize; top:0px;bottom:-0px;right:-0px;.w(10px); }
+	&-s{ cursor: s-resize; left:0px;right:-0px;bottom:-0px;.h(10px); }
 }
 
 .flash{
@@ -16,7 +16,10 @@
 		.h(100%);
 	}
 	border:1px solid #222;
-	border-bottom:4px solid #222;
+	.ui-resizable{
+		&-s{ bottom:-6px;.h(6px);.bgc(#222);}
+	}
+
 }
 
 .view{

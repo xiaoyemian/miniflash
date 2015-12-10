@@ -100,6 +100,7 @@ return {
 				mSelf.$emit('updateItem')
 			}
 			, containment : "document"
+			, scroll : false
 			, snap : '.page'
 			, snapTolerance : '10'
 		})
