@@ -20,7 +20,7 @@ body{
 <template>
 <div class="app">
 	<div class="headtop"></div>
-	<view v-ref:view :pagedata="pages[number]" :pagesize="pagesize" :flashsize="flashsize" :viewsize="viewsize"></view>
+	<view v-ref:view :pagedata="pages[number]" :pagesize="pagesize" :tracksettingsize="tracksettingsize" :viewsize="viewsize"></view>
 </div>
 </template>
 
@@ -36,7 +36,7 @@ return {
 	, data : function(){
 		return {
 			printsize : {}	
-			, flashsize : {}
+			, tracksettingsize : {}
 			, viewsize : {} 
 			, pagesize : {}
 		}
@@ -49,7 +49,7 @@ return {
 	}
 	, events : {
 		updateFlash : function(height){
-			Vue.set(this.flashsize, 'height', height)
+			Vue.set(this.tracksettingsize, 'height', height)
 			this.$broadcast('updateAppView')
 		}
 		, updatePage : function(width, height){
