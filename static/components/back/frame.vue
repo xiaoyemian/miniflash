@@ -44,13 +44,13 @@ return {
 	}
 	, methods : {
 		selectFrame : function(){
-			console.log(this.index)
+		//	console.log(this.index)
 
 			if(!this.trackdata[this.frame_id]){
 				this.$dispatch('addFrame', this.frame_id)
 			}
 
-			this.$dispatch('setFocus', this.item_id, this.frame_id, this.trackdata[this.frame_id].style)
+			this.$dispatch('setFocus', this.item_id, this.frame_id, this.trackdata[this.focus[this.item_id] || 0].style)
 		}
 	}
 	, events : {

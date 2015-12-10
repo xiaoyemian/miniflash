@@ -99,12 +99,15 @@ return {
 				return;
 
 			if(!style){
-				this.$broadcast('selectFrame', item_id, frame_id || 0)
+				this.$broadcast('selectFrame', item_id, this.focus[item_id] || 0)
 
 			}else{
 				Vue.set(this.focus, 'item_id', item_id)
 				Vue.set(this.focus, 'frame_id', frame_id || 0)
 				Vue.set(this.focus, 'style', style)
+				Vue.set(this.focus, item_id, frame_id || 0)
+
+				console.log(this.focus)
 				this.$emit('updataItemStyle')
 			}
 		}

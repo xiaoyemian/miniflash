@@ -44,7 +44,8 @@ return {
 	}
 	, methods : {
 		selectItem : function(){
-			this.$dispatch('setFocus', this.itemdata.item_id, this.itemdata.frame_id)
+			console.log(this.focus[this.itemdata.item_id])
+			this.$dispatch('setFocus', this.itemdata.item_id)
 		}
 	}
 	, events : {
@@ -53,7 +54,7 @@ return {
 
 			if(!style){
 				style = {}
-				var framedata = this.trackdata[this.itemdata.frame_id || 0]
+				var framedata = this.trackdata[this.focus[this.itemdata.item_id] || 0]
 
 				for(var i in framedata.style){
 					style[i] = framedata.style[i]
