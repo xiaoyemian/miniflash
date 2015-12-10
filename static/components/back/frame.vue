@@ -37,7 +37,7 @@
 <script>
 
 return {
-	props : ['focus', 'item_id', 'frame_id', 'trackdata', 'frame_step']
+	props : ['focus', 'item_id', 'frame_id', 'trackdata', 'frame_step', 'index']
 	, data : function(){
 		return {
 			framedata : this.trackdata[this.frame_id]
@@ -45,6 +45,7 @@ return {
 	}
 	, methods : {
 		selectFrame : function(){
+			console.log(this.index)
 
 			if(!this.trackdata[this.frame_id]){
 				this.$dispatch('addFrame', this.frame_id)

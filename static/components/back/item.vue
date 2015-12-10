@@ -42,7 +42,7 @@ return {
 		this.itemdata.frame_id = 0
 
 		return {
-			style : this.style
+			style : {} 
 		}
 	}
 	, methods : {
@@ -66,15 +66,14 @@ return {
 			}
 		}
 		, updateStyle : function(style){
-			var background = this.itemdata.background
-
-			this.style = {
-				width : style.width + 'px'
-				, height : style.height + 'px'
-				, top : style.top + 'px'
-				, left : style.left + 'px'
-				, 'background-image' : 'url("' + background.image + '")' 
+			var styleKey = ['width', 'height', 'top', 'left']
+			for(var i in styleKey){
+				var key = styleKey[i]
+				Vue.set(this.style, key, style[key] + 'px')
 			}
+
+			var background = this.itemdata.background
+			Vue.set(this.style, 'background-image', 'url("' + background.image + '")')
 		}
 	}
 	, events : {
@@ -94,7 +93,6 @@ return {
 		}
 		, reloadItem : function(size, oldsize){
 			var scale = size.width/oldsize.width
-
 		}
 	}
 	, ready : function(){
