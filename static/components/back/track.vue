@@ -52,7 +52,7 @@ return {
 	}
 	, events : {
 		addFrame : function(frame_id, style){
-			frame_id = frame_id || 0 
+			frame_id = frame_id|0 + ''
 
 			if(!style){
 				style = {}
