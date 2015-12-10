@@ -17,7 +17,7 @@
 	}
 	input{
 		&[type="text"],&[type="number"]{
-			.i_block;.fc(#ccc);.bgc(#3a3a3a);padding:2px 6px;
+			.i_block;.fc(#ccc);.bgc(#383838);padding:2px 6px;
 			border:1px solid #2e2e2e;
 		}
 		&[type="text"]{

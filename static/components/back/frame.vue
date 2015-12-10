@@ -10,18 +10,35 @@
 	.bgc(#333);
 
 	&:nth-child(5n+1){
-		.bgc(#3a3a3a);
+		.bgc(#383838);
 	}
 	&:nth-last-child(1){
 		border-right:1px solid #222;
+	}
+
+	&:before, &:after{
+		content:'';.pa;z-index:1;
 	}
 
 
 	.handel{
 		.pa;top:0px;left:0px;right:0px;bottom:0px;
 		.opacity(10);
+
 	}
-	
+
+	&.current{
+		.handel{
+			.opacity(100);
+		}
+	}
+
+	&.focus{
+		.handel{
+			.opacity(100);
+		}
+	}
+
 	&.animateframe{
 		.handel{
 			.bgc(#5CADD6);
@@ -33,22 +50,11 @@
 		}
 
 		&:before{
-			content:'';.pa;top:50%;left:50%;.w(6px);.h(6px);.mt(-3px);.ml(-3px);.bgc(#000);
+			top:50%;left:50%;.w(6px);.h(6px);.mt(-3px);.ml(-3px);.bgc(#000);
 			.border-r(8px);
-			z-index:1;
 		}
 	}
 
-	&.current{
-		.handel{
-			.opacity(100);
-		}
-	}
-	&.focus{
-		.handel{
-			.opacity(100);
-		}
-	}
 }
 </style>
 
