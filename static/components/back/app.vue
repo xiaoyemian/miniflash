@@ -76,11 +76,18 @@ return {
         Vue.set(this.focus, 'frame_id', frame_id)
 
         Vue.set(this.focus, 'style', this.pagedata.tracks[item_id][frame_id].style)
-        Vue.set(this.focus, item_id, frame_id)
-
+				this.$emit('setCurrent', item_id, frame_id)
         this.$emit('updataItemStyle')
       }
     }
+		, setCurrent : function(item_id, frame_id){
+			frame_id = frame_id|0 + ''
+
+			if(this.focus[item_id] == frame_id)
+				return
+
+			Vue.set(this.focus, item_id, frame_id)
+		}
 
 		, updataItemStyle : function(style, item_id){
       if(!style)

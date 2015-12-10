@@ -65,9 +65,10 @@ return {
 		}
 	}
 	, ready : function(){
-//		this.$dispatch('updataItemStyle', this.trackdata[0].style, this.item_id)
-			this.$dispatch('setFocus', this.item_id)
-			this.$dispatch('clearFocus')
+		var frame_id = '0'
+		this.$dispatch('updataItemStyle', this.trackdata[frame_id].style, this.item_id)
+		this.$dispatch('setCurrent', this.item_id, frame_id)
+
 	}
 }
 </script>
