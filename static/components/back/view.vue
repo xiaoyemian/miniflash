@@ -6,22 +6,6 @@
 	&-s{cursor:s-resize;}
 }
 
-.flash{
-	z-index:900;
-	.pa;left:0px;right:0px;top:0px;
-	.bgc(#333);
-
-	.tracks{
-		overflow:auto;
-		.h(100%);
-	}
-	border:1px solid #222;
-	.ui-resizable{
-		&-s{ left:0px;right:-0px;bottom:-6px;.h(6px);.bgc(#222);}
-	}
-
-}
-
 .view{
 	.pa;left:0px;right:0px;bottom:0px;
 	.page{
@@ -33,15 +17,9 @@
 
 
 <template>
-<div class="flash" :style="flashstyle" v-el:flash>
-	<div class="tracks">
-		<track v-for="(item_id, trackdata) in pagedata.tracks" :focus="focus" :item_id="item_id" :trackdata="trackdata"></track>
-	</div>
-</div>
+<flash :style="flashstyle" :tracksdata="pagedata.tracks" :focus="focus"></flash>
 
-<div class="itemsetting" :style="itemsettingstyle" v-if="focus.item_id">
-	<itemsetting :focus="focus" :itemdata="pagedata.items[focus.item_id]"></itemsetting>
-</div>
+<itemsetting :focus="focus" :itemdata="pagedata.items[focus.item_id]" :itemsettingstyle="itemsettingstyle"></itemsetting>
 
 <div class="view" @click="clearFocus" :style="viewstyle">
 	<div class="page" :style="pagestyle">
@@ -59,12 +37,12 @@ require('jqui/resizable')
 
 var item = require('back/item.vue')
 var itemsetting = require('back/itemsetting.vue')
-var track = require('back/track.vue')
+var flash = require('back/flash.vue')
 
 return {
   components : {
     item : item
-		, track : track
+		, flash : flash 
 		, itemsetting : itemsetting
   }
 	, props:['pagedata', 'pagesize', 'flashsize', 'viewsize']
@@ -154,23 +132,6 @@ return {
 	, ready : function(){
 		this.$emit('updateAppView')
 
-		var mSelf = this
-
-		var $flash = $('.flash')
-
-		$flash.resizable({
-			start : function(event, opts){
-			}
-			, resize : function(event, opts){
-			}
-			, stop : function(event, opts){
-
-				mSelf.$dispatch('updateFlash', opts.size.height)
-			}
-			, maxHeight: 250
-			, minHeight: 75
-			, grid: [ 0, 25 ]
-		})
 	}
 }
 </script>

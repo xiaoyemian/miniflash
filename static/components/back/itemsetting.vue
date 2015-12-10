@@ -44,21 +44,23 @@
 </style>
 
 <template>
-<div class="itemStyle">
-	<div class="inputBox" v-for="(key, value) in label.style"><label for="style|{{key}}">{{value}}</label><input type="number" @keyup="updateItem" id="style|{{key}}" placeholder="" value="{{focus.style[key]}}"/>px</div>
+<div class="itemsetting" :style="itemsettingstyle" v-if="focus.item_id">
+
+	<div class="itemStyle">
+		<div class="inputBox" v-for="(key, value) in label.style"><label for="style|{{key}}">{{value}}</label><input type="number" @keyup="updateItem" id="style|{{key}}" placeholder="" value="{{focus.style[key]}}"/>px</div>
+	</div>
+
+	<div class="itemType" v-if="itemdata && itemdata.background">
+		<div class="inputBox" v-for="(key, value) in label.background"><label for="background|{{key}}">{{value}}</label><input type="text" id="background|{{key}}" placeholder="" value="{{itemdata.background[key]}}"/></div>
+
+	</div>
 </div>
-
-<div class="itemType" v-if="itemdata && itemdata.background">
-	<div class="inputBox" v-for="(key, value) in label.background"><label for="background|{{key}}">{{value}}</label><input type="text" id="background|{{key}}" placeholder="" value="{{itemdata.background[key]}}"/></div>
-
-</div>
-
 </template>
 
 <script>
 
 return {
-	props : ['itemdata', 'focus']
+	props : ['itemdata', 'focus', 'itemsettingstyle']
 	, data : function(){
 		return {
 			label : {
@@ -85,21 +87,6 @@ return {
 
 			this.$dispatch('updataItemStyle', style)
 		}
-	}
-	, ready : function(){
-		console.log(this)
-
-		$('.itemsetting').draggable({
-			start : function(event, opts){
-			}
-			, drag : function(event, opts){
-			}
-			, stop : function(event, opts){
-			}
-			, containment : "parent"
-			, scroll : false
-		})
-	
 	}
 }
 </script>
