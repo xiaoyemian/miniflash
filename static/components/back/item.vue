@@ -4,7 +4,7 @@
 	background-size:100% 100%;
 	background-repeat:no-repeat;
 	&.focus{
-		.handle{
+		.handel{
 			.pa;top:0px;left:0px;right:0px;bottom:0px;
 			border:10px solid #f69;
 		
@@ -25,7 +25,7 @@
 
 <template>
 <div class="item" @click.stop="selectItem" :class="{focus : focus.item_id == itemdata.item_id}" :style="style">
-	<div class="handle">
+	<div class="handel">
 		<div @click.stop="aspectRatio" class="aspectRatioBtn"></div>
 	</div>
 </div>

@@ -7,7 +7,7 @@
 }
 
 .view{
-	.pa;left:0px;right:0px;bottom:0px;
+	.pa;left:0px;right:0px;top:0px;bottom:0px;
 	.page{
 		.pa;
 		.bgc(#fff);

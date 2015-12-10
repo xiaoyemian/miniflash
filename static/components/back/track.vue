@@ -1,12 +1,9 @@
 <style>
-.track, .trackbar{
+.track{
 	.l(24px);
 	.fc(#ccc);
 	.hidden;
 	border-bottom:1px solid #222;
-	&:nth-child(1){
-		border-top:1px solid #222;
-	}
 
 	.trackname{
 		.left;.w(140px);
@@ -18,6 +15,7 @@
 	}
 	&.focus{
 	}
+
 }
 </style>
 
@@ -67,7 +65,9 @@ return {
 		}
 	}
 	, ready : function(){
-		this.$dispatch('updataItemStyle', this.trackdata[0].style, this.item_id)
+//		this.$dispatch('updataItemStyle', this.trackdata[0].style, this.item_id)
+			this.$dispatch('setFocus', this.item_id)
+			this.$dispatch('clearFocus')
 	}
 }
 </script>

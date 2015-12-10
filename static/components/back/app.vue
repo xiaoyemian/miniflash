@@ -21,9 +21,9 @@ body{
 <div class="app">
 	<div class="headtop"></div>
 
-	<flash :style="flashstyle" :tracksdata="pagedata.tracks" :focus="focus"></flash>
-
 	<view :focus="focus" :pagedata="pagedata" :pagestyle="pagestyle" :viewstyle="viewstyle" :itemsettingstyle="itemsettingstyle"></view>
+
+	<flash :style="flashstyle" :tracksdata="pagedata.tracks" :focus="focus"></flash>
 
 </div>
 </template>
@@ -109,12 +109,12 @@ return {
 
 
 		, updateFlash : function(height){
+			height = height || 0
 			Vue.set(this.flashsize, 'height', height)
 
       Vue.set(this.flashstyle, 'height', this.flashsize.height + 'px')
 
-      Vue.set(this.viewstyle, 'top', this.flashsize.height + 'px')
-      Vue.set(this.itemsettingstyle, 'top', this.flashsize.height + 'px')
+      Vue.set(this.viewstyle, 'bottom', this.flashsize.height + 'px')
 
 		}
 		, updatePage : function(width, height){
@@ -135,7 +135,7 @@ return {
 	}
 	, created: function(){
 		this.$emit('updatePage', 640, 1136)
-		this.$emit('updateFlash', 75)
+//		this.$emit('updateFlash', 75)
   }
 }
 </script>
