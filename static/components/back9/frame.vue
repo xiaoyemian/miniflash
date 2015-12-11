@@ -61,7 +61,7 @@
 </style>
 
 <template>
-<div class="frame" :class="{keyframe : framedata.type == 'keyframe', blankframe : framedata.type == 'blankframe'}" @click.stop="selectFrame">
+<div class="frame" :class="{keyframe : framedata.type == 'keyframe', blankframe : framedata.type == 'blankframe', focus : focus.item_id == item_id && focus.frame_id == frame_id , current : focus[item_id] == frame_id}" @click.stop="selectFrame">
 	<div class="handel"></div>
 
 </div>
@@ -72,14 +72,23 @@
 <script>
 
 return {
-	props : ['framedata']
+	props : ['focus', 'item_id', 'frame_id', 'framedata']
 	, data : function(){
 		return {
 		}
 	}
 	, methods : {
 		selectFrame : function(){
-			this.$dispatch('setTrackFocusFrame', this.frame_id)
+			if(this.framedata.type != 'keyframe')
+				this.$dispatch('addKeyFrame', this)
+
+			this.$dispatch('setFocus', this.item_id, this.frame_id, this.framedata.style)
+		}
+	}
+	, events : {
+		selectFrame : function(item_id, frame_id){
+			if(item_id == this.item_id && frame_id == this.frame_id)
+				this.selectFrame()
 		}
 	}
 }

@@ -39,7 +39,7 @@
 <div class="track" @click.stop="selectItem" :class="{focus : focus.item_id == item_id}">
 	<div class="trackname">{{item_id}}</div>
 	<div class="trackframe" v-el:trackframe>
-		<frameitem v-ref:frame v-for="(frame_id, framedata) in framesdata" :framedata="framedata"></frameitem>
+		<frameitem v-ref:frame v-for="(frame_id, framedata) in framesdata" :framedata="framedata" :frame_id="$index" :focus="focus" :item_id="item_id"></frameitem>
 	</div>
 </div>
 
@@ -75,6 +75,7 @@ return {
 	}
 	, events : {
 		addKeyFrame : function(frame){
+			console.log(111111, frame)
 			var framedata = this.framesdata[this.focus[this.item_id] || 0]
 
 			frame.$set('framedata.type', 'keyframe')
