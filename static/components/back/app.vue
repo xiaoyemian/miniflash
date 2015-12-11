@@ -147,7 +147,7 @@ return {
 	}
 	, created: function(){
 		this.$emit('updatePage', 640, 1136)
-//		this.$emit('updateFlash', 75)
+		this.$emit('updateFlash', 75)
   }
 }
 </script>
