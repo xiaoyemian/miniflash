@@ -16,13 +16,34 @@
 	&.focus{
 	}
 
+	.frame{
+		.w(12px); .h(24px);
+		border-left:1px solid #222;
+
+		&:nth-last-child(1){
+			border-right:1px solid #222;
+		}
+
+	}
+
+	.ui-state-highlight{
+		.w(12px);.h(24px);.bgc(#222);
+		border-left:1px solid #222;
+
+		&:nth-last-child(1){
+			border-right:1px solid #222;
+		}
+	}
+
+
 }
+
 </style>
 
 <template>
 <div class="track" @click.stop="selectItem" v-if="trackdata" :class="{focus : focus.item_id == item_id}">
 	<div class="trackname">{{item_id}}</div>
-	<div class="trackframe">
+	<div class="trackframe" v-el:trackframe>
 		<frameitem v-for="index in tracklength/framestep" :framedata="trackdata[index]" :frame_id="index" :focus="focus" :item_id="item_id" :index="$index"></frameitem>
 	</div>
 </div>
@@ -74,16 +95,24 @@ return {
 		}
 	}
 	, ready : function(){
+		var mSelf = this
 		var frame_id = '0'
 		this.$dispatch('updataItemStyle', this.trackdata[frame_id].style, this.item_id)
 		this.$dispatch('setCurrent', this.item_id, frame_id)
 
-		var mSelf = this
-		setTimeout(function(){
+		var $trackframe = $(this.$els.trackframe)
+		$trackframe.sortable({
+			start : function(event, opts){
+				mSelf.selectItem()
+			}
+			, stop : function(){
+			}
+			, axis: "x"
+			, cursor: 'crosshair'
+			, placeholder: 'ui-state-highlight'
+		})
+		$trackframe.disableSelection()
 
-			
-
-		}, 4000)
 	}
 }
 </script>

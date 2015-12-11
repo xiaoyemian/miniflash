@@ -2,18 +2,14 @@
 .framemenu{
 	.pa;
 }
+
 .frame{
 	.pr;
-	.w(12px);
-	.h(24px);
-	border-left:1px solid #222;
 	.bgc(#333);
+
 
 	&:nth-child(5n+1){
 		.bgc(#383838);
-	}
-	&:nth-last-child(1){
-		border-right:1px solid #222;
 	}
 
 	&:before, &:after{

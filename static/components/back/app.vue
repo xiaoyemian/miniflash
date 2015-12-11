@@ -33,6 +33,7 @@ body{
 require('jquery')
 require('jqui/draggable')
 require('jqui/resizable')
+require('jqui/sortable')
 
 var flash = require('back/flash.vue')
 var view = require('back/view.vue')
