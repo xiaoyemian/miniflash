@@ -73,10 +73,10 @@ return {
 
       }else{
         frame_id = frame_id|0
-        Vue.set(this.focus, 'item_id', item_id)
-        Vue.set(this.focus, 'frame_id', frame_id)
+				this.$set('focus.item_id', item_id)
+				this.$set('focus.frame_id', frame_id)
+				this.$set('focus.style', style)
 
-        Vue.set(this.focus, 'style', style)
 				this.$emit('setCurrent', item_id, frame_id)
         this.$emit('updataItemStyle')
       }
@@ -87,7 +87,7 @@ return {
 			if(this.focus[item_id] == frame_id)
 				return
 
-			Vue.set(this.focus, item_id, frame_id)
+			this.$set('focus.'+item_id, frame_id)
 		}
 
 		, updataItemStyle : function(style, item_id){
@@ -110,9 +110,9 @@ return {
     }
 
 		, clearFocus : function(){
-      Vue.set(this.focus, 'item_id', null)
-      Vue.set(this.focus, 'frame_id', null)
-      Vue.set(this.focus, 'style', {})
+			this.$set('focus.item_id', null)
+			this.$set('focus.frame_id', null)
+			this.$set('focus.style', {})
     }
 
 

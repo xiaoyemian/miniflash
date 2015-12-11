@@ -48,7 +48,7 @@ return {
 		}
 		, aspectRatio : function(){
 			var style = this.focus.style
-			Vue.set(this.focus.style, 'height', style.width*this.itemdata.scale)
+			this.$set('focus.style.height', style.width*this.itemdata.scale)
 			this.$emit('updateItem')
 
 		}
@@ -57,8 +57,8 @@ return {
 				var style = this.focus.style
 				opts = opts || {}
 
-				for(var i in opts){
-					Vue.set(this.focus.style, i, opts[i])
+				for(var key in opts){
+					this.$set('focus.style["'+key+'"]', opts[key])
 				}
 			}
 		}
@@ -66,11 +66,11 @@ return {
 			var styleKey = ['width', 'height', 'top', 'left']
 			for(var i in styleKey){
 				var key = styleKey[i]
-				Vue.set(this.style, key, style[key] + 'px')
+				this.$set('style["'+key+'"]', style[key] + 'px')
 			}
 
 			var background = this.itemdata.background
-			Vue.set(this.style, 'background-image', 'url("' + background.image + '")')
+			this.$set('style["background-image"]', 'url("' + background.image + '")')
 		}
 	}
 	, events : {

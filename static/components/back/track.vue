@@ -77,13 +77,13 @@ return {
 			if(!frame.framedata){
 				var framedata = this.$children[this.focus[this.item_id] || 0].framedata
 
-				Vue.set(frame, 'framedata', {
+				frame.$set('framedata', {
 					style : {}
 					, type : 'blankframe'
 				})
 
 				for(var i in framedata.style){
-					Vue.set(frame.framedata.style, i ,framedata.style[i])
+					frame.$set('framedata.style.'+i, framedata.style[i])
 				}
 			}
 		}
@@ -91,6 +91,8 @@ return {
 	, ready : function(){
 		var mSelf = this
 		var frame = this.$children[this.focus[this.item_id] || 0]
+
+		console.log(frame)
 
 		this.$dispatch('updataItemStyle', frame.framedata.style, this.item_id)
 		this.$dispatch('setCurrent', this.item_id, frame.frame_id)
