@@ -1,45 +1,35 @@
 <style>
 .track{
-	.l(24px);
-	.fc(#ccc);
-	.hidden;
-	border-top:1px solid #222;
-
-	border-bottom:1px solid #222;
-	.mt(-1px);
+	.l(24px); .fc(#ccc); .hidden; .mt(-1px);
+	border-top:1px solid #222; border-bottom:1px solid #222;
 
 	.trackname{
-		.left;.w(140px);
-		.h(100%);
+		.left;.w(140px); .h(100%);
 	}
 	.trackframe{
-		.ml(140px);
-		display:-webkit-box;
+		.ml(140px); display:-webkit-box;
 	}
 	&.focus{
+		.bgc(#f69);
 	}
 
 	.frame, .ui-state-highlight{
-		.w(12px); .h(24px);
-		border-left:1px solid #222;
-		border-right:1px solid #222;
-		.ml(-1px);
+		.w(12px); .h(24px); .ml(-1px);
+		border-left:1px solid #222; border-right:1px solid #222;
 	}
 
 	.ui-state-highlight{
 		.bgc(#222);
 	}
-
-
 }
 
 </style>
 
 <template>
-<div class="track" @click.stop="selectItem" :class="{focus : focus.item_id == item_id}">
+<div class="track" @click.stop="setFocusTrack" :class="{focus:focustrack && focustrack.item_id == item_id}">
 	<div class="trackname">{{item_id}}</div>
 	<div class="trackframe" v-el:trackframe>
-		<frameitem v-ref:frame v-for="framedata in framesdata" :framedata="framedata" :frame_id="$index"></frameitem>
+		<frameitem v-ref:frame v-for="framedata in framesdata" :focusframe="focusframe" :framedata="framedata" :frame_id="$index"></frameitem>
 	</div>
 </div>
 
@@ -52,64 +42,47 @@ return {
   components : {
     frameitem : frame
 	}
-	, props : ['focus', 'item_id', 'trackdata']
+	, props : ['focustrack', 'item_id', 'trackdata']
 	, data : function(){
 		var tracklength = 4000
 		var framestep = 100
-		this.framesdata = []
+		var framesdata = []
 
 		for(var i = 0; i <= tracklength/framestep; i++){
-			Vue.set(this.framesdata, i, this.trackdata[i] || {style:{}, type:'blankframe'})
+			Vue.set(framesdata, i, this.trackdata[i] || {style:{}, type:'blankframe'})
 		}
 
 		return {
-			tracklength : tracklength 
-			, framestep : framestep
-			, framesdata : this.framesdata
+			framesdata : framesdata
+			, focusframe : 0 
 		}
 	}
 	, methods : {
-		selectItem : function(){
-			this.$dispatch('setFocus', this.item_id)
+		setFocusTrack : function(){
+			this.$dispatch('setFocusTrack', this)
 		}
 	}
 	, events : {
-		setTrackFocusFrame : function(frame){
-			console.log(frame)
-		}
-		, addKeyFrame : function(frame){
-			var framedata = this.framesdata[this.focus[this.item_id] || 0]
-
-			frame.$set('framedata.type', 'keyframe')
-
-			for(var i in framedata.style){
-				frame.$set('framedata.style.'+i, framedata.style[i])
-			}
+		setFocusFrame : function(frame){
+			this.$set('focusframe', frame)
+			this.setFocusTrack()
 		}
 	}
 	, ready : function(){
 		var mSelf = this
-		var frame_id = 0
-		this.$dispatch('updataItemStyle', {style : this.framesdata[frame_id].style, item_id : this.item_id})
-		this.$dispatch('setCurrent', this.item_id, frame_id)
-
 
 		var $trackframe = $(this.$els.trackframe)
-		var index = {}
 		var sortStart
 
 		$trackframe.sortable({
 			start : function(event, ui){
-				mSelf.selectItem()
-				sortStart = ui.item.index()
 			}
 			, stop : function(event, ui){
-				var frame_id = ui.item.index()
-				mSelf.framesdata.splice(frame_id, 0, mSelf.framesdata.splice(sortStart, 1)[0])
+				var sortStop = ui.item.index()
 
-				console.log(sortStart, mSelf.focus[frame_id])
-
-				mSelf.$dispatch('setFocus', mSelf.item_id, frame_id, mSelf.framesdata[frame_id])
+				mSelf.$nextTick(function(){
+					mSelf.$emit('focusFrame', mSelf.$refs.frame[sortStop])
+				})
 			}
 			, axis: "x"
 			, cursor: 'crosshair'

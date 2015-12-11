@@ -20,13 +20,8 @@
 
 <template>
 <div class="flash" :style="flashstyle">
-	<div class="flashsetting">
-		<div class="trackframe">
-		</div>
-	</div>
-
 	<div class="tracks">
-		<track v-ref:track v-for="(item_id, trackdata) in tracksdata" :focus="focus" :item_id="item_id" :trackdata="trackdata"></track>
+		<track v-ref:track v-for="trackdata in flashdata" :trackdata="trackdata" :item_id="$key" :focustrack="focustrack"></track>
 	</div>
 </div>
 
@@ -40,15 +35,19 @@ return {
   components : {
 		track : track
   }
-	, props:['focus', 'tracksdata', 'flashstyle']
+	, props:['flashdata', 'flashstyle']
 	, data : function(){
 
 		return {
+			focustrack : null
 		}
 	}
 	, methods : {
 	}
 	, events : {
+		setFocusTrack : function(track){
+			this.$set('focustrack', track)
+		}
 	}
 }
 </script>

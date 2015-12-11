@@ -23,7 +23,7 @@ body{
 
 	<view v-ref:view :focus="focus" :pagedata="pagedata" :pagestyle="pagestyle" :viewstyle="viewstyle" :itemsettingstyle="itemsettingstyle"></view>
 
-	<flash v-ref:flash :style="flashstyle" :tracksdata="pagedata.tracks" :focus="focus"></flash>
+	<flash v-ref:flash :style="flashstyle" :flashdata="pagedata.tracks" :focus="focus"></flash>
 
 </div>
 </template>
