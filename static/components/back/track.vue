@@ -3,7 +3,10 @@
 	.l(24px);
 	.fc(#ccc);
 	.hidden;
+	border-top:1px solid #222;
+
 	border-bottom:1px solid #222;
+	.mt(-1px);
 
 	.trackname{
 		.left;.w(140px);
