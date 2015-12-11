@@ -66,7 +66,7 @@ return {
 			var styleKey = ['width', 'height', 'top', 'left']
 			for(var i in styleKey){
 				var key = styleKey[i]
-				this.$set('style["'+key+'"]', style[key] + 'px')
+				this.$set('style["'+key+'"]', (style[key] ? style[key] : 0) + 'px')
 			}
 
 			var background = this.itemdata.background

@@ -23,7 +23,7 @@
 
 	}
 
-	&.keyframe, &.blankframe{
+	&.keyframe{
 		.handel{
 			.bgc(#5CD685);
 		}
@@ -79,10 +79,15 @@ return {
 	}
 	, methods : {
 		selectFrame : function(){
+			this.$dispatch('setFocus', this.item_id, this.frame_id, this.framedata.style)
+
+
+/*
 			if(this.framedata.type != 'keyframe')
 				this.$dispatch('addKeyFrame', this)
 
 			this.$dispatch('setFocus', this.item_id, this.frame_id, this.framedata.style)
+*/
 		}
 	}
 	, events : {
