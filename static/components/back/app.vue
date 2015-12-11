@@ -53,8 +53,11 @@ return {
 	, methods : {
 	}
 	, events : {
-		focusItem : function(track){
+		focusItemByTrack : function(track){
 			this.$refs.view.$emit('focusItem', track.item_id, track.focus_frame.framedata)
+		} 
+		, focusTrackByItem : function(item){
+			this.$refs.flash.$emit('focusTrack', item.itemdata.item_id)
 		} 
 	}
 	, ready: function(){

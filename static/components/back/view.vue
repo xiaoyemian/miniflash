@@ -53,6 +53,7 @@ return {
 	, events : {
 		setFocusItem : function(item){
 			this.$set('focus_item', item)
+			this.$dispatch('focusTrackByItem', item)
 		}
 
 		, focusItem : function(item_id, framedata){

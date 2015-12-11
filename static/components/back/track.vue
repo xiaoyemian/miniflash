@@ -57,16 +57,19 @@ return {
 		}
 	}
 	, methods : {
-		setFocusTrack : function(){
-			this.$dispatch('setFocusTrack', this)
+		setFocusTrack : function(forbiddenFocusItem){
+			this.$dispatch('setFocusTrack', this, forbiddenFocusItem)
 		}
 	}
 	, events : {
 		setFocusFrame : function(frame){
 			this.$set('focus_frame', frame)
 			this.setFocusTrack()
-
-			console.log(frame)
+		}
+		, updateTrackByItem : function(item_id){
+			if(item_id == this.item_id){
+				this.setFocusTrack(true)
+			}
 		}
 	}
 	, ready : function(){

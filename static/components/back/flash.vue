@@ -48,10 +48,15 @@ return {
 		}
 	}
 	, events : {
-		setFocusTrack : function(track){
+		setFocusTrack : function(track, forbiddenFocusItem){
 			this.$set('focus_track', track)
 
-			this.$dispatch('focusItem', this.focus_track)
+			if(!forbiddenFocusItem){
+				this.$dispatch('focusItemByTrack', this.focus_track)
+			}
+		}
+		, focusTrack : function(item_id){
+      this.$broadcast('updateTrackByItem', item_id)
 		}
 	}
 	, ready : function(){
