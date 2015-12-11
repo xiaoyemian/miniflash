@@ -19,23 +19,15 @@
 	&.focus{
 	}
 
-	.frame{
+	.frame, .ui-state-highlight{
 		.w(12px); .h(24px);
 		border-left:1px solid #222;
-
-		&:nth-last-child(1){
-			border-right:1px solid #222;
-		}
-
+		border-right:1px solid #222;
+		.ml(-1px);
 	}
 
 	.ui-state-highlight{
-		.w(12px);.h(24px);.bgc(#222);
-		border-left:1px solid #222;
-
-		&:nth-last-child(1){
-			border-right:1px solid #222;
-		}
+		.bgc(#222);
 	}
 
 
