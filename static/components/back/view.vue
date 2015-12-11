@@ -16,11 +16,11 @@
 
 
 <template>
-<itemsetting :itemsettingstyle="itemsettingstyle"></itemsetting>
+<itemsetting :focus_item="focus_item"></itemsetting>
 
-<div class="view" @click="clearFocus" :style="viewstyle">
+<div class="view" @click="clearFocus">
 	<div class="page" :style="pagestyle">
-		<item v-ref:item v-for="(index, itemdata) in pagedata.items" :itemdata="itemdata"></item>
+		<item v-ref:item v-for="itemdata in pagedata.items" :itemdata="itemdata" :index="$index" :focus_item="focus_item" :pagesize="pagesize"></item>
 	</div>
 </div>
 
@@ -36,9 +36,13 @@ return {
     item : item
 		, itemsetting : itemsetting
   }
-	, props:['pagedata', 'pagestyle', 'viewstyle', 'itemsettingstyle']
+	, props:['pagedata']
 	, data : function(){
 		return {
+			focus_item : null
+			, printsize : {}	
+			, pagesize : {}
+			, pagestyle : {}
 		}
 	}
 	, methods : {
@@ -48,10 +52,28 @@ return {
 	}
 	, events : {
 		focusItem : function(item_id, framedata){
-			console.log(item_id, framedata)
+			this.$set('focus_item', item_id)
+      this.$broadcast('updateItemByFrame', item_id, framedata)
 		}
+
+		, updatePage : function(width, height){
+			width = width || 640
+			height = height || 1136
+
+			Vue.set(this.printsize, 'width', width)
+			Vue.set(this.printsize, 'height', height)
+			
+			Vue.set(this.pagesize, 'width', this.printsize.width * 0.4)
+			Vue.set(this.pagesize, 'height', this.printsize.height * 0.4)
+
+			Vue.set(this.pagestyle, 'width', this.pagesize.width + 'px')
+			Vue.set(this.pagestyle, 'height', this.pagesize.height + 'px')
+			Vue.set(this.pagestyle, 'margin-top', this.pagesize.height/-2 + 'px')
+			Vue.set(this.pagestyle, 'margin-left', this.pagesize.width/-2 + 'px')
+    }
 	}
 	, ready : function(){
+		this.$emit('updatePage', 640, 1136)
 	}
 }
 </script>

@@ -21,7 +21,7 @@ body{
 <div class="app">
 	<div class="headtop"></div>
 
-	<view v-ref:view :pagedata="pagedata" :pagestyle="pagestyle" :viewstyle="viewstyle" :itemsettingstyle="itemsettingstyle"></view>
+	<view v-ref:view :pagedata="pagedata"></view>
 
 	<flash v-ref:flash :flashdata="pagedata.tracks"></flash>
 
@@ -48,14 +48,6 @@ return {
 	, data : function(){
 		return {
 			pagedata : this.pages[this.number]
-			, printsize : {}	
-			, flashsize : {}
-			, viewsize : {} 
-			, pagesize : {}
-			
-			, viewstyle : {}
-			, itemsettingstyle : {}
-			, pagestyle : {}
 		}
 	}
 	, methods : {
@@ -64,46 +56,8 @@ return {
 		focusItem : function(track){
 			this.$refs.view.$emit('focusItem', track.item_id, track.focus_frame.framedata)
 		} 
-		, updataItemStyle : function(opts){
-			opts = opts || {}
-			var style = opts.style
-
-      if(!style)
-        style = this.focus.style
-
-      if(style['padding-top']){
-        var pagesize = this.pagesize
-
-        Vue.set(style, 'height', pagesize.width * style['padding-top']/100)
-
-        style.width = pagesize.width * style['width']/100
-        style.top = pagesize.height * style['top']/100
-        style.left = pagesize.width * style['left']/100
-
-        delete style['padding-top']
-      }
-
-      this.$broadcast('updateItem', opts)
-    }
-
-		, updatePage : function(width, height){
-			width = width || 640
-			height = height || 1136
-
-			Vue.set(this.printsize, 'width', width)
-			Vue.set(this.printsize, 'height', height)
-			
-			Vue.set(this.pagesize, 'width', this.printsize.width * 0.4)
-			Vue.set(this.pagesize, 'height', this.printsize.height * 0.4)
-
-			Vue.set(this.pagestyle, 'width', this.pagesize.width + 'px')
-			Vue.set(this.pagestyle, 'height', this.pagesize.height + 'px')
-			Vue.set(this.pagestyle, 'margin-top', this.pagesize.height/-2 + 'px')
-			Vue.set(this.pagestyle, 'margin-left', this.pagesize.width/-2 + 'px')
-    }
 	}
-	, created: function(){
-		this.$emit('updatePage', 640, 1136)
+	, ready: function(){
   }
 }
 </script>

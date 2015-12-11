@@ -44,7 +44,7 @@
 </style>
 
 <template>
-<div class="itemsetting" :style="itemsettingstyle" v-if="0">
+<div class="itemsetting" v-if="0">
 
 	<div class="itemStyle">
 		<div class="inputBox" v-for="(key, value) in label.style"><label for="style|{{key}}">{{value}}</label><input type="number" @keyup="updateItem" id="style|{{key}}" placeholder="" value="{{focus.style[key]}}"/>px</div>
@@ -60,7 +60,7 @@
 <script>
 
 return {
-	props : ['itemsettingstyle']
+	props : ['focus_item']
 	, data : function(){
 		return {
 			label : {

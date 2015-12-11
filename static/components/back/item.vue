@@ -24,7 +24,7 @@
 </style>
 
 <template>
-<div class="item" @click.stop="selectItem" :class="" :style="style">
+<div class="item" @click.stop="setFocusItem" :class="{focus : focus_item && focus_item == itemdata.item_id}" :style="style">
 	<div class="handel">
 		<div @click.stop="aspectRatio" class="aspectRatioBtn"></div>
 	</div>
@@ -35,55 +35,63 @@
 <script>
 
 return {
-	props:['itemdata']
+	props:['focus_item', 'itemdata', 'pagesize']
 	, data:function(){
-
 		return {
-			style : {} 
+			framestyle : {}
+			, style : {} 
 		}
 	}
 	, methods : {
-		selectItem : function(){
-			this.$dispatch('setFocus', this.itemdata.item_id)
+		setFocusItem : function(){
+			console.log(this)
 		}
 		, aspectRatio : function(){
-			var style = this.focus.style
-			this.$set('focus.style.height', style.width*this.itemdata.scale)
-			this.$emit('updateItem')
-
+			this.resetItemStyle({
+				height:this.framestyle.width * this.itemdata.scale
+			})
+			this.updateItemStyle()
 		}
-		, setItemStyle : function(opts){
-			if(this.itemdata.item_id == this.focus.item_id){
-				var style = this.focus.style
-				opts = opts || {}
+		, formatItemStyle : function(){
+			var style = this.framestyle
+      if(style['padding-top']){
+        var pagesize = this.pagesize
 
-				for(var key in opts){
-					this.$set('focus.style["'+key+'"]', opts[key])
-				}
-			}
+        Vue.set(style, 'height', pagesize.width * style['padding-top']/100)
+
+        style.width = pagesize.width * style['width']/100
+        style.top = pagesize.height * style['top']/100
+        style.left = pagesize.width * style['left']/100
+
+        delete style['padding-top']
+      }
+    }
+
+		, resetItemStyle : function(style){
+			for(var i in style)
+				this.$set('framestyle["'+i+'"]', style[i])
 		}
-		, updateStyle : function(style){
+
+		, updateItemStyle : function(){
+			var style = this.framestyle
 			var styleKey = ['width', 'height', 'top', 'left']
 			for(var i in styleKey){
 				var key = styleKey[i]
 				this.$set('style["'+key+'"]', (style[key] ? style[key] : 0) + 'px')
 			}
+			console.log(style, this.style)
 
 			var background = this.itemdata.background
 			this.$set('style["background-image"]', 'url("' + background.image + '")')
 		}
 	}
 	, events : {
-		updateItem : function(opts){
-			var focus = (opts && opts.item_id) ? opts : this.focus
-
-			if(this.itemdata.item_id == focus.item_id){
-				this.updateStyle(focus.style)
+		updateItemByFrame : function(item_id, framedata){
+			if(item_id == this.itemdata.item_id){
+				this.framestyle = framedata.style
+				this.formatItemStyle()
+				this.updateItemStyle()
 			}
-
-		}
-		, reloadItem : function(size, oldsize){
-			var scale = size.width/oldsize.width
 		}
 	}
 	, ready : function(){
@@ -92,13 +100,13 @@ return {
 
 		$item.draggable({
 			start : function(event, ui){
-				mSelf.selectItem()
+				mSelf.setFocusItem()
 			}
 			, drag : function(event, ui){
-				mSelf.setItemStyle(ui.position)
+				mSelf.resetItemStyle(ui.position)
 			}
 			, stop : function(event, ui){
-				mSelf.$emit('updateItem')
+				mSelf.updateItemStyle()
 			}
 			, containment : "document"
 			, scroll : false
@@ -108,13 +116,13 @@ return {
 	
 		$item.resizable({
 			start : function(event, ui){
-				mSelf.selectItem()
+				mSelf.setFocusItem()
 			}
 			, resize : function(event, ui){
-				mSelf.setItemStyle(ui.size)
+				mSelf.resetItemStyle(ui.size)
 			}
 			, stop : function(event, ui){
-				mSelf.$emit('updateItem')
+				mSelf.updateItemStyle()
 			}
 			, ghost: true
 		})
