@@ -21,9 +21,9 @@ body{
 <div class="app">
 	<div class="headtop"></div>
 
-	<view :focus="focus" :pagedata="pagedata" :pagestyle="pagestyle" :viewstyle="viewstyle" :itemsettingstyle="itemsettingstyle"></view>
+	<view v-ref:view :focus="focus" :pagedata="pagedata" :pagestyle="pagestyle" :viewstyle="viewstyle" :itemsettingstyle="itemsettingstyle"></view>
 
-	<flash :style="flashstyle" :tracksdata="pagedata.tracks" :focus="focus"></flash>
+	<flash v-ref:flash :style="flashstyle" :tracksdata="pagedata.tracks" :focus="focus"></flash>
 
 </div>
 </template>

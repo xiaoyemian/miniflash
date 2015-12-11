@@ -26,7 +26,7 @@
 	</div>
 
 	<div class="tracks">
-		<track v-for="(item_id, trackdata) in tracksdata" :focus="focus" :item_id="item_id" :trackdata="trackdata"></track>
+		<track v-ref:track v-for="(item_id, trackdata) in tracksdata" :focus="focus" :item_id="item_id" :trackdata="trackdata"></track>
 	</div>
 </div>
 
