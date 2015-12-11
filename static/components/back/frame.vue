@@ -11,22 +11,19 @@
 		.opacity(20); 
 	}
 
-	&.keyframe{
-		.handel{ .bgc(#5CD685); }
+	&.focus{
+		.handel{.bgc(#ccc);}
 	}
 
 	&.keyframe{
+		.handel{ .bgc(#5CD685); }
 		&:before{
 			top:50%;left:50%;.w(6px);.h(6px);.mt(-3px);.ml(-3px);.bgc(#000); .border-r(8px);
 		}
 	}
 
 	&.animateframe{
-		.handel{ .bgc(#5CADD6); }
-	}
-
-	&.focus{
-		.handel{ .bgc(#f69); }
+		.handel{.bgc(#5CADD6);}
 	}
 
 }

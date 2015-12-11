@@ -10,7 +10,6 @@
 		.ml(140px); display:-webkit-box;
 	}
 	&.focus{
-		.bgc(#f69);
 	}
 
 	.frame, .ui-state-highlight{
@@ -68,7 +67,6 @@ return {
 			this.setFocusTrack()
 
 			console.log(frame)
-
 		}
 	}
 	, ready : function(){
