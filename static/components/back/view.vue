@@ -51,8 +51,11 @@ return {
 		}
 	}
 	, events : {
-		focusItem : function(item_id, framedata){
-			this.$set('focus_item', item_id)
+		setFocusItem : function(item){
+			this.$set('focus_item', item)
+		}
+
+		, focusItem : function(item_id, framedata){
       this.$broadcast('updateItemByFrame', item_id, framedata)
 		}
 

@@ -24,7 +24,7 @@
 </style>
 
 <template>
-<div class="item" @click.stop="setFocusItem" :class="{focus : focus_item && focus_item == itemdata.item_id}" :style="style">
+<div class="item" @click.stop="setFocusItem" :class="{focus : focus_item && focus_item.itemdata.item_id == itemdata.item_id}" :style="style">
 	<div class="handel">
 		<div @click.stop="aspectRatio" class="aspectRatioBtn"></div>
 	</div>
@@ -44,7 +44,7 @@ return {
 	}
 	, methods : {
 		setFocusItem : function(){
-			console.log(this)
+			this.$dispatch('setFocusItem', this)
 		}
 		, aspectRatio : function(){
 			this.resetItemStyle({
@@ -91,6 +91,8 @@ return {
 				this.framestyle = framedata.style
 				this.formatItemStyle()
 				this.updateItemStyle()
+				
+				this.setFocusItem()
 			}
 		}
 	}
