@@ -48,7 +48,7 @@ return {
 		setFocusTrack : function(track){
 			this.$set('focustrack', track)
 
-			this.dispatch('focusitem', this.focustrack)
+			this.$dispatch('focusitem', this.focustrack)
 		}
 	}
 }
