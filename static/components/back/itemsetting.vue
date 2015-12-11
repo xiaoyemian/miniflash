@@ -70,7 +70,7 @@ return {
 
 			this.$set('focus_item.framestyle["'+ type[1] +'"]', value|0)
 
-			this.$dispatch('updataItemStyle')
+			this.focus_item.updateItemStyle()
 		}
 	}
 }

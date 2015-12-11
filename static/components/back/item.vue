@@ -58,7 +58,8 @@ return {
       if(style['padding-top']){
         var pagesize = this.pagesize
 
-        Vue.set(style, 'height', pagesize.width * style['padding-top']/100)
+				this.$set('framestyle.height', pagesize.width * style['padding-top']/100)
+     //   Vue.set(style, 'height', pagesize.width * style['padding-top']/100)
 
         style.width = pagesize.width * style['width']/100
         style.top = pagesize.height * style['top']/100
