@@ -64,16 +64,16 @@ return {
 	, data : function(){
 		var tracklength = 4000
 		var framestep = 100
-		var framesdata = []
+		this.framesdata = []
 
 		for(var i = 0; i <= tracklength/framestep; i++){
-			framesdata.push(this.trackdata[i] || {})
+			Vue.set(this.framesdata, i, this.trackdata[i] || {style:{}, type:'blankframe'})
 		}
 
 		return {
 			tracklength : tracklength 
 			, framestep : framestep
-			, framesdata : framesdata
+			, framesdata : this.framesdata
 		}
 	}
 	, methods : {
@@ -82,18 +82,13 @@ return {
 		}
 	}
 	, events : {
-		addFrame : function(frame){
-			if(!frame.framedata.style){
-				var framedata = this.framesdata[this.focus[this.item_id] || 0]
+		addKeyFrame : function(frame){
+			var framedata = this.framesdata[this.focus[this.item_id] || 0]
 
-				frame.$set('framedata', {
-					style : {}
-					, type : 'keyframe'
-				})
+			frame.$set('framedata.type', 'keyframe')
 
-				for(var i in framedata.style){
-					frame.$set('framedata.style.'+i, framedata.style[i])
-				}
+			for(var i in framedata.style){
+				frame.$set('framedata.style.'+i, framedata.style[i])
 			}
 		}
 	}
