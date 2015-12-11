@@ -44,11 +44,11 @@ return {
 	}
 	, props : ['focustrack', 'item_id', 'trackdata']
 	, data : function(){
-		var tracklength = 4000
+		var tracklength = 600
 		var framestep = 100
 		var framesdata = []
 
-		for(var i = 0; i <= tracklength/framestep; i++){
+		for(var i = 0; i < tracklength/framestep; i++){
 			Vue.set(framesdata, i, this.trackdata[i] || {style:{}, type:'blankframe'})
 		}
 
@@ -66,6 +66,9 @@ return {
 		setFocusFrame : function(frame){
 			this.$set('focusframe', frame)
 			this.setFocusTrack()
+
+			console.log(frame)
+
 		}
 	}
 	, ready : function(){
@@ -73,16 +76,19 @@ return {
 
 		var $trackframe = $(this.$els.trackframe)
 		var sortStart
+		var sortStop
 
 		$trackframe.sortable({
 			start : function(event, ui){
+				sortStart = ui.item.index()
 			}
 			, stop : function(event, ui){
-				var sortStop = ui.item.index()
+				sortStop = ui.item.index()
 
-				mSelf.$nextTick(function(){
-					mSelf.$emit('focusFrame', mSelf.$refs.frame[sortStop])
-				})
+				var framedata = mSelf.framesdata.splice(sortStart, 1)[0]
+				mSelf.framesdata.splice(sortStop, 0, framedata)
+				console.log(mSelf.framesdata)
+
 			}
 			, axis: "x"
 			, cursor: 'crosshair'

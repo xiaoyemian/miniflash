@@ -29,7 +29,6 @@
 		.handel{ .bgc(#f69); }
 	}
 
-
 }
 .track.focus{
 	.frame{
@@ -43,7 +42,6 @@
 <template>
 <div class="frame" :class="{focus:focusframe && focusframe.frame_id == frame_id, keyframe : framedata.type == 'keyframe', blankframe : framedata.type == 'blankframe'}" @click.stop="setFocusFrame">
 	<div class="handel"></div>
-
 </div>
 </template>
 
