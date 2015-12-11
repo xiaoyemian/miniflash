@@ -44,10 +44,10 @@
 </style>
 
 <template>
-<div class="itemsetting" v-if="0">
+<div class="itemsetting" v-if="focus_item">
 
 	<div class="itemStyle">
-		<div class="inputBox" v-for="(key, value) in label.style"><label for="style|{{key}}">{{value}}</label><input type="number" @keyup="updateItem" id="style|{{key}}" placeholder="" value="{{focus.style[key]}}"/>px</div>
+		<div class="inputBox" v-for="(key, value) in label.style"><label for="style|{{key}}">{{value}}</label><input type="number" @keyup="updateItem" id="style|{{key}}" placeholder="" value="{{focus_item.framestyle[key]}}"/>px</div>
 	</div>
 
 	<div class="itemType" v-if="0 && itemdata.background">
@@ -82,7 +82,7 @@ return {
 			var type = setting.id.split('|')
 			var value = setting.value
 
-			this.$set('focus.style["'+ type[1] +'"]', value|0)
+			this.$set('focus_item.framestyle["'+ type[1] +'"]', value|0)
 
 			this.$dispatch('updataItemStyle')
 		}
