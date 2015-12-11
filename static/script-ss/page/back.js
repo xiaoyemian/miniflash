@@ -3,7 +3,7 @@ Vue.config.debug = true
 var app = require('back/app.vue')
 
 var pages = require('data/pages')
-var number = 0
+var number = 2
 
 for(var no in pages){
 	var pagedata = pages[no]

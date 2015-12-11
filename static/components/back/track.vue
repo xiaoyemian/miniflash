@@ -44,10 +44,10 @@
 </style>
 
 <template>
-<div class="track" @click.stop="selectItem" v-if="trackdata" :class="{focus : focus.item_id == item_id}">
+<div class="track" @click.stop="selectItem" :class="{focus : focus.item_id == item_id}">
 	<div class="trackname">{{item_id}}</div>
 	<div class="trackframe" v-el:trackframe>
-		<frameitem v-ref:frame v-for="index in tracklength/framestep" :framedata="trackdata[$index]" :frame_id="$index" :focus="focus" :item_id="item_id"></frameitem>
+		<frameitem v-ref:frame v-for="(frame_id, framedata) in framesdata" :framedata="framedata" :frame_id="$index" :focus="focus" :item_id="item_id"></frameitem>
 	</div>
 </div>
 
@@ -62,9 +62,18 @@ return {
 	}
 	, props : ['focus', 'item_id', 'trackdata']
 	, data : function(){
+		var tracklength = 4000
+		var framestep = 100
+		var framesdata = []
+
+		for(var i = 0; i <= tracklength/framestep; i++){
+			framesdata.push(this.trackdata[i] || {})
+		}
+
 		return {
-			tracklength : 4000
-			, framestep : 100
+			tracklength : tracklength 
+			, framestep : framestep
+			, framesdata : framesdata
 		}
 	}
 	, methods : {
@@ -74,12 +83,12 @@ return {
 	}
 	, events : {
 		addFrame : function(frame){
-			if(!frame.framedata){
-				var framedata = this.$children[this.focus[this.item_id] || 0].framedata
+			if(!frame.framedata.style){
+				var framedata = this.framesdata[this.focus[this.item_id] || 0]
 
 				frame.$set('framedata', {
 					style : {}
-					, type : 'blankframe'
+					, type : 'keyframe'
 				})
 
 				for(var i in framedata.style){
@@ -90,12 +99,12 @@ return {
 	}
 	, ready : function(){
 		var mSelf = this
-		var frame = this.$children[this.focus[this.item_id] || 0]
+		var frame_id = 0
+		this.$dispatch('updataItemStyle', {style : this.framesdata[frame_id].style, item_id : this.item_id})
+		this.$dispatch('setCurrent', this.item_id, frame_id)
 
-		console.log(frame)
 
-		this.$dispatch('updataItemStyle', {style : frame.framedata.style, item_id : frame.item_id})
-		this.$dispatch('setCurrent', this.item_id, frame.frame_id)
+
 
 		var $trackframe = $(this.$els.trackframe)
 		var index = {}
@@ -103,15 +112,16 @@ return {
 		$trackframe.sortable({
 			start : function(event, ui){
 				mSelf.selectItem()
-
 				index = {start:ui.item.index()}
 
 			}
 			, stop : function(event, ui){
 				index.stop = ui.item.index()
-				console.log('stop', index)
-			
-				console.log(mSelf.$children)
+
+				var framedata = mSelf.framesdata.splice(index.start, 1)[0]
+				mSelf.framesdata.splice(index.stop, 0, framedata)
+
+				mSelf.$dispatch('setFocus', mSelf.item_id, index.stop, framedata.style)
 
 			}
 			, axis: "x"
@@ -119,7 +129,6 @@ return {
 			, placeholder: 'ui-state-highlight'
 		})
 		$trackframe.disableSelection()
-
 	}
 }
 </script>
