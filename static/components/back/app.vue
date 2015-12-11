@@ -63,7 +63,7 @@ return {
 	, methods : {
 	}
 	, events : {
-    setFocus : function(item_id, frame_id){
+    setFocus : function(item_id, frame_id, style){
       if(item_id == this.focus.item_id && frame_id == this.focus.frame_id)
         return;
 
@@ -76,7 +76,7 @@ return {
         Vue.set(this.focus, 'item_id', item_id)
         Vue.set(this.focus, 'frame_id', frame_id)
 
-        Vue.set(this.focus, 'style', this.pagedata.tracks[item_id][frame_id].style)
+        Vue.set(this.focus, 'style', style)
 				this.$emit('setCurrent', item_id, frame_id)
         this.$emit('updataItemStyle')
       }

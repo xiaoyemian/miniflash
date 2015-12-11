@@ -91,13 +91,13 @@ return {
 		var $item = $(this.$el)
 
 		$item.draggable({
-			start : function(event, opts){
+			start : function(event, ui){
 				mSelf.selectItem()
 			}
-			, drag : function(event, opts){
-				mSelf.setItemStyle(opts.position)
+			, drag : function(event, ui){
+				mSelf.setItemStyle(ui.position)
 			}
-			, stop : function(event, opts){
+			, stop : function(event, ui){
 				mSelf.$emit('updateItem')
 			}
 			, containment : "document"
@@ -107,13 +107,13 @@ return {
 		})
 	
 		$item.resizable({
-			start : function(event, opts){
+			start : function(event, ui){
 				mSelf.selectItem()
 			}
-			, resize : function(event, opts){
-				mSelf.setItemStyle(opts.size)
+			, resize : function(event, ui){
+				mSelf.setItemStyle(ui.size)
 			}
-			, stop : function(event, opts){
+			, stop : function(event, ui){
 				mSelf.$emit('updateItem')
 			}
 			, ghost: true

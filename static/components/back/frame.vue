@@ -79,13 +79,13 @@ return {
 	}
 	, methods : {
 		selectFrame : function(){
-			console.log(this.index)
+			console.log(this.index, this.frame_id)
 
 			if(!this.framedata){
-				this.$dispatch('addFrame', this.frame_id)
+				this.$dispatch('addFrame', this)
 			}
 
-			this.$dispatch('setFocus', this.item_id, this.frame_id)
+			this.$dispatch('setFocus', this.item_id, this.frame_id, this.framedata.style)
 		}
 	}
 	, events : {

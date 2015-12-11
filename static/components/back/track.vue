@@ -47,7 +47,7 @@
 <div class="track" @click.stop="selectItem" v-if="trackdata" :class="{focus : focus.item_id == item_id}">
 	<div class="trackname">{{item_id}}</div>
 	<div class="trackframe" v-el:trackframe>
-		<frameitem v-for="index in tracklength/framestep" :framedata="trackdata[index]" :frame_id="index" :focus="focus" :item_id="item_id" :index="$index"></frameitem>
+		<frameitem v-ref:frame v-for="index in tracklength/framestep" :framedata="trackdata[index]" :frame_id="index" :focus="focus" :item_id="item_id" :index="$index"></frameitem>
 	</div>
 </div>
 
@@ -73,42 +73,44 @@ return {
 		}
 	}
 	, events : {
-		addFrame : function(frame_id, style){
-			frame_id = frame_id|0 + ''
+		addFrame : function(frame){
+			if(!frame.framedata){
+				var framedata = this.$children[this.focus[this.item_id] || 0].framedata
 
-			if(!style){
-				style = {
-					type : 'blank'
-				}
-				var framedata = this.trackdata[this.focus[this.item_id] || 0]
+				Vue.set(frame, 'framedata', {
+					style : {}
+					, type : 'blankframe'
+				})
 
 				for(var i in framedata.style){
-					style[i] = framedata.style[i]
+					Vue.set(frame.framedata.style, i ,framedata.style[i])
 				}
 			}
-
-			Vue.set(this.trackdata, frame_id, {style:style})
-		}
-		, deleteFrame : function(frame_id){
-			frame_id = frame_id|0 + ''
-			Vue.delete(mSelf.trackdata, '0')
-
-			//mSelf.$children[2].$remove()
-			console.log(this)
 		}
 	}
 	, ready : function(){
 		var mSelf = this
-		var frame_id = '0'
-		this.$dispatch('updataItemStyle', this.trackdata[frame_id].style, this.item_id)
-		this.$dispatch('setCurrent', this.item_id, frame_id)
+		var frame = this.$children[this.focus[this.item_id] || 0]
+
+		this.$dispatch('updataItemStyle', frame.framedata.style, this.item_id)
+		this.$dispatch('setCurrent', this.item_id, frame.frame_id)
 
 		var $trackframe = $(this.$els.trackframe)
+		var index = {}
+
 		$trackframe.sortable({
-			start : function(event, opts){
+			start : function(event, ui){
 				mSelf.selectItem()
+
+				index = {start:ui.item.index()}
+
 			}
-			, stop : function(){
+			, stop : function(event, ui){
+				index.stop = ui.item.index()
+				console.log('stop', index)
+			
+				console.log(mSelf.$children)
+
 			}
 			, axis: "x"
 			, cursor: 'crosshair'
