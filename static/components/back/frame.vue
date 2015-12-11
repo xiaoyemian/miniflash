@@ -72,14 +72,14 @@
 <script>
 
 return {
-	props : ['focus', 'item_id', 'frame_id', 'framedata', 'index']
+	props : ['focus', 'item_id', 'frame_id', 'framedata']
 	, data : function(){
 		return {
 		}
 	}
 	, methods : {
 		selectFrame : function(){
-			console.log(this.index, this.frame_id)
+			console.log(this.frame_id)
 
 			if(!this.framedata){
 				this.$dispatch('addFrame', this)

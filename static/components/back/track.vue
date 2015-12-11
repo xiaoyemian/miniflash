@@ -47,7 +47,7 @@
 <div class="track" @click.stop="selectItem" v-if="trackdata" :class="{focus : focus.item_id == item_id}">
 	<div class="trackname">{{item_id}}</div>
 	<div class="trackframe" v-el:trackframe>
-		<frameitem v-ref:frame v-for="index in tracklength/framestep" :framedata="trackdata[index]" :frame_id="index" :focus="focus" :item_id="item_id" :index="$index"></frameitem>
+		<frameitem v-ref:frame v-for="index in tracklength/framestep" :framedata="trackdata[$index]" :frame_id="$index" :focus="focus" :item_id="item_id"></frameitem>
 	</div>
 </div>
 
