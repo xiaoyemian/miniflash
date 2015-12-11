@@ -94,7 +94,7 @@ return {
 
 		console.log(frame)
 
-		this.$dispatch('updataItemStyle', frame.framedata.style, this.item_id)
+		this.$dispatch('updataItemStyle', {style : frame.framedata.style, item_id : frame.item_id})
 		this.$dispatch('setCurrent', this.item_id, frame.frame_id)
 
 		var $trackframe = $(this.$els.trackframe)

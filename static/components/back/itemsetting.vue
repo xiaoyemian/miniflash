@@ -82,9 +82,9 @@ return {
 			var type = setting.id.split('|')
 			var value = setting.value
 
-			var style = this.focus.style
-			style[type[1]] = value|0
-			this.$dispatch('updataItemStyle', style)
+			this.$set('focus.style["'+ type[1] +'"]', value|0)
+
+			this.$dispatch('updataItemStyle')
 		}
 	}
 }

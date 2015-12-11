@@ -90,7 +90,10 @@ return {
 			this.$set('focus.'+item_id, frame_id)
 		}
 
-		, updataItemStyle : function(style, item_id){
+		, updataItemStyle : function(opts){
+			opts = opts || {}
+			var style = opts.style
+
       if(!style)
         style = this.focus.style
 
@@ -106,7 +109,7 @@ return {
         delete style['padding-top']
       }
 
-      this.$broadcast('updateItem', {style:style, item_id:item_id})
+      this.$broadcast('updateItem', opts)
     }
 
 		, clearFocus : function(){
