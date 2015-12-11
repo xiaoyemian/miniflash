@@ -21,9 +21,9 @@ body{
 <div class="app">
 	<div class="headtop"></div>
 
-	<view v-ref:view :focus="focus" :pagedata="pagedata" :pagestyle="pagestyle" :viewstyle="viewstyle" :itemsettingstyle="itemsettingstyle"></view>
+	<view v-ref:view :pagedata="pagedata" :pagestyle="pagestyle" :viewstyle="viewstyle" :itemsettingstyle="itemsettingstyle"></view>
 
-	<flash v-ref:flash :style="flashstyle" :flashdata="pagedata.tracks" :focus="focus"></flash>
+	<flash v-ref:flash :flashdata="pagedata.tracks"></flash>
 
 </div>
 </template>
@@ -48,13 +48,11 @@ return {
 	, data : function(){
 		return {
 			pagedata : this.pages[this.number]
-			, focus : {}
 			, printsize : {}	
 			, flashsize : {}
 			, viewsize : {} 
 			, pagesize : {}
 			
-			, flashstyle : {}
 			, viewstyle : {}
 			, itemsettingstyle : {}
 			, pagestyle : {}
@@ -63,34 +61,9 @@ return {
 	, methods : {
 	}
 	, events : {
-    setFocus : function(item_id, frame_id, style){
-      if(item_id == this.focus.item_id && frame_id == this.focus.frame_id)
-        return;
-
-      if(typeof frame_id == 'undefined'){
-        frame_id = this.focus[item_id]
-        this.$broadcast('selectFrame', item_id, frame_id)
-
-      }else{
-        frame_id = frame_id|0
-				this.$set('focus.item_id', item_id)
-				this.$set('focus.frame_id', frame_id)
-				this.$set('focus.style', style)
-
-				this.$emit('setCurrent', item_id, frame_id)
-        this.$emit('updataItemStyle')
-      }
-    }
-		, setCurrent : function(item_id, frame_id){
-			frame_id = frame_id|0
-
-			console.log(item_id, frame_id)
-			if(this.focus[item_id] == frame_id)
-				return
-
-			this.$set('focus["' + item_id + '"]', frame_id)
-		}
-
+		focusItem : function(track){
+			this.$refs.view.$emit('focusItem', track.item_id, track.focus_frame.framedata)
+		} 
 		, updataItemStyle : function(opts){
 			opts = opts || {}
 			var style = opts.style
@@ -113,22 +86,6 @@ return {
       this.$broadcast('updateItem', opts)
     }
 
-		, clearFocus : function(){
-			this.$set('focus.item_id', null)
-			this.$set('focus.frame_id', null)
-			this.$set('focus.style', {})
-    }
-
-
-		, updateFlash : function(height){
-			height = height || 0
-			Vue.set(this.flashsize, 'height', height)
-
-      Vue.set(this.flashstyle, 'height', this.flashsize.height + 'px')
-
-      Vue.set(this.viewstyle, 'bottom', this.flashsize.height + 'px')
-
-		}
 		, updatePage : function(width, height){
 			width = width || 640
 			height = height || 1136
@@ -147,7 +104,6 @@ return {
 	}
 	, created: function(){
 		this.$emit('updatePage', 640, 1136)
-		this.$emit('updateFlash', 75)
   }
 }
 </script>

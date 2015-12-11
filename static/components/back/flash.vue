@@ -21,7 +21,7 @@
 <template>
 <div class="flash" :style="flashstyle">
 	<div class="tracks">
-		<track v-ref:track v-for="trackdata in flashdata" :trackdata="trackdata" :item_id="$key" :focustrack="focustrack"></track>
+		<track v-ref:track v-for="trackdata in flashdata" :trackdata="trackdata" :item_id="$key" :focus_track="focus_track"></track>
 	</div>
 </div>
 
@@ -39,17 +39,23 @@ return {
 	, data : function(){
 
 		return {
-			focustrack : null
+			focus_track : null
 		}
 	}
 	, methods : {
+		setTime : function(frame_id){
+      this.$broadcast('setTime', frame_id)
+		}
 	}
 	, events : {
 		setFocusTrack : function(track){
-			this.$set('focustrack', track)
+			this.$set('focus_track', track)
 
-			this.$dispatch('focusitem', this.focustrack)
+			this.$dispatch('focusItem', this.focus_track)
 		}
+	}
+	, ready : function(){
+		this.setTime(0)
 	}
 }
 </script>

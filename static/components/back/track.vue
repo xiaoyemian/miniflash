@@ -25,10 +25,10 @@
 </style>
 
 <template>
-<div class="track" @click.stop="setFocusTrack" :class="{focus:focustrack && focustrack.item_id == item_id}">
+<div class="track" @click.stop="setFocusTrack" :class="{focus:focus_track && focus_track.item_id == item_id}">
 	<div class="trackname">{{item_id}}</div>
 	<div class="trackframe" v-el:trackframe>
-		<frameitem v-ref:frame v-for="framedata in framesdata" :focusframe="focusframe" :framedata="framedata" :frame_id="$index"></frameitem>
+		<frameitem v-ref:frame v-for="framedata in tracklist" :focus_frame="focus_frame" :framedata="framedata" :frame_id="$index"></frameitem>
 	</div>
 </div>
 
@@ -41,19 +41,19 @@ return {
   components : {
     frameitem : frame
 	}
-	, props : ['focustrack', 'item_id', 'trackdata']
+	, props : ['focus_track', 'item_id', 'trackdata']
 	, data : function(){
 		var tracklength = 600
 		var framestep = 100
-		var framesdata = []
+		var tracklist = []
 
 		for(var i = 0; i < tracklength/framestep; i++){
-			Vue.set(framesdata, i, this.trackdata[i] || {style:{}, type:'blankframe'})
+			Vue.set(tracklist, i, this.trackdata[i] || {style:{}, type:'blankframe'})
 		}
 
 		return {
-			framesdata : framesdata
-			, focusframe : 0 
+			tracklist : tracklist
+			, focus_frame : null 
 		}
 	}
 	, methods : {
@@ -63,7 +63,7 @@ return {
 	}
 	, events : {
 		setFocusFrame : function(frame){
-			this.$set('focusframe', frame)
+			this.$set('focus_frame', frame)
 			this.setFocusTrack()
 
 			console.log(frame)
@@ -71,6 +71,10 @@ return {
 	}
 	, ready : function(){
 		var mSelf = this
+
+
+
+
 
 		var $trackframe = $(this.$els.trackframe)
 		var sortStart
@@ -83,9 +87,9 @@ return {
 			, stop : function(event, ui){
 				sortStop = ui.item.index()
 
-				var framedata = mSelf.framesdata.splice(sortStart, 1)[0]
-				mSelf.framesdata.splice(sortStop, 0, framedata)
-				console.log(mSelf.framesdata)
+				var framedata = mSelf.tracklist.splice(sortStart, 1)[0]
+				mSelf.tracklist.splice(sortStop, 0, framedata)
+				console.log(mSelf.tracklist)
 
 			}
 			, axis: "x"

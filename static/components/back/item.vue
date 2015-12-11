@@ -24,7 +24,7 @@
 </style>
 
 <template>
-<div class="item" @click.stop="selectItem" :class="{focus : focus.item_id == itemdata.item_id}" :style="style">
+<div class="item" @click.stop="selectItem" :class="" :style="style">
 	<div class="handel">
 		<div @click.stop="aspectRatio" class="aspectRatioBtn"></div>
 	</div>
@@ -35,7 +35,7 @@
 <script>
 
 return {
-	props:['focus', 'itemdata']
+	props:['itemdata']
 	, data:function(){
 
 		return {

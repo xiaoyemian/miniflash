@@ -9,21 +9,18 @@
 .view{
 	.pa;left:0px;right:0px;top:0px;bottom:0px;
 	.page{
-		.pa;
-		.bgc(#fff);
-		left:50%;
-		top:50%;
+		.pa; .bgc(#fff); left:50%; top:50%;
 	}
 }
 </style>
 
 
 <template>
-<itemsetting :focus="focus" :itemsettingstyle="itemsettingstyle"></itemsetting>
+<itemsetting :itemsettingstyle="itemsettingstyle"></itemsetting>
 
 <div class="view" @click="clearFocus" :style="viewstyle">
 	<div class="page" :style="pagestyle">
-		<item v-ref:item v-for="(index, itemdata) in pagedata.items" :itemdata="itemdata" :focus="focus"></item>
+		<item v-ref:item v-for="(index, itemdata) in pagedata.items" :itemdata="itemdata"></item>
 	</div>
 </div>
 
@@ -39,7 +36,7 @@ return {
     item : item
 		, itemsetting : itemsetting
   }
-	, props:['focus', 'pagedata', 'pagestyle', 'viewstyle', 'itemsettingstyle']
+	, props:['pagedata', 'pagestyle', 'viewstyle', 'itemsettingstyle']
 	, data : function(){
 		return {
 		}
@@ -50,6 +47,9 @@ return {
 		}
 	}
 	, events : {
+		focusItem : function(item_id, framedata){
+			console.log(item_id, framedata)
+		}
 	}
 	, ready : function(){
 	}
