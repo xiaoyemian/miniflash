@@ -72,14 +72,15 @@
 <script>
 
 return {
-	props : ['framedata']
+	props : ['framedata', 'frame_id']
 	, data : function(){
 		return {
 		}
 	}
 	, methods : {
 		selectFrame : function(){
-			this.$dispatch('setTrackFocusFrame', this.frame_id)
+			this.$dispatch('setTrackFocusFrame', this)
+			console.log(this.frame_id)
 		}
 	}
 }
