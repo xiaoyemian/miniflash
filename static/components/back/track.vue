@@ -108,21 +108,19 @@ return {
 
 		var $trackframe = $(this.$els.trackframe)
 		var index = {}
+		var sortStart
 
 		$trackframe.sortable({
 			start : function(event, ui){
 				mSelf.selectItem()
-				index = {start:ui.item.index()}
-
+				sortStart = ui.item.index()
 			}
 			, stop : function(event, ui){
-				index.stop = ui.item.index()
+				var frame_id = ui.item.index()
 
-				var framedata = mSelf.framesdata.splice(index.start, 1)[0]
-				mSelf.framesdata.splice(index.stop, 0, framedata)
+				mSelf.framesdata.splice(frame_id, 0, mSelf.framesdata.splice(sortStart, 1)[0])
 
-				mSelf.$dispatch('setFocus', mSelf.item_id, index.stop, framedata.style)
-
+				mSelf.$dispatch('setFocus', mSelf.item_id, frame_id, mSelf.framesdata[frame_id])
 			}
 			, axis: "x"
 			, cursor: 'crosshair'
