@@ -79,8 +79,6 @@ return {
 	}
 	, methods : {
 		selectFrame : function(){
-			console.log(this.framedata)
-
 			if(this.framedata.type != 'keyframe')
 				this.$dispatch('addKeyFrame', this)
 

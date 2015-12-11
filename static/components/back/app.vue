@@ -84,10 +84,11 @@ return {
 		, setCurrent : function(item_id, frame_id){
 			frame_id = frame_id|0
 
+			console.log(item_id, frame_id)
 			if(this.focus[item_id] == frame_id)
 				return
 
-			this.$set('focus.'+item_id, frame_id)
+			this.$set('focus["' + item_id + '"]', frame_id)
 		}
 
 		, updataItemStyle : function(opts){

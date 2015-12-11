@@ -75,6 +75,7 @@ return {
 	}
 	, events : {
 		addKeyFrame : function(frame){
+			console.log(111111, frame)
 			var framedata = this.framesdata[this.focus[this.item_id] || 0]
 
 			frame.$set('framedata.type', 'keyframe')
@@ -91,8 +92,6 @@ return {
 		this.$dispatch('setCurrent', this.item_id, frame_id)
 
 
-
-
 		var $trackframe = $(this.$els.trackframe)
 		var index = {}
 		var sortStart
@@ -104,8 +103,9 @@ return {
 			}
 			, stop : function(event, ui){
 				var frame_id = ui.item.index()
-
 				mSelf.framesdata.splice(frame_id, 0, mSelf.framesdata.splice(sortStart, 1)[0])
+
+				console.log(sortStart, mSelf.focus[frame_id])
 
 				mSelf.$dispatch('setFocus', mSelf.item_id, frame_id, mSelf.framesdata[frame_id])
 			}
