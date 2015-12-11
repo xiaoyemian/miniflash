@@ -24,7 +24,7 @@
 </style>
 
 <template>
-<div class="item" @click.stop="setFocusItem" :class="{focus : focus_item && focus_item.itemdata.item_id == itemdata.item_id}" :style="style">
+<div class="item" @click.stop="setFocusItem" :class="{focus : focus_item && focus_item.itemdata.item_id == itemdata.item_id && frametype == 'keyframe'}" :style="style">
 	<div class="handel">
 		<div @click.stop="aspectRatio" class="aspectRatioBtn"></div>
 	</div>
@@ -39,6 +39,7 @@ return {
 	, data:function(){
 		return {
 			framestyle : {}
+			, frametype : ''
 			, style : {} 
 		}
 	}
@@ -89,6 +90,7 @@ return {
 		updateItemByFrame : function(item_id, framedata){
 			if(item_id == this.itemdata.item_id){
 				this.framestyle = framedata.style
+				this.frametype = framedata.type
 				this.formatItemStyle()
 				this.updateItemStyle()
 				
