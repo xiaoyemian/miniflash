@@ -54,7 +54,7 @@ return {
 			this.$refs.view.$emit('focusItem', track.item_id, track.focus_frame)
 		} 
 		, focusTrackByItem : function(item){
-			this.$refs.flash.$emit('focusTrack', item.itemdata.item_id)
+			this.$refs.flash.$emit('focusTrack', item.itemdata.item_id, true)
 		} 
 	}
 	, ready: function(){
