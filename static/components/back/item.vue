@@ -5,18 +5,30 @@
 	background-repeat:no-repeat;
 	&.focus{
 		.handel{
-			.pa;top:-10px;left:-10px;right:-10px;bottom:-10px;
-			border:10px solid #f69;
+			.pa;top:-1px;left:-1px;right:-1px;bottom:-1px;
+			border:1px solid #5CADD6;
 		
 			.aspectRatioBtn{
-				.pa;left:50%;top:0%;.ml(-10px);.w(20px);.h(20px);.bgc(red);
-				.cursor;
+				.opacity(60);
+				.pa;left:50%;top:50%;.ml(-4px);.mt(-4px);.w(7px);.h(7px);.bgc(#fff);.cursor;
+				border:1px solid #222;
+				.border-r(8px);
+
+				&:before, &:after{ content:'';.pa;z-index:1; }
+				&:before{
+					top:0px;left:0px;.w(7px);.h(3px);
+					border-bottom:1px solid #222;
+				}
+				&:after{
+					top:0px;left:0px;.w(3px);.h(7px);
+					border-right:1px solid #222;
+				}
 			}
 		}
 		.ui-resizable{
 			&-se{ bottom:-10px;right:-10px;.w(10px);.h(10px); }
-			&-e{ top:-10px;bottom:-10px;right:-10px;.w(10px); }
-			&-s{ left:-10px;right:-10px;bottom:-10px;.h(10px); }
+			&-e{ top:-0px;bottom:-0px;right:-10px;.w(10px); }
+			&-s{ left:-0px;right:-0px;bottom:-10px;.h(10px); }
 		}
 
 	}
@@ -24,7 +36,7 @@
 </style>
 
 <template>
-<div class="item" @click.stop="setFocusItem" :class="{focus : focus_item && focus_item.itemdata.item_id == itemdata.item_id && frametype == 'keyframe'}" :style="itemstyle">
+<div class="item" @click.stop="setFocusItem" :class="{focus : focus_item && focus_item.itemdata.item_id == itemdata.item_id, keyframe : frametype == 'keyframe'}" :style="itemstyle">
 	<div class="handel">
 		<div @click.stop="aspectRatio" class="aspectRatioBtn"></div>
 	</div>
