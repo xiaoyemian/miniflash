@@ -36,7 +36,7 @@
 </style>
 
 <template>
-<div class="item" @click.stop="setFocusItem" :class="{focus : focus_item && focus_item.itemdata.item_id == itemdata.item_id, keyframe : framedata.type == 'keyframe', blankframe : framedata.type == 'blankframe'}" :style="itemstyle">
+<div class="item" @click.stop="setFocusItem" :class="{focus : focus_item && focus_item.itemdata.item_id == itemdata.item_id, keyframe : frame && frame.framedata.type == 'keyframe', blankframe :frame && frame.framedata.type == 'blankframe'}" :style="itemstyle">
 	<div class="handel">
 		<div @click.stop="aspectRatio" class="aspectRatioBtn"></div>
 	</div>
@@ -50,7 +50,7 @@ return {
 	props:['focus_item', 'itemdata', 'print', 'stylekey', 'backgroundkey']
 	, data:function(){
 		return {
-			framedata : {}
+			frame : null
 			, itemstyle : {} 
 		}
 	}
@@ -59,11 +59,11 @@ return {
 			this.$dispatch('setFocusItem', this)
 		}
 		, aspectRatio : function(){
-			var style = this.framedata.style
+			var style = this.frame.framedata.style
 			style.height = style.width * this.itemdata.scale
 		}
 		, formatItemStyle : function(){
-			var style = this.framedata.style
+			var style = this.frame.framedata.style
       if(style['padding-top']){
 
 				style.height = this.print.width * style['padding-top']/100 
@@ -78,14 +78,14 @@ return {
 				style[i] = style[i]|0
     }
 		, resetItemStyle : function(opts){
-			var style = this.framedata.style
+			var style = this.frame.framedata.style
 			for(var i in opts)
 				style[i] = ((opts[i]|0) / this.print.scale)|0
 
 			this.updateItemStyle()
 		}
 		, updateItemStyle : function(){
-			var style = this.framedata.style
+			var style = this.frame.framedata.style
 			for(var i in this.stylekey)
 				this.$set('itemstyle["'+i+'"]', (style[i]|0) * this.print.scale + 'px')
 
@@ -93,9 +93,9 @@ return {
 		}
 	}
 	, events : {
-		updateItemByFrame : function(item_id, framedata){
+		updateItemByFrame : function(item_id, frame){
 			if(item_id == this.itemdata.item_id){
-				this.framedata = framedata
+				this.frame = frame
 				this.formatItemStyle()
 				this.updateItemStyle()
 				this.setFocusItem()
