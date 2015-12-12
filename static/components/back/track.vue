@@ -44,11 +44,11 @@ return {
 	}
 	, props : ['focus_track', 'item_id', 'trackdata']
 	, data : function(){
-		var tracklength = 600
-		var framestep = 100
+		var tracklength = 10000
+		var framestep = 200
 		var tracklist = []
 
-		for(var i = 0; i < tracklength/framestep; i++){
+		for(var i = 0; i <= tracklength/framestep; i++){
 			tracklist.push(this.trackdata[i] || {style:{}, type:'blankframe'})
 		}
 
@@ -67,12 +67,6 @@ return {
 			this.$set('focus_frame', frame)
 			this.setFocusTrack(true)
 		}
-		, updateTrackByItem : function(item_id){
-			if(item_id == this.item_id){
-				console.log('updateTrackByItem')
-				this.setFocusTrack(false)
-			}
-		}
 	}
 	, ready : function(){
 		var mSelf = this
@@ -90,7 +84,7 @@ return {
 
 				var framedata = mSelf.tracklist.splice(sortStart, 1)[0]
 				mSelf.tracklist.splice(sortStop, 0, framedata)
-				console.log(mSelf.tracklist)
+				//console.log(mSelf.tracklist)
 
 			}
 			, axis: "x"
