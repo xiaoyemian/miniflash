@@ -60,7 +60,7 @@ return {
       this.$refs.flash.$broadcast('updateFrameByItem', item)
 		} 
 		, loadTime : function(){
-      this.$refs.flash.setTime()
+      this.$refs.flash.loadTime()
 		}
 	}
 	, ready: function(){

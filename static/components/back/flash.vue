@@ -72,7 +72,7 @@ return {
 		}
 	}
 	, methods : {
-		setTime : function(time){
+		loadTime : function(time){
 			if(time > this.timedata.length/this.timedata.step)
 				return;
 
@@ -92,7 +92,7 @@ return {
 		}
 	}
 	, ready : function(){
-		this.setTime(0)
+		this.loadTime(0)
 
 		var mSelf = this
 		var $timecontrol = $(this.$els.timecontrol)
@@ -102,11 +102,11 @@ return {
 			}
 			, drag : function(event, ui){
 				var time = ((ui.position.left - 140)/mSelf.timedata.framewidth)|0
-				mSelf.setTime(time)
+				mSelf.loadTime(time)
 			}
 			, stop : function(event, ui){
 				var time = ((ui.position.left - 140)/mSelf.timedata.framewidth)|0
-				mSelf.setTime(time)
+				mSelf.loadTime(time)
 			}
 			, cursor: "move"
 			, containment : "parent"
