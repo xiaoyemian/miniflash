@@ -37,11 +37,9 @@
 return {
 	props:['focus_item', 'itemdata', 'printsize', 'printscale', 'stylekey', 'backgroundkey']
 	, data:function(){
-		console.log(this.backgroundkey)
-
 		return {
-			framestyle : {}
-			, frametype : ''
+			frametype : ''
+			, framestyle : {}
 			, itemstyle : {} 
 		}
 	}
