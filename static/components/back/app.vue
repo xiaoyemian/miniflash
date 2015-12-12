@@ -18,9 +18,9 @@ body{
 <div class="app">
 	<div class="headtop"></div>
 
-	<view v-ref:view :pagedata="pagedata"></view>
+	<view v-ref:view :itemsdata="pagedata.items"></view>
 
-	<flash v-ref:flash :flashdata="pagedata.tracks"></flash>
+	<flash v-ref:flash :tracksdata="pagedata.tracks"></flash>
 
 </div>
 </template>

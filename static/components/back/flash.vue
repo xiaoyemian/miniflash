@@ -21,7 +21,7 @@
 <template>
 <div class="flash" :style="flashstyle">
 	<div class="tracks">
-		<track v-ref:track v-for="trackdata in flashdata" :trackdata="trackdata" :item_id="$key" :focus_track="focus_track"></track>
+		<track v-ref:track v-for="trackdata in tracksdata" :trackdata="trackdata" :item_id="$key" :focus_track="focus_track"></track>
 	</div>
 </div>
 
@@ -35,7 +35,7 @@ return {
   components : {
 		track : track
   }
-	, props:['flashdata', 'flashstyle']
+	, props:['tracksdata', 'flashstyle']
 	, data : function(){
 
 		return {

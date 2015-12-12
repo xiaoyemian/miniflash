@@ -20,7 +20,7 @@
 
 <div class="view" @click="clearFocus">
 	<div class="page" :style="pagestyle">
-		<item v-ref:item v-for="itemdata in pagedata.items" :itemdata="itemdata" :index="$index" :focus_item="focus_item" :print="print" :stylekey="stylekey" :backgroundkey="backgroundkey"></item>
+		<item v-ref:item v-for="itemdata in itemsdata" :itemdata="itemdata" :index="$index" :focus_item="focus_item" :print="print" :stylekey="stylekey" :backgroundkey="backgroundkey"></item>
 	</div>
 </div>
 
@@ -36,7 +36,7 @@ return {
     item : item
 		, itemsetting : itemsetting
   }
-	, props:['pagedata']
+	, props:['itemsdata']
 	, data : function(){
 
 		return {
