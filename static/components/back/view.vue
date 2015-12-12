@@ -80,6 +80,7 @@ return {
 	}
 	, events : {
 		setFocusItem : function(item, doFocusFrame){
+			console.log('doFocusFrame', doFocusFrame)
 			this.$set('focus_item', item)
 
 			if(doFocusFrame)

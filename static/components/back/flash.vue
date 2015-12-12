@@ -79,6 +79,7 @@ return {
 	}
 	, events : {
 		setFocusTrack : function(track, doFocusItem){
+			console.log('doFocusItem', doFocusItem)
 			this.$set('focus_track', track)
 
 			if(doFocusItem)

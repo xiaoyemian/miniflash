@@ -121,7 +121,6 @@ return {
 	, events : {
 		updateItemByFrame : function(track){
 			if(track.item_id == this.itemdata.item_id){
-				console.log('updateItemByFrame')
 				this.frame = track.focus_frame
 				this.formatItemStyle()
 				this.updateItemStyle()

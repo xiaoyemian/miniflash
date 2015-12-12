@@ -52,12 +52,12 @@ return {
 	, events : {
 		focusItemByFrame : function(track){
 			console.log('focusItemByFrame')
+			console.log(this)
       this.$refs.view.$broadcast('updateItemByFrame', track)
 		} 
 		, focusFrameByItem : function(item_id){
 			console.log('focusFrameByItem')
 			this.$refs.flash.$refs.track[item_id].setFocusTrack(false)
-
 		} 
 	}
 	, ready: function(){
