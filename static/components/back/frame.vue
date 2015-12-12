@@ -14,7 +14,6 @@
 	&.focus{
 		.handel{
 			border:1px solid #f69;
-			.bgc(#ccc);
 		}
 	}
 
@@ -44,7 +43,7 @@
 </style>
 
 <template>
-<div class="frame" :class="{focus:focus_frame && focus_frame.index == index, keyframe : framedata.type == 'keyframe', blankframe : framedata.type == 'blankframe'}" @click.stop="setFocusFrame">
+<div class="frame" :class="[framedata.type, focus_frame && focus_frame.index == index ? 'focus' : '']" @click.stop="setFocusFrame">
 	<div class="handel"></div>
 </div>
 </template>

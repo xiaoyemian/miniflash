@@ -15,15 +15,19 @@ for(var no in pages){
 
 		for(var i in items){
 			var item = items[i]
+			var style = {}
+			for(var j in item.style){
+				style[j] = item.style[j]
+			}
 
 			pagedata.tracks[item.item_id] = {
 				0 : {
-					style : item.style 
+					style : style 
 					, type : 'keyframe'
 				}
 				, 3 : {
-					style : item.style 
-					, type : 'keyframe'
+					style : style 
+					, type : 'animateframe'
 				}
 			}
 
