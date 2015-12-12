@@ -10,30 +10,25 @@ for(var no in pages){
 	
 	if(Array.isArray(pagedata.items)){
 		var items = pagedata.items
-//		pagedata.items = {}
 		pagedata.tracks = {}
 
 		for(var i in items){
 			var item = items[i]
-			var style = {}
-			for(var j in item.style){
-				style[j] = item.style[j]
-			}
+			pagedata.tracks[item.item_id] = {} 
 
-			pagedata.tracks[item.item_id] = {
-				0 : {
+			var key = [0,5,9, 10]
+			for(var k in key){
+				var style = {}
+
+				for(var j in item.style){
+					style[j] = item.style[j]
+				}
+
+				pagedata.tracks[item.item_id][key[k]+''] = {
 					style : style 
 					, type : 'keyframe'
 				}
-				, 3 : {
-					style : style 
-					, type : 'animateframe'
-				}
 			}
-
-			item.style = {} 
-
-//			pagedata.items[item.item_id] = item
 		}
 	}
 }
