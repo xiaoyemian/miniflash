@@ -14,9 +14,9 @@
 			}
 		}
 		.ui-resizable{
-			&-se{ bottom:-0px;right:-0px;.w(10px);.h(10px); }
-			&-e{ top:0px;bottom:-0px;right:-0px;.w(10px); }
-			&-s{ left:0px;right:-0px;bottom:-0px;.h(10px); }
+			&-se{ bottom:-10px;right:-10px;.w(10px);.h(10px); }
+			&-e{ top:-10px;bottom:-10px;right:-10px;.w(10px); }
+			&-s{ left:-10px;right:-10px;bottom:-10px;.h(10px); }
 		}
 
 	}
