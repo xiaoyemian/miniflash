@@ -36,7 +36,7 @@
 </style>
 
 <template>
-<div class="item" @click.stop="setFocusItem" :class="{focus : focus_item && focus_item.itemdata.item_id == itemdata.item_id, keyframe : frametype == 'keyframe'}" :style="itemstyle">
+<div class="item" @click.stop="setFocusItem" :class="{focus : focus_item && focus_item.itemdata.item_id == itemdata.item_id, keyframe : framedata.type == 'keyframe', blankframe : framedata.type == 'blankframe'}" :style="itemstyle">
 	<div class="handel">
 		<div @click.stop="aspectRatio" class="aspectRatioBtn"></div>
 	</div>
@@ -50,8 +50,7 @@ return {
 	props:['focus_item', 'itemdata', 'print', 'stylekey', 'backgroundkey']
 	, data:function(){
 		return {
-			frametype : ''
-			, framestyle : {}
+			framedata : {}
 			, itemstyle : {} 
 		}
 	}
@@ -60,46 +59,50 @@ return {
 			this.$dispatch('setFocusItem', this)
 		}
 		, aspectRatio : function(){
-			this.framestyle.height = this.framestyle.width * this.itemdata.scale
+			var style = this.framedata.style
+			style.height = style.width * this.itemdata.scale
 			this.updateItemStyle()
 		}
 		, formatItemStyle : function(){
-      if(this.framestyle['padding-top']){
+			var style = this.framedata.style
+      if(style['padding-top']){
 
-				this.framestyle.height = this.print.width * this.framestyle['padding-top']/100 
-        delete this.framestyle['padding-top']
+				style.height = this.print.width * style['padding-top']/100 
+        delete style['padding-top']
 
-        this.framestyle.width *= this.print.width/100
-        this.framestyle.top *= this.print.height/100
-        this.framestyle.left *= this.print.width/100
+        style.width *= this.print.width/100
+        style.top *= this.print.height/100
+        style.left *= this.print.width/100
       }
 
-			for(var i in this.framestyle)
-				this.framestyle[i] = this.framestyle[i]|0
+			for(var i in style)
+				style[i] = style[i]|0
 
+			this.updateItemStyle()
     }
 
 		, resetItemStyle : function(style){
+			var style = this.framedata.style
 			for(var i in style)
-				this.framestyle[i] = ((style[i]|0) / this.print.scale)|0
+				style[i] = ((style[i]|0) / this.print.scale)|0
 
+			this.updateItemStyle()
 		}
 
 		, updateItemStyle : function(){
+			var style = this.framedata.style
 			for(var i in this.stylekey)
-				this.$set('itemstyle["'+i+'"]', (this.framestyle[i]|0) * this.print.scale + 'px')
+				this.$set('itemstyle["'+i+'"]', (style[i]|0) * this.print.scale + 'px')
 
 			this.$set('itemstyle["background-image"]', 'url("' + this.itemdata.background.image + '")')
+
 		}
 	}
 	, events : {
 		updateItemByFrame : function(item_id, framedata){
 			if(item_id == this.itemdata.item_id){
-				this.framestyle = framedata.style
-				this.frametype = framedata.type
+				this.framedata = framedata
 				this.formatItemStyle()
-				this.updateItemStyle()
-				
 				this.setFocusItem()
 			}
 		}
