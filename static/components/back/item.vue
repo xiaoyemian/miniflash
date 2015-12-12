@@ -98,20 +98,22 @@ return {
         style.left *= this.print.width/100
       }
 
-			for(var i in style)
-				style[i] = style[i]|0
     }
 		, resetItemStyle : function(opts){
 			var style = this.frame.framedata.style
 			for(var i in opts)
-				style[i] = ((opts[i]|0) / this.print.scale)|0
+				style[i] = (opts[i]) / this.print.scale
 
 			this.updateItemStyle()
 		}
 		, updateItemStyle : function(){
 			var style = this.frame.framedata.style
+
+			for(var i in style)
+				style[i] = style[i]|0
+
 			for(var i in this.stylekey)
-				this.$set('itemstyle["'+i+'"]', (style[i]|0) * this.print.scale + 'px')
+				this.$set('itemstyle["'+i+'"]', (style[i]||0) * this.print.scale + 'px')
 
 			this.$set('itemstyle["background-image"]', 'url("' + this.itemdata.background.image + '")')
 		}
