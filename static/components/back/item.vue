@@ -48,12 +48,13 @@ return {
 			this.$dispatch('setFocusItem', this)
 		}
 		, aspectRatio : function(){
-			this.$set('framestyle["height"]', this.framestyle.width * this.itemdata.scale)
+			this.framestyle.height = this.framestyle.width * this.itemdata.scale
 			this.updateItemStyle()
 		}
 		, formatItemStyle : function(){
       if(this.framestyle['padding-top']){
-				this.$set('framestyle.height', this.print.width * this.framestyle['padding-top']/100)
+
+				this.framestyle.height = this.print.width * this.framestyle['padding-top']/100 
         delete this.framestyle['padding-top']
 
         this.framestyle.width *= this.print.width/100
@@ -62,12 +63,12 @@ return {
       }
 
 			for(var i in this.framestyle)
-				this.$set('framestyle["'+i+'"]', this.framestyle[i]|0)
+				this.framestyle[i] = this.framestyle[i]|0
     }
 
 		, resetItemStyle : function(style){
 			for(var i in style)
-				this.$set('framestyle["'+i+'"]', ((style[i]|0) / this.print.scale)|0)
+				this.framestyle[i] = ((style[i]|0) / this.print.scale)|0
 		}
 
 		, updateItemStyle : function(){
