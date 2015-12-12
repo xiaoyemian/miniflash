@@ -9,41 +9,48 @@
 			border:1px solid #5CADD6;
 		
 			.aspectRatioBtn{
-				.opacity(60);
-				.pa;left:50%;top:50%;.ml(-4px);.mt(-4px);.w(7px);.h(7px);.bgc(#fff);.cursor;
+				.pa;left:50%;top:50%;.ml(-5px);.mt(-5px);.w(9px);.h(9px);.bgc(#fff);.cursor;
 				border:1px solid #222;
-				.border-r(4px);
+				.border-r(8px);
+				.opacity(80);
 
 				&:before, &:after{ content:'';.pa;z-index:1; }
 				&:before{
-					top:0px;left:0px;.w(7px);.h(3px);
+					top:0px;left:0px;.w(9px);.h(4px);
 					border-bottom:1px solid #222;
 				}
 				&:after{
-					top:0px;left:0px;.w(3px);.h(7px);
+					top:0px;left:0px;.w(4px);.h(9px);
 					border-right:1px solid #222;
 				}
 			}
 		}
 		.ui-resizable{
 			&-se, &-e, &-s{
-				.opacity(60);
+				.opacity(80);
 			}
 			&-se{ 
-				bottom:-5px;right:-5px;.w(7px);.h(7px);border:1px solid #222;.bgc(#fff);
-				.border-r(4px);
+				bottom:-6px;right:-6px;.w(9px);.h(9px);border:1px solid #222;.bgc(#fff);
+				.border-r(8px);
 			}
 			&-e, &-s{
 				&:before{
 					content:'';.pa;z-index:1;
 					border:1px solid #222;.bgc(#fff);
-					.pa;.w(6px);.h(6px);
-					top:50%;left:50%;.ml(-3px);.mt(-3px);
-					.border-r(2px);
+					.pa;.w(8px);.h(8px);
+					.border-r(3px);
 				}
 			}
-			&-e{ right:-4px;.w(8px);.h(100%);}
-			&-s{ bottom:-4px;.h(8px);.w(100%);}
+			&-e{ right:-6px;.w(10px);.h(100%);
+				&:before{
+					top:50%;.mt(-5px);
+				}
+			}
+			&-s{ bottom:-6px;.h(10px);.w(100%);
+				&:before{
+					left:50%;.ml(-5px);
+				}
+			}
 		}
 
 	}
@@ -51,7 +58,7 @@
 </style>
 
 <template>
-<div class="item" @click.stop="setFocusItem(true)" :class="{focus : focus_item && focus_item.itemdata.item_id == itemdata.item_id, keyframe : frame && frame.framedata.type == 'keyframe', blankframe :frame && frame.framedata.type == 'blankframe'}" :style="itemstyle">
+<div class="item" @click.stop="setFocusItem(true)" :class="[frame && frame.framedata.type, focus_item && focus_item.itemdata.item_id == itemdata.item_id ? 'focus' : '']" :style="itemstyle">
 	<div class="handel">
 		<div @click.stop="aspectRatio" class="aspectRatioBtn"></div>
 	</div>
