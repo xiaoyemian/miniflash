@@ -24,7 +24,7 @@
 </style>
 
 <template>
-<div class="item" @click.stop="setFocusItem" :class="{focus : focus_item && focus_item.itemdata.item_id == itemdata.item_id && frametype == 'keyframe'}" :style="style">
+<div class="item" @click.stop="setFocusItem" :class="{focus : focus_item && focus_item.itemdata.item_id == itemdata.item_id && frametype == 'keyframe'}" :style="itemstyle">
 	<div class="handel">
 		<div @click.stop="aspectRatio" class="aspectRatioBtn"></div>
 	</div>
@@ -35,13 +35,14 @@
 <script>
 
 return {
-	props:['focus_item', 'itemdata', 'printsize', 'printscale']
+	props:['focus_item', 'itemdata', 'printsize', 'printscale', 'stylekey', 'backgroundkey']
 	, data:function(){
+		console.log(this.backgroundkey)
 
 		return {
 			framestyle : {}
 			, frametype : ''
-			, style : {} 
+			, itemstyle : {} 
 		}
 	}
 	, methods : {
@@ -49,45 +50,33 @@ return {
 			this.$dispatch('setFocusItem', this)
 		}
 		, aspectRatio : function(){
-			this.resetItemStyle({
-				height:this.framestyle.width * this.itemdata.scale
-			})
+			this.$set('framestyle["height"]', this.framestyle.width * this.itemdata.scale)
 			this.updateItemStyle()
 		}
 		, formatItemStyle : function(){
-			var style = this.framestyle
-      if(style['padding-top']){
-        var printsize = this.printsize
+      if(this.framestyle['padding-top']){
+				this.$set('framestyle.height', this.printsize.width * this.framestyle['padding-top']/100)
 
-				this.$set('framestyle.height', printsize.width * style['padding-top']/100)
+        this.framestyle.width *= this.printsize.width/100
+        this.framestyle.top *= this.printsize.height/100
+        this.framestyle.left *= this.printsize.width/100
 
-        style.width = printsize.width * style['width']/100
-        style.top = printsize.height * style['top']/100
-        style.left = printsize.width * style['left']/100
-
-        delete style['padding-top']
+        delete this.framestyle['padding-top']
       }
-
-			console.log(style)
+			console.log(this.framestyle)
     }
 
 		, resetItemStyle : function(style){
 			for(var i in style)
-				this.$set('framestyle["'+i+'"]', style[i] / this.printscale)
+				this.$set('framestyle["'+i+'"]', (style[i]|0) / this.printscale)
 		}
 
 		, updateItemStyle : function(){
-			console.log(11111, this.printscale)
-
-			var style = this.framestyle
-			var styleKey = ['width', 'height', 'top', 'left']
-			for(var i in styleKey){
-				var key = styleKey[i]
-				this.$set('style["'+key+'"]', (style[key] ? style[key] : 0) * this.printscale + 'px')
+			for(var i in this.stylekey){
+				this.$set('itemstyle["'+i+'"]', (this.framestyle[i]|0) * this.printscale + 'px')
 			}
 
-			var background = this.itemdata.background
-			this.$set('style["background-image"]', 'url("' + background.image + '")')
+			this.$set('itemstyle["background-image"]', 'url("' + this.itemdata.background.image + '")')
 		}
 	}
 	, events : {
@@ -134,7 +123,6 @@ return {
 			}
 			, ghost: true
 		})
-
 	}
 }
 </script>

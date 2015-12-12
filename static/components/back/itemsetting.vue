@@ -33,11 +33,11 @@
 <div class="itemsetting" v-if="focus_item">
 
 	<div class="itemStyle">
-		<div class="inputBox" v-for="(key, value) in label.style"><label for="style|{{key}}">{{value}}</label><input type="number" @keyup="updateItem" id="style|{{key}}" placeholder="" value="{{focus_item.framestyle[key]}}"/>px</div>
+		<div class="inputBox" v-for="(key, value) in stylekey"><label for="style|{{key}}">{{value}}:</label><input type="number" @keyup="updateItem" id="style|{{key}}" placeholder="" value="{{focus_item.framestyle[key]}}"/>px</div>
 	</div>
 
 	<div class="itemType" v-if="focus_item.itemdata.background">
-		<div class="inputBox" v-for="(key, value) in label.background"><label for="background|{{key}}">{{value}}</label><input type="text" id="background|{{key}}" placeholder="" value="{{focus_item.itemdata.background[key]}}"/></div>
+		<div class="inputBox" v-for="(key, value) in backgroundkey"><label for="background|{{key}}">{{value}}:</label><input type="text" id="background|{{key}}" placeholder="" value="{{focus_item.itemdata.background[key]}}"/></div>
 
 	</div>
 </div>
@@ -46,20 +46,9 @@
 <script>
 
 return {
-	props : ['focus_item']
+	props : ['focus_item', 'stylekey', 'backgroundkey']
 	, data : function(){
 		return {
-			label : {
-				style : {
-					width : '宽度:'
-					, height : '高度:'
-					, top : 'top:'
-					, left : 'left:'
-				}
-				, background : {
-					image : '背景图片:'
-				}
-			}
 		}
 	}
 	, methods : {

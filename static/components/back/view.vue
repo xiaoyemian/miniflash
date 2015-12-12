@@ -16,11 +16,11 @@
 
 
 <template>
-<itemsetting :focus_item="focus_item"></itemsetting>
+<itemsetting :focus_item="focus_item" :stylekey="stylekey" :backgroundkey="backgroundkey"></itemsetting>
 
 <div class="view" @click="clearFocus">
 	<div class="page" :style="pagestyle">
-		<item v-ref:item v-for="itemdata in pagedata.items" :itemdata="itemdata" :index="$index" :focus_item="focus_item" :printsize="printsize" :printscale="printscale"></item>
+		<item v-ref:item v-for="itemdata in pagedata.items" :itemdata="itemdata" :index="$index" :focus_item="focus_item" :printsize="printsize" :printscale="printscale" :stylekey="stylekey" :backgroundkey="backgroundkey"></item>
 	</div>
 </div>
 
@@ -44,6 +44,15 @@ return {
 			, printscale : 1
 			, printsize : {}	
 			, pagestyle : {}
+			, stylekey : {
+				width : '宽度'
+				, height : '高度'
+				, top : 'top'
+				, left : 'left'
+			}
+			, backgroundkey : {
+				image : '背景图片'
+			}
 		}
 	}
 	, methods : {
