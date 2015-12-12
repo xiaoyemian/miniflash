@@ -12,11 +12,20 @@
 		.pa; .bgc(#fff); left:50%; top:50%;
 	}
 }
+
+.viewcontrol{
+	.pa;z-index:100;top:50%;right:0px;
+	.bgc(white);
+}
 </style>
 
 
 <template>
 <itemsetting :focus_item="focus_item" :stylekey="stylekey" :backgroundkey="backgroundkey"></itemsetting>
+
+<div class="viewcontrol">
+	<div @click="addItem">addItem</div>
+</div>
 
 <div class="view" @click="clearFocus">
 	<div class="page" :style="pagestyle">
@@ -30,6 +39,16 @@
 <script>
 var item = require('back/item.vue')
 var itemsetting = require('back/itemsetting.vue')
+
+var stylekey = {
+	width : '宽度'
+	, height : '高度'
+	, top : 'top'
+	, left : 'left'
+}
+var backgroundkey = {
+	image : '背景图片'
+}
 
 return {
   components : {
@@ -47,15 +66,8 @@ return {
 				, scale : 0
 			}
 			, pagestyle : {}
-			, stylekey : {
-				width : '宽度'
-				, height : '高度'
-				, top : 'top'
-				, left : 'left'
-			}
-			, backgroundkey : {
-				image : '背景图片'
-			}
+			, stylekey : stylekey 
+			, backgroundkey : backgroundkey 
 		}
 	}
 	, methods : {
@@ -66,7 +78,6 @@ return {
 			for(var i in print){
 				this.$set('print["'+i+'"]', print[i]||0)
 			}
-
 			this.updatePage()
 		}
 		, updatePage : function(){
@@ -77,6 +88,20 @@ return {
 			this.$set('pagestyle["margin-left"]', print.width * print.scale/-2 + 'px')
 			this.$set('pagestyle["margin-top"]', print.height * print.scale/-2 + 'px')
     }
+		, addItem : function(){
+			console.log(this.itemsdata)
+			this.itemsdata.push({
+				style:{
+					width:100
+					, height:100
+				}
+			})
+		}
+	}
+	, watch : {
+		itemsdata : function(){
+			console.log(arguments)
+		}
 	}
 	, events : {
 		setFocusItem : function(item, doFocusFrame){

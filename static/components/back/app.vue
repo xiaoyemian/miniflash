@@ -17,11 +17,8 @@ body{
 <template>
 <div class="app">
 	<div class="headtop"></div>
-
 	<view v-ref:view :itemsdata="pagedata.items"></view>
-
 	<flash v-ref:flash :tracksdata="pagedata.tracks"></flash>
-
 </div>
 </template>
 

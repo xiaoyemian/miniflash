@@ -85,7 +85,12 @@ return {
 			, cursor: "move"
 			, placeholder: 'ui-state-highlight'
 		})
+
 		$trackframe.disableSelection()
+
+
+
+		console.log(this)
 	}
 }
 </script>
