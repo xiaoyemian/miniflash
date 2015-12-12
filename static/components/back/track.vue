@@ -38,11 +38,11 @@ return {
   components : {
     frameitem : frame
 	}
-	, props : ['flashdata', 'focus_track', 'item_id', 'trackdata']
+	, props : ['timedata', 'focus_track', 'item_id', 'trackdata']
 	, data : function(){
 		var tracklist = []
 
-		for(var i = 0; i <= this.flashdata.length/this.flashdata.step; i++){
+		for(var i = 0; i <= this.timedata.length/this.timedata.step; i++){
 			tracklist.push(this.trackdata[i] || {style:{}, type:'blankframe'})
 		}
 

@@ -44,7 +44,7 @@
 	</div>
 
 	<div class="tracks">
-		<track v-ref:track v-for="itemdata in itemsdata" :index="$index" :trackdata="itemdata.tracks" :item_id="itemdata.item_id" :focus_track="focus_track" :flashdata="flashdata"></track>
+		<track v-ref:track v-for="itemdata in itemsdata" :index="$index" :trackdata="itemdata.tracks" :item_id="itemdata.item_id" :focus_track="focus_track" :timedata="timedata"></track>
 	</div>
 </div>
 
@@ -63,20 +63,20 @@ return {
 
 		return {
 			focus_track : null
-			, flashdata : {
+			, timedata : {
 				length : 10000
 				, step : 1000
 				, framewidth : 13
+				, time : 0
 			}
-			, time : 0
 		}
 	}
 	, methods : {
 		setTime : function(time){
 			if(typeof time !== 'undefined')
-				this.time = time
+				this.timedata.time = time
 
-      this.$broadcast('setTime', this.time)
+      this.$broadcast('setTime', this.timedata.time)
 		}
 	}
 	, events : {
@@ -98,17 +98,17 @@ return {
 			start : function(event, ui){
 			}
 			, drag : function(event, ui){
-				var time = ((ui.position.left - 140)/mSelf.flashdata.framewidth)|0
+				var time = ((ui.position.left - 140)/mSelf.timedata.framewidth)|0
 				mSelf.setTime(time)
 			}
 			, stop : function(event, ui){
-				var time = ((ui.position.left - 140)/mSelf.flashdata.framewidth)|0
+				var time = ((ui.position.left - 140)/mSelf.timedata.framewidth)|0
 				mSelf.setTime(time)
 			}
 			, cursor: "move"
 			, containment : "parent"
 			, scroll : false
-			, grid: [ mSelf.flashdata.framewidth, 0 ]
+			, grid: [ mSelf.timedata.framewidth, 0 ]
 		})
 	
 	}
