@@ -6,7 +6,7 @@ body{
 }
 .app{
 	.pa;
-	bottom:0px;left:0px;top:26px;right:0px;
+	bottom:20px;left:0px;top:26px;right:0px;
 }
 .headtop{
 	z-index:998;

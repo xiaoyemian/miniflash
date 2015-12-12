@@ -4,8 +4,6 @@
 	.pa;left:0px;right:0px;bottom:0px;
 	.bgc(#333);
 
-	.pb(20px);
-
 	.tracks{
 		overflow:auto;
 		.h(100%);
@@ -14,9 +12,7 @@
 	.ui-resizable{
 		&-s{ left:0px;right:-0px;bottom:-6px;.h(6px);.bgc(#222);}
 	}
-
 }
-
 </style>
 
 
