@@ -61,6 +61,8 @@ return {
 		, aspectRatio : function(){
 			var style = this.frame.framedata.style
 			style.height = style.width * this.itemdata.scale
+
+			this.updateItemStyle()
 		}
 		, formatItemStyle : function(){
 			var style = this.frame.framedata.style
