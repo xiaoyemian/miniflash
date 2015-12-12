@@ -61,7 +61,6 @@ return {
 		, aspectRatio : function(){
 			var style = this.framedata.style
 			style.height = style.width * this.itemdata.scale
-			this.updateItemStyle()
 		}
 		, formatItemStyle : function(){
 			var style = this.framedata.style
@@ -77,25 +76,20 @@ return {
 
 			for(var i in style)
 				style[i] = style[i]|0
-
-			this.updateItemStyle()
     }
-
-		, resetItemStyle : function(style){
+		, resetItemStyle : function(opts){
 			var style = this.framedata.style
-			for(var i in style)
-				style[i] = ((style[i]|0) / this.print.scale)|0
+			for(var i in opts)
+				style[i] = ((opts[i]|0) / this.print.scale)|0
 
 			this.updateItemStyle()
 		}
-
 		, updateItemStyle : function(){
 			var style = this.framedata.style
 			for(var i in this.stylekey)
 				this.$set('itemstyle["'+i+'"]', (style[i]|0) * this.print.scale + 'px')
 
 			this.$set('itemstyle["background-image"]', 'url("' + this.itemdata.background.image + '")')
-
 		}
 	}
 	, events : {
@@ -103,6 +97,7 @@ return {
 			if(item_id == this.itemdata.item_id){
 				this.framedata = framedata
 				this.formatItemStyle()
+				this.updateItemStyle()
 				this.setFocusItem()
 			}
 		}
