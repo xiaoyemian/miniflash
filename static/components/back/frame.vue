@@ -54,6 +54,7 @@
 return {
 	props : ['focus_frame', 'framedata', 'time']
 	, data : function(){
+		console.log(this.time, this.framedata)
 		return {
 		}
 	}

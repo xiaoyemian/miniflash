@@ -91,10 +91,23 @@ return {
 		, addItem : function(){
 			console.log(this.itemsdata)
 			this.itemsdata.push({
-				style:{
-					width:100
-					, height:100
+				item_id : '111'
+				, background : {
 				}
+				, style : {
+					width : 100
+					, height : 100
+				}
+				, tracks : {
+					0 : {
+						style : {}
+						, type : 'animateframe'
+					}
+				}
+			})
+
+			this.$nextTick(function () {
+				this.$dispatch('focusByTime')
 			})
 		}
 	}

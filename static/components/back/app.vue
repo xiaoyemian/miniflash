@@ -55,6 +55,9 @@ return {
 			console.log('focusTrackByItem')
       this.$refs.flash.$broadcast('updateFrameByItem', item)
 		} 
+		, focusByTime : function(){
+      this.$refs.flash.setTime()
+		}
 	}
 	, ready: function(){
 

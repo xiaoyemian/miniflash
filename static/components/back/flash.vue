@@ -73,8 +73,10 @@ return {
 	}
 	, methods : {
 		setTime : function(time){
-			this.$set('time', time)
-      this.$broadcast('setTime', time)
+			if(typeof time !== 'undefined')
+				this.$set('time', time)
+
+      this.$broadcast('setTime', this.time)
 		}
 	}
 	, events : {
@@ -84,9 +86,6 @@ return {
 
 			if(doFocusItem)
 				this.$dispatch('focusItemByTrack', this.focus_track)
-		}
-		, setTime : function(time){
-			this.setTime(time)
 		}
 	}
 	, ready : function(){

@@ -93,8 +93,6 @@ return {
 
 		$trackframe.disableSelection()
 
-
-
 		console.log(this)
 	}
 }
