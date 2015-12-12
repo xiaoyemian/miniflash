@@ -54,24 +54,25 @@ return {
 		, formatItemStyle : function(){
       if(this.framestyle['padding-top']){
 				this.$set('framestyle.height', this.print.width * this.framestyle['padding-top']/100)
+        delete this.framestyle['padding-top']
 
         this.framestyle.width *= this.print.width/100
         this.framestyle.top *= this.print.height/100
         this.framestyle.left *= this.print.width/100
-
-        delete this.framestyle['padding-top']
       }
+
+			for(var i in this.framestyle)
+				this.$set('framestyle["'+i+'"]', this.framestyle[i]|0)
     }
 
 		, resetItemStyle : function(style){
 			for(var i in style)
-				this.$set('framestyle["'+i+'"]', (style[i]|0) / this.print.scale)
+				this.$set('framestyle["'+i+'"]', ((style[i]|0) / this.print.scale)|0)
 		}
 
 		, updateItemStyle : function(){
-			for(var i in this.stylekey){
+			for(var i in this.stylekey)
 				this.$set('itemstyle["'+i+'"]', (this.framestyle[i]|0) * this.print.scale + 'px')
-			}
 
 			this.$set('itemstyle["background-image"]', 'url("' + this.itemdata.background.image + '")')
 		}
