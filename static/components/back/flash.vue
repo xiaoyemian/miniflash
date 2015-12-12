@@ -40,7 +40,7 @@
 <template>
 <div class="flash">
 	<div class="times">
-		<div class="timecontrol" v-el:timecontrol></div>
+		<div class="timecontrol" v-el:timecontrol :style="{left:140 + 13 * timedata.time + 'px'}"></div>
 	</div>
 
 	<div class="tracks">
@@ -90,6 +90,9 @@ return {
 			if(doFocusItem)
 				this.$dispatch('focusItemByTrack', this.focus_track)
 		}
+		, loadTime : function(time){
+			this.loadTime(time)
+		}
 	}
 	, ready : function(){
 		this.loadTime(0)
@@ -102,11 +105,13 @@ return {
 			}
 			, drag : function(event, ui){
 				var time = ((ui.position.left - 140)/mSelf.timedata.framewidth)|0
-				mSelf.loadTime(time)
+				if(mSelf.timedata.time != time)
+					mSelf.loadTime(time)
 			}
 			, stop : function(event, ui){
 				var time = ((ui.position.left - 140)/mSelf.timedata.framewidth)|0
-				mSelf.loadTime(time)
+				if(mSelf.timedata.time != time)
+					mSelf.loadTime(time)
 			}
 			, cursor: "move"
 			, containment : "parent"

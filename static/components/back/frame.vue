@@ -60,6 +60,7 @@ return {
 	, methods : {
 		setFocusFrame : function(){
 			this.$dispatch('setFocusFrame', this)
+			this.$dispatch('loadTime', this.time)
 		}
 	}
 	, events : {
