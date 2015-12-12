@@ -39,11 +39,9 @@ return {
 	, props:['pagedata']
 	, data : function(){
 
-		var printscale = 0.4
-
 		return {
 			focus_item : null
-			, printscale : printscale
+			, printscale : 1
 			, printsize : {}	
 			, pagestyle : {}
 		}
@@ -76,7 +74,8 @@ return {
 			Vue.set(this.pagestyle, 'margin-top', this.printsize.height * this.printscale/-2 + 'px')
     }
 	}
-	, ready : function(){
+	, created : function(){
+		this.printscale = 0.4
 		this.$emit('updatePage', 640, 1136)
 	}
 }
