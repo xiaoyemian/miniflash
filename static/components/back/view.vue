@@ -20,7 +20,7 @@
 
 <div class="view" @click="clearFocus">
 	<div class="page" :style="pagestyle">
-		<item v-ref:item v-for="itemdata in pagedata.items" :itemdata="itemdata" :index="$index" :focus_item="focus_item" :pagesize="pagesize"></item>
+		<item v-ref:item v-for="itemdata in pagedata.items" :itemdata="itemdata" :index="$index" :focus_item="focus_item" :printsize="printsize"></item>
 	</div>
 </div>
 
@@ -40,8 +40,8 @@ return {
 	, data : function(){
 		return {
 			focus_item : null
+			, printscale : 1
 			, printsize : {}	
-			, pagesize : {}
 			, pagestyle : {}
 		}
 	}
@@ -67,16 +67,14 @@ return {
 			Vue.set(this.printsize, 'width', width)
 			Vue.set(this.printsize, 'height', height)
 			
-			Vue.set(this.pagesize, 'width', this.printsize.width * 0.4)
-			Vue.set(this.pagesize, 'height', this.printsize.height * 0.4)
-
-			Vue.set(this.pagestyle, 'width', this.pagesize.width + 'px')
-			Vue.set(this.pagestyle, 'height', this.pagesize.height + 'px')
-			Vue.set(this.pagestyle, 'margin-top', this.pagesize.height/-2 + 'px')
-			Vue.set(this.pagestyle, 'margin-left', this.pagesize.width/-2 + 'px')
+			Vue.set(this.pagestyle, 'width', this.printsize.width * this.printscale + 'px')
+			Vue.set(this.pagestyle, 'height', this.printsize.height * this.printscale + 'px')
+			Vue.set(this.pagestyle, 'margin-left', this.printsize.width * this.printscale/-2 + 'px')
+			Vue.set(this.pagestyle, 'margin-top', this.printsize.height * this.printscale/-2 + 'px')
     }
 	}
 	, ready : function(){
+		this.$set('printscale', 0.4)
 		this.$emit('updatePage', 640, 1136)
 	}
 }

@@ -35,8 +35,10 @@
 <script>
 
 return {
-	props:['focus_item', 'itemdata', 'pagesize']
+	props:['focus_item', 'itemdata', 'printsize']
 	, data:function(){
+		this.printscale = 0.4
+
 		return {
 			framestyle : {}
 			, frametype : ''
@@ -56,22 +58,23 @@ return {
 		, formatItemStyle : function(){
 			var style = this.framestyle
       if(style['padding-top']){
-        var pagesize = this.pagesize
+        var printsize = this.printsize
 
-				this.$set('framestyle.height', pagesize.width * style['padding-top']/100)
-     //   Vue.set(style, 'height', pagesize.width * style['padding-top']/100)
+				this.$set('framestyle.height', printsize.width * style['padding-top']/100)
 
-        style.width = pagesize.width * style['width']/100
-        style.top = pagesize.height * style['top']/100
-        style.left = pagesize.width * style['left']/100
+        style.width = printsize.width * style['width']/100
+        style.top = printsize.height * style['top']/100
+        style.left = printsize.width * style['left']/100
 
         delete style['padding-top']
       }
+
+			console.log(style)
     }
 
 		, resetItemStyle : function(style){
 			for(var i in style)
-				this.$set('framestyle["'+i+'"]', style[i])
+				this.$set('framestyle["'+i+'"]', style[i] / this.printscale)
 		}
 
 		, updateItemStyle : function(){
@@ -79,9 +82,8 @@ return {
 			var styleKey = ['width', 'height', 'top', 'left']
 			for(var i in styleKey){
 				var key = styleKey[i]
-				this.$set('style["'+key+'"]', (style[key] ? style[key] : 0) + 'px')
+				this.$set('style["'+key+'"]', (style[key] ? style[key] : 0) * this.printscale + 'px')
 			}
-			console.log(style, this.style)
 
 			var background = this.itemdata.background
 			this.$set('style["background-image"]', 'url("' + background.image + '")')
