@@ -69,7 +69,6 @@ return {
 			this.$set('pagestyle.height', size.height * scale + 'px')
 			this.$set('pagestyle["margin-left"]', size.width * scale/-2 + 'px')
 			this.$set('pagestyle["margin-top"]', size.height * scale/-2 + 'px')
-
     }
 	}
 	, events : {
@@ -96,7 +95,6 @@ return {
 			mSelf.print.scale = 1
 			mSelf.updatePage()
       mSelf.$broadcast('updateItemStyle')
-
 		}, 4000)
 */
 	}
