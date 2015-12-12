@@ -43,7 +43,7 @@
 </style>
 
 <template>
-<div class="frame" :class="[framedata.type, focus_frame && focus_frame.index == index ? 'focus' : '']" @click.stop="setFocusFrame">
+<div class="frame" :class="[framedata.type, focus_frame && focus_frame.time == time ? 'focus' : '']" @click.stop="setFocusFrame">
 	<div class="handel"></div>
 </div>
 </template>
@@ -52,7 +52,7 @@
 <script>
 
 return {
-	props : ['focus_frame', 'framedata', 'index']
+	props : ['focus_frame', 'framedata', 'time']
 	, data : function(){
 		return {
 		}
@@ -63,8 +63,8 @@ return {
 		}
 	}
 	, events : {
-		setTime : function(index){
-			if(index == this.index)
+		setTime : function(time){
+			if(time == this.time)
 				this.setFocusFrame()
 		}
 	}

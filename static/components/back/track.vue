@@ -29,7 +29,7 @@
 <div class="track" @click.stop="setFocusTrack(true)" :class="{focus:focus_track && focus_track.item_id == item_id}">
 	<div class="trackname">{{item_id}}</div>
 	<div class="trackframe" v-el:trackframe>
-		<frameitem v-ref:frame v-for="framedata in tracklist" :focus_frame="focus_frame" :framedata="framedata" :index="$index"></frameitem>
+		<frameitem v-ref:frame v-for="framedata in tracklist" :focus_frame="focus_frame" :framedata="framedata" :time="$index"></frameitem>
 	</div>
 </div>
 

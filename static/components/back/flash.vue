@@ -45,8 +45,8 @@ return {
 		}
 	}
 	, methods : {
-		setTime : function(index){
-      this.$broadcast('setTime', index)
+		setTime : function(time){
+      this.$broadcast('setTime', time)
 		}
 	}
 	, events : {
