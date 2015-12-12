@@ -21,6 +21,10 @@ for(var no in pages){
 					style : item.style 
 					, type : 'keyframe'
 				}
+				, 3 : {
+					style : item.style 
+					, type : 'keyframe'
+				}
 			}
 
 			item.style = {} 

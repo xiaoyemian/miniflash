@@ -8,17 +8,24 @@
 
 	.handel{
 		.pa;top:0px;left:0px;right:0px;bottom:0px;
-		.opacity(20); 
+//		.opacity(20); 
 	}
 
 	&.focus{
-		.handel{.bgc(#ccc);}
+		.handel{
+			border:1px solid #f69;
+			.bgc(#ccc);
+		}
 	}
 
 	&.keyframe{
 		.handel{ .bgc(#5CD685); }
 		&:before{
 			top:50%;left:50%;.w(6px);.h(6px);.mt(-3px);.ml(-3px);.bgc(#000); .border-r(8px);
+		}
+		&.focus{
+			.handel{
+			}
 		}
 	}
 

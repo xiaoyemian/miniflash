@@ -68,7 +68,7 @@ return {
 			var style = this.frame.framedata.style
       if(style['padding-top']){
 
-				style.height = this.print.width * style['padding-top']/100 
+				this.$set('frame.framedata.style.height', this.print.width * style['padding-top']/100)
         delete style['padding-top']
 
         style.width *= this.print.width/100

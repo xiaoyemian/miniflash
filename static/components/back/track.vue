@@ -76,10 +76,6 @@ return {
 	, ready : function(){
 		var mSelf = this
 
-
-
-
-
 		var $trackframe = $(this.$els.trackframe)
 		var sortStart
 		var sortStop
