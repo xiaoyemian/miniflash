@@ -77,14 +77,12 @@ return {
 			for(var i in this.framestyle)
 				this.framestyle[i] = this.framestyle[i]|0
 
-			this.updateItemStyle()
     }
 
 		, resetItemStyle : function(style){
 			for(var i in style)
 				this.framestyle[i] = ((style[i]|0) / this.print.scale)|0
 
-			this.updateItemStyle()
 		}
 
 		, updateItemStyle : function(){
@@ -100,6 +98,7 @@ return {
 				this.framestyle = framedata.style
 				this.frametype = framedata.type
 				this.formatItemStyle()
+				this.updateItemStyle()
 				
 				this.setFocusItem()
 			}
