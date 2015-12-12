@@ -20,7 +20,7 @@
 
 <div class="view" @click="clearFocus">
 	<div class="page" :style="pagestyle">
-		<item v-ref:item v-for="itemdata in pagedata.items" :itemdata="itemdata" :index="$index" :focus_item="focus_item" :printsize="printsize"></item>
+		<item v-ref:item v-for="itemdata in pagedata.items" :itemdata="itemdata" :index="$index" :focus_item="focus_item" :printsize="printsize" :printscale="printscale"></item>
 	</div>
 </div>
 
@@ -38,9 +38,12 @@ return {
   }
 	, props:['pagedata']
 	, data : function(){
+
+		var printscale = 0.4
+
 		return {
 			focus_item : null
-			, printscale : 1
+			, printscale : printscale
 			, printsize : {}	
 			, pagestyle : {}
 		}
@@ -74,7 +77,6 @@ return {
     }
 	}
 	, ready : function(){
-		this.$set('printscale', 0.4)
 		this.$emit('updatePage', 640, 1136)
 	}
 }

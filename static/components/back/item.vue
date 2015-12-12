@@ -35,9 +35,8 @@
 <script>
 
 return {
-	props:['focus_item', 'itemdata', 'printsize']
+	props:['focus_item', 'itemdata', 'printsize', 'printscale']
 	, data:function(){
-		this.printscale = 0.4
 
 		return {
 			framestyle : {}
@@ -78,6 +77,8 @@ return {
 		}
 
 		, updateItemStyle : function(){
+			console.log(11111, this.printscale)
+
 			var style = this.framestyle
 			var styleKey = ['width', 'height', 'top', 'left']
 			for(var i in styleKey){
