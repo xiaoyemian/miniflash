@@ -50,8 +50,8 @@ return {
 	, methods : {
 	}
 	, events : {
-		focusItemByTrack : function(track){
-			console.log('focusItemByTrack')
+		focusItemByFrame : function(track){
+			console.log('focusItemByFrame')
 			this.$refs.view.$emit('focusItem', track.item_id, track.focus_frame)
 		} 
 		, focusTrackByItem : function(item){
