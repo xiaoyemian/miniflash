@@ -51,12 +51,6 @@ return {
 			tracklist.push(this.trackdata[i] || {style:{}, type:'blankframe'})
 		}
 
-/*
-		for(var i = 0; i < tracklength/framestep; i++){
-			Vue.set(tracklist, i, this.trackdata[i] || {style:{}, type:'blankframe'})
-		}
-*/
-
 		return {
 			tracklist : tracklist
 			, focus_frame : null 

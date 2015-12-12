@@ -35,7 +35,7 @@
 <script>
 
 return {
-	props:['focus_item', 'itemdata', 'printsize', 'printscale', 'stylekey', 'backgroundkey']
+	props:['focus_item', 'itemdata', 'print', 'stylekey', 'backgroundkey']
 	, data:function(){
 		return {
 			frametype : ''
@@ -53,25 +53,31 @@ return {
 		}
 		, formatItemStyle : function(){
       if(this.framestyle['padding-top']){
-				this.$set('framestyle.height', this.printsize.width * this.framestyle['padding-top']/100)
+				var framestyle = this.framestyle 
+				var size = this.print.size
 
-        this.framestyle.width *= this.printsize.width/100
-        this.framestyle.top *= this.printsize.height/100
-        this.framestyle.left *= this.printsize.width/100
+				this.$set('framestyle.height', size.width * framestyle['padding-top']/100)
 
-        delete this.framestyle['padding-top']
+        framestyle.width *= size.width/100
+        framestyle.top *= size.height/100
+        framestyle.left *= size.width/100
+
+        delete framestyle['padding-top']
       }
-			console.log(this.framestyle)
     }
 
 		, resetItemStyle : function(style){
+			var scale = this.print.scale
 			for(var i in style)
-				this.$set('framestyle["'+i+'"]', (style[i]|0) / this.printscale)
+				this.$set('framestyle["'+i+'"]', (style[i]|0) / scale)
 		}
 
 		, updateItemStyle : function(){
+			var framestyle = this.framestyle 
+			var scale = this.print.scale
+
 			for(var i in this.stylekey){
-				this.$set('itemstyle["'+i+'"]', (this.framestyle[i]|0) * this.printscale + 'px')
+				this.$set('itemstyle["'+i+'"]', (framestyle[i]|0) * scale + 'px')
 			}
 
 			this.$set('itemstyle["background-image"]', 'url("' + this.itemdata.background.image + '")')
@@ -87,6 +93,9 @@ return {
 				
 				this.setFocusItem()
 			}
+		}
+		, updateItemStyle : function(){
+			this.updateItemStyle()
 		}
 	}
 	, ready : function(){

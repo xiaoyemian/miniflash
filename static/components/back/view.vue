@@ -20,7 +20,7 @@
 
 <div class="view" @click="clearFocus">
 	<div class="page" :style="pagestyle">
-		<item v-ref:item v-for="itemdata in pagedata.items" :itemdata="itemdata" :index="$index" :focus_item="focus_item" :printsize="printsize" :printscale="printscale" :stylekey="stylekey" :backgroundkey="backgroundkey"></item>
+		<item v-ref:item v-for="itemdata in pagedata.items" :itemdata="itemdata" :index="$index" :focus_item="focus_item" :print="print" :stylekey="stylekey" :backgroundkey="backgroundkey"></item>
 	</div>
 </div>
 
@@ -41,8 +41,10 @@ return {
 
 		return {
 			focus_item : null
-			, printscale : 1
-			, printsize : {}	
+			, print : {
+				size : {}
+				, scale : 1
+			}
 			, pagestyle : {}
 			, stylekey : {
 				width : '宽度'
@@ -59,33 +61,44 @@ return {
 		clearFocus : function(){
 			this.$dispatch('clearFocus')
 		}
+		, updatePage : function(){
+			var size = this.print.size
+			var scale = this.print.scale
+
+			this.$set('pagestyle.width', size.width * scale + 'px')
+			this.$set('pagestyle.height', size.height * scale + 'px')
+			this.$set('pagestyle["margin-left"]', size.width * scale/-2 + 'px')
+			this.$set('pagestyle["margin-top"]', size.height * scale/-2 + 'px')
+
+    }
 	}
 	, events : {
 		setFocusItem : function(item){
 			this.$set('focus_item', item)
 			this.$dispatch('focusTrackByItem', item)
 		}
-
 		, focusItem : function(item_id, framedata){
       this.$broadcast('updateItemByFrame', item_id, framedata)
 		}
-
-		, updatePage : function(width, height){
-			width = width || 640
-			height = height || 1136
-
-			Vue.set(this.printsize, 'width', width)
-			Vue.set(this.printsize, 'height', height)
-			
-			Vue.set(this.pagestyle, 'width', this.printsize.width * this.printscale + 'px')
-			Vue.set(this.pagestyle, 'height', this.printsize.height * this.printscale + 'px')
-			Vue.set(this.pagestyle, 'margin-left', this.printsize.width * this.printscale/-2 + 'px')
-			Vue.set(this.pagestyle, 'margin-top', this.printsize.height * this.printscale/-2 + 'px')
-    }
+		, resizePrint : function(width, height){
+			this.$set('print.size.width', width || 640)
+			this.$set('print.size.height', height || 1136)
+			this.updatePage()
+		}
 	}
 	, created : function(){
-		this.printscale = 0.4
-		this.$emit('updatePage', 640, 1136)
+		this.print.scale = 0.4
+		this.$emit('resizePrint', 640, 1136)
+
+/*
+		var mSelf = this
+		var t = setTimeout(function(){
+			mSelf.print.scale = 1
+			mSelf.updatePage()
+      mSelf.$broadcast('updateItemStyle')
+
+		}, 4000)
+*/
 	}
 }
 </script>
