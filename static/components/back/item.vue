@@ -5,7 +5,7 @@
 	background-repeat:no-repeat;
 	&.focus{
 		.handel{
-			.pa;top:0px;left:0px;right:0px;bottom:0px;
+			.pa;top:-10px;left:-10px;right:-10px;bottom:-10px;
 			border:10px solid #f69;
 		
 			.aspectRatioBtn{
@@ -103,6 +103,7 @@ return {
 			, stop : function(event, ui){
 				mSelf.updateItemStyle()
 			}
+			, cursor: "crosshair"
 			, containment : "document"
 			, scroll : false
 			, snap : '.page'
