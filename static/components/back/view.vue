@@ -42,8 +42,9 @@ return {
 		return {
 			focus_item : null
 			, print : {
-				size : {}
-				, scale : 1
+				width : 0
+				, height : 0
+				, scale : 0
 			}
 			, pagestyle : {}
 			, stylekey : {
@@ -61,14 +62,20 @@ return {
 		clearFocus : function(){
 			this.$dispatch('clearFocus')
 		}
-		, updatePage : function(){
-			var size = this.print.size
-			var scale = this.print.scale
+		, resizePrint : function(print){
+			for(var i in print){
+				this.$set('print["'+i+'"]', print[i]||0)
+			}
 
-			this.$set('pagestyle.width', size.width * scale + 'px')
-			this.$set('pagestyle.height', size.height * scale + 'px')
-			this.$set('pagestyle["margin-left"]', size.width * scale/-2 + 'px')
-			this.$set('pagestyle["margin-top"]', size.height * scale/-2 + 'px')
+			this.updatePage()
+		}
+		, updatePage : function(){
+			var print = this.print
+
+			this.$set('pagestyle.width', print.width * print.scale + 'px')
+			this.$set('pagestyle.height', print.height * print.scale + 'px')
+			this.$set('pagestyle["margin-left"]', print.width * print.scale/-2 + 'px')
+			this.$set('pagestyle["margin-top"]', print.height * print.scale/-2 + 'px')
     }
 	}
 	, events : {
@@ -79,24 +86,13 @@ return {
 		, focusItem : function(item_id, framedata){
       this.$broadcast('updateItemByFrame', item_id, framedata)
 		}
-		, resizePrint : function(width, height){
-			this.$set('print.size.width', width || 640)
-			this.$set('print.size.height', height || 1136)
-			this.updatePage()
-		}
 	}
-	, created : function(){
-		this.print.scale = 0.4
-		this.$emit('resizePrint', 640, 1136)
-
-/*
-		var mSelf = this
-		var t = setTimeout(function(){
-			mSelf.print.scale = 1
-			mSelf.updatePage()
-      mSelf.$broadcast('updateItemStyle')
-		}, 4000)
-*/
+	, ready : function(){
+		this.resizePrint({
+			width : 640
+			, height : 1136
+			, scale : 0.4
+		})
 	}
 }
 </script>

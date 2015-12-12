@@ -53,31 +53,24 @@ return {
 		}
 		, formatItemStyle : function(){
       if(this.framestyle['padding-top']){
-				var framestyle = this.framestyle 
-				var size = this.print.size
+				this.$set('framestyle.height', this.print.width * this.framestyle['padding-top']/100)
 
-				this.$set('framestyle.height', size.width * framestyle['padding-top']/100)
+        this.framestyle.width *= this.print.width/100
+        this.framestyle.top *= this.print.height/100
+        this.framestyle.left *= this.print.width/100
 
-        framestyle.width *= size.width/100
-        framestyle.top *= size.height/100
-        framestyle.left *= size.width/100
-
-        delete framestyle['padding-top']
+        delete this.framestyle['padding-top']
       }
     }
 
 		, resetItemStyle : function(style){
-			var scale = this.print.scale
 			for(var i in style)
-				this.$set('framestyle["'+i+'"]', (style[i]|0) / scale)
+				this.$set('framestyle["'+i+'"]', (style[i]||0) / this.print.scale)
 		}
 
 		, updateItemStyle : function(){
-			var framestyle = this.framestyle 
-			var scale = this.print.scale
-
 			for(var i in this.stylekey){
-				this.$set('itemstyle["'+i+'"]', (framestyle[i]|0) * scale + 'px')
+				this.$set('itemstyle["'+i+'"]', (this.framestyle[i]||0) * this.print.scale + 'px')
 			}
 
 			this.$set('itemstyle["background-image"]', 'url("' + this.itemdata.background.image + '")')

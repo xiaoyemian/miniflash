@@ -58,6 +58,7 @@ return {
 		} 
 	}
 	, ready: function(){
+
   }
 }
 </script>
