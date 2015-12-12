@@ -56,7 +56,7 @@ return {
 	}
 	, methods : {
 		setFocusItem : function(){
-			this.$dispatch('setFocusItem', this)
+			this.$dispatch('setFocusItem', this, true)
 		}
 		, aspectRatio : function(){
 			var style = this.frame.framedata.style
@@ -95,10 +95,11 @@ return {
 	, events : {
 		updateItemByFrame : function(item_id, frame){
 			if(item_id == this.itemdata.item_id){
+				console.log('updateItemByFrame')
 				this.frame = frame
 				this.formatItemStyle()
 				this.updateItemStyle()
-				this.setFocusItem()
+				this.$dispatch('setFocusItem', this)
 			}
 		}
 		, updateItemStyle : function(){
