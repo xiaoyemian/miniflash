@@ -57,7 +57,7 @@ return {
 			var type = setting.id.split('|')
 			var value = setting.value
 
-			this.$set('focus_item.framestyle["'+ type[1] +'"]', value||0)
+			this.$set('focus_item.framestyle["'+ type[1] +'"]', value|0)
 
 			this.focus_item.updateItemStyle()
 		}

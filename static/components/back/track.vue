@@ -96,7 +96,7 @@ return {
 
 			}
 			, axis: "x"
-			, cursor: 'crosshair'
+			, cursor: "move"
 			, placeholder: 'ui-state-highlight'
 		})
 		$trackframe.disableSelection()

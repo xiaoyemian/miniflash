@@ -65,12 +65,12 @@ return {
 
 		, resetItemStyle : function(style){
 			for(var i in style)
-				this.$set('framestyle["'+i+'"]', (style[i]||0) / this.print.scale)
+				this.$set('framestyle["'+i+'"]', (style[i]|0) / this.print.scale)
 		}
 
 		, updateItemStyle : function(){
 			for(var i in this.stylekey){
-				this.$set('itemstyle["'+i+'"]', (this.framestyle[i]||0) * this.print.scale + 'px')
+				this.$set('itemstyle["'+i+'"]', (this.framestyle[i]|0) * this.print.scale + 'px')
 			}
 
 			this.$set('itemstyle["background-image"]', 'url("' + this.itemdata.background.image + '")')
@@ -105,7 +105,7 @@ return {
 			, stop : function(event, ui){
 				mSelf.updateItemStyle()
 			}
-			, cursor: "crosshair"
+			, cursor: "move"
 			, containment : "document"
 			, scroll : false
 			, snap : '.page'
