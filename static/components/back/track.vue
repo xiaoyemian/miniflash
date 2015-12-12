@@ -58,18 +58,18 @@ return {
 	}
 	, methods : {
 		setFocusTrack : function(){
-			this.$dispatch('setFocusTrack', this)
+			this.$dispatch('setFocusTrack', this, true)
 		}
 	}
 	, events : {
 		setFocusFrame : function(frame){
 			this.$set('focus_frame', frame)
-			this.$dispatch('setFocusTrack', this)
+			this.$dispatch('setFocusTrack', this, true)
 		}
 		, updateTrackByItem : function(item_id){
 			if(item_id == this.item_id){
 				console.log('updateTrackByItem')
-				this.$dispatch('setFocusTrack', this, true)
+				this.$dispatch('setFocusTrack', this)
 			}
 		}
 	}

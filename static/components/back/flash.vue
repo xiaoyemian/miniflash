@@ -48,9 +48,10 @@ return {
 		}
 	}
 	, events : {
-		setFocusTrack : function(track){
+		setFocusTrack : function(track, focusitem){
 			this.$set('focus_track', track)
-			this.$dispatch('focusItemByFrame', this.focus_track)
+			if(focusitem)
+				this.$dispatch('focusItemByFrame', this.focus_track)
 		}
 		, focusTrack : function(item_id, fromItem){
 			this.$broadcast('updateTrackByItem', item_id)
