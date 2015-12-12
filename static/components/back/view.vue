@@ -91,7 +91,7 @@ return {
 		, addItem : function(){
 			console.log(this.itemsdata)
 			this.itemsdata.push({
-				item_id : '111'
+				item_id : new Date().valueOf()
 				, background : {
 				}
 				, style : {
@@ -107,7 +107,7 @@ return {
 			})
 
 			this.$nextTick(function () {
-				this.$dispatch('focusByTime')
+				this.$dispatch('reloadTime')
 			})
 		}
 	}

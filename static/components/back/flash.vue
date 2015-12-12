@@ -74,7 +74,7 @@ return {
 	, methods : {
 		setTime : function(time){
 			if(typeof time !== 'undefined')
-				this.$set('time', time)
+				this.time = time
 
       this.$broadcast('setTime', this.time)
 		}
