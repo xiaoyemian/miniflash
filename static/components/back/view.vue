@@ -79,10 +79,10 @@ return {
     }
 	}
 	, events : {
-		setFocusItem : function(item, isfocusTrack){
+		setFocusItem : function(item, doFocusTrack){
 			this.$set('focus_item', item)
 
-			if(isfocusTrack)
+			if(doFocusTrack)
 				this.$dispatch('focusTrackByItem', item)
 		}
 		, focusItem : function(item_id, framedata){
