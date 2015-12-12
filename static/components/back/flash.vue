@@ -73,10 +73,13 @@ return {
 	}
 	, methods : {
 		setTime : function(time){
+			if(time > this.timedata.length/this.timedata.step)
+				return;
+
 			if(typeof time !== 'undefined')
 				this.timedata.time = time
 
-      this.$broadcast('setTime', this.timedata.time)
+			this.$broadcast('loadItemByTime', this.timedata.time)
 		}
 	}
 	, events : {

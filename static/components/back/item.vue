@@ -119,7 +119,14 @@ return {
 		}
 	}
 	, events : {
-		updateItemByFrame : function(track){
+		loadItemByFrame : function(track){
+			if(track.item_id == this.itemdata.item_id){
+				this.frame = track.focus_frame
+				this.formatItemStyle()
+				this.updateItemStyle()
+			}
+		}
+		, updateItemByFrame : function(track){
 			if(track.item_id == this.itemdata.item_id){
 				this.frame = track.focus_frame
 				this.formatItemStyle()
@@ -127,6 +134,7 @@ return {
 				this.setFocusItem(false)
 			}
 		}
+
 		, updateItemStyle : function(){
 			this.updateItemStyle()
 		}

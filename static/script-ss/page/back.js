@@ -29,7 +29,7 @@ for(var no in pages){
 				}
 			}
 		}
-		console.log(pagedata)
+	//	console.log(pagedata)
 	}
 }
 

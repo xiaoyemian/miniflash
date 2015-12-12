@@ -47,7 +47,11 @@ return {
 	, methods : {
 	}
 	, events : {
-		focusItemByTrack : function(track){
+		loadItemByTrack : function(track){
+			console.log('loadItemByTrack')
+      this.$refs.view.$broadcast('loadItemByFrame', track)
+		}
+		, focusItemByTrack : function(track){
 			console.log('focusItemByTrack')
       this.$refs.view.$broadcast('updateItemByFrame', track)
 		} 
@@ -55,7 +59,7 @@ return {
 			console.log('focusTrackByItem')
       this.$refs.flash.$broadcast('updateFrameByItem', item)
 		} 
-		, reloadTime : function(){
+		, loadTime : function(){
       this.$refs.flash.setTime()
 		}
 	}

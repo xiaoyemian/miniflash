@@ -107,13 +107,13 @@ return {
 			})
 
 			this.$nextTick(function () {
-				this.$dispatch('reloadTime')
+				this.$dispatch('loadTime')
 			})
 		}
 	}
 	, watch : {
 		itemsdata : function(){
-			console.log(arguments)
+//			console.log(arguments)
 		}
 	}
 	, events : {

@@ -54,7 +54,6 @@
 return {
 	props : ['focus_frame', 'framedata', 'time']
 	, data : function(){
-		console.log(this.time, this.framedata)
 		return {
 		}
 	}
@@ -64,10 +63,6 @@ return {
 		}
 	}
 	, events : {
-		setTime : function(time){
-			if(time == this.time)
-				this.setFocusFrame()
-		}
 	}
 }
 </script>

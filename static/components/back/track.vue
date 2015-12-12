@@ -66,6 +66,11 @@ return {
 			this.$set('focus_frame', frame)
 			this.setFocusTrack(true)
 		}
+		, loadItemByTime : function(time){
+			var frame = this.$refs.frame[time]
+			this.$set('focus_frame', frame)
+			this.$dispatch('loadItemByTrack', this)
+		}
 	}
 	, ready : function(){
 		var mSelf = this
@@ -81,9 +86,11 @@ return {
 			, stop : function(event, ui){
 				sortStop = ui.item.index()
 
+/*
 				var framedata = mSelf.tracklist.splice(sortStart, 1)[0]
 				mSelf.tracklist.splice(sortStop, 0, framedata)
 				//console.log(mSelf.tracklist)
+*/
 
 			}
 			, axis: "x"
