@@ -77,8 +77,8 @@ return {
 		}
 	}
 	, methods : {
-		setFocusItem : function(doFocusTrack){
-			this.$dispatch('setFocusItem', this, doFocusTrack)
+		setFocusItem : function(doFocusFrame){
+			this.$dispatch('setFocusItem', this, doFocusFrame)
 		}
 		, aspectRatio : function(){
 			var style = this.frame.framedata.style

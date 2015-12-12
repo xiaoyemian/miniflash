@@ -11,10 +11,10 @@
 	}
 
 	.times{
-		.h(20px);
+		.h(20px);.ml(140px);
 
 		.timecontrol{
-			.pa;.w(140px + 13px);.h(100%);
+			.pa;.w(13px);.h(100%);
 			&:before, &:after{ content:'';.pa;z-index:1; }
 			&:before{
 				right:5px;top:0px;bottom:0px;.ml(-1px);border-left:2px solid red;
@@ -74,7 +74,6 @@ return {
 	, methods : {
 		setTime : function(time){
 			this.$set('time', time)
-			console.log(this)
       this.$broadcast('setTime', time)
 		}
 	}
@@ -99,11 +98,11 @@ return {
 			start : function(event, ui){
 			}
 			, drag : function(event, ui){
-				var time = (ui.position.left/mSelf.flashdata.framewidth)|0
+				var time = ((ui.position.left - 140)/mSelf.flashdata.framewidth)|0
 				mSelf.setTime(time)
 			}
 			, stop : function(event, ui){
-				var time = (ui.position.left/mSelf.flashdata.framewidth)|0
+				var time = ((ui.position.left - 140)/mSelf.flashdata.framewidth)|0
 				mSelf.setTime(time)
 			}
 			, cursor: "move"

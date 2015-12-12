@@ -54,9 +54,10 @@ return {
 			console.log('focusItemByFrame')
       this.$refs.view.$broadcast('updateItemByFrame', track)
 		} 
-		, focusTrackByItem : function(item){
-			console.log('focusTrackByItem')
-			item.frame.setFocusFrame()
+		, focusFrameByItem : function(item_id){
+			console.log('focusFrameByItem')
+			this.$refs.flash.$refs.track[item_id].setFocusTrack(false)
+
 		} 
 	}
 	, ready: function(){

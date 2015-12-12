@@ -79,11 +79,11 @@ return {
     }
 	}
 	, events : {
-		setFocusItem : function(item, doFocusTrack){
+		setFocusItem : function(item, doFocusFrame){
 			this.$set('focus_item', item)
 
-			if(doFocusTrack)
-				this.$dispatch('focusTrackByItem', item)
+			if(doFocusFrame)
+				this.$dispatch('focusFrameByItem', item.itemdata.item_id)
 		}
 	}
 	, ready : function(){
