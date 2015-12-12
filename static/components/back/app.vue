@@ -18,7 +18,7 @@ body{
 <div class="app">
 	<div class="headtop"></div>
 	<view v-ref:view :itemsdata="pagedata.items"></view>
-	<flash v-ref:flash :tracksdata="pagedata.tracks"></flash>
+	<flash v-ref:flash :itemsdata="pagedata.items"></flash>
 </div>
 </template>
 
@@ -47,13 +47,13 @@ return {
 	, methods : {
 	}
 	, events : {
-		focusItemByFrame : function(track){
-			console.log('focusItemByFrame')
+		focusItemByTrack : function(track){
+			console.log('focusItemByTrack')
       this.$refs.view.$broadcast('updateItemByFrame', track)
 		} 
-		, focusFrameByItem : function(item_id){
-			console.log('focusFrameByItem')
-			this.$refs.flash.$refs.track[item_id].setFocusTrack(false)
+		, focusTrackByItem : function(item){
+			console.log('focusTrackByItem')
+      this.$refs.flash.$broadcast('updateFrameByItem', item)
 		} 
 	}
 	, ready: function(){

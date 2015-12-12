@@ -10,11 +10,10 @@ for(var no in pages){
 	
 	if(Array.isArray(pagedata.items)){
 		var items = pagedata.items
-		pagedata.tracks = {}
 
 		for(var i in items){
 			var item = items[i]
-			pagedata.tracks[item.item_id] = {} 
+			item.tracks = {} 
 
 			var key = [0,5,9, 10]
 			for(var k in key){
@@ -24,12 +23,13 @@ for(var no in pages){
 					style[j] = item.style[j]
 				}
 
-				pagedata.tracks[item.item_id][key[k]+''] = {
+				item.tracks[key[k]+''] = {
 					style : style 
 					, type : 'keyframe'
 				}
 			}
 		}
+		console.log(pagedata)
 	}
 }
 

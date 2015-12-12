@@ -109,7 +109,7 @@ return {
 			this.$set('focus_item', item)
 
 			if(doFocusFrame)
-				this.$dispatch('focusFrameByItem', item.itemdata.item_id)
+				this.$dispatch('focusTrackByItem', item)
 		}
 	}
 	, ready : function(){

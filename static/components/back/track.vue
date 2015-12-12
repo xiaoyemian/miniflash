@@ -57,7 +57,12 @@ return {
 		}
 	}
 	, events : {
-		setFocusFrame : function(frame){
+		updateFrameByItem : function(item){
+			if(item.itemdata.item_id == this.item_id){
+				this.setFocusTrack(false)
+			}
+		}
+		, setFocusFrame : function(frame){
 			this.$set('focus_frame', frame)
 			this.setFocusTrack(true)
 		}

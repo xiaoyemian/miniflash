@@ -44,7 +44,7 @@
 	</div>
 
 	<div class="tracks">
-		<track v-ref:track v-for="trackdata in tracksdata" :trackdata="trackdata" :item_id="$key" :focus_track="focus_track" :flashdata="flashdata"></track>
+		<track v-ref:track v-for="itemdata in itemsdata" :index="$index" :trackdata="itemdata.tracks" :item_id="itemdata.item_id" :focus_track="focus_track" :flashdata="flashdata"></track>
 	</div>
 </div>
 
@@ -58,7 +58,7 @@ return {
   components : {
 		track : track
   }
-	, props:['tracksdata']
+	, props:['itemsdata']
 	, data : function(){
 
 		return {
@@ -83,7 +83,7 @@ return {
 			this.$set('focus_track', track)
 
 			if(doFocusItem)
-				this.$dispatch('focusItemByFrame', this.focus_track)
+				this.$dispatch('focusItemByTrack', this.focus_track)
 		}
 		, setTime : function(time){
 			this.setTime(time)
