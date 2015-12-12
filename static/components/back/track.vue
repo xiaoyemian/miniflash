@@ -1,7 +1,12 @@
 <style>
 .track{
-	.l(24px); .fc(#ccc); .hidden; .mt(-1px);
-	border-top:1px solid #222; border-bottom:1px solid #222;
+	.l(24px); .fc(#ccc); .hidden;
+	.mt(-1px);
+	border-top:1px solid #222;
+	border-bottom:1px solid #222;
+	&:nth-last-child(1){
+		.mb(-1px);
+	}
 
 	.trackname{
 		.left;.w(140px); .h(100%);
@@ -11,15 +16,6 @@
 	}
 	&.focus{
 		.bgc(#f69);
-	}
-
-	.frame, .ui-state-highlight{
-		.w(12px); .h(24px); .ml(-1px);
-		border-left:1px solid #222; border-right:1px solid #222;
-	}
-
-	.ui-state-highlight{
-		.bgc(#222);
 	}
 }
 
@@ -42,13 +38,11 @@ return {
   components : {
     frameitem : frame
 	}
-	, props : ['focus_track', 'item_id', 'trackdata']
+	, props : ['flashdata', 'focus_track', 'item_id', 'trackdata']
 	, data : function(){
-		var tracklength = 10000
-		var framestep = 200
 		var tracklist = []
 
-		for(var i = 0; i <= tracklength/framestep; i++){
+		for(var i = 0; i <= this.flashdata.length/this.flashdata.step; i++){
 			tracklist.push(this.trackdata[i] || {style:{}, type:'blankframe'})
 		}
 
