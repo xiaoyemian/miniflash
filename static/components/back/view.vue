@@ -85,9 +85,6 @@ return {
 			if(doFocusTrack)
 				this.$dispatch('focusTrackByItem', item)
 		}
-		, focusItem : function(item_id, framedata){
-      this.$broadcast('updateItemByFrame', item_id, framedata)
-		}
 	}
 	, ready : function(){
 		this.resizePrint({

@@ -54,9 +54,6 @@ return {
 			if(doFocusItem)
 				this.$dispatch('focusItemByFrame', this.focus_track)
 		}
-		, focusTrack : function(item_id, fromItem){
-			this.$broadcast('updateTrackByItem', item_id)
-		}
 	}
 	, ready : function(){
 		this.setTime(0)
