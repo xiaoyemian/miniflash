@@ -36,7 +36,7 @@
 </style>
 
 <template>
-<div class="item" @click.stop="setFocusItem" :class="{focus : focus_item && focus_item.itemdata.item_id == itemdata.item_id, keyframe : frame && frame.framedata.type == 'keyframe', blankframe :frame && frame.framedata.type == 'blankframe'}" :style="itemstyle">
+<div class="item" @click.stop="setFocusItem(true)" :class="{focus : focus_item && focus_item.itemdata.item_id == itemdata.item_id, keyframe : frame && frame.framedata.type == 'keyframe', blankframe :frame && frame.framedata.type == 'blankframe'}" :style="itemstyle">
 	<div class="handel">
 		<div @click.stop="aspectRatio" class="aspectRatioBtn"></div>
 	</div>
@@ -55,8 +55,8 @@ return {
 		}
 	}
 	, methods : {
-		setFocusItem : function(){
-			this.$dispatch('setFocusItem', this, true)
+		setFocusItem : function(doFocusTrack){
+			this.$dispatch('setFocusItem', this, doFocusTrack)
 		}
 		, aspectRatio : function(){
 			var style = this.frame.framedata.style
@@ -101,7 +101,7 @@ return {
 				this.frame = frame
 				this.formatItemStyle()
 				this.updateItemStyle()
-				this.$dispatch('setFocusItem', this)
+				this.setFocusItem(false)
 			}
 		}
 		, updateItemStyle : function(){
@@ -114,7 +114,7 @@ return {
 
 		$item.draggable({
 			start : function(event, ui){
-				mSelf.setFocusItem()
+				mSelf.setFocusItem(false)
 			}
 			, drag : function(event, ui){
 				mSelf.resetItemStyle(ui.position)
@@ -131,7 +131,7 @@ return {
 	
 		$item.resizable({
 			start : function(event, ui){
-				mSelf.setFocusItem()
+				mSelf.setFocusItem(false)
 			}
 			, resize : function(event, ui){
 				mSelf.resetItemStyle(ui.size)

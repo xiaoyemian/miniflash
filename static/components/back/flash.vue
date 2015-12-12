@@ -43,8 +43,8 @@ return {
 		}
 	}
 	, methods : {
-		setTime : function(frame_id){
-      this.$broadcast('setTime', frame_id)
+		setTime : function(index){
+      this.$broadcast('setTime', index)
 		}
 	}
 	, events : {

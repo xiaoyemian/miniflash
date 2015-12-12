@@ -25,7 +25,7 @@
 </style>
 
 <template>
-<div class="track" @click.stop="setFocusTrack" :class="{focus:focus_track && focus_track.item_id == item_id}">
+<div class="track" @click.stop="setFocusTrack(true)" :class="{focus:focus_track && focus_track.item_id == item_id}">
 	<div class="trackname">{{item_id}}</div>
 	<div class="trackframe" v-el:trackframe>
 		<frameitem v-ref:frame v-for="framedata in tracklist" :focus_frame="focus_frame" :framedata="framedata" :index="$index"></frameitem>
@@ -57,19 +57,19 @@ return {
 		}
 	}
 	, methods : {
-		setFocusTrack : function(){
-			this.$dispatch('setFocusTrack', this, true)
+		setFocusTrack : function(doFocusItem){
+			this.$dispatch('setFocusTrack', this, doFocusItem)
 		}
 	}
 	, events : {
 		setFocusFrame : function(frame){
 			this.$set('focus_frame', frame)
-			this.setFocusTrack()
+			this.setFocusTrack(true)
 		}
 		, updateTrackByItem : function(item_id){
 			if(item_id == this.item_id){
 				console.log('updateTrackByItem')
-				this.$dispatch('setFocusTrack', this)
+				this.setFocusTrack(false)
 			}
 		}
 	}
