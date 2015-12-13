@@ -82,18 +82,18 @@ return {
 			console.log(this.timedata.time, time)
 			this.$broadcast('loadItemByTime', this.timedata.time)
 		}
-		, setFocusTrack : function(track){
-			this.$set('focus_track', track)
+		, setFocusTrack : function(item_id){
+			this.$set('focus_track', item_id)
 		}
 	}
 	, events : {
 		selectTrack : function(track){
-			this.setFocusTrack(track)
+			this.setFocusTrack(track.item_id)
 			this.$dispatch('loadItemByFrame', track.item_id, track.focus_frame)
 			this.$dispatch('focusItemById', track.item_id)
 		}
-		, setFocusTrack : function(track){
-			this.setFocusTrack(track)
+		, focusTrackById : function(item_id){
+			this.setFocusTrack(item_id)
 		}
 		, loadTime : function(time){
 			this.loadTime(time)
