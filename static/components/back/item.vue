@@ -138,6 +138,10 @@ return {
 				}
 				this.$set('itemdata.tracks', tracks)
 			}
+
+			delete itemdata.style
+			delete itemdata.background
+			delete itemdata.scale
 		}
 	}
 	, events : {
