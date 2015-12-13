@@ -92,19 +92,28 @@ return {
 			var style = this.framedata.style
 			style.height = style.width * this.itemdata.original.scale
 
-			this.reloadItemStyle()
+			this.loadItemStyle()
 		}
 		, resetItemStyle : function(opts){
 			for(var i in opts)
 				this.framedata.style[i] = (opts[i]) / this.print.scale
 
-			this.reloadItemStyle()
+			this.loadItemStyle()
 		}
-		, reloadItemStyle : function(){
+		, loadPrevItemStyle : function(style){
+			this.framestyle = {}
+			
+			for(var i in style){
+				if(style[i]){
+					this.$set('framestyle["' + i + '"]', style[i] * this.print.scale + 'px')
+				}
+			}
+		}
+
+		, loadItemStyle : function(){
 			var style = this.framedata.style
 
 			this.framestyle = {}
-			this.framedata.type = 'blankframe'
 			
 			for(var i in style){
 				if(style[i]){
@@ -151,8 +160,25 @@ return {
 	, events : {
 		loadItemByTrack : function(track){
 			if(track.item_id == this.itemdata.item_id){
-				this.framedata = track.focus_frame.framedata
-				this.reloadItemStyle()
+
+				var frame = track.focus_frame
+				this.framedata = frame.framedata
+
+				if(this.framedata.type == 'blankframe'){
+
+					for(var i = frame.time; i >= 0; i--){
+						var framedata = track.frameslist[i]
+
+						if(framedata.type == 'keyframe'){
+							this.loadPrevItemStyle(framedata.style)
+							break;
+						}
+					}
+
+
+				}else{
+					this.loadItemStyle()
+				}
 			}
 		}
 		, focusItemById : function(item_id){
@@ -160,8 +186,8 @@ return {
 				this.setFocusItem()
 			}
 		}
-		, reloadItemStyle : function(){
-			this.reloadItemStyle()
+		, loadItemStyle : function(){
+			this.loadItemStyle()
 		}
 	}
 	, ready : function(){
@@ -177,7 +203,7 @@ return {
 				mSelf.resetItemStyle(ui.position)
 			}
 			, stop : function(event, ui){
-				mSelf.reloadItemStyle()
+				mSelf.loadItemStyle()
 			}
 			, cursor: "move"
 			, containment : "document"
@@ -194,7 +220,7 @@ return {
 				mSelf.resetItemStyle(ui.size)
 			}
 			, stop : function(event, ui){
-				mSelf.reloadItemStyle()
+				mSelf.loadItemStyle()
 			}
 			, ghost: true
 		})

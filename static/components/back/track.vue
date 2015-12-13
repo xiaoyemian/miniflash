@@ -25,7 +25,7 @@
 <div class="track" @click.stop="selectTrack" :class="{focus:focus_track == item_id}">
 	<div class="trackname">{{item_id}}</div>
 	<div class="trackframe" v-el:trackframe>
-		<frameitem v-ref:frame v-for="framedata in framelist" :focus_frame="focus_frame" :framedata="framedata" :time="$index" :timedata="timedata"></frameitem>
+		<frameitem v-ref:frame v-for="framedata in frameslist" :focus_frame="focus_frame" :framedata="framedata" :time="$index" :timedata="timedata"></frameitem>
 	</div>
 </div>
 
@@ -40,14 +40,14 @@ return {
 	}
 	, props : ['timedata', 'focus_track', 'item_id', 'framesdata']
 	, data : function(){
-		var framelist = []
+		var frameslist = []
 
 		for(var i = 0; i <= this.timedata.length/this.timedata.step; i++){
-			framelist.push(this.framesdata[i] || {style:{}, type:'blankframe'})
+			frameslist.push(this.framesdata[i] || {style:{}, type:'blankframe'})
 		}
 
 		return {
-			framelist : framelist
+			frameslist : frameslist
 			, focus_frame : null 
 		}
 	}
@@ -71,7 +71,7 @@ return {
 		}
 	}
 	, watch : {
-		framelist : function(){
+		frameslist : function(){
 				console.log(arguments)
 		}
 	}
@@ -87,14 +87,14 @@ return {
 			}
 			, stop : function(event, ui){
 				sortStop = ui.item.index()
-				var frames = mSelf.framelist
+				var frames = mSelf.frameslist
 
 				frames.splice(sortStop, 0, frames.splice(sortStart,1)[0])
 
-				mSelf.framelist = []	
+				mSelf.frameslist = []	
 
 				mSelf.$nextTick(function(){
-					mSelf.framelist = frames	
+					mSelf.frameslist = frames	
 
 					mSelf.$nextTick(function(){
 						mSelf.$dispatch('loadTime')

@@ -84,10 +84,7 @@ return {
 					, height : 100
 				}
 				, frames : {
-					0 : {
-						style : {}
-						, type : 'animateframe'
-					}
+					0 : { style : {} , type : 'animateframe' }
 				}
 			})
 

@@ -70,7 +70,7 @@ return {
 
 			this.$set('focus_item.framedata.style["'+ type[1] +'"]', value|0)
 
-			this.focus_item.reloadItemStyle()
+			this.focus_item.loadItemStyle()
 		}
 	}
 }
