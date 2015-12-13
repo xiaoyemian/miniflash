@@ -72,7 +72,10 @@ return {
 		}
 	}
 	, methods : {
-		loadTime : function(time){
+		setFocusTrack : function(item_id){
+			this.$set('focus_track', item_id)
+		}
+		, loadTime : function(time){
 			if(time > this.timedata.length/this.timedata.step)
 				return;
 
@@ -81,9 +84,6 @@ return {
 
 			console.log(this.timedata.time, time)
 			this.$broadcast('loadItemByTime', this.timedata.time)
-		}
-		, setFocusTrack : function(item_id){
-			this.$set('focus_track', item_id)
 		}
 	}
 	, events : {
