@@ -154,6 +154,7 @@ return {
 				this.framedata = frame.framedata
 
 				if(this.framedata.type == 'blankframe'){
+					this.framedata.style = {}
 
 					for(var i = frame.time; i >= 0; i--){
 
