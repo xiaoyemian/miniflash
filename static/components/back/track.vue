@@ -60,8 +60,8 @@ return {
 		}
 	}
 	, events : {
-		updateFrameByItem : function(item){
-			if(item.itemdata.item_id == this.item_id){
+		focusTrackById : function(item_id){
+			if(item_id == this.item_id){
 				this.$dispatch('setFocusTrack', this)
 			}
 		}

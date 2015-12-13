@@ -122,7 +122,7 @@ return {
 	, events : {
 		selectItem : function(item){
 			this.setFocusItem(item)
-			this.$dispatch('focusTrackByItem', item)
+			this.$dispatch('focusTrackById', item.itemdata.item_id)
 		}
 		, setFocusItem : function(item){
 			this.setFocusItem(item)

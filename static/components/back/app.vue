@@ -56,8 +56,8 @@ return {
 		, focusItemById : function(item_id, frame){
       this.$refs.view.$broadcast('focusItemById', item_id)
 		} 
-		, focusTrackByItem : function(item){
-      this.$refs.flash.$broadcast('updateFrameByItem', item)
+		, focusTrackById : function(item_id){
+      this.$refs.flash.$broadcast('focusTrackById', item_id)
 		} 
 		, loadTime : function(){
       this.$refs.flash.loadTime()
