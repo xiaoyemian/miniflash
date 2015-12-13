@@ -92,7 +92,6 @@ return {
 				for(var i in mSelf.tracklist){
 					tracks[i] = mSelf.tracklist[i]
 				}
-
 				tracks.splice(sortStop, 0, tracks.splice(sortStart,1)[0])
 
 				mSelf.tracklist = []	
