@@ -117,12 +117,12 @@ return {
 		}
 	}
 	, events : {
-		setFocusItem : function(item, doFocusFrame){
-			console.log('doFocusFrame', doFocusFrame)
+		selectItem : function(item){
 			this.$set('focus_item', item)
-
-			if(doFocusFrame)
-				this.$dispatch('focusTrackByItem', item)
+			this.$dispatch('focusTrackByItem', item)
+		}
+		, setFocusItem : function(item){
+			this.$set('focus_item', item)
 		}
 	}
 	, ready : function(){

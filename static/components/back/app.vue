@@ -45,18 +45,19 @@ return {
 		}
 	}
 	, methods : {
+		loadItemByTrack : function(track){
+      this.$refs.view.$broadcast('loadItemByFrame', track)
+		}
 	}
 	, events : {
 		loadItemByTrack : function(track){
-			console.log('loadItemByTrack')
-      this.$refs.view.$broadcast('loadItemByFrame', track)
+			this.loadItemByTrack(track)
 		}
 		, focusItemByTrack : function(track){
-			console.log('focusItemByTrack')
+			this.loadItemByTrack(track)
       this.$refs.view.$broadcast('updateItemByFrame', track)
 		} 
 		, focusTrackByItem : function(item){
-			console.log('focusTrackByItem')
       this.$refs.flash.$broadcast('updateFrameByItem', item)
 		} 
 		, loadTime : function(){

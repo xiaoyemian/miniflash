@@ -83,12 +83,12 @@ return {
 		}
 	}
 	, events : {
-		setFocusTrack : function(track, doFocusItem){
-			console.log('doFocusItem', doFocusItem)
+		selectTrack : function(track){
 			this.$set('focus_track', track)
-
-			if(doFocusItem)
-				this.$dispatch('focusItemByTrack', this.focus_track)
+			this.$dispatch('focusItemByTrack', this.focus_track)
+		}
+		, setFocusTrack : function(track){
+			this.$set('focus_track', track)
 		}
 		, loadTime : function(time){
 			this.loadTime(time)
