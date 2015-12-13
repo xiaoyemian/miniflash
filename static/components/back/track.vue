@@ -53,7 +53,7 @@ return {
 	}
 	, methods : {
 		selectTrack : function(){
-			this.$dispatch('selectTrack', this.item_id, this.focus_frame.framedata)
+			this.$dispatch('selectTrack', this)
 		}
 		, setFocusFrame : function(frame){
 			this.$set('focus_frame', frame)
@@ -67,7 +67,7 @@ return {
 		, loadItemByTime : function(time){
 			var frame = this.$refs.frame[time]
 			this.setFocusFrame(frame)
-			this.$dispatch('loadItemByFrame', this.item_id, frame.framedata)
+			this.$dispatch('loadItemByFrame', this)
 		}
 	}
 	, watch : {

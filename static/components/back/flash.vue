@@ -99,10 +99,10 @@ return {
 		}
 	}
 	, events : {
-		selectTrack : function(item_id, framedata){
-			this.setFocusTrack(item_id)
-			this.$dispatch('loadItemByFrame', item_id, framedata)
-			this.$dispatch('focusItemById', item_id)
+		selectTrack : function(track){
+			this.setFocusTrack(track.item_id)
+			this.$dispatch('loadItemByFrame', track)
+			this.$dispatch('focusItemById', track.item_id)
 		}
 		, loadTime : function(time){
 			this.loadTime(time)

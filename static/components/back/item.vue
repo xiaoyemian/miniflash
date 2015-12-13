@@ -149,9 +149,9 @@ return {
 		}
 	}
 	, events : {
-		loadItemByFrame : function(item_id, framedata){
-			if(item_id == this.itemdata.item_id){
-				this.framedata = framedata
+		loadItemByFrame : function(track){
+			if(track.item_id == this.itemdata.item_id){
+				this.framedata = track.focus_frame.framedata
 				this.reloadItemStyle()
 			}
 		}
