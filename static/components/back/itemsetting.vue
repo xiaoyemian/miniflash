@@ -33,7 +33,7 @@
 <div class="itemsetting" v-if="focus_item">
 
 	<div class="itemOriginal" v-if="focus_item.itemdata.original">
-		<div class="inputBox" v-for="(key, value) in original">{{value.label}}:{{focus_item.itemdata.original[key]}}</div>
+		<div class="inputBox" v-for="(key, value) in original"><label for="original|{{key}}">{{value.label}}:</label><input type="{{value.type}}" @keyup="updateItem" id="original|{{key}}" placeholder="" value="{{focus_item.itemdata.original[key]}}" disabled/>{{value.unit}}</div>
 	</div>
 
 	<div class="itemFrame" v-if="focus_item.framedata">
@@ -50,9 +50,9 @@ return {
 	, data : function(){
 		return {
 			original : {
-				width : {label : 'width', unit : 'px', type : 'number'}
-				, height : {label : 'height', unit : 'px', type : 'number'}
-				, imageUrl : {label : 'imageUrl', unit : '', type : 'text'}
+				width : {label : '宽度', unit : 'px', type : 'number'}
+				, height : {label : '高度', unit : 'px', type : 'number'}
+				, imageUrl : {label : '背景图片', unit : '', type : 'text'}
 			}
 			, frame : {
 				width : {label : 'width', unit : 'px', type : 'number'}

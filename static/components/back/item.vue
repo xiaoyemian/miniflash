@@ -90,7 +90,7 @@ return {
 		}
 		, aspectRatio : function(){
 			var style = this.framedata.style
-			style.height = style.width * this.itemdata.original.scale
+			style.height = style.width * this.itemdata.original.height / this.itemdata.original.width
 
 			this.loadItemStyle()
 		}
@@ -130,7 +130,6 @@ return {
 				var original = {
 					width : 640 * itemdata.style['width']/100
 					, height : 640 * itemdata.style['padding-top']/100
-					, scale : itemdata.scale
 					, imageUrl : itemdata.background.image
 				}
 
