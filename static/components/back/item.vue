@@ -149,7 +149,7 @@ return {
 		}
 	}
 	, events : {
-		loadItemByFrame : function(track){
+		loadItemByTrack : function(track){
 			if(track.item_id == this.itemdata.item_id){
 				this.framedata = track.focus_frame.framedata
 				this.reloadItemStyle()

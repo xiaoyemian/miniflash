@@ -101,7 +101,7 @@ return {
 	, events : {
 		selectTrack : function(track){
 			this.setFocusTrack(track.item_id)
-			this.$dispatch('loadItemByFrame', track)
+			this.$dispatch('loadItemByTrack', track)
 			this.$dispatch('focusItemById', track.item_id)
 		}
 		, loadTime : function(time){
