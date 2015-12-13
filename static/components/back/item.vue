@@ -100,15 +100,6 @@ return {
 
 			this.loadItemStyle()
 		}
-		, loadPrevItemStyle : function(style){
-			this.framestyle = {}
-			
-			for(var i in style){
-				if(style[i]){
-					this.$set('framestyle["' + i + '"]', style[i] * this.print.scale + 'px')
-				}
-			}
-		}
 
 		, loadItemStyle : function(){
 			var style = this.framedata.style
@@ -118,7 +109,6 @@ return {
 			for(var i in style){
 				if(style[i]){
 					this.$set('framestyle["' + i + '"]', style[i] * this.print.scale + 'px')
-					this.framedata.type = 'keyframe'
 				}
 			}
 
@@ -166,18 +156,21 @@ return {
 				if(this.framedata.type == 'blankframe'){
 
 					for(var i = frame.time; i >= 0; i--){
+
 						var framedata = track.frameslist[i]
 
-						if(framedata.type == 'keyframe'){
-							this.loadPrevItemStyle(framedata.style)
+						if(framedata.type && framedata.type != 'blankframe'){
+
+							for(var i in framedata.style)
+								this.framedata.style[i] = framedata.style[i]
+
 							break;
 						}
 					}
-
-
-				}else{
-					this.loadItemStyle()
 				}
+
+				this.loadItemStyle()
+
 			}
 		}
 		, focusItemById : function(item_id){
@@ -197,6 +190,7 @@ return {
 		$item.draggable({
 			start : function(event, ui){
 				mSelf.setFocusItem()
+				mSelf.framedata.type = 'keyframe'
 			}
 			, drag : function(event, ui){
 				mSelf.resetItemStyle(ui.position)
@@ -214,6 +208,7 @@ return {
 		$item.resizable({
 			start : function(event, ui){
 				mSelf.setFocusItem()
+				mSelf.framedata.type = 'keyframe'
 			}
 			, resize : function(event, ui){
 				mSelf.resetItemStyle(ui.size)
