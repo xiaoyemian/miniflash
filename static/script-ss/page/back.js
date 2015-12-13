@@ -10,6 +10,7 @@ for(var no in pages){
 	
 	if(Array.isArray(pagedata.items)){
 		var items = pagedata.items
+		var itemsnew = {}
 
 		for(var i in items){
 			var item = items[i]
@@ -28,8 +29,12 @@ for(var no in pages){
 					, type : 'keyframe'
 				}
 			}
+
+			itemsnew[item.item_id] = item
 		}
-	//	console.log(pagedata)
+		pagedata.items = itemsnew
+
+		//console.log(pagedata)
 	}
 }
 

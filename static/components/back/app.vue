@@ -45,15 +45,15 @@ return {
 		}
 	}
 	, methods : {
-		loadItemByTrack : function(track){
+		loadItemByFrame : function(track){
       this.$refs.view.$broadcast('loadItemByFrame', track)
 		}
 	}
 	, events : {
-		loadItemByTrack : function(track){
-			this.loadItemByTrack(track)
+		loadItemByFrame : function(track){
+			this.loadItemByFrame(track)
 		}
-		, focusItemByTrack : function(track){
+		, focusItemByFrame : function(track){
       this.$refs.view.$broadcast('updateItemByFrame', track)
 		} 
 		, focusTrackByItem : function(item){

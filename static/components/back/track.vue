@@ -69,7 +69,7 @@ return {
 		, loadItemByTime : function(time){
 			var frame = this.$refs.frame[time]
 			this.$set('focus_frame', frame)
-			this.$dispatch('loadItemByTrack', this)
+			this.$dispatch('loadItemByFrame', this)
 		}
 	}
 	, ready : function(){
