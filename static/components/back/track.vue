@@ -53,7 +53,7 @@ return {
 	}
 	, methods : {
 		selectTrack : function(){
-			this.$dispatch('selectTrack', this)
+			this.$dispatch('selectTrack', this.item_id, this.focus_frame)
 		}
 		, setFocusFrame : function(frame){
 			this.$set('focus_frame', frame)
