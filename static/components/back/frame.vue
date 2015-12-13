@@ -68,10 +68,8 @@ return {
 	, methods : {
 		selectFrame : function(){
 			console.log(this.time)
-
 			this.$dispatch('selectFrame', this)
 			this.$dispatch('loadTime', this.time)
-
 		}
 	}
 	, events : {

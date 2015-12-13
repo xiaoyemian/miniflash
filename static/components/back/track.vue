@@ -70,19 +70,13 @@ return {
 			this.$dispatch('loadItemByFrame', this.item_id, frame.framedata)
 		}
 	}
+	, watch : {
+		tracklist : function(){
+				console.log(arguments)
+		}
+	}
 	, ready : function(){
 		var mSelf = this
-/*
-		var t = setInterval(function(){
-			var a = mSelf.tracklist.shift()
-			mSelf.tracklist.push(a)
-
-			mSelf.$nextTick(function () {
-				mSelf.$dispatch('loadTime')
-			})
-		}, 3000)
-*/
-
 		var $trackframe = $(this.$els.trackframe)
 		var sortStart
 		var sortStop
@@ -91,17 +85,25 @@ return {
 			start : function(event, ui){
 				sortStart = ui.item.index()
 			}
-			, update : function(event, ui){
+			, stop : function(event, ui){
 				sortStop = ui.item.index()
 
-				$trackframe.sortable('cancel')
+				var tracks = []
+				for(var i in mSelf.tracklist){
+					tracks[i] = mSelf.tracklist[i]
+				}
 
-				var a = mSelf.tracklist.shift()
-				mSelf.tracklist.push(a)
+				tracks.splice(sortStop, 0, tracks.splice(sortStart,1)[0])
 
+				mSelf.tracklist = []	
 
 				mSelf.$nextTick(function(){
-	//				mSelf.$dispatch('loadTime')
+					mSelf.tracklist = tracks	
+
+					mSelf.$nextTick(function(){
+						mSelf.$dispatch('loadTime')
+					})
+
 				})
 			}
 			, axis: "x"
