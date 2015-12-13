@@ -115,9 +115,6 @@ return {
 			, scale : 0.4
 		})
 	}
-	, ready : function(){
-		console.log(this.itemsdata)
-	}
 }
 </script>
 
