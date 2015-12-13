@@ -11,13 +11,14 @@
 	}
 
 	.times{
-		.h(14px);.ml(140px);
+		.h(12px);.ml(140px);
 
 		.timecontrol{
 			.pa;.h(100%);
 			&:before, &:after{ content:'';.pa;z-index:1; }
 			&:before{
-				right:5px;top:0px;bottom:0px;.ml(-1px);border-left:2px solid red;
+				top:0px;bottom:0px;.ml(-1px);border-right:2px solid red;
+				.w(50%);
 			}
 			&:after{
 			}
@@ -30,7 +31,7 @@
 		border-left:1px solid #222; border-right:1px solid #222;
 	}
 	.ui-state-highlight{
-		.w(12px);
+		.w(14px);
 	}
 
 	.ui-state-highlight{
@@ -68,7 +69,7 @@ return {
 			focus_track : null
 			, timedata : {
 				length : 10000
-				, step : 1000
+				, step : 200
 				, framewidth : 13
 				, time : 0
 			}

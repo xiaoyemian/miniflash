@@ -150,7 +150,7 @@ return {
 			, containment : "document"
 			, scroll : false
 			, snap : '.page'
-			, snapTolerance : '10'
+			, snapTolerance : '4'
 		})
 	
 		$item.resizable({
