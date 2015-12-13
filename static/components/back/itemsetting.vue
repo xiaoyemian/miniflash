@@ -21,7 +21,7 @@
 	}
 }
 
-.itemTrack{
+.itemFrame{
 	.bgc(#333); border:1px solid #222;
 }
 .itemOriginal{
@@ -36,8 +36,8 @@
 		<div class="inputBox" v-for="(key, value) in original">{{value.label}}:{{focus_item.itemdata.original[key]}}</div>
 	</div>
 
-	<div class="itemTrack" v-if="focus_item.framedata">
-		<div class="inputBox" v-for="(key, value) in track"><label for="track|{{key}}">{{value.label}}:</label><input type="{{value.type}}" @keyup="updateItem" id="track|{{key}}" placeholder="" value="{{focus_item.framedata.style[key]}}"/>{{value.unit}}</div>
+	<div class="itemFrame" v-if="focus_item.framedata">
+		<div class="inputBox" v-for="(key, value) in frame"><label for="frame|{{key}}">{{value.label}}:</label><input type="{{value.type}}" @keyup="updateItem" id="frame|{{key}}" placeholder="" value="{{focus_item.framedata.style[key]}}"/>{{value.unit}}</div>
 	</div>
 
 </div>
@@ -54,7 +54,7 @@ return {
 				, height : {label : 'height', unit : 'px', type : 'number'}
 				, imageUrl : {label : 'imageUrl', unit : '', type : 'text'}
 			}
-			, track : {
+			, frame : {
 				width : {label : 'width', unit : 'px', type : 'number'}
 				, height : {label : 'height', unit : 'px', type : 'number'}
 				, top : {label : 'top', unit : 'px', type : 'number'}
@@ -70,7 +70,7 @@ return {
 
 			this.$set('focus_item.framedata.style["'+ type[1] +'"]', value|0)
 
-			this.focus_item.updateItemStyle()
+			this.focus_item.reloadItemStyle()
 		}
 	}
 }

@@ -13,10 +13,10 @@
 
 	&.keyframe{
 		.handel{ .bgc(#5CD685); }
-/*
 		&:before{
 			top:50%;left:50%;.w(6px);.h(6px);.mt(-3px);.ml(-3px);.bgc(#000); .border-r(8px);
 		}
+/*
 */
 		&.focus{
 			.handel{
@@ -31,7 +31,7 @@
 	&.focus{
 		.handel{
 //			border:1px solid #f69;
-			.bgc(red);
+//			.bgc(red);
 		}
 	}
 

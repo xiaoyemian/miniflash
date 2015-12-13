@@ -92,15 +92,15 @@ return {
 			var style = this.framedata.style
 			style.height = style.width * this.itemdata.original.scale
 
-			this.updateItemStyle()
+			this.reloadItemStyle()
 		}
 		, resetItemStyle : function(opts){
 			for(var i in opts)
 				this.framedata.style[i] = (opts[i]) / this.print.scale
 
-			this.updateItemStyle()
+			this.reloadItemStyle()
 		}
-		, updateItemStyle : function(){
+		, reloadItemStyle : function(){
 			var style = this.framedata.style
 
 			this.framestyle = {}
@@ -152,7 +152,7 @@ return {
 		loadItemByFrame : function(item_id, framedata){
 			if(item_id == this.itemdata.item_id){
 				this.framedata = framedata
-				this.updateItemStyle()
+				this.reloadItemStyle()
 			}
 		}
 		, focusItemById : function(item_id){
@@ -160,8 +160,8 @@ return {
 				this.setFocusItem()
 			}
 		}
-		, updateItemStyle : function(){
-			this.updateItemStyle()
+		, reloadItemStyle : function(){
+			this.reloadItemStyle()
 		}
 	}
 	, ready : function(){
@@ -177,7 +177,7 @@ return {
 				mSelf.resetItemStyle(ui.position)
 			}
 			, stop : function(event, ui){
-				mSelf.updateItemStyle()
+				mSelf.reloadItemStyle()
 			}
 			, cursor: "move"
 			, containment : "document"
@@ -194,7 +194,7 @@ return {
 				mSelf.resetItemStyle(ui.size)
 			}
 			, stop : function(event, ui){
-				mSelf.updateItemStyle()
+				mSelf.reloadItemStyle()
 			}
 			, ghost: true
 		})
