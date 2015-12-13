@@ -189,7 +189,7 @@ return {
 
 		$item.draggable({
 			start : function(event, ui){
-				mSelf.setFocusItem()
+				mSelf.selectItem()
 				mSelf.framedata.type = 'keyframe'
 			}
 			, drag : function(event, ui){
@@ -207,7 +207,7 @@ return {
 	
 		$item.resizable({
 			start : function(event, ui){
-				mSelf.setFocusItem()
+				mSelf.selectItem()
 				mSelf.framedata.type = 'keyframe'
 			}
 			, resize : function(event, ui){

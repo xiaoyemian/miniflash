@@ -39,7 +39,7 @@
 .track.focus{
 	.frame.focus{
 		.handel{
-//			.bgc(#f69);
+			.bgc(red);
 		}
 	}
 	.frame{
