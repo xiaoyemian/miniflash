@@ -11,7 +11,7 @@
 	}
 
 	.times{
-		.h(20px);.ml(140px);
+		.h(14px);.ml(140px);
 
 		.timecontrol{
 			.pa;.h(100%);
