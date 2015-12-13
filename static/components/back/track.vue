@@ -96,8 +96,8 @@ return {
 
 				$trackframe.sortable('cancel')
 
-//				var a = mSelf.tracklist.shift()
-	//			mSelf.tracklist.push(a)
+				var a = mSelf.tracklist.shift()
+				mSelf.tracklist.push(a)
 
 
 				mSelf.$nextTick(function(){
