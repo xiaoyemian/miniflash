@@ -83,7 +83,7 @@ return {
 					width : 100
 					, height : 100
 				}
-				, tracks : {
+				, frames : {
 					0 : {
 						style : {}
 						, type : 'animateframe'
@@ -114,6 +114,9 @@ return {
 			, height : 1136
 			, scale : 0.4
 		})
+	}
+	, ready : function(){
+		console.log(this.itemsdata)
 	}
 }
 </script>

@@ -48,7 +48,7 @@
 	</div>
 
 	<div class="tracks">
-		<track v-ref:track v-for="itemdata in itemsdata" :index="$index" :trackdata="itemdata.tracks" :item_id="itemdata.item_id" :focus_track="focus_track" :timedata="timedata"></track>
+		<track v-ref:track v-for="itemdata in itemsdata" :index="$index" :framesdata="itemdata.frames" :item_id="itemdata.item_id" :focus_track="focus_track" :timedata="timedata"></track>
 	</div>
 </div>
 
@@ -68,8 +68,8 @@ return {
 		for(var i in this.itemsdata){
 			var itemdata = this.itemsdata[i]
 
-			if(!itemdata.tracks)
-				itemdata.tracks = {}
+			if(!itemdata.frames)
+				itemdata.frames = {}
 
 		}
 

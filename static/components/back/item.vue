@@ -124,8 +124,8 @@ return {
 				this.$set('itemdata.original', original)
 			}
 
-			if(!itemdata.tracks){
-				var tracks = {
+			if(!itemdata.frames){
+				var frames = {
 					0 : {
 						style : {
 							width : itemdata.original.width
@@ -136,7 +136,7 @@ return {
 						, type : 'keyframe'
 					}
 				}
-				this.$set('itemdata.tracks', tracks)
+				this.$set('itemdata.frames', frames)
 			}
 
 			delete itemdata.style
