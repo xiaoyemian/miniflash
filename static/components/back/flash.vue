@@ -85,6 +85,7 @@ return {
 	, events : {
 		selectTrack : function(track){
 			this.$set('focus_track', track)
+			this.$dispatch('loadItemByTrack', this.focus_track)
 			this.$dispatch('focusItemByTrack', this.focus_track)
 		}
 		, setFocusTrack : function(track){

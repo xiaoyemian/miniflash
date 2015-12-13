@@ -54,7 +54,6 @@ return {
 			this.loadItemByTrack(track)
 		}
 		, focusItemByTrack : function(track){
-			this.loadItemByTrack(track)
       this.$refs.view.$broadcast('updateItemByFrame', track)
 		} 
 		, focusTrackByItem : function(item){

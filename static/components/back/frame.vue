@@ -43,7 +43,7 @@
 </style>
 
 <template>
-<div class="frame" :class="[framedata.type, focus_frame && focus_frame.time == time ? 'focus' : '']" @click.stop="setFocusFrame">
+<div class="frame" :class="[framedata.type, focus_frame && focus_frame.time == time ? 'focus' : '']" @click.stop="selectFrame">
 	<div class="handel"></div>
 </div>
 </template>
@@ -58,8 +58,8 @@ return {
 		}
 	}
 	, methods : {
-		setFocusFrame : function(){
-			this.$dispatch('setFocusFrame', this)
+		selectFrame : function(){
+			this.$dispatch('selectFrame', this)
 			this.$dispatch('loadTime', this.time)
 		}
 	}

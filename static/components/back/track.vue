@@ -55,17 +55,14 @@ return {
 		selectTrack : function(){
 			this.$dispatch('selectTrack', this)
 		}
-		, setFocusTrack : function(){
-			this.$dispatch('setFocusTrack', this)
-		}
 	}
 	, events : {
 		updateFrameByItem : function(item){
 			if(item.itemdata.item_id == this.item_id){
-				this.setFocusTrack()
+				this.$dispatch('setFocusTrack', this)
 			}
 		}
-		, setFocusFrame : function(frame){
+		, selectFrame : function(frame){
 			this.$set('focus_frame', frame)
 			this.selectTrack()
 		}
