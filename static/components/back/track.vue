@@ -15,7 +15,7 @@
 		.ml(140px); display:-webkit-box;
 	}
 	&.focus{
-		.bgc(#f69);
+		//.bgc(#f69);
 	}
 }
 
@@ -25,7 +25,7 @@
 <div class="track" @click.stop="selectTrack" :class="{focus:focus_track && focus_track.item_id == item_id}">
 	<div class="trackname">{{item_id}}</div>
 	<div class="trackframe" v-el:trackframe>
-		<frameitem v-ref:frame v-for="framedata in tracklist" :focus_frame="focus_frame" :framedata="framedata" :time="$index"></frameitem>
+		<frameitem v-ref:frame v-for="framedata in tracklist" :focus_frame="focus_frame" :framedata="framedata" :time="$index" :timedata="timedata"></frameitem>
 	</div>
 </div>
 
@@ -72,11 +72,21 @@ return {
 		, loadItemByTime : function(time){
 			var frame = this.$refs.frame[time]
 			this.setFocusFrame(frame)
-			this.$dispatch('loadItemByFrame', this)
+			this.$dispatch('loadItemByFrame', this.item_id, frame)
 		}
 	}
 	, ready : function(){
 		var mSelf = this
+/*
+		var t = setInterval(function(){
+			var a = mSelf.tracklist.shift()
+			mSelf.tracklist.push(a)
+
+			mSelf.$nextTick(function () {
+				mSelf.$dispatch('loadTime')
+			})
+		}, 3000)
+*/
 
 		var $trackframe = $(this.$els.trackframe)
 		var sortStart
@@ -86,15 +96,18 @@ return {
 			start : function(event, ui){
 				sortStart = ui.item.index()
 			}
-			, stop : function(event, ui){
+			, update : function(event, ui){
 				sortStop = ui.item.index()
 
-/*
-				var framedata = mSelf.tracklist.splice(sortStart, 1)[0]
-				mSelf.tracklist.splice(sortStop, 0, framedata)
-				//console.log(mSelf.tracklist)
-*/
+				$trackframe.sortable('cancel')
 
+				var a = mSelf.tracklist.shift()
+				mSelf.tracklist.push(a)
+
+
+				mSelf.$nextTick(function(){
+	//				mSelf.$dispatch('loadTime')
+				})
 			}
 			, axis: "x"
 			, cursor: "move"

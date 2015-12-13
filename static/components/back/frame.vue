@@ -8,20 +8,16 @@
 
 	.handel{
 		.pa;top:0px;left:0px;right:0px;bottom:0px;
-//		.opacity(20); 
-	}
-
-	&.focus{
-		.handel{
-			border:1px solid #f69;
-		}
+		.opacity(60); 
 	}
 
 	&.keyframe{
 		.handel{ .bgc(#5CD685); }
+/*
 		&:before{
 			top:50%;left:50%;.w(6px);.h(6px);.mt(-3px);.ml(-3px);.bgc(#000); .border-r(8px);
 		}
+*/
 		&.focus{
 			.handel{
 			}
@@ -32,8 +28,20 @@
 		.handel{.bgc(#5CADD6);}
 	}
 
+	&.focus{
+		.handel{
+//			border:1px solid #f69;
+			.bgc(red);
+		}
+	}
+
 }
 .track.focus{
+	.frame.focus{
+		.handel{
+//			.bgc(#f69);
+		}
+	}
 	.frame{
 		.handel{
 			.opacity(100);
@@ -44,7 +52,7 @@
 
 <template>
 <div class="frame" :class="[framedata.type, focus_frame && focus_frame.time == time ? 'focus' : '']" @click.stop="selectFrame">
-	<div class="handel"></div>
+	<div class="handel">{{time}}</div>
 </div>
 </template>
 
@@ -52,7 +60,7 @@
 <script>
 
 return {
-	props : ['focus_frame', 'framedata', 'time']
+	props : ['focus_frame', 'framedata', 'time', 'timedata']
 	, data : function(){
 		return {
 		}
@@ -61,9 +69,14 @@ return {
 		selectFrame : function(){
 			this.$dispatch('selectFrame', this)
 			this.$dispatch('loadTime', this.time)
+
+			console.log(this.time)
 		}
 	}
 	, events : {
+	}
+	, ready : function(){
+
 	}
 }
 </script>

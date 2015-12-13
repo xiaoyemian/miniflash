@@ -122,15 +122,15 @@ return {
 		}
 	}
 	, events : {
-		loadItemByFrame : function(track){
-			if(track.item_id == this.itemdata.item_id){
-				this.frame = track.focus_frame
+		loadItemByFrame : function(item_id, frame){
+			if(item_id == this.itemdata.item_id){
+				this.frame = frame
 				this.formatItemStyle()
 				this.updateItemStyle()
 			}
 		}
-		, updateItemByFrame : function(track){
-			if(track.item_id == this.itemdata.item_id){
+		, focusItemById : function(item_id){
+			if(item_id == this.itemdata.item_id){
 				this.setFocusItem()
 			}
 		}

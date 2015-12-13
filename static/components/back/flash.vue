@@ -14,7 +14,7 @@
 		.h(20px);.ml(140px);
 
 		.timecontrol{
-			.pa;.w(13px);.h(100%);
+			.pa;.w(15px);.h(100%);
 			&:before, &:after{ content:'';.pa;z-index:1; }
 			&:before{
 				right:5px;top:0px;bottom:0px;.ml(-1px);border-left:2px solid red;
@@ -26,7 +26,7 @@
 	}
 
 	.frame, .ui-state-highlight{
-		.w(12px); .h(24px); .ml(-1px);
+		.w(14px); .h(24px); .ml(-1px);
 		border-left:1px solid #222; border-right:1px solid #222;
 	}
 
@@ -40,7 +40,7 @@
 <template>
 <div class="flash">
 	<div class="times">
-		<div class="timecontrol" v-el:timecontrol :style="{left:140 + 13 * timedata.time + 'px'}"></div>
+		<div class="timecontrol" v-el:timecontrol :style="{left:140 + timedata.framewidth * timedata.time + 'px'}"></div>
 	</div>
 
 	<div class="tracks">
@@ -66,7 +66,7 @@ return {
 			, timedata : {
 				length : 10000
 				, step : 1000
-				, framewidth : 13
+				, framewidth : 15
 				, time : 0
 			}
 		}
@@ -79,6 +79,7 @@ return {
 			if(typeof time !== 'undefined')
 				this.timedata.time = time
 
+			console.log(this.timedata.time, time)
 			this.$broadcast('loadItemByTime', this.timedata.time)
 		}
 		, setFocusTrack : function(track){
@@ -88,8 +89,8 @@ return {
 	, events : {
 		selectTrack : function(track){
 			this.setFocusTrack(track)
-			this.$dispatch('loadItemByFrame', this.focus_track)
-			this.$dispatch('focusItemByFrame', this.focus_track)
+			this.$dispatch('loadItemByFrame', track.item_id, track.focus_frame)
+			this.$dispatch('focusItemById', track.item_id)
 		}
 		, setFocusTrack : function(track){
 			this.setFocusTrack(track)

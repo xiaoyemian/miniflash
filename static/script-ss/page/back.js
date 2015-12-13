@@ -10,7 +10,6 @@ for(var no in pages){
 	
 	if(Array.isArray(pagedata.items)){
 		var items = pagedata.items
-		var itemsnew = {}
 
 		for(var i in items){
 			var item = items[i]
@@ -30,9 +29,7 @@ for(var no in pages){
 				}
 			}
 
-			itemsnew[item.item_id] = item
 		}
-		pagedata.items = itemsnew
 
 		//console.log(pagedata)
 	}

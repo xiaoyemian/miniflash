@@ -45,16 +45,16 @@ return {
 		}
 	}
 	, methods : {
-		loadItemByFrame : function(track){
-      this.$refs.view.$broadcast('loadItemByFrame', track)
+		loadItemByFrame : function(item_id, frame){
+      this.$refs.view.$broadcast('loadItemByFrame', item_id, frame)
 		}
 	}
 	, events : {
-		loadItemByFrame : function(track){
-			this.loadItemByFrame(track)
+		loadItemByFrame : function(item_id, frame){
+			this.loadItemByFrame(item_id, frame)
 		}
-		, focusItemByFrame : function(track){
-      this.$refs.view.$broadcast('updateItemByFrame', track)
+		, focusItemById : function(item_id, frame){
+      this.$refs.view.$broadcast('focusItemById', item_id)
 		} 
 		, focusTrackByItem : function(item){
       this.$refs.flash.$broadcast('updateFrameByItem', item)
