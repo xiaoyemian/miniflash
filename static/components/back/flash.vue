@@ -14,7 +14,7 @@
 		.h(20px);.ml(140px);
 
 		.timecontrol{
-			.pa;.w(15px);.h(100%);
+			.pa;.h(100%);
 			&:before, &:after{ content:'';.pa;z-index:1; }
 			&:before{
 				right:5px;top:0px;bottom:0px;.ml(-1px);border-left:2px solid red;
@@ -26,8 +26,11 @@
 	}
 
 	.frame, .ui-state-highlight{
-		.w(14px); .h(24px); .ml(-1px);
+		.h(24px); .ml(-1px);
 		border-left:1px solid #222; border-right:1px solid #222;
+	}
+	.ui-state-highlight{
+		.w(12px);
 	}
 
 	.ui-state-highlight{
@@ -40,7 +43,7 @@
 <template>
 <div class="flash">
 	<div class="times">
-		<div class="timecontrol" v-el:timecontrol :style="{left:140 + timedata.framewidth * timedata.time + 'px'}"></div>
+		<div class="timecontrol" v-el:timecontrol :style="{width:timedata.framewidth + 'px',left:140 + timedata.framewidth * timedata.time + 'px'}"></div>
 	</div>
 
 	<div class="tracks">
@@ -66,7 +69,7 @@ return {
 			, timedata : {
 				length : 10000
 				, step : 1000
-				, framewidth : 15
+				, framewidth : 13
 				, time : 0
 			}
 		}

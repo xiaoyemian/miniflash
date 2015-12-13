@@ -51,8 +51,8 @@
 </style>
 
 <template>
-<div class="frame" :class="[framedata.type, focus_frame && focus_frame.time == time ? 'focus' : '']" @click.stop="selectFrame">
-	<div class="handel">{{time}}</div>
+<div class="frame" :class="[framedata.type, focus_frame && focus_frame.time == time ? 'focus' : '']" @click.stop="selectFrame" :style="{width:timedata.framewidth-1 + 'px'}">
+	<div class="handel"></div>
 </div>
 </template>
 
