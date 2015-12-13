@@ -52,7 +52,7 @@ return {
       this.$refs.view.$broadcast('focusItemById', item_id)
 		} 
 		, focusTrackById : function(item_id){
-      this.$refs.flash.$broadcast('focusTrackById', item_id)
+      this.$refs.flash.setFocusTrack(item_id)
 		} 
 		, loadTime : function(){
       this.$refs.flash.loadTime()
