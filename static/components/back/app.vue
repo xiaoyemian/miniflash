@@ -44,16 +44,11 @@ return {
 			pagedata : this.pages[this.number]
 		}
 	}
-	, methods : {
+	, events : {
 		loadItemByFrame : function(item_id, frame){
       this.$refs.view.$broadcast('loadItemByFrame', item_id, frame)
 		}
-	}
-	, events : {
-		loadItemByFrame : function(item_id, frame){
-			this.loadItemByFrame(item_id, frame)
-		}
-		, focusItemById : function(item_id, frame){
+		, focusItemById : function(item_id){
       this.$refs.view.$broadcast('focusItemById', item_id)
 		} 
 		, focusTrackById : function(item_id){
