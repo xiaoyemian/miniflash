@@ -59,7 +59,15 @@ return {
 		}
 	}
 	, ready: function(){
-
+		var itemsdata = this.pagedata.items
+		for(var i in itemsdata){
+			var itemdata = itemsdata[i]
+			delete itemdata.style
+			delete itemdata.background
+			delete itemdata.scale
+			
+			console.log(itemdata)
+		}
   }
 }
 </script>

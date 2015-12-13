@@ -21,7 +21,7 @@
 
 
 <template>
-<itemsetting :focus_item="focus_item" :stylekey="stylekey" :backgroundkey="backgroundkey"></itemsetting>
+<itemsetting :focus_item="focus_item"></itemsetting>
 
 <div class="viewcontrol">
 	<div @click="addItem">addItem</div>
@@ -29,7 +29,7 @@
 
 <div class="view" @click="clearFocus">
 	<div class="page" :style="pagestyle">
-		<item v-ref:item v-for="itemdata in itemsdata" :itemdata="itemdata" :index="$index" :focus_item="focus_item" :print="print" :stylekey="stylekey" :backgroundkey="backgroundkey"></item>
+		<item v-ref:item v-for="itemdata in itemsdata" :itemdata="itemdata" :index="$index" :focus_item="focus_item" :print="print"></item>
 	</div>
 </div>
 
@@ -39,16 +39,6 @@
 <script>
 var item = require('back/item.vue')
 var itemsetting = require('back/itemsetting.vue')
-
-var stylekey = {
-	width : '宽度'
-	, height : '高度'
-	, top : 'top'
-	, left : 'left'
-}
-var backgroundkey = {
-	image : '背景图片'
-}
 
 return {
   components : {
@@ -66,8 +56,6 @@ return {
 				, scale : 0
 			}
 			, pagestyle : {}
-			, stylekey : stylekey 
-			, backgroundkey : backgroundkey 
 		}
 	}
 	, methods : {
@@ -89,12 +77,9 @@ return {
 			this.$set('pagestyle["margin-top"]', print.height * print.scale/-2 + 'px')
     }
 		, addItem : function(){
-			console.log(this.itemsdata)
 			this.itemsdata.push({
 				item_id : new Date().valueOf()
-				, background : {
-				}
-				, style : {
+				, original : {
 					width : 100
 					, height : 100
 				}
@@ -114,11 +99,6 @@ return {
 			this.$set('focus_item', item)
 		}
 	}
-	, watch : {
-		itemsdata : function(){
-//			console.log(arguments)
-		}
-	}
 	, events : {
 		selectItem : function(item){
 			this.setFocusItem(item)
@@ -128,7 +108,7 @@ return {
 			this.setFocusItem(item)
 		}
 	}
-	, ready : function(){
+	, created : function(){
 		this.resizePrint({
 			width : 640
 			, height : 1136

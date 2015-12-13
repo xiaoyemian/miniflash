@@ -5,37 +5,6 @@ var app = require('back/app.vue')
 var pages = require('data/pages')
 var number = 2
 
-for(var no in pages){
-	var pagedata = pages[no]
-	
-	if(Array.isArray(pagedata.items)){
-		var items = pagedata.items
-
-		for(var i in items){
-			var item = items[i]
-			item.tracks = {} 
-
-			var key = [0,5,9, 10]
-			for(var k in key){
-				var style = {}
-
-				for(var j in item.style){
-					style[j] = item.style[j]
-				}
-
-				item.tracks[key[k]+''] = {
-					style : style 
-					, type : 'keyframe'
-				}
-			}
-
-		}
-
-		//console.log(pagedata)
-	}
-}
-
-
 var vm = new Vue({
   el: 'body'
 	, data : {

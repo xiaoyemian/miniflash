@@ -21,10 +21,10 @@
 	}
 }
 
-.itemStyle{
+.itemTrack{
 	.bgc(#333); border:1px solid #222;
 }
-.itemType{
+.itemOriginal{
 	.bgc(#333); border:1px solid #222;
 }
 </style>
@@ -32,23 +32,34 @@
 <template>
 <div class="itemsetting" v-if="focus_item">
 
-	<div class="itemStyle">
-		<div class="inputBox" v-for="(key, value) in stylekey"><label for="style|{{key}}">{{value}}:</label><input type="number" @keyup="updateItem" id="style|{{key}}" placeholder="" value="{{focus_item.framedata.style[key]}}"/>px</div>
+	<div class="itemOriginal" v-if="focus_item.itemdata.original">
+		<div class="inputBox" v-for="(key, value) in original">{{value.label}}:{{focus_item.itemdata.original[key]}}</div>
 	</div>
 
-	<div class="itemType" v-if="focus_item.itemdata.background">
-		<div class="inputBox" v-for="(key, value) in backgroundkey"><label for="background|{{key}}">{{value}}:</label><input type="text" id="background|{{key}}" placeholder="" value="{{focus_item.itemdata.background[key]}}"/></div>
-
+	<div class="itemTrack" v-if="focus_item.framedata">
+		<div class="inputBox" v-for="(key, value) in track"><label for="track|{{key}}">{{value.label}}:</label><input type="{{value.type}}" @keyup="updateItem" id="track|{{key}}" placeholder="" value="{{focus_item.framedata.style[key]}}"/>{{value.unit}}</div>
 	</div>
+
 </div>
 </template>
 
 <script>
 
 return {
-	props : ['focus_item', 'stylekey', 'backgroundkey']
+	props : ['focus_item']
 	, data : function(){
 		return {
+			original : {
+				width : {label : 'width', unit : 'px', type : 'number'}
+				, height : {label : 'height', unit : 'px', type : 'number'}
+				, imageUrl : {label : 'imageUrl', unit : '', type : 'text'}
+			}
+			, track : {
+				width : {label : 'width', unit : 'px', type : 'number'}
+				, height : {label : 'height', unit : 'px', type : 'number'}
+				, top : {label : 'top', unit : 'px', type : 'number'}
+				, left : {label : 'left', unit : 'px', type : 'number'}
+			}
 		}
 	}
 	, methods : {
@@ -57,7 +68,7 @@ return {
 			var type = setting.id.split('|')
 			var value = setting.value
 
-			this.$set('focus_item.frame.framedata.style["'+ type[1] +'"]', value|0)
+			this.$set('focus_item.framedata.style["'+ type[1] +'"]', value|0)
 
 			this.focus_item.updateItemStyle()
 		}

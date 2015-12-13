@@ -52,7 +52,7 @@
 </style>
 
 <template>
-<div class="item" @click.stop="selectItem" :class="[framedata && framedata.type, focus_item && focus_item.itemdata.item_id == itemdata.item_id ? 'focus' : '']" :style="itemstyle">
+<div class="item" @click.stop="selectItem" :class="[framedata && framedata.type, focus_item && focus_item.itemdata.item_id == itemdata.item_id ? 'focus' : '']" :style="[itemstyle, framestyle]">
 	<div class="handel">
 		<div @click.stop="aspectRatio" class="aspectRatioBtn"></div>
 	</div>
@@ -63,11 +63,13 @@
 <script>
 
 return {
-	props:['focus_item', 'itemdata', 'print', 'stylekey', 'backgroundkey']
+	props:['focus_item', 'itemdata', 'print']
 	, data:function(){
+
 		return {
 			framedata : null
-			, itemstyle : {} 
+			, framestyle : {} 
+			, itemstyle : {}
 		}
 	}
 	, methods : {
@@ -77,49 +79,71 @@ return {
 		, setFocusItem : function(){
 			this.$dispatch('setFocusItem', this)
 		}
+		, loadItemByOriginal : function(){
+			var style = this.itemdata.original
+
+			this.itemstyle = {
+				width : style.width * this.print.scale + 'px'
+				, height : style.height * this.print.scale + 'px'
+				, 'background-image' : 'url("' + style.imageUrl + '")'
+			}
+		}
 		, aspectRatio : function(){
 			var style = this.framedata.style
-			style.height = style.width * this.itemdata.scale
+			style.height = style.width * this.itemdata.original.scale
 
 			this.updateItemStyle()
 		}
-		, formatItemStyle : function(){
-			var style = this.framedata.style
-      if(style['padding-top']){
-
-				this.$set('framedata.style.height', this.print.width * style['padding-top']/100)
-        delete style['padding-top']
-
-        style.width *= this.print.width/100
-        style.top *= this.print.height/100
-        style.left *= this.print.width/100
-      }
-
-    }
 		, resetItemStyle : function(opts){
-			var style = this.framedata.style
 			for(var i in opts)
-				style[i] = (opts[i]) / this.print.scale
+				this.framedata.style[i] = (opts[i]) / this.print.scale
 
 			this.updateItemStyle()
 		}
 		, updateItemStyle : function(){
 			var style = this.framedata.style
 
-			for(var i in style)
-				style[i] = style[i]|0
+			this.framestyle = {
+				width : (style.width||0) * this.print.scale + 'px'
+				, height : (style.height||0) * this.print.scale + 'px'
+				, top : (style.top||0) * this.print.scale + 'px'
+				, left : (style.left||0) * this.print.scale + 'px'
+			}
+		}
+		, formatItem : function(){
+			var itemdata = this.itemdata
 
-			for(var i in this.stylekey)
-				this.$set('itemstyle["'+i+'"]', (style[i]||0) * this.print.scale + 'px')
+			if(!itemdata.original){
+				var original = {
+					width : 640 * itemdata.style['width']/100
+					, height : 640 * itemdata.style['padding-top']/100
+					, scale : itemdata.scale
+					, imageUrl : itemdata.background.image
+				}
 
-			this.$set('itemstyle["background-image"]', 'url("' + this.itemdata.background.image + '")')
+				this.$set('itemdata.original', original)
+			}
+
+			if(!itemdata.tracks){
+				var tracks = {
+					0 : {
+						style : {
+							width : itemdata.original.width
+							, height : itemdata.original.height
+							, left : 640 * itemdata.style['left']/100	
+							, top : 1136 * itemdata.style['top']/100	
+						}
+						, type : 'keyframe'
+					}
+				}
+				this.$set('itemdata.tracks', tracks)
+			}
 		}
 	}
 	, events : {
 		loadItemByFrame : function(item_id, framedata){
 			if(item_id == this.itemdata.item_id){
 				this.framedata = framedata
-				this.formatItemStyle()
 				this.updateItemStyle()
 			}
 		}
@@ -133,6 +157,7 @@ return {
 		}
 	}
 	, ready : function(){
+		console.log(this.itemdata)
 		var mSelf = this
 		var $item = $(this.$el)
 
@@ -165,6 +190,10 @@ return {
 			}
 			, ghost: true
 		})
+	}
+	, created : function(){
+		this.formatItem()
+		this.loadItemByOriginal()
 	}
 }
 </script>
