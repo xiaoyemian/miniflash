@@ -103,12 +103,16 @@ return {
 		, updateItemStyle : function(){
 			var style = this.framedata.style
 
-			this.framestyle = {
-				width : (style.width||0) * this.print.scale + 'px'
-				, height : (style.height||0) * this.print.scale + 'px'
-				, top : (style.top||0) * this.print.scale + 'px'
-				, left : (style.left||0) * this.print.scale + 'px'
+			this.framestyle = {}
+			this.framedata.type = 'blankframe'
+			
+			for(var i in style){
+				if(style[i]){
+					this.$set('framestyle["' + i + '"]', style[i] * this.print.scale + 'px')
+					this.framedata.type = 'keyframe'
+				}
 			}
+
 		}
 		, formatItem : function(){
 			var itemdata = this.itemdata
