@@ -55,6 +55,9 @@ return {
 		selectTrack : function(){
 			this.$dispatch('selectTrack', this)
 		}
+		, setFocusFrame : function(frame){
+			this.$set('focus_frame', frame)
+		}
 	}
 	, events : {
 		updateFrameByItem : function(item){
@@ -63,12 +66,12 @@ return {
 			}
 		}
 		, selectFrame : function(frame){
-			this.$set('focus_frame', frame)
+			this.setFocusFrame(frame)
 			this.selectTrack()
 		}
 		, loadItemByTime : function(time){
 			var frame = this.$refs.frame[time]
-			this.$set('focus_frame', frame)
+			this.setFocusFrame(frame)
 			this.$dispatch('loadItemByFrame', this)
 		}
 	}

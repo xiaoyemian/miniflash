@@ -110,6 +110,9 @@ return {
 				this.$dispatch('loadTime')
 			})
 		}
+		, setFocusItem : function(item){
+			this.$set('focus_item', item)
+		}
 	}
 	, watch : {
 		itemsdata : function(){
@@ -118,11 +121,11 @@ return {
 	}
 	, events : {
 		selectItem : function(item){
-			this.$set('focus_item', item)
+			this.setFocusItem(item)
 			this.$dispatch('focusTrackByItem', item)
 		}
 		, setFocusItem : function(item){
-			this.$set('focus_item', item)
+			this.setFocusItem(item)
 		}
 	}
 	, ready : function(){

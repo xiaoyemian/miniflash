@@ -81,15 +81,18 @@ return {
 
 			this.$broadcast('loadItemByTime', this.timedata.time)
 		}
+		, setFocusTrack : function(track){
+			this.$set('focus_track', track)
+		}
 	}
 	, events : {
 		selectTrack : function(track){
-			this.$set('focus_track', track)
+			this.setFocusTrack(track)
 			this.$dispatch('loadItemByFrame', this.focus_track)
 			this.$dispatch('focusItemByFrame', this.focus_track)
 		}
 		, setFocusTrack : function(track){
-			this.$set('focus_track', track)
+			this.setFocusTrack(track)
 		}
 		, loadTime : function(time){
 			this.loadTime(time)

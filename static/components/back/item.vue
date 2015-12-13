@@ -134,7 +134,6 @@ return {
 				this.setFocusItem()
 			}
 		}
-
 		, updateItemStyle : function(){
 			this.updateItemStyle()
 		}
