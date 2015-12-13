@@ -58,7 +58,7 @@
 </style>
 
 <template>
-<div class="item" @click.stop="selectItem" :class="[frame && frame.framedata.type, focus_item && focus_item.itemdata.item_id == itemdata.item_id ? 'focus' : '']" :style="itemstyle">
+<div class="item" @click.stop="selectItem" :class="[framedata && framedata.type, focus_item && focus_item.itemdata.item_id == itemdata.item_id ? 'focus' : '']" :style="itemstyle">
 	<div class="handel">
 		<div @click.stop="aspectRatio" class="aspectRatioBtn"></div>
 	</div>
@@ -72,7 +72,7 @@ return {
 	props:['focus_item', 'itemdata', 'print', 'stylekey', 'backgroundkey']
 	, data:function(){
 		return {
-			frame : null
+			framedata : null
 			, itemstyle : {} 
 		}
 	}
@@ -84,16 +84,16 @@ return {
 			this.$dispatch('setFocusItem', this)
 		}
 		, aspectRatio : function(){
-			var style = this.frame.framedata.style
+			var style = this.framedata.style
 			style.height = style.width * this.itemdata.scale
 
 			this.updateItemStyle()
 		}
 		, formatItemStyle : function(){
-			var style = this.frame.framedata.style
+			var style = this.framedata.style
       if(style['padding-top']){
 
-				this.$set('frame.framedata.style.height', this.print.width * style['padding-top']/100)
+				this.$set('framedata.style.height', this.print.width * style['padding-top']/100)
         delete style['padding-top']
 
         style.width *= this.print.width/100
@@ -103,14 +103,14 @@ return {
 
     }
 		, resetItemStyle : function(opts){
-			var style = this.frame.framedata.style
+			var style = this.framedata.style
 			for(var i in opts)
 				style[i] = (opts[i]) / this.print.scale
 
 			this.updateItemStyle()
 		}
 		, updateItemStyle : function(){
-			var style = this.frame.framedata.style
+			var style = this.framedata.style
 
 			for(var i in style)
 				style[i] = style[i]|0
@@ -122,9 +122,9 @@ return {
 		}
 	}
 	, events : {
-		loadItemByFrame : function(item_id, frame){
+		loadItemByFrame : function(item_id, framedata){
 			if(item_id == this.itemdata.item_id){
-				this.frame = frame
+				this.framedata = framedata
 				this.formatItemStyle()
 				this.updateItemStyle()
 			}

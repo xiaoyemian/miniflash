@@ -89,7 +89,7 @@ return {
 	, events : {
 		selectTrack : function(item_id, frame){
 			this.setFocusTrack(item_id)
-			this.$dispatch('loadItemByFrame', item_id, frame)
+			this.$dispatch('loadItemByFrame', item_id, frame.framedata)
 			this.$dispatch('focusItemById', item_id)
 		}
 		, focusTrackById : function(item_id){
