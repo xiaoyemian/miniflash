@@ -89,33 +89,6 @@ return {
 				, 'background-image' : 'url("' + style.imageUrl + '")'
 			}
 		}
-		, aspectRatio : function(){
-		}
-		, loadItemStyle : function(){
-			var format = this.formatdata.transform
-			var transform = this.framedata.transform
-			var transformList = []
-
-			for(var i in transform){
-				var trans = transform[i]
-				var opts = format[i].opts
-				var arr = []
-				for(var j in opts){
-					var opt = opts[j]
-					arr.push(trans[opt[0]] * this.printdata.scale + opt[1]||'')
-				}
-				transformList.push(i + '(' + arr.join(',') + ')')
-
-			}
-			this.framestyle = {transform:transformList.join(' ')}
-
-		}
-		, resetItemId : function(type){
-			this.itemdata.item_id = type + '|' + (this.index+1) + '|' 
-														+ (new Date()).valueOf() 
-														+ Math.floor(Math.random()*10000) 
-														+ Math.floor(Math.random()*100)
-		}
 		, formatItem : function(){
 			var itemdata = this.itemdata
 			var type = 'item'
@@ -133,6 +106,7 @@ return {
 				type = 'image'
 			}
 			this.resetItemId(type)
+
 
 			if(!itemdata.frames){
 				var framedata = {
@@ -154,39 +128,64 @@ return {
 			delete itemdata.background
 			delete itemdata.scale
 		}
+		, loadItemStyle : function(){
+			var format = this.formatdata.transform
+			var transform = this.framedata.transform
+			var transformList = []
+
+			console.log(transform)
+
+			for(var i in transform){
+				var trans = transform[i]
+				var opts = format[i].opts
+				var arr = []
+				for(var j in opts){
+					var opt = opts[j]
+					arr.push(trans[opt[0]] * this.printdata.scale + opt[1]||'')
+				}
+				transformList.push(i + '(' + arr.join(',') + ')')
+
+			}
+			this.framestyle = {transform:transformList.join(' ')}
+
+		}
+		, resetItemId : function(type){
+			this.itemdata.item_id = type + '|' + (this.index+1) + '|' 
+														+ (new Date()).valueOf() 
+														+ Math.floor(Math.random()*10000) 
+														+ Math.floor(Math.random()*100)
+		}
+		, aspectRatio : function(){
+		}
 	}
 	, events : {
 		loadItemByTrack : function(track){
 			if(track.item_id == this.itemdata.item_id){
-
-				var frame = track.focus_frame
-				this.framedata = frame.framedata
+				this.framedata = track.focus_frame.framedata
 
 				if(this.framedata.type == 'blankframe'){
-					this.framedata.transform = {}
+					var transform = {}
 
-					for(var i = frame.time; i >= 0; i--){
-
+					for(var i = track.focus_frame.time; i >= 0; i--){
 						var framedata = track.frameslist[i]
 
 						if(framedata.type && framedata.type != 'blankframe'){
-
 							for(var i in framedata.transform){
-								if(!this.framedata.transform[i])
-									this.framedata.transform[i] = {}
-
+								transform[i] = {}
 								for(var j in framedata.transform[i]){
-									this.framedata.transform[i][j] = framedata.transform[i][j]
+									transform[i][j] = framedata.transform[i][j]
 								}
 							}
 
+							console.log(transform)
 							break;
 						}
 					}
+
+					this.framedata.transform = transform
 				}
 
 				this.loadItemStyle()
-
 			}
 		}
 		, focusItemById : function(item_id){
