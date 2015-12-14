@@ -142,6 +142,18 @@ return {
 			var framedata = this.framedata
 			var transformList = []
 
+			this.framestyle = {}
+
+			for(var i in framedata.resize){
+				var unit = format.resize[i].unit || 'px'
+				var value = framedata.resize[i]
+				
+				if(unit == 'px'){
+					value *= this.printdata.scale
+				}
+				this.framestyle[i] = value + unit 
+			}
+
 			for(var i in framedata.transform){
 				var transform = framedata.transform[i]
 				var opts = format.transform[i].opts
@@ -158,18 +170,8 @@ return {
 				transformList.push(i + '(' + arr.join(',') + ')')
 			}
 
-			this.framestyle = {}
 			this.framestyle.transform = transformList.join(' ')
 
-			for(var i in framedata.resize){
-				var unit = format.resize[i].unit || 'px'
-				var value = framedata.resize[i]
-				
-				if(unit == 'px'){
-					value *= this.printdata.scale
-				}
-				this.framestyle[i] = value + unit 
-			}
 		}
 		, resetItemId : function(type){
 			this.itemdata.item_id = type + '|' + (this.index+1) + '|' 
@@ -211,8 +213,8 @@ return {
 					}
 				}
 
-				this.framedata.resize = resize
-				this.framedata.transform = transform
+				this.$set('framedata.resize', resize)
+				this.$set('framedata.transform', transform)
 			}
 
 			this.loadItemStyle()
