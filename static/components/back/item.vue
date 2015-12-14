@@ -80,15 +80,6 @@ return {
 		, setFocusItem : function(){
 			this.$dispatch('setFocusItem', this)
 		}
-		, loadItemByOriginal : function(){
-			var style = this.itemdata.original
-
-			this.itemstyle = {
-				width : style.width * this.printdata.scale + 'px'
-				, height : style.height * this.printdata.scale + 'px'
-				, 'background-image' : 'url("' + style.imageUrl + '")'
-			}
-		}
 		, formatItem : function(){
 			var itemdata = this.itemdata
 			var type = 'item'
@@ -119,6 +110,10 @@ return {
 						x : 640 * itemdata.style['left']/100
 						, y : 1136 * itemdata.style['top']/100
 					}
+					, scale : {
+						x : 1
+						, y : 1
+					}
 				}
 			
 				this.$set('itemdata.frames', {0:framedata})
@@ -128,12 +123,19 @@ return {
 			delete itemdata.background
 			delete itemdata.scale
 		}
+		, loadItemOriginal : function(){
+			var style = this.itemdata.original
+
+			this.itemstyle = {
+				width : style.width * this.printdata.scale + 'px'
+				, height : style.height * this.printdata.scale + 'px'
+				, 'background-image' : 'url("' + style.imageUrl + '")'
+			}
+		}
 		, loadItemStyle : function(){
 			var format = this.formatdata.transform
 			var transform = this.framedata.transform
 			var transformList = []
-
-			console.log(transform)
 
 			for(var i in transform){
 				var trans = transform[i]
@@ -141,7 +143,12 @@ return {
 				var arr = []
 				for(var j in opts){
 					var opt = opts[j]
-					arr.push(trans[opt[0]] * this.printdata.scale + opt[1]||'')
+					var value = trans[opt[0]]
+					var unit = opt[1] || ''
+					if(unit == 'px'){
+						value *= this.printdata.scale
+					}
+					arr.push(value + unit)
 				}
 				transformList.push(i + '(' + arr.join(',') + ')')
 
@@ -205,19 +212,26 @@ return {
 			start : function(event, ui){
 				mSelf.selectItem()
 				mSelf.framedata.type = 'keyframe'
-
-				mSelf.$set('framedata.transform.translate', { x : 0 , y : 0 })
-				mSelf.loadItemStyle()
-
 			}
 			, drag : function(event, ui){
-			}
-			, stop : function(event, ui){
-				$(this).css({top:0,left:0})
-
+				$(this).css({
+					'margin-left' : -ui.position.left
+					, 'margin-top' : -ui.position.top
+				})
+				
 				mSelf.$set('framedata.transform.translate', {
 					x : ui.position.left / mSelf.printdata.scale
 					, y : ui.position.top / mSelf.printdata.scale
+				})
+
+				mSelf.loadItemStyle()
+			}
+			, stop : function(event, ui){
+				$(this).css({
+					'margin-left' : 0
+					, 'margin-top' : 0
+					, top : 0
+					, left : 0
 				})
 
 				mSelf.loadItemStyle()
@@ -235,17 +249,23 @@ return {
 				mSelf.framedata.type = 'keyframe'
 			}
 			, resize : function(event, ui){
-				console.log(ui.position)
+				console.log(ui)
+
+				mSelf.$set('framedata.transform.scale', {
+					x : ui.size.width / ui.originalSize.width
+					, y : ui.size.height / ui.originalSize.height
+				})
+
+				mSelf.loadItemStyle()
 			}
 			, stop : function(event, ui){
 				mSelf.loadItemStyle()
 			}
-			, ghost: true
 		})
 	}
 	, created : function(){
 		this.formatItem()
-		this.loadItemByOriginal()
+		this.loadItemOriginal()
 	}
 }
 </script>
