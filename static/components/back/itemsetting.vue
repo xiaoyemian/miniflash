@@ -52,25 +52,18 @@
 <div class="itemsetting" v-if="focus_item">
 
 	<div class="itemOriginal" v-if="focus_item.itemdata.original">
-		<div class="inputArea" v-for="(key, value) in original">
+		<div class="inputArea" v-for="(key, value) in formatdata.original">
 			<label for="original|{{key}}">{{value.label || key}}:</label>
 			<input type="{{value.type||'number'}}" @keyup="updateItem" id="original|{{key}}" placeholder="" value="{{focus_item.itemdata.original[key]}}" disabled/>{{value.unit||'px'}}
 		</div>
 	</div>
 
-	<div class="itemFrame" v-if="focus_item.framedata.style">
-		<div class="inputArea" v-for="(key, value) in style">
-			<label for="style|{{key}}">{{value.label || key}}:</label>
-			<input type="{{value.type||'number'}}" @keyup="updateItem" id="style|{{key}}" placeholder="" value="{{focus_item.framedata.style[key]}}"/>{{value.unit||'px'}}
-		</div>
-	</div>
-
 	<div class="itemTramsform" v-if="focus_item.framedata.transform">
-		<div class="inputArea" v-for="(name, transformdata) in transform">
-			<div class="inputLabel">{{transformdata.label || name}}:</div>
-			<div class="inputBox" v-for="(key, value) in transformdata.opts">
-				<label for="transform|{{name}}|{{key}}">{{value.label || key}}:</label>
-				<input type="{{value.type||'number'}}" @keyup="updateItem" id="transform|{{name}}|{{key}}" placeholder="" value="{{focus_item.framedata.transform[name][key]}}"/>{{value.unit||'px'}}
+		<div class="inputArea" v-for="(key, transform) in formatdata.transform" v-if="focus_item.framedata.transform[key]">
+			<div class="inputLabel">{{transform.label || key}}:</div>
+			<div class="inputBox" v-for="value in transform.opts">
+				<label for="transform|{{key}}|{{value[0]}}">{{value[0]}}:</label>
+				<input type="{{value.type||'number'}}" @keyup="updateItem" id="transform|{{key}}|{{value[0]}}" placeholder="" value="{{focus_item.framedata.transform[key][value[0]]}}"/>{{value[1]||'px'}}
 			</div>
 		</div>
 	</div>
@@ -81,50 +74,9 @@
 <script>
 
 return {
-	props : ['focus_item']
+	props : ['focus_item', 'formatdata']
 	, data : function(){
 		return {
-			original : {
-				width : {label : '宽度'}
-				, height : {label : '高度'}
-				, imageUrl : {label : '背景图片', type : 'text', unit : ''}
-			}
-			, style : {
-				width : {label : '宽度'}
-				, height : {label : '高度'}
-				, top : {}
-				, left : {}
-			}
-			, transform : {
-				translate : {
-					opts : {
-						x : {}
-						, y : {}
-					}
-					, label : '坐标'
-				}
-				, scale : {
-					opts : {
-						x : {}
-						, y : {}
-					}
-					, label : '缩放'
-				}
-				, rotate : {
-					opts : {
-						angle : {unit : 'deg'}
-					}
-					, label : '旋转'
-				}
-				, skew : {
-					opts : {
-						'x-angle' : {unit : 'deg'}
-						, 'y-angle' : {unit : 'deg'}
-					}
-					, label : '倾斜'
-				}
-
-			}
 		}
 	}
 	, methods : {

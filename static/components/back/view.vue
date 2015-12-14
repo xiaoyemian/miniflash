@@ -21,7 +21,7 @@
 
 
 <template>
-<itemsetting :focus_item="focus_item"></itemsetting>
+<itemsetting :focus_item="focus_item" :formatdata="formatdata"></itemsetting>
 
 <div class="viewcontrol">
 	<div @click="addItem">addItem</div>
@@ -29,7 +29,7 @@
 
 <div class="view" @click="blurItem">
 	<div class="page" :style="pagestyle">
-		<item v-ref:item v-for="itemdata in itemsdata" :itemdata="itemdata" :index="$index" :focus_item="focus_item" :print="print"></item>
+		<item v-ref:item v-for="itemdata in itemsdata" :itemdata="itemdata" :index="$index" :focus_item="focus_item" :printdata="printdata" :formatdata="formatdata"></item>
 	</div>
 </div>
 
@@ -39,6 +39,32 @@
 <script>
 var item = require('back/item.vue')
 var itemsetting = require('back/itemsetting.vue')
+
+var formatdata = {}
+formatdata.original = {
+	width : {label : '宽度'}
+	, height : {label : '高度'}
+	, imageUrl : {label : '背景图片', type : 'text', unit : ''}
+}
+formatdata.transform = {
+	translate : {
+		label : '坐标'
+		, opts : [['x'],['y']]
+	}
+	, scale : {
+		label : '缩放'
+		, opts : [['x'],['y']]
+	}
+	, rotate : {
+		label : '旋转'
+		, opts : [['angle', 'deg']]
+	}
+	, skew : {
+		label : '倾斜'
+		, opts : [['x-angle', 'deg'], ['y-angle', 'deg']]
+	}
+}
+
 
 return {
   components : {
@@ -50,11 +76,12 @@ return {
 
 		return {
 			focus_item : null
-			, print : {
+			, printdata : {
 				width : 0
 				, height : 0
 				, scale : 0
 			}
+			, formatdata : formatdata
 			, pagestyle : {}
 		}
 	}
@@ -63,19 +90,19 @@ return {
 			this.setFocusItem(null)
 			this.$dispatch('blurTrack')
 		}
-		, resizePrint : function(print){
-			for(var i in print){
-				this.$set('print["'+i+'"]', print[i]||0)
+		, resizePrint : function(printdata){
+			for(var i in printdata){
+				this.$set('printdata["'+i+'"]', printdata[i]||0)
 			}
 			this.updatePage()
 		}
 		, updatePage : function(){
-			var print = this.print
+			var printdata = this.printdata
 
-			this.$set('pagestyle.width', print.width * print.scale + 'px')
-			this.$set('pagestyle.height', print.height * print.scale + 'px')
-			this.$set('pagestyle["margin-left"]', print.width * print.scale/-2 + 'px')
-			this.$set('pagestyle["margin-top"]', print.height * print.scale/-2 + 'px')
+			this.$set('pagestyle.width', printdata.width * printdata.scale + 'px')
+			this.$set('pagestyle.height', printdata.height * printdata.scale + 'px')
+			this.$set('pagestyle["margin-left"]', printdata.width * printdata.scale/-2 + 'px')
+			this.$set('pagestyle["margin-top"]', printdata.height * printdata.scale/-2 + 'px')
     }
 		, addItem : function(){
 			this.itemsdata.push({
@@ -84,7 +111,7 @@ return {
 					, height : 100
 				}
 				, frames : {
-					0 : { style : {} , type : 'animateframe' }
+					0 : { transform : {} , type : 'animateframe' }
 				}
 			})
 

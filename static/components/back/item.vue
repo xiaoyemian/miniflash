@@ -63,7 +63,7 @@
 <script>
 
 return {
-	props:['focus_item', 'itemdata', 'index', 'print']
+	props:['focus_item', 'itemdata', 'index', 'printdata']
 	, data:function(){
 		return {
 			framedata : null
@@ -82,35 +82,34 @@ return {
 			var style = this.itemdata.original
 
 			this.itemstyle = {
-				width : style.width * this.print.scale + 'px'
-				, height : style.height * this.print.scale + 'px'
+				width : style.width * this.printdata.scale + 'px'
+				, height : style.height * this.printdata.scale + 'px'
 				, 'background-image' : 'url("' + style.imageUrl + '")'
 			}
 		}
 		, aspectRatio : function(){
-			var style = this.framedata.style
-			style.height = style.width * this.itemdata.original.height / this.itemdata.original.width
-
-			this.loadItemStyle()
 		}
-		, resetItemStyle : function(opts){
-			for(var i in opts)
-				this.framedata.style[i] = (opts[i]) / this.print.scale
+		, resetItemStyle : function(name, opts){
+			if(!this.framedata.transform[name])
+				this.framedata.transform[name] = {}
+			
+			for(var i in opts){
+				this.framedata.transform[name][i] = (opts[i]) / this.printdata.scale
+			}
 
 			this.loadItemStyle()
 		}
 
 		, loadItemStyle : function(){
-			var style = this.framedata.style
+			var transform = this.framedata.transform
+			var transformList = []
 
-			this.framestyle = {}
-			
-			for(var i in style){
-				if(style[i]){
-					this.$set('framestyle["' + i + '"]', style[i] * this.print.scale + 'px')
-				}
+			for(var i in transform){
+				var item = transform[i]
+
 			}
 
+			this.framestyle = {transform: transformList.join(', ')}
 		}
 		, resetItemId : function(type){
 			this.itemdata.item_id = type + '|' + (this.index+1) + '|' 
@@ -137,18 +136,19 @@ return {
 			this.resetItemId(type)
 
 			if(!itemdata.frames){
-				var frames = {
-					0 : {
-						style : {
-							width : itemdata.original.width
-							, height : itemdata.original.height
-							, left : 640 * itemdata.style['left']/100	
-							, top : 1136 * itemdata.style['top']/100	
-						}
-						, type : 'keyframe'
+				var framedata = {
+					type : 'keyframe'
+					, transform : {}
+				}
+
+				framedata.transform = {
+					translate : {
+						x : 640 * itemdata.style['left']/100
+						, y : 1136 * itemdata.style['top']/100
 					}
 				}
-				this.$set('itemdata.frames', frames)
+			
+				this.$set('itemdata.frames', {0:framedata})
 			}
 
 			delete itemdata.style
@@ -164,7 +164,7 @@ return {
 				this.framedata = frame.framedata
 
 				if(this.framedata.type == 'blankframe'){
-					this.framedata.style = {}
+					this.framedata.transform = {}
 
 					for(var i = frame.time; i >= 0; i--){
 
@@ -172,8 +172,14 @@ return {
 
 						if(framedata.type && framedata.type != 'blankframe'){
 
-							for(var i in framedata.style)
-								this.framedata.style[i] = framedata.style[i]
+							for(var i in framedata.transform){
+								if(!this.framedata.transform[i])
+									this.framedata.transform[i] = {}
+
+								for(var j in framedata.transform[i]){
+									this.framedata.transform[i][j] = framedata.transform[i][j]
+								}
+							}
 
 							break;
 						}
@@ -194,7 +200,6 @@ return {
 		}
 	}
 	, ready : function(){
-		console.log(this.itemdata)
 		var mSelf = this
 		var $item = $(this.$el)
 
@@ -204,7 +209,7 @@ return {
 				mSelf.framedata.type = 'keyframe'
 			}
 			, drag : function(event, ui){
-				mSelf.resetItemStyle(ui.position)
+				mSelf.resetItemStyle('translate', {x:ui.position.left, y:ui.position.top})
 			}
 			, stop : function(event, ui){
 				mSelf.loadItemStyle()

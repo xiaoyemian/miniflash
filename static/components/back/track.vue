@@ -44,11 +44,10 @@ return {
 		var frameslist = []
 
 		for(var i = 0; i <= this.timedata.length/this.timedata.step; i++){
-			frameslist.push(this.framesdata[i] || {style:{}, type:'blankframe'})
+			frameslist.push(this.framesdata[i] || {transform:{}, type:'blankframe'})
 		}
 
 		var item_name = this.item_id.split('|')
-		console.log(this.item_id)
 		item_name = item_name[0] + item_name[1]
 
 		return {
