@@ -174,6 +174,11 @@ return {
 														+ Math.floor(Math.random()*100)
 		}
 		, aspectRatio : function(){
+			var resize = this.framedata.resize
+			var original = this.itemdata.original
+			resize.height = resize.width * original.height / original.width
+
+			this.loadItemStyle()
 		}
 	}
 	, events : {
