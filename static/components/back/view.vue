@@ -27,7 +27,7 @@
 	<div @click="addItem">addItem</div>
 </div>
 
-<div class="view" @click="clearFocus">
+<div class="view" @click="blurItem">
 	<div class="page" :style="pagestyle">
 		<item v-ref:item v-for="itemdata in itemsdata" :itemdata="itemdata" :index="$index" :focus_item="focus_item" :print="print"></item>
 	</div>
@@ -59,8 +59,9 @@ return {
 		}
 	}
 	, methods : {
-		clearFocus : function(){
-			this.$dispatch('clearFocus')
+		blurItem : function(){
+			this.setFocusItem(null)
+			this.$dispatch('blurTrack')
 		}
 		, resizePrint : function(print){
 			for(var i in print){

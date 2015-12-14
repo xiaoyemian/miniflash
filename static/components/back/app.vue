@@ -54,6 +54,9 @@ return {
 		, focusTrackById : function(item_id){
       this.$refs.flash.setFocusTrack(item_id)
 		} 
+		, blurTrack : function(){
+      this.$refs.flash.setFocusTrack(null)
+		} 
 		, loadTime : function(){
       this.$refs.flash.loadTime()
 		}
