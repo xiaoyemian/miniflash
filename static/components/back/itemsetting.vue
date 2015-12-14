@@ -54,23 +54,23 @@
 	<div class="itemOriginal" v-if="focus_item.itemdata.original">
 		<div class="inputArea" v-for="(key, value) in formatdata.original">
 			<label for="original|{{key}}">{{value.label || key}}:</label>
-			<input type="{{value.type||'number'}}" @keyup="updateItem" id="original|{{key}}" placeholder="" value="{{focus_item.itemdata.original[key]}}" disabled/>{{value.unit||'px'}}
+			<input type="{{value.type||'number'}}" @keyup="updateItem" id="original|{{key}}" placeholder="" value="{{focus_item.itemdata.original[key]}}" disabled/>{{value.unit||''}}
 		</div>
 	</div>
 
 	<div class="itemResize" v-if="focus_item.framedata.resize">
 		<div class="inputArea" v-for="(key, value) in formatdata.resize">
 			<label for="resize|{{key}}">{{value.label || key}}:</label>
-			<input type="{{value.type||'number'}}" @keyup="updateItem" id="resize|{{key}}" placeholder="" value="{{focus_item.framedata.resize[key]}}"/>{{value.unit||'px'}}
+			<input type="{{value.type||'number'}}" @keyup="updateItem" id="resize|{{key}}" placeholder="" value="{{focus_item.framedata.resize[key]}}"/>{{value.unit||''}}
 		</div>
 	</div>
 
 	<div class="itemTramsform" v-if="focus_item.framedata.transform">
-		<div class="inputArea" v-for="(key, transform) in formatdata.transform" v-if="focus_item.framedata.transform[key]">
+		<div class="inputArea" v-for="(key, transform) in formatdata.transform">
 			<div class="inputLabel">{{transform.label || key}}:</div>
 			<div class="inputBox" v-for="value in transform.opts">
 				<label for="transform|{{key}}|{{value[0]}}">{{value[0]}}:</label>
-				<input type="{{value.type||'number'}}" @keyup="updateItem" id="transform|{{key}}|{{value[0]}}" placeholder="" value="{{focus_item.framedata.transform[key][value[0]]}}"/>{{value[1]||'px'}}
+				<input type="{{value.type||'number'}}" @keyup="updateItem" id="transform|{{key}}|{{value[0]}}" placeholder="" value="{{focus_item.framedata.transform[key] ? focus_item.framedata.transform[key][value[0]] : 0}}"/>{{value[1]||''}}
 			</div>
 		</div>
 	</div>

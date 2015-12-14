@@ -101,26 +101,15 @@ return {
 			if(!itemdata.frames){
 				var framedata = {
 					type : 'keyframe'
-				}
-
-				framedata.resize = {
-					width : 640 * itemdata.style['width']/100
-					, height : 640 * itemdata.style['padding-top']/100
-					, left : 640 * itemdata.style['left']/100
-					, top : 1136 * itemdata.style['top']/100
-				}
-
-				framedata.transform = {
-					translate : {
-						x : 0 
-						, y : 0 
-					}
-					, scale : {
-						x : 1
-						, y : 1
+					, transform : {}
+					, resize : {
+						width : 640 * itemdata.style['width']/100
+						, height : 640 * itemdata.style['padding-top']/100
+						, left : 640 * itemdata.style['left']/100
+						, top : 1136 * itemdata.style['top']/100
 					}
 				}
-			
+
 				this.$set('itemdata.frames', {0:framedata})
 			}
 
@@ -145,7 +134,7 @@ return {
 			this.framestyle = {}
 
 			for(var i in framedata.resize){
-				var unit = format.resize[i].unit || 'px'
+				var unit = format.resize[i].unit || ''
 				var value = framedata.resize[i]
 				
 				if(unit == 'px'){

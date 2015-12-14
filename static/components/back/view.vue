@@ -42,15 +42,15 @@ var itemsetting = require('back/itemsetting.vue')
 
 var formatdata = {}
 formatdata.original = {
-	width : {label : '宽度'}
-	, height : {label : '高度'}
-	, imageUrl : {label : '背景图片', type : 'text', unit : ''}
+	width : {label : '宽度', unit : 'px'}
+	, height : {label : '高度', unit : 'px'}
+	, imageUrl : {label : '背景图片', type : 'text'}
 }
 formatdata.resize = {
-	width : {label : '宽度'}
-	, height : {label : '高度'}
-	, top : {}
-	, left : {}
+	width : {label : '宽度', unit : 'px'}
+	, height : {label : '高度', unit : 'px'}
+	, top : {unit : 'px'}
+	, left : {unit : 'px'}
 }
 
 formatdata.transform = {
