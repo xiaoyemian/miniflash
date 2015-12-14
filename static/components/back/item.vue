@@ -120,6 +120,7 @@ return {
 				}
 
 				this.$set('itemdata.frames', {0:framedata})
+				console.log(this.itemdata.frames)
 			}
 
 			delete itemdata.style
@@ -134,6 +135,9 @@ return {
 				, height : style.height * this.printdata.scale + 'px'
 				, 'background-image' : 'url("' + style.imageUrl + '")'
 			}
+		}
+		, setKeyFrame : function(){
+			this.framedata.type = 'keyframe'
 		}
 		, loadItemStyle : function(){
 			var format = this.formatdata
@@ -161,6 +165,11 @@ return {
 				for(var j in opts){
 					var opt = opts[j]
 			//		transform[opt[0]] = Math.round(transform[opt[0]])
+
+
+
+
+
 
 					var value = transform[opt[0]] || opt[2] || 0
 					var unit = opt[1] || ''
@@ -245,7 +254,7 @@ return {
 		$item.draggable({
 			start : function(event, ui){
 				mSelf.selectItem()
-				mSelf.framedata.type = 'keyframe'
+				mSelf.setKeyFrame()
 			}
 			, drag : function(event, ui){
 				var resize = mSelf.framedata.resize
@@ -265,7 +274,7 @@ return {
 		$item.resizable({
 			start : function(event, ui){
 				mSelf.selectItem()
-				mSelf.framedata.type = 'keyframe'
+				mSelf.setKeyFrame()
 			}
 			, resize : function(event, ui){
 				var resize = mSelf.framedata.resize
