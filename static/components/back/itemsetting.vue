@@ -92,7 +92,14 @@ return {
 			var type = setting.id.split('|')
 			var value = setting.value
 
-			this.$set('focus_item.framedata["' + type[0] + '"]["'+ type[1] +'"]', value|0)
+			console.log(type)
+			var arr = []
+			for(var i in type){
+				arr.push('["' + type[i] + '"]')
+			}
+
+			this.$set('focus_item.framedata' + arr.join(''), value|0)
+			console.log(this.focus_item.framedata)
 
 			this.focus_item.loadItemStyle()
 		}

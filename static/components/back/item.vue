@@ -135,7 +135,7 @@ return {
 
 			for(var i in framedata.resize){
 				var unit = format.resize[i].unit || ''
-				var value = framedata.resize[i]
+				var value = framedata.resize[i] || 0
 				
 				if(unit == 'px'){
 					value *= this.printdata.scale
@@ -150,7 +150,7 @@ return {
 				for(var j in opts){
 					var opt = opts[j]
 					var unit = opt[1] || ''
-					var value = transform[opt[0]]
+					var value = transform[opt[0]] || 0
 					if(unit == 'px'){
 						value *= this.printdata.scale
 					}
