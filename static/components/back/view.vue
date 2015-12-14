@@ -78,8 +78,7 @@ return {
     }
 		, addItem : function(){
 			this.itemsdata.push({
-				item_id : new Date().valueOf()
-				, original : {
+				original : {
 					width : 100
 					, height : 100
 				}
@@ -106,6 +105,8 @@ return {
 		}
 	}
 	, created : function(){
+
+var mSelf = this
 		this.resizePrint({
 			width : 640
 			, height : 1136

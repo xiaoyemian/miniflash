@@ -63,9 +63,8 @@
 <script>
 
 return {
-	props:['focus_item', 'itemdata', 'print']
+	props:['focus_item', 'itemdata', 'index', 'print']
 	, data:function(){
-
 		return {
 			framedata : null
 			, framestyle : {} 
@@ -113,16 +112,15 @@ return {
 			}
 
 		}
-		, resetItemId : function(){
-			var itemdata = this.itemdata
-			console.log(itemdata.original.type)
-			itemdata.item_id = itemdata.original.type + '|' 
-															+ (new Date()).valueOf() 
-															+ Math.floor(Math.random()*100) 
-															+ Math.floor(Math.random()*100)
+		, resetItemId : function(type){
+			this.itemdata.item_id = type + '|' + (this.index+1) + '|' 
+														+ (new Date()).valueOf() 
+														+ Math.floor(Math.random()*100) 
+														+ Math.floor(Math.random()*100)
 		}
 		, formatItem : function(){
 			var itemdata = this.itemdata
+			var type = 'item'
 
 			if(!itemdata.original){
 				var original = {
@@ -131,13 +129,12 @@ return {
 				}
 				this.$set('itemdata.original', original)
 			}
-			itemdata.original.type = 'item'
 
 			if(itemdata.background && itemdata.background.image){
 				itemdata.original.imageUrl = itemdata.background.image
-				itemdata.original.type = 'image'
+				type = 'image'
 			}
-			this.resetItemId()
+			this.resetItemId(type)
 
 			if(!itemdata.frames){
 				var frames = {

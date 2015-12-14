@@ -23,7 +23,7 @@
 
 <template>
 <div class="track" @click.stop="selectTrack" :class="{focus:focus_track == item_id}">
-	<div class="trackname">{{item_id}}</div>
+	<div class="trackname">{{item_name}}</div>
 	<div class="trackframe" v-el:trackframe>
 		<frameitem v-ref:frame v-for="framedata in frameslist" :focus_frame="focus_frame" :framedata="framedata" :time="$index" :timedata="timedata"></frameitem>
 	</div>
@@ -40,15 +40,21 @@ return {
 	}
 	, props : ['timedata', 'focus_track', 'item_id', 'framesdata']
 	, data : function(){
+
 		var frameslist = []
 
 		for(var i = 0; i <= this.timedata.length/this.timedata.step; i++){
 			frameslist.push(this.framesdata[i] || {style:{}, type:'blankframe'})
 		}
 
+		var item_name = this.item_id.split('|')
+		console.log(this.item_id)
+		item_name = item_name[0] + item_name[1]
+
 		return {
 			frameslist : frameslist
 			, focus_frame : null 
+			, item_name :item_name 
 		}
 	}
 	, methods : {
