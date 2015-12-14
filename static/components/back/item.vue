@@ -249,13 +249,17 @@ return {
 				mSelf.framedata.type = 'keyframe'
 			}
 			, resize : function(event, ui){
-				console.log(ui)
+/*
+				$(this).css({
+					width :  ui.originalSize.width
+					, height : ui.originalSize.height 
+				})
 
 				mSelf.$set('framedata.transform.scale', {
 					x : ui.size.width / ui.originalSize.width
 					, y : ui.size.height / ui.originalSize.height
 				})
-
+*/
 				mSelf.loadItemStyle()
 			}
 			, stop : function(event, ui){
