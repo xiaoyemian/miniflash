@@ -113,6 +113,14 @@ return {
 			}
 
 		}
+		, resetItemId : function(){
+			var itemdata = this.itemdata
+			console.log(itemdata.original.type)
+			itemdata.item_id = itemdata.original.type + '|' 
+															+ (new Date()).valueOf() 
+															+ Math.floor(Math.random()*100) 
+															+ Math.floor(Math.random()*100)
+		}
 		, formatItem : function(){
 			var itemdata = this.itemdata
 
@@ -120,11 +128,16 @@ return {
 				var original = {
 					width : 640 * itemdata.style['width']/100
 					, height : 640 * itemdata.style['padding-top']/100
-					, imageUrl : itemdata.background.image
 				}
-
 				this.$set('itemdata.original', original)
 			}
+			itemdata.original.type = 'item'
+
+			if(itemdata.background && itemdata.background.image){
+				itemdata.original.imageUrl = itemdata.background.image
+				itemdata.original.type = 'image'
+			}
+			this.resetItemId()
 
 			if(!itemdata.frames){
 				var frames = {
