@@ -5,7 +5,9 @@
 	background-repeat:no-repeat;
 	&.focus{
 		.handel{
-			.pa;top:-1px;left:-1px;right:-1px;bottom:-1px;
+			.pa;
+			.w(100%);.h(100%);
+			.ml(-1px);.mt(-1px);
 			border:1px solid #5CADD6;
 		
 			.aspectRatioBtn{
@@ -89,12 +91,6 @@ return {
 		}
 		, aspectRatio : function(){
 		}
-		, resetItemStyle : function(name, opts){
-			console.log(name, opts)
-
-			//this.loadItemStyle()
-		}
-
 		, loadItemStyle : function(){
 			var format = this.formatdata.transform
 			var transform = this.framedata.transform
@@ -210,11 +206,18 @@ return {
 			start : function(event, ui){
 				mSelf.selectItem()
 				mSelf.framedata.type = 'keyframe'
+
+				mSelf.framedata.transform.translate.x = 0
+				mSelf.framedata.transform.translate.y = 0
+				mSelf.loadItemStyle()
 			}
 			, drag : function(event, ui){
-				mSelf.resetItemStyle('transform', ui.position)
 			}
 			, stop : function(event, ui){
+				$item.css({top:0,left:0})
+
+				mSelf.framedata.transform.translate.x = ui.position.left / mSelf.printdata.scale
+				mSelf.framedata.transform.translate.y = ui.position.top / mSelf.printdata.scale
 				mSelf.loadItemStyle()
 			}
 			, cursor: "move"
@@ -224,19 +227,21 @@ return {
 			, snapTolerance : '4'
 		})
 	
+/*
 		$item.resizable({
 			start : function(event, ui){
 				mSelf.selectItem()
 				mSelf.framedata.type = 'keyframe'
 			}
 			, resize : function(event, ui){
-				mSelf.resetItemStyle('scale', ui.size)
+				console.log(ui.position)
 			}
 			, stop : function(event, ui){
 				mSelf.loadItemStyle()
 			}
 			, ghost: true
 		})
+*/
 	}
 	, created : function(){
 		this.formatItem()
