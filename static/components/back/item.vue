@@ -81,6 +81,7 @@ return {
 			this.$dispatch('setFocusItem', this)
 		}
 		, formatItem : function(){
+			var format = this.formatdata
 			var itemdata = this.itemdata
 			var type = 'item'
 
@@ -101,12 +102,20 @@ return {
 			if(!itemdata.frames){
 				var framedata = {
 					type : 'keyframe'
-					, transform : {}
 					, resize : {
 						width : 640 * itemdata.style['width']/100
 						, height : 640 * itemdata.style['padding-top']/100
 						, left : 640 * itemdata.style['left']/100
 						, top : 1136 * itemdata.style['top']/100
+					}
+					, transform : {}
+				}
+
+				for(var i in format.transform){
+					framedata.transform[i] = {}
+					for(var j in format.transform[i].opts){
+						var value = format.transform[i].opts[j]
+						framedata.transform[i][value[0]] = value[2] || 0
 					}
 				}
 
@@ -270,6 +279,7 @@ return {
 	}
 	, created : function(){
 		this.formatItem()
+		console.log(this)
 		this.loadItemOriginal()
 	}
 }
