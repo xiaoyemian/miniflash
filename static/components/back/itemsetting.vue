@@ -33,7 +33,7 @@
 <div class="itemsetting" v-if="focus_item">
 
 	<div class="itemOriginal" v-if="focus_item.itemdata.original">
-		<div class="inputBox" v-for="(key, value) in original"><label for="original|{{key}}">{{value.label || key}}:</label><input type="{{value.type||'type'}}" @keyup="updateItem" id="original|{{key}}" placeholder="" value="{{focus_item.itemdata.original[key]}}" disabled/>{{value.unit||''}}</div>
+		<div class="inputBox" v-for="(key, value) in original"><label for="original|{{key}}">{{value.label || key}}:</label><input type="{{value.type||'text'}}" @keyup="updateItem" id="original|{{key}}" placeholder="" value="{{focus_item.itemdata.original[key]}}" disabled/>{{value.unit||''}}</div>
 	</div>
 
 	<div class="itemFrame" v-if="focus_item.framedata">
