@@ -49,7 +49,7 @@ formatdata.original = {
 formatdata.transform = {
 	translate : {
 		label : '坐标'
-		, opts : [['x'],['y']]
+		, opts : [['x', 'px'],['y', 'px']]
 	}
 	, scale : {
 		label : '缩放'

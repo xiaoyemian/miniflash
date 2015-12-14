@@ -63,7 +63,7 @@
 <script>
 
 return {
-	props:['focus_item', 'itemdata', 'index', 'printdata']
+	props:['focus_item', 'itemdata', 'index', 'printdata', 'formatdata']
 	, data:function(){
 		return {
 			framedata : null
@@ -93,23 +93,29 @@ return {
 			if(!this.framedata.transform[name])
 				this.framedata.transform[name] = {}
 			
-			for(var i in opts){
-				this.framedata.transform[name][i] = (opts[i]) / this.printdata.scale
-			}
+			console.log(name, opts)
 
-			this.loadItemStyle()
+			//this.loadItemStyle()
 		}
 
 		, loadItemStyle : function(){
+			var format = this.formatdata.transform
 			var transform = this.framedata.transform
 			var transformList = []
 
 			for(var i in transform){
-				var item = transform[i]
+				var trans = transform[i]
+				var opts = format[i].opts
+				var arr = []
+				for(var j in opts){
+					var opt = opts[j]
+					arr.push(trans[opt[0]] * this.printdata.scale + opt[1]||'')
+				}
+				transformList.push(i + '(' + arr.join(',') + ')')
 
 			}
+			this.framestyle = {transform:transformList.join(' ')}
 
-			this.framestyle = {transform: transformList.join(', ')}
 		}
 		, resetItemId : function(type){
 			this.itemdata.item_id = type + '|' + (this.index+1) + '|' 
@@ -209,7 +215,6 @@ return {
 				mSelf.framedata.type = 'keyframe'
 			}
 			, drag : function(event, ui){
-				mSelf.resetItemStyle('translate', {x:ui.position.left, y:ui.position.top})
 			}
 			, stop : function(event, ui){
 				mSelf.loadItemStyle()
