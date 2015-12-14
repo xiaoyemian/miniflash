@@ -70,7 +70,7 @@
 			<div class="inputLabel">{{transform.label || key}}:</div>
 			<div class="inputBox" v-for="value in transform.opts">
 				<label for="transform|{{key}}|{{value[0]}}">{{value[0]}}:</label>
-				<input type="{{value.type||'number'}}" @keyup="updateItem" id="transform|{{key}}|{{value[0]}}" placeholder="" value="{{focus_item.framedata.transform[key] ? focus_item.framedata.transform[key][value[0]] : 0}}"/>{{value[1]||''}}
+				<input type="number" step="{{value[3]}}" @keyup="updateItem" id="transform|{{key}}|{{value[0]}}" placeholder="" value="{{focus_item.framedata.transform[key] ? focus_item.framedata.transform[key][value[0]] : 0}}"/>{{value[1]||''}}
 			</div>
 		</div>
 	</div>
@@ -98,8 +98,8 @@ return {
 				arr.push('["' + type[i] + '"]')
 			}
 
-			this.$set('focus_item.framedata' + arr.join(''), value|0)
-			console.log(this.focus_item.framedata)
+			this.$set('focus_item.framedata' + arr.join(''), value||0)
+			console.log(this.focus_item.framedata, value||0)
 
 			this.focus_item.loadItemStyle()
 		}

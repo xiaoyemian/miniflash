@@ -134,7 +134,7 @@ return {
 			this.framestyle = {}
 
 			for(var i in framedata.resize){
-				framedata.resize[i] = Math.round(framedata.resize[i])
+		//		framedata.resize[i] = Math.round(framedata.resize[i])
 
 				var value = framedata.resize[i] || 0
 				var unit = format.resize[i].unit || ''
@@ -151,9 +151,9 @@ return {
 				var arr = []
 				for(var j in opts){
 					var opt = opts[j]
-					transform[opt[0]] = Math.round(transform[opt[0]])
+			//		transform[opt[0]] = Math.round(transform[opt[0]])
 
-					var value = transform[opt[0]] || 0
+					var value = transform[opt[0]] || opt[2] || 0
 					var unit = opt[1] || ''
 
 					if(unit == 'px'){
@@ -165,6 +165,8 @@ return {
 			}
 
 			this.framestyle.transform = transformList.join(' ')
+
+			console.log(this.framestyle.transform)
 
 		}
 		, resetItemId : function(type){

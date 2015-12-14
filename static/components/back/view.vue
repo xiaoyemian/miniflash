@@ -44,13 +44,14 @@ var formatdata = {}
 formatdata.original = {
 	width : {label : '原始宽度', unit : 'px'}
 	, height : {label : '原始高度', unit : 'px'}
-	, imageUrl : {label : '背景图片', type : 'text'}
+	, imageUrl : {label : '图片地址', type : 'text'}
 }
 formatdata.resize = {
 	width : {label : '宽度', unit : 'px'}
 	, height : {label : '高度', unit : 'px'}
-	, top : {unit : 'px'}
-	, left : {unit : 'px'}
+	, top : {label : '上边距', unit : 'px'}
+	, left : {label : '左边距', unit : 'px'}
+	, 'border-radius' : {label : '圆角', unit : 'px'}
 }
 
 formatdata.transform = {
@@ -60,7 +61,7 @@ formatdata.transform = {
 	}
 	, scale : {
 		label : '缩放'
-		, opts : [['x'],['y']]
+		, opts : [['x', '', '1', '0.1'],['y', '', '1', '0.1']]
 	}
 	, rotate : {
 		label : '旋转'
