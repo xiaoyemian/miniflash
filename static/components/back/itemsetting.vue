@@ -33,11 +33,11 @@
 <div class="itemsetting" v-if="focus_item">
 
 	<div class="itemOriginal" v-if="focus_item.itemdata.original">
-		<div class="inputBox" v-for="(key, value) in original"><label for="original|{{key}}">{{value.label}}:</label><input type="{{value.type}}" @keyup="updateItem" id="original|{{key}}" placeholder="" value="{{focus_item.itemdata.original[key]}}" disabled/>{{value.unit}}</div>
+		<div class="inputBox" v-for="(key, value) in original"><label for="original|{{key}}">{{value.label || key}}:</label><input type="{{value.type||'type'}}" @keyup="updateItem" id="original|{{key}}" placeholder="" value="{{focus_item.itemdata.original[key]}}" disabled/>{{value.unit||''}}</div>
 	</div>
 
 	<div class="itemFrame" v-if="focus_item.framedata">
-		<div class="inputBox" v-for="(key, value) in frame"><label for="frame|{{key}}">{{value.label}}:</label><input type="{{value.type}}" @keyup="updateItem" id="frame|{{key}}" placeholder="" value="{{focus_item.framedata.style[key]}}"/>{{value.unit}}</div>
+		<div class="inputBox" v-for="(key, value) in frame"><label for="frame|{{key}}">{{value.label || key}}:</label><input type="{{value.type||'text'}}" @keyup="updateItem" id="frame|{{key}}" placeholder="" value="{{focus_item.framedata.style[key]}}"/>{{value.unit||''}}</div>
 	</div>
 
 </div>
@@ -52,13 +52,29 @@ return {
 			original : {
 				width : {label : '宽度', unit : 'px', type : 'number'}
 				, height : {label : '高度', unit : 'px', type : 'number'}
-				, imageUrl : {label : '背景图片', unit : '', type : 'text'}
+				, imageUrl : {label : '背景图片'}
 			}
 			, frame : {
 				width : {label : '宽度', unit : 'px', type : 'number'}
 				, height : {label : '高度', unit : 'px', type : 'number'}
-				, top : {label : 'top', unit : 'px', type : 'number'}
-				, left : {label : 'left', unit : 'px', type : 'number'}
+				, top : {unit : 'px', type : 'number'}
+				, left : {unit : 'px', type : 'number'}
+			}
+			, transform : {
+				translate : {
+					label : '坐标'
+					, opts : {
+						x : {unit : 'px', type : 'number'}
+						, y : {unit : 'px', type : 'number'}
+					}
+				}
+				, scale : {
+					label : '缩放'
+					, opts : {
+						x : {unit : 'px', type : 'number'}
+						, y : {unit : 'px', type : 'number'}
+					}
+				}
 			}
 		}
 	}
