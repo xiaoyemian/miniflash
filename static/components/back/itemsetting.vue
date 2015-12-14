@@ -55,8 +55,8 @@ return {
 				, imageUrl : {label : '背景图片', unit : '', type : 'text'}
 			}
 			, frame : {
-				width : {label : 'width', unit : 'px', type : 'number'}
-				, height : {label : 'height', unit : 'px', type : 'number'}
+				width : {label : '宽度', unit : 'px', type : 'number'}
+				, height : {label : '高度', unit : 'px', type : 'number'}
 				, top : {label : 'top', unit : 'px', type : 'number'}
 				, left : {label : 'left', unit : 'px', type : 'number'}
 			}
