@@ -65,14 +65,6 @@ return {
 	, props:['itemsdata']
 	, data : function(){
 
-		for(var i in this.itemsdata){
-			var itemdata = this.itemsdata[i]
-
-			if(!itemdata.frames)
-				itemdata.frames = {}
-
-		}
-
 		return {
 			focus_track : null
 			, timedata : {
