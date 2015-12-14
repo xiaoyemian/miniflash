@@ -42,8 +42,8 @@ var itemsetting = require('back/itemsetting.vue')
 
 var formatdata = {}
 formatdata.original = {
-	width : {label : '宽度', unit : 'px'}
-	, height : {label : '高度', unit : 'px'}
+	width : {label : '原始宽度', unit : 'px'}
+	, height : {label : '原始高度', unit : 'px'}
 	, imageUrl : {label : '背景图片', type : 'text'}
 }
 formatdata.resize = {
@@ -55,7 +55,7 @@ formatdata.resize = {
 
 formatdata.transform = {
 	translate : {
-		label : '坐标'
+		label : '转换'
 		, opts : [['x', 'px'],['y', 'px']]
 	}
 	, scale : {
