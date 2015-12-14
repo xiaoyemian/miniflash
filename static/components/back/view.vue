@@ -118,7 +118,7 @@ return {
 					, height : 100
 				}
 				, frames : {
-					0 : { transform : {} , type : 'animateframe' }
+					0 : { type : 'blankframe' , resize:{}, transform:{}}
 				}
 			})
 
