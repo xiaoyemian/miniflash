@@ -46,6 +46,13 @@ formatdata.original = {
 	, height : {label : '高度'}
 	, imageUrl : {label : '背景图片', type : 'text', unit : ''}
 }
+formatdata.resize = {
+	width : {label : '宽度'}
+	, height : {label : '高度'}
+	, top : {}
+	, left : {}
+}
+
 formatdata.transform = {
 	translate : {
 		label : '坐标'

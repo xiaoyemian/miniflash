@@ -54,7 +54,7 @@
 </style>
 
 <template>
-<div class="item" @click.stop="selectItem" :class="[framedata && framedata.type, focus_item && focus_item.itemdata.item_id == itemdata.item_id ? 'focus' : '']" :style="[itemstyle, framestyle]">
+<div class="item" @click.stop="selectItem" :class="[framedata && framedata.type, focus_item && focus_item.itemdata.item_id == itemdata.item_id ? 'focus' : '']" :style="[originalstyle, framestyle]">
 	<div class="handel">
 		<div @click.stop="aspectRatio" class="aspectRatioBtn"></div>
 	</div>
@@ -69,8 +69,8 @@ return {
 	, data:function(){
 		return {
 			framedata : null
+			, originalstyle : {}
 			, framestyle : {} 
-			, itemstyle : {}
 		}
 	}
 	, methods : {
@@ -98,17 +98,22 @@ return {
 			}
 			this.resetItemId(type)
 
-
 			if(!itemdata.frames){
 				var framedata = {
 					type : 'keyframe'
-					, transform : {}
+				}
+
+				framedata.resize = {
+					width : 640 * itemdata.style['width']/100
+					, height : 640 * itemdata.style['padding-top']/100
+					, left : 640 * itemdata.style['left']/100
+					, top : 1136 * itemdata.style['top']/100
 				}
 
 				framedata.transform = {
 					translate : {
-						x : 640 * itemdata.style['left']/100
-						, y : 1136 * itemdata.style['top']/100
+						x : 0 
+						, y : 0 
 					}
 					, scale : {
 						x : 1
@@ -126,35 +131,45 @@ return {
 		, loadItemOriginal : function(){
 			var style = this.itemdata.original
 
-			this.itemstyle = {
+			this.originalstyle = {
 				width : style.width * this.printdata.scale + 'px'
 				, height : style.height * this.printdata.scale + 'px'
 				, 'background-image' : 'url("' + style.imageUrl + '")'
 			}
 		}
 		, loadItemStyle : function(){
-			var format = this.formatdata.transform
-			var transform = this.framedata.transform
+			var format = this.formatdata
+			var framedata = this.framedata
 			var transformList = []
 
-			for(var i in transform){
-				var trans = transform[i]
-				var opts = format[i].opts
+			for(var i in framedata.transform){
+				var transform = framedata.transform[i]
+				var opts = format.transform[i].opts
 				var arr = []
 				for(var j in opts){
 					var opt = opts[j]
-					var value = trans[opt[0]]
 					var unit = opt[1] || ''
+					var value = transform[opt[0]]
 					if(unit == 'px'){
 						value *= this.printdata.scale
 					}
 					arr.push(value + unit)
 				}
 				transformList.push(i + '(' + arr.join(',') + ')')
-
 			}
-			this.framestyle = {transform:transformList.join(' ')}
 
+			this.framestyle = {}
+			this.framestyle.transform = transformList.join(' ')
+
+			for(var i in framedata.resize){
+				var unit = format.resize[i].unit || 'px'
+				var value = framedata.resize[i]
+				
+				if(unit == 'px'){
+					value *= this.printdata.scale
+				}
+				this.framestyle[i] = value + unit 
+			}
 		}
 		, resetItemId : function(type){
 			this.itemdata.item_id = type + '|' + (this.index+1) + '|' 
@@ -167,33 +182,40 @@ return {
 	}
 	, events : {
 		loadItemByTrack : function(track){
-			if(track.item_id == this.itemdata.item_id){
-				this.framedata = track.focus_frame.framedata
+			if(track.item_id != this.itemdata.item_id)
+				return;
 
-				if(this.framedata.type == 'blankframe'){
-					var transform = {}
+			this.framedata = track.focus_frame.framedata
 
-					for(var i = track.focus_frame.time; i >= 0; i--){
-						var framedata = track.frameslist[i]
+			if(this.framedata.type == 'blankframe'){
+				var resize = {}
+				var transform = {}
 
-						if(framedata.type && framedata.type != 'blankframe'){
-							for(var i in framedata.transform){
-								transform[i] = {}
-								for(var j in framedata.transform[i]){
-									transform[i][j] = framedata.transform[i][j]
-								}
-							}
+				for(var i = track.focus_frame.time; i >= 0; i--){
+					var framedata = track.frameslist[i]
 
-							console.log(transform)
-							break;
+					if(framedata.type && framedata.type != 'blankframe'){
+
+						for(var i in framedata.resize){
+							resize[i] = framedata.resize[i]
 						}
-					}
 
-					this.framedata.transform = transform
+						for(var i in framedata.transform){
+							transform[i] = {}
+							for(var j in framedata.transform[i]){
+								transform[i][j] = framedata.transform[i][j]
+							}
+						}
+
+						break;
+					}
 				}
 
-				this.loadItemStyle()
+				this.framedata.resize = resize
+				this.framedata.transform = transform
 			}
+
+			this.loadItemStyle()
 		}
 		, focusItemById : function(item_id){
 			if(item_id == this.itemdata.item_id){
@@ -214,26 +236,11 @@ return {
 				mSelf.framedata.type = 'keyframe'
 			}
 			, drag : function(event, ui){
-				$(this).css({
-					'margin-left' : -ui.position.left
-					, 'margin-top' : -ui.position.top
-				})
-				
-				mSelf.$set('framedata.transform.translate', {
-					x : ui.position.left / mSelf.printdata.scale
-					, y : ui.position.top / mSelf.printdata.scale
-				})
-
-				mSelf.loadItemStyle()
+				var resize = mSelf.framedata.resize
+				resize.left = ui.position.left / mSelf.printdata.scale
+				resize.top = ui.position.top / mSelf.printdata.scale
 			}
 			, stop : function(event, ui){
-				$(this).css({
-					'margin-left' : 0
-					, 'margin-top' : 0
-					, top : 0
-					, left : 0
-				})
-
 				mSelf.loadItemStyle()
 			}
 			, cursor: "move"
@@ -249,18 +256,9 @@ return {
 				mSelf.framedata.type = 'keyframe'
 			}
 			, resize : function(event, ui){
-/*
-				$(this).css({
-					width :  ui.originalSize.width
-					, height : ui.originalSize.height 
-				})
-
-				mSelf.$set('framedata.transform.scale', {
-					x : ui.size.width / ui.originalSize.width
-					, y : ui.size.height / ui.originalSize.height
-				})
-*/
-				mSelf.loadItemStyle()
+				var resize = mSelf.framedata.resize
+				resize.width = ui.size.width / mSelf.printdata.scale
+				resize.height = ui.size.height / mSelf.printdata.scale
 			}
 			, stop : function(event, ui){
 				mSelf.loadItemStyle()

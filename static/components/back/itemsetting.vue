@@ -40,7 +40,7 @@
 .itemOriginal{
 	.bgc(#333); border:1px solid #222;
 }
-.itemFrame{
+.itemResize{
 	.bgc(#333); border:1px solid #222;
 }
 .itemTramsform{
@@ -55,6 +55,13 @@
 		<div class="inputArea" v-for="(key, value) in formatdata.original">
 			<label for="original|{{key}}">{{value.label || key}}:</label>
 			<input type="{{value.type||'number'}}" @keyup="updateItem" id="original|{{key}}" placeholder="" value="{{focus_item.itemdata.original[key]}}" disabled/>{{value.unit||'px'}}
+		</div>
+	</div>
+
+	<div class="itemResize" v-if="focus_item.framedata.resize">
+		<div class="inputArea" v-for="(key, value) in formatdata.resize">
+			<label for="resize|{{key}}">{{value.label || key}}:</label>
+			<input type="{{value.type||'number'}}" @keyup="updateItem" id="resize|{{key}}" placeholder="" value="{{focus_item.framedata.resize[key]}}"/>{{value.unit||'px'}}
 		</div>
 	</div>
 
