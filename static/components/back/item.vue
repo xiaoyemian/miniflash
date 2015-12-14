@@ -90,9 +90,6 @@ return {
 		, aspectRatio : function(){
 		}
 		, resetItemStyle : function(name, opts){
-			if(!this.framedata.transform[name])
-				this.framedata.transform[name] = {}
-			
 			console.log(name, opts)
 
 			//this.loadItemStyle()
@@ -215,6 +212,7 @@ return {
 				mSelf.framedata.type = 'keyframe'
 			}
 			, drag : function(event, ui){
+				mSelf.resetItemStyle('transform', ui.position)
 			}
 			, stop : function(event, ui){
 				mSelf.loadItemStyle()
@@ -232,7 +230,7 @@ return {
 				mSelf.framedata.type = 'keyframe'
 			}
 			, resize : function(event, ui){
-				mSelf.resetItemStyle(ui.size)
+				mSelf.resetItemStyle('scale', ui.size)
 			}
 			, stop : function(event, ui){
 				mSelf.loadItemStyle()
