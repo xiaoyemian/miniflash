@@ -207,17 +207,20 @@ return {
 				mSelf.selectItem()
 				mSelf.framedata.type = 'keyframe'
 
-				mSelf.framedata.transform.translate.x = 0
-				mSelf.framedata.transform.translate.y = 0
+				mSelf.$set('framedata.transform.translate', { x : 0 , y : 0 })
 				mSelf.loadItemStyle()
+
 			}
 			, drag : function(event, ui){
 			}
 			, stop : function(event, ui){
-				$item.css({top:0,left:0})
+				$(this).css({top:0,left:0})
 
-				mSelf.framedata.transform.translate.x = ui.position.left / mSelf.printdata.scale
-				mSelf.framedata.transform.translate.y = ui.position.top / mSelf.printdata.scale
+				mSelf.$set('framedata.transform.translate', {
+					x : ui.position.left / mSelf.printdata.scale
+					, y : ui.position.top / mSelf.printdata.scale
+				})
+
 				mSelf.loadItemStyle()
 			}
 			, cursor: "move"
@@ -227,7 +230,6 @@ return {
 			, snapTolerance : '4'
 		})
 	
-/*
 		$item.resizable({
 			start : function(event, ui){
 				mSelf.selectItem()
@@ -241,7 +243,6 @@ return {
 			}
 			, ghost: true
 		})
-*/
 	}
 	, created : function(){
 		this.formatItem()
