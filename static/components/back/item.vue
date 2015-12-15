@@ -197,6 +197,7 @@ return {
 	}
 	, created : function(){
 		this.$dispatch('upgradeItem', this)
+		this.$dispatch('formatData', this.itemdata)
 		this.loadItemOriginal()
 	}
 }

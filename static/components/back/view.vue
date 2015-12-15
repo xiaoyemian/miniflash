@@ -131,24 +131,22 @@ return {
 			var itemdata = item.itemdata
 
 			if(!itemdata.original){
-				var resize = {
-					width : 640 * itemdata.style['width']/100
-					, height : 640 * itemdata.style['padding-top']/100
-					, left : 640 * itemdata.style['left']/100
-					, top : 1136 * itemdata.style['top']/100
-				}
-
 				var original = {
-					width : resize.width
-					, height : resize.height 
+					width : 640 * itemdata.style['width']/100
+					, height : 640 * itemdata.style['padding-top']/100 
 				}
-
 				if(itemdata.background && itemdata.background.image){
 					original.imageUrl = itemdata.background.image
 				}
 
-				var transform = {}
+				var resize = {
+					width : original.width 
+					, height : original.height 
+					, left : 640 * itemdata.style['left']/100
+					, top : 1136 * itemdata.style['top']/100
+				}
 
+				var transform = {}
 				for(var i in formatdata.transform){
 					transform[i] = {}
 					for(var j in formatdata.transform[i].opts){
@@ -167,10 +165,42 @@ return {
 			}
 
 			var type = itemdata.original.imageUrl ? 'image' : 'item'
-			itemdata.item_id = type + '|' + (1) + '|' 
+			itemdata.item_id = type + '|' + (item.index+1) + '|' 
 												+ (new Date()).valueOf() 
 												+ Math.floor(Math.random()*10000) 
 												+ Math.floor(Math.random()*100)
+
+		}
+		, formatData : function(itemdata){
+			var formatdata = this.formatdata
+			var original = itemdata.original
+
+			if(!itemdata.frames)
+				itemdata.frames = {}
+
+			if(!itemdata.frames[0])
+				itemdata.frames[0] = {}
+
+			if(!itemdata.frames[0].resize)
+				itemdata.frames[0].resize = {}
+
+			if(!itemdata.frames[0].resize.width)
+				itemdata.frames[0].resize.width = original.width
+
+			if(!itemdata.frames[0].resize.height)
+				itemdata.frames[0].resize.height = original.height
+
+			if(!itemdata.frames[0].transform){
+				var transform = {}
+				for(var i in formatdata.transform){
+					transform[i] = {}
+					for(var j in formatdata.transform[i].opts){
+						var value = formatdata.transform[i].opts[j]
+						transform[i][value[0]] = value[2] || 0
+					}
+				}
+				itemdata.frames[0].transform = transform
+			}
 
 		}
 		, setFocusItem : function(item){
