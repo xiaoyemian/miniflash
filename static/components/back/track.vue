@@ -58,7 +58,7 @@ return {
 	}
 	, methods : {
 		selectTrack : function(){
-			this.$dispatch('selectTrack', this)
+			this.$dispatch('selectTrack', this.item_id)
 		}
 		, setFocusFrame : function(frame){
 			this.$set('focus_frame', frame)
@@ -105,7 +105,7 @@ return {
 	}
 	, watch : {
 		frameslist : function(){
-				console.log(arguments)
+			//console.log(arguments)
 		}
 	}
 	, ready : function(){

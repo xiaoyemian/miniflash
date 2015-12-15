@@ -120,7 +120,7 @@ return {
 				}
 
 				this.$set('itemdata.frames', {0:framedata})
-				console.log(this.itemdata.frames)
+				//console.log(this.itemdata.frames)
 			}
 
 			delete itemdata.style
@@ -179,7 +179,7 @@ return {
 
 			this.framestyle.transform = transformList.join(' ')
 
-			console.log(this.framestyle.transform)
+			//console.log(this.framestyle.transform)
 
 		}
 		, resetItemId : function(type){
@@ -203,6 +203,8 @@ return {
 
 			this.framedata = track.focus_frame.framedata
 			this.loadItemStyle()
+
+			console.log(track.item_id)
 		}
 		, focusItemById : function(item_id){
 			if(item_id == this.itemdata.item_id){
@@ -254,7 +256,7 @@ return {
 	}
 	, created : function(){
 		this.formatItem()
-		console.log(this)
+		//console.log(this)
 		this.loadItemOriginal()
 	}
 }
