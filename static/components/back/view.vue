@@ -56,7 +56,7 @@ formatdata.resize = {
 
 formatdata.transform = {
 	translate : {
-		label : '转换'
+		label : '偏移'
 		, opts : [['x', 'px'],['y', 'px']]
 	}
 	, scale : {
