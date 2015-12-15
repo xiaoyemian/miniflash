@@ -179,7 +179,7 @@ return {
 				itemdata.frames = {}
 
 			if(!itemdata.frames[0])
-				itemdata.frames[0] = {}
+				itemdata.frames[0] = {type:'keyframe'}
 
 			if(!itemdata.frames[0].resize)
 				itemdata.frames[0].resize = {}
