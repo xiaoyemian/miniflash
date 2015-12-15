@@ -113,19 +113,65 @@ return {
 			this.$set('pagestyle["margin-top"]', printdata.height * printdata.scale/-2 + 'px')
     }
 		, addItem : function(){
-			this.itemsdata.push({
+			var itemdata = {
 				original : {
 					width : 100
 					, height : 100
 				}
-				, frames : {
-					0 : { type : 'blankframe'}
-				}
-			})
+			}
+			this.formatData(itemdata)
+			this.itemsdata.push(itemdata)
 
 			this.$nextTick(function () {
-				//todo reloadTime
+				this.$dispatch('loadTime')
 			})
+		}
+		, upgradeItem: function(item){
+			var formatdata = this.formatdata
+			var itemdata = item.itemdata
+
+			if(!itemdata.original){
+				var resize = {
+					width : 640 * itemdata.style['width']/100
+					, height : 640 * itemdata.style['padding-top']/100
+					, left : 640 * itemdata.style['left']/100
+					, top : 1136 * itemdata.style['top']/100
+				}
+
+				var original = {
+					width : resize.width
+					, height : resize.height 
+				}
+
+				if(itemdata.background && itemdata.background.image){
+					original.imageUrl = itemdata.background.image
+				}
+
+				var transform = {}
+
+				for(var i in formatdata.transform){
+					transform[i] = {}
+					for(var j in formatdata.transform[i].opts){
+						var value = formatdata.transform[i].opts[j]
+						transform[i][value[0]] = value[2] || 0
+					}
+				}
+
+				item.$set('itemdata.original', original)
+				item.$set('itemdata.frames', {0 : { type:'keyframe', resize : resize, transform : transform }})
+
+				delete itemdata.style
+				delete itemdata.background
+				delete itemdata.scale
+
+			}
+
+			var type = itemdata.original.imageUrl ? 'image' : 'item'
+			itemdata.item_id = type + '|' + (1) + '|' 
+												+ (new Date()).valueOf() 
+												+ Math.floor(Math.random()*10000) 
+												+ Math.floor(Math.random()*100)
+
 		}
 		, setFocusItem : function(item){
 			this.$set('focus_item', item)
@@ -138,6 +184,9 @@ return {
 		}
 		, setFocusItem : function(item){
 			this.setFocusItem(item)
+		}
+		, upgradeItem : function(itemdata){
+			this.upgradeItem(itemdata)
 		}
 	}
 	, created : function(){

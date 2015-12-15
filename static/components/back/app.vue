@@ -57,6 +57,9 @@ return {
 		, blurTrack : function(){
       this.$refs.flash.setFocusTrack(null)
 		} 
+		, loadTime : function(time){
+			this.$refs.flash.loadTime(time)
+		}
 	}
 	, ready: function(){
   }

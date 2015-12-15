@@ -80,53 +80,6 @@ return {
 		, setFocusItem : function(){
 			this.$dispatch('setFocusItem', this)
 		}
-		, formatItem : function(){
-			var format = this.formatdata
-			var itemdata = this.itemdata
-			var type = 'item'
-
-			if(!itemdata.original){
-				var original = {
-					width : 640 * itemdata.style['width']/100
-					, height : 640 * itemdata.style['padding-top']/100
-				}
-				this.$set('itemdata.original', original)
-			}
-
-			if(itemdata.background && itemdata.background.image){
-				itemdata.original.imageUrl = itemdata.background.image
-				type = 'image'
-			}
-			this.resetItemId(type)
-
-			if(!itemdata.frames){
-				var framedata = {
-					type : 'keyframe'
-					, resize : {
-						width : 640 * itemdata.style['width']/100
-						, height : 640 * itemdata.style['padding-top']/100
-						, left : 640 * itemdata.style['left']/100
-						, top : 1136 * itemdata.style['top']/100
-					}
-					, transform : {}
-				}
-
-				for(var i in format.transform){
-					framedata.transform[i] = {}
-					for(var j in format.transform[i].opts){
-						var value = format.transform[i].opts[j]
-						framedata.transform[i][value[0]] = value[2] || 0
-					}
-				}
-
-				this.$set('itemdata.frames', {0:framedata})
-				//console.log(this.itemdata.frames)
-			}
-
-			delete itemdata.style
-			delete itemdata.background
-			delete itemdata.scale
-		}
 		, loadItemOriginal : function(){
 			var style = this.itemdata.original
 
@@ -140,17 +93,16 @@ return {
 			this.framedata.type = 'keyframe'
 		}
 		, loadItemStyle : function(){
-			var format = this.formatdata
+			var formatdata = this.formatdata
 			var framedata = this.framedata
 			var transformList = []
 
 			this.framestyle = {}
 
 			for(var i in framedata.resize){
-		//		framedata.resize[i] = Math.round(framedata.resize[i])
 
 				var value = framedata.resize[i] || 0
-				var unit = format.resize[i].unit || ''
+				var unit = formatdata.resize[i].unit || ''
 				
 				if(unit == 'px'){
 					value *= this.printdata.scale
@@ -160,11 +112,10 @@ return {
 
 			for(var i in framedata.transform){
 				var transform = framedata.transform[i]
-				var opts = format.transform[i].opts
+				var opts = formatdata.transform[i].opts
 				var arr = []
 				for(var j in opts){
 					var opt = opts[j]
-			//		transform[opt[0]] = Math.round(transform[opt[0]])
 
 					var value = transform[opt[0]] || opt[2] || 0
 					var unit = opt[1] || ''
@@ -178,8 +129,6 @@ return {
 			}
 
 			this.framestyle.transform = transformList.join(' ')
-
-			//console.log(this.framestyle.transform)
 
 		}
 		, resetItemId : function(type){
@@ -253,8 +202,7 @@ return {
 		})
 	}
 	, created : function(){
-		this.formatItem()
-		//console.log(this)
+		this.$dispatch('upgradeItem', this)
 		this.loadItemOriginal()
 	}
 }

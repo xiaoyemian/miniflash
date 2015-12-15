@@ -92,7 +92,6 @@ return {
 			var type = setting.id.split('|')
 			var value = setting.value
 
-			console.log(type)
 			var arr = []
 			for(var i in type){
 				arr.push('["' + type[i] + '"]')

@@ -44,7 +44,7 @@ return {
 		var frameslist = []
 
 		for(var i = 0; i <= this.timedata.length/this.timedata.step; i++){
-			frameslist.push(this.framesdata[i] || {transform:{}, type:'blankframe'})
+			frameslist.push(this.framesdata[i] || {type:'blankframe'})
 		}
 
 		var item_name = this.item_id.split('|')
@@ -72,36 +72,36 @@ return {
 		, loadItemByTime : function(time){
 			this.setFocusFrame(time)
 
-			var frame = this.$refs.frame[time]
+			var framedata = this.frameslist[time]
+			console.log(framedata)
 
-			if(frame.framedata.type == 'blankframe'){
+			if(framedata.type == 'blankframe'){
 				var resize = {}
 				var transform = {}
 
-				for(var i = frame.time; i >= 0; i--){
-					var framedata = this.frameslist[i]
+				for(var i = time; i >= 0; i--){
+					var data = this.frameslist[i]
+					if(data.type && data.type != 'blankframe'){
 
-					if(framedata.type && framedata.type != 'blankframe'){
-
-						for(var i in framedata.resize){
-							resize[i] = framedata.resize[i]
+						for(var i in data.resize){
+							resize[i] = data.resize[i]
 						}
 
-						for(var i in framedata.transform){
+						for(var i in data.transform){
 							transform[i] = {}
-							for(var j in framedata.transform[i]){
-								transform[i][j] = framedata.transform[i][j]
+							for(var j in data.transform[i]){
+								transform[i][j] = data.transform[i][j]
 							}
 						}
 
 						break;
 					}
 				}
-				frame.$set('framedata.resize', resize)
-				frame.$set('framedata.transform', transform)
+				this.$set('frameslist[' + time + '].resize', resize)
+				this.$set('frameslist[' + time + '].transform', transform)
 			}
 
-			this.$dispatch('loadItemByFrame', this.item_id, frame.framedata)
+			this.$dispatch('loadItemByFrame', this.item_id, framedata)
 		}
 	}
 	, watch : {
