@@ -71,13 +71,12 @@ return {
 		}
 		, loadItemByTime : function(time){
 			var frame = this.$refs.frame[time]
-			this.setFocusFrame(frame)
 
-			if(this.focus_frame.framedata.type == 'blankframe'){
+			if(frame.framedata.type == 'blankframe'){
 				var resize = {}
 				var transform = {}
 
-				for(var i = this.focus_frame.time; i >= 0; i--){
+				for(var i = frame.time; i >= 0; i--){
 					var framedata = this.frameslist[i]
 
 					if(framedata.type && framedata.type != 'blankframe'){
@@ -96,10 +95,11 @@ return {
 						break;
 					}
 				}
-				this.$set('focus_frame.framedata.resize', resize)
-				this.$set('focus_frame.framedata.transform', transform)
+				frame.$set('framedata.resize', resize)
+				frame.$set('framedata.transform', transform)
 			}
 
+			this.setFocusFrame(frame)
 			this.$dispatch('loadItemByTrack', this)
 		}
 	}
