@@ -17,7 +17,7 @@
 			.pa;.h(100%);z-index:2;
 			&:before, &:after{ content:'';.pa;z-index:1; }
 			&:before{
-				top:0px;bottom:0px;.ml(-1px);border-right:2px solid red;
+				top:0px;bottom:0px;border-right:1px solid red;
 				.w(50%);
 			}
 			&:after{
