@@ -197,11 +197,11 @@ return {
 		}
 	}
 	, events : {
-		loadItemByFrame : function(item_id, frame){
+		loadItemByFrame : function(item_id, framedata){
 			if(item_id != this.itemdata.item_id)
 				return;
 
-			this.framedata = frame.framedata
+			this.framedata = framedata
 			this.loadItemStyle()
 		}
 		, focusItemById : function(item_id){

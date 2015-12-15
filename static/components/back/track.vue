@@ -70,6 +70,8 @@ return {
 			this.selectTrack()
 		}
 		, loadItemByTime : function(time){
+			this.setFocusFrame(time)
+
 			var frame = this.$refs.frame[time]
 
 			if(frame.framedata.type == 'blankframe'){
@@ -99,8 +101,7 @@ return {
 				frame.$set('framedata.transform', transform)
 			}
 
-			this.setFocusFrame(frame.time)
-			this.$dispatch('loadItemByFrame', this.item_id, frame)
+			this.$dispatch('loadItemByFrame', this.item_id, frame.framedata)
 		}
 	}
 	, watch : {
