@@ -115,9 +115,6 @@ return {
 					mSelf.loadTime(time)
 			}
 			, stop : function(event, ui){
-				var time = ((ui.position.left - 140)/mSelf.timedata.framewidth)|0
-				if(mSelf.timedata.time != time)
-					mSelf.loadTime(time)
 			}
 			, cursor: "move"
 			, containment : "parent"

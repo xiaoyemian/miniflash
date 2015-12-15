@@ -124,7 +124,7 @@ return {
 			})
 
 			this.$nextTick(function () {
-				this.$dispatch('loadTime')
+				//todo reloadTime
 			})
 		}
 		, setFocusItem : function(item){
