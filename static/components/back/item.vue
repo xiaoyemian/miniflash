@@ -166,11 +166,6 @@ return {
 					var opt = opts[j]
 			//		transform[opt[0]] = Math.round(transform[opt[0]])
 
-
-
-
-
-
 					var value = transform[opt[0]] || opt[2] || 0
 					var unit = opt[1] || ''
 
