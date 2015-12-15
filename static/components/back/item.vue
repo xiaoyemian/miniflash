@@ -197,14 +197,12 @@ return {
 		}
 	}
 	, events : {
-		loadItemByTrack : function(track){
-			if(track.item_id != this.itemdata.item_id)
+		loadItemByFrame : function(item_id, frame){
+			if(item_id != this.itemdata.item_id)
 				return;
 
-			this.framedata = track.focus_frame.framedata
+			this.framedata = frame.framedata
 			this.loadItemStyle()
-
-			console.log(track.item_id)
 		}
 		, focusItemById : function(item_id){
 			if(item_id == this.itemdata.item_id){

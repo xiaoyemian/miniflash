@@ -51,7 +51,7 @@
 </style>
 
 <template>
-<div class="frame" :class="[framedata.type, focus_frame && focus_frame.time == time ? 'focus' : '']" @click.stop="selectFrame" :style="{width:timedata.framewidth-1 + 'px'}">
+<div class="frame" :class="[framedata.type, focus_frame == time ? 'focus' : '']" @click.stop="selectFrame" :style="{width:timedata.framewidth-1 + 'px'}">
 	<div class="handel"></div>
 </div>
 </template>
@@ -68,7 +68,7 @@ return {
 	, methods : {
 		selectFrame : function(){
 			console.log(this.time)
-			this.$dispatch('selectFrame', this)
+			this.$dispatch('selectFrame', this.time)
 			this.$dispatch('loadTime', this.time)
 		}
 	}

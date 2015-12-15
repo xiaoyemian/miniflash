@@ -45,8 +45,8 @@ return {
 		}
 	}
 	, events : {
-		loadItemByTrack : function(track){
-      this.$refs.view.$broadcast('loadItemByTrack', track)
+		loadItemByFrame : function(item_id, frame){
+      this.$refs.view.$broadcast('loadItemByFrame', item_id, frame)
 		}
 		, focusItemById : function(item_id){
       this.$refs.view.$broadcast('focusItemById', item_id)

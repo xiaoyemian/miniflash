@@ -60,13 +60,13 @@ return {
 		selectTrack : function(){
 			this.$dispatch('selectTrack', this.item_id)
 		}
-		, setFocusFrame : function(frame){
-			this.$set('focus_frame', frame)
+		, setFocusFrame : function(time){
+			this.$set('focus_frame', time)
 		}
 	}
 	, events : {
-		selectFrame : function(frame){
-			this.setFocusFrame(frame)
+		selectFrame : function(time){
+			this.setFocusFrame(time)
 			this.selectTrack()
 		}
 		, loadItemByTime : function(time){
@@ -99,8 +99,8 @@ return {
 				frame.$set('framedata.transform', transform)
 			}
 
-			this.setFocusFrame(frame)
-			this.$dispatch('loadItemByTrack', this)
+			this.setFocusFrame(frame.time)
+			this.$dispatch('loadItemByFrame', this.item_id, frame)
 		}
 	}
 	, watch : {
