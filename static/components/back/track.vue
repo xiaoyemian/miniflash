@@ -72,6 +72,34 @@ return {
 		, loadItemByTime : function(time){
 			var frame = this.$refs.frame[time]
 			this.setFocusFrame(frame)
+
+			if(this.focus_frame.framedata.type == 'blankframe'){
+				var resize = {}
+				var transform = {}
+
+				for(var i = this.focus_frame.time; i >= 0; i--){
+					var framedata = this.frameslist[i]
+
+					if(framedata.type && framedata.type != 'blankframe'){
+
+						for(var i in framedata.resize){
+							resize[i] = framedata.resize[i]
+						}
+
+						for(var i in framedata.transform){
+							transform[i] = {}
+							for(var j in framedata.transform[i]){
+								transform[i][j] = framedata.transform[i][j]
+							}
+						}
+
+						break;
+					}
+				}
+				this.$set('focus_frame.framedata.resize', resize)
+				this.$set('focus_frame.framedata.transform', transform)
+			}
+
 			this.$dispatch('loadItemByTrack', this)
 		}
 	}
