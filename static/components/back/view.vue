@@ -122,7 +122,7 @@ return {
 			this.formatData(itemdata)
 			this.itemsdata.push(itemdata)
 
-			this.$nextTick(function () {
+			this.$nextTick(function(){
 				this.$dispatch('loadTime')
 			})
 		}
