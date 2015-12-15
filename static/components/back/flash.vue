@@ -86,7 +86,6 @@ return {
 			if(typeof time !== 'undefined')
 				this.timedata.time = time
 
-			console.log(this.timedata.time, time)
 			this.$broadcast('loadItemByTime', this.timedata.time)
 		}
 	}

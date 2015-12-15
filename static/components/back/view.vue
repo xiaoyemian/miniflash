@@ -119,7 +119,7 @@ return {
 					, height : 100
 				}
 				, frames : {
-					0 : { type : 'blankframe' , resize:{}, transform:{}}
+					0 : { type : 'blankframe'}
 				}
 			})
 
