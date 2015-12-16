@@ -177,14 +177,11 @@ return {
 			})
 		}
 		, formatItemData : function(itemdata){
-			var formatdata = this.formatdata
-
 			if(!itemdata.frames)
 				itemdata.frames = {}
 
 			if(!itemdata.frames[0])
 				itemdata.frames[0] = {type:'keyframe'}
-
 		}
 		, setFocusItem : function(item){
 			this.$set('focus_item', item)
