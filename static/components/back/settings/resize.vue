@@ -5,7 +5,7 @@
 <div class="settingBox" v-if="focus_item && focus_item.framedata.resize">
 	<div class="inputArea" v-for="(key, value) in formatdata">
 		<label for="{{key}}">{{value.label || key}}:</label>
-		<input type="{{value.type||'number'}}" @keyup="updateItem" id="{{key}}" placeholder="" value="{{focus_item.framedata.resize[key]}}"/>{{value.unit||''}}
+		<input type="{{value.type||'number'}}" @keydown="updateItem" id="{{key}}" placeholder="" value="{{focus_item.framedata.resize[key]}}"/>{{value.unit||''}}
 	</div>
 </div>
 </template>

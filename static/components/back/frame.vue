@@ -28,19 +28,11 @@
 	&.animateframe{
 		.handel{.bgc(#5CADD6);}
 	}
-
-	&.focus{
-		.handel{
-//			border:1px solid #f69; 
-//			.bgc(red);
-		}
-	}
-
 }
 .track.focus{
 	.frame.focus{
 		.handel{
-			.bgc(red);
+			//border:1px solid red;
 		}
 	}
 	.frame{
@@ -52,7 +44,7 @@
 </style>
 
 <template>
-<div class="frame" :class="[framedata.type, focus_frame == time ? 'focus' : '']" @keyup.enter="setAnimateFrame" @click.stop="selectFrame" :style="{width:timedata.framewidth-1 + 'px'}">
+<div class="frame" :class="[framedata.type, focus_frame == time ? 'focus' : '']" @click.stop="selectFrame" :style="{width:timedata.framewidth-1 + 'px'}">
 	<div class="handel"></div>
 </div>
 </template>
@@ -76,6 +68,7 @@ return {
 			this.framedata.type = 'keyframe'
 		}
 		, setAnimateFrame : function(){
+			console.log(123)
 			this.framedata.type = 'animateframe'
 		}
 	}
