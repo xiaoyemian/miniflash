@@ -90,7 +90,7 @@ return {
 			}
 		}
 		, setKeyFrame : function(){
-			this.framedata.type = 'keyframe'
+			this.framedata.type = 'blankkeyframe'
 		}
 		, loadItemStyle : function(){
 			var formatdata = this.formatdata

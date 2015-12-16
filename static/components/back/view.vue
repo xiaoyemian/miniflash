@@ -6,8 +6,51 @@
 	&-s{cursor:s-resize;}
 }
 
+.itemsettings{
+	.pa;.w(180px);right:0px;top:0px;bottom:100px;
+	.pl(4px);.pr(4px);
+}
+.settingBox{
+	z-index:900;
+	.mt(4px);
+
+	padding:4px;
+
+	.bgc(#333); border:1px solid #222;
+
+	.inputArea, .inputBox, .inputLabel{
+		.f(12px);.fc(#ccc); .l(20px);
+	}
+	.inputArea{
+		padding:4px 0px;
+		border-bottom:1px solid #2E2E2E;
+		&:nth-last-child(1){
+			border:0 none;;
+		}
+	}
+	.inputLabel{
+		.left;
+	}
+	.inputBox{
+		.ml(40px);
+	}
+
+	input{
+		&[type="text"],&[type="number"]{
+			.i_block;.fc(#ccc);.bgc(#383838);
+			padding:2px 6px;
+			border:1px solid #2E2E2E;
+		}
+		&[type="text"]{ .w(88px); }
+    &[type="number"]{ .c;.w(44px); }		
+	}
+	label {
+		.i_block; .tr;
+	}
+}
+
 .view{
-	.pa;left:0px;right:0px;top:0px;bottom:100px;
+	.pa;left:0px;right:180px;top:0px;bottom:100px;
 	.page{
 		.pa; .bgc(#fff); left:50%; top:50%;
 	}
@@ -17,11 +60,16 @@
 	.pa;z-index:100;top:50%;right:0px;
 	.bgc(white);
 }
+
 </style>
 
 
 <template>
-<itemsetting :focus_item="focus_item" :formatdata="formatdata"></itemsetting>
+<div class="itemsettings">
+	<original :focus_item="focus_item" :formatdata="formatdata.original"></original>
+	<resize :focus_item="focus_item" :formatdata="formatdata.resize"></resize>
+	<transform :focus_item="focus_item" :formatdata="formatdata.transform"></transform>
+</div>
 
 <div class="viewcontrol">
 	<div @click="addItem">addItem</div>
@@ -38,7 +86,9 @@
 
 <script>
 var item = require('back/item.vue')
-var itemsetting = require('back/itemsetting.vue')
+var original = require('back/settings/original.vue')
+var transform = require('back/settings/transform.vue')
+var resize = require('back/settings/resize.vue')
 
 var formatdata = {}
 formatdata.original = {
@@ -53,7 +103,6 @@ formatdata.resize = {
 	, left : {label : '左边距', unit : 'px'}
 	, 'border-radius' : {label : '圆角', unit : 'px'}
 }
-
 formatdata.transform = {
 	translate : {
 		label : '偏移'
@@ -73,11 +122,12 @@ formatdata.transform = {
 	}
 }
 
-
 return {
   components : {
     item : item
-		, itemsetting : itemsetting
+		, original : original
+		, transform : transform
+		, resize : resize
   }
 	, props:['itemsdata']
 	, data : function(){
@@ -156,7 +206,7 @@ return {
 				}
 
 				item.$set('itemdata.original', original)
-				item.$set('itemdata.frames', {0 : { type:'keyframe', resize : resize, transform : transform }})
+				item.$set('itemdata.frames', {0 : { type:'blankkeyframe', resize : resize, transform : transform }})
 
 				delete itemdata.style
 				delete itemdata.background
@@ -179,7 +229,7 @@ return {
 				itemdata.frames = {}
 
 			if(!itemdata.frames[0])
-				itemdata.frames[0] = {type:'keyframe'}
+				itemdata.frames[0] = {type:'blankkeyframe'}
 
 			if(!itemdata.frames[0].resize)
 				itemdata.frames[0].resize = {}

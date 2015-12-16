@@ -11,16 +11,17 @@
 		.opacity(60); 
 	}
 
-	&.keyframe{
+	&.blankkeyframe, &.keyframe{
 		.handel{ .bgc(#5CD685); }
-/*
-		&:before{
-			top:50%;left:50%;.w(6px);.h(6px);.mt(-3px);.ml(-3px);.bgc(#000); .border-r(8px);
-		}
-*/
 		&.focus{
 			.handel{
 			}
+		}
+	}
+
+	&.keyframe{
+		&:before{
+			top:50%;left:50%;.w(6px);.h(6px);.mt(-3px);.ml(-3px);.bgc(#000); .border-r(8px);
 		}
 	}
 
@@ -30,7 +31,7 @@
 
 	&.focus{
 		.handel{
-//			border:1px solid #f69;
+//			border:1px solid #f69; 
 //			.bgc(red);
 		}
 	}
