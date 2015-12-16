@@ -164,7 +164,7 @@ return {
 				}
 
 				this.$set('itemdata.original', original)
-				this.$set('itemdata.frames', {0 : { type:'keyframe', name:'', resize : resize, transform : transform }})
+				this.$set('itemdata.frames', {0 : { type:'keyframe', name:'normal', resize : resize, transform : transform }})
 
 				delete itemdata.style
 				delete itemdata.background

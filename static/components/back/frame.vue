@@ -12,12 +12,14 @@
 	}
 
 	&.keyframe{
-		.handel{.bgc(#5CD685);}
 		&:before{
 			top:50%;left:50%;.w(6px);.h(6px);.mt(-3px);.ml(-3px);.bgc(#000); .border-r(8px);
 		}
 	}
 
+	&.normal{
+		.handel{.bgc(#5CD685);}
+	}
 	&.animate{
 		.handel{.bgc(#5CADD6);}
 	}
@@ -62,10 +64,11 @@ return {
 
 
 			if(this.framedata.type == 'keyframe'){
-				if(this.framedata.name == 'animate')
-					this.$dispatch('serNormalFrame', this)
-				else
-					this.$dispatch('setAnimateFrame', this)
+				if(this.framedata.name == 'animate'){
+					this.framedata.name = 'normal'
+				}else{
+					this.framedata.name = 'animate'
+				}
 			}
 		}
 	}

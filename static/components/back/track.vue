@@ -71,14 +71,9 @@ return {
 
 				if(framedata.type == 'keyframe'){
 					name = framedata.name
-				}
 
-				if(name){
-					if(framedata.type == 'blankframe'){
-						framedata.name = name
-					}
 				}else{
-						framedata.name = '' 
+					framedata.name = name
 				}
 
 				console.log(name, framedata.name, framedata.type)
@@ -124,14 +119,10 @@ return {
 
 			this.$dispatch('loadItemByFrame', this.item_id, framedata)
 		}
-		, setAnimateFrame : function(frame){
-			frame.framedata.name = 'animate'
-			this.reloadFrameAll()
-		}
 	}
 	, watch : {
 		frameslist : function(){
-			//console.log(arguments)
+			console.log(this.item_id)
 		}
 	}
 	, ready : function(){
@@ -156,7 +147,7 @@ return {
 					mSelf.frameslist = frames	
 
 					mSelf.$nextTick(function(){
-						mSelf.reloadFrameAll()
+						this.reloadFrameAll()
 						mSelf.$dispatch('loadTime')
 					})
 
