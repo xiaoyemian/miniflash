@@ -43,7 +43,7 @@ return {
 		var frameslist = []
 
 		for(var i = 0; i <= this.timedata.length/this.timedata.step; i++){
-			frameslist.push(this.framesdata[i] || {type:'', name:''})
+			frameslist.push(this.framesdata[i] || {type:'blankframe', name:'normal'})
 		}
 
 		var item_name = this.item_id.split('|')
@@ -64,13 +64,20 @@ return {
 		}
 		, reloadFrameAll : function(){
 			var len = this.frameslist.length
-			var type = ''
 			var name = ''
 
 			for(var i = len-1; i >= 0; i--){
 				var framedata = this.frameslist[i]
 
-				console.log(framedata.type, framedata.name)
+				if(framedata.type == 'keyframe'){
+					name = framedata.name
+				}
+
+				if(name && framedata.type == 'blankframe'){
+					framedata.name = name
+				}
+
+				console.log(name, framedata.name, framedata.type)
 			}
 		}
 	}
