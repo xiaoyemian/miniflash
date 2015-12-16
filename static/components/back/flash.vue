@@ -53,7 +53,7 @@
 	</div>
 
 	<div class="tracks">
-		<track v-ref:track v-for="itemdata in itemsdata" :index="$index" :framesdata="itemdata.frames" :item_id="itemdata.item_id" :focus_track="focus_track" :timedata="timedata"></track>
+		<track v-ref:track v-for="itemdata in itemsdata" :index="$index" :framesdata="itemdata.frames" :item_id="itemdata.item_id" :focus_track="focus_track" :timedata="timedata" :command="command"></track>
 	</div>
 </div>
 
@@ -78,6 +78,7 @@ return {
 				, framewidth : 15
 				, time : 0
 			}
+			, command : false
 		}
 	}
 	, methods : {
@@ -125,15 +126,31 @@ return {
 			, grid: [ mSelf.timedata.framewidth, 0 ]
 		})
 
+		$(window)
+			.on('keydown', function(e){
+				console.log(e.keyCode)
 
-		$(window).on('keydown', function(e){
-			console.log(e.keyCode)
+				switch(e.keyCode){
+					case 91 :
+						mSelf.command = true
+						break;			
 
-			return;
-			switch(e.keyCode){
-			}
+					default : 
+						break;
+				}
+				console.log(mSelf.command)
+			})
+			.on('keyup', function(e){
+	
+				switch(e.keyCode){
+					case 91 :
+						mSelf.command = false
+						break;			
 
-		})
+					default : 
+						break;
+				}
+			})
 	}
 }
 </script>

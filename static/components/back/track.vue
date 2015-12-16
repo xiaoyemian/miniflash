@@ -25,7 +25,7 @@
 <div class="track" @click.stop="selectTrack" :class="{focus:focus_track == item_id}">
 	<div class="trackname">{{item_name}}</div>
 	<div class="trackframe" v-el:trackframe>
-		<frameitem v-ref:frame v-for="framedata in frameslist" :focus_frame="focus_frame" :framedata="framedata" :time="$index" :timedata="timedata"></frameitem>
+		<frameitem v-ref:frame v-for="framedata in frameslist" :focus_frame="focus_frame" :framedata="framedata" :time="$index" :timedata="timedata" :command="command"></frameitem>
 	</div>
 </div>
 
@@ -37,13 +37,13 @@ return {
   components : {
     frameitem : frame
 	}
-	, props : ['timedata', 'focus_track', 'item_id', 'framesdata']
+	, props : ['timedata', 'focus_track', 'item_id', 'framesdata', 'command']
 	, data : function(){
 
 		var frameslist = []
 
 		for(var i = 0; i <= this.timedata.length/this.timedata.step; i++){
-			frameslist.push(this.framesdata[i] || {type:'blankframe'})
+			frameslist.push(this.framesdata[i] || {type:'', name:''})
 		}
 
 		var item_name = this.item_id.split('|')
@@ -62,7 +62,16 @@ return {
 		, setFocusFrame : function(time){
 			this.$set('focus_frame', time)
 		}
-		, setAnimateFrame : function(){
+		, reloadFrameAll : function(){
+			var len = this.frameslist.length
+			var type = ''
+			var name = ''
+
+			for(var i = len-1; i >= 0; i--){
+				var framedata = this.frameslist[i]
+
+				console.log(framedata.type, framedata.name)
+			}
 		}
 	}
 	, events : {
@@ -103,6 +112,10 @@ return {
 			}
 
 			this.$dispatch('loadItemByFrame', this.item_id, framedata)
+		}
+		, setAnimateFrame : function(frame){
+			frame.framedata.name = 'animate'
+			this.reloadFrameAll()
 		}
 	}
 	, watch : {

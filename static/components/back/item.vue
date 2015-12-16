@@ -89,9 +89,6 @@ return {
 				, 'background-image' : 'url("' + style.imageUrl + '")'
 			}
 		}
-		, setKeyFrame : function(){
-			this.framedata.type = 'keyframe'
-		}
 		, loadItemStyle : function(){
 			var formatdata = this.formatdata
 			var framedata = this.framedata
@@ -167,7 +164,7 @@ return {
 				}
 
 				this.$set('itemdata.original', original)
-				this.$set('itemdata.frames', {0 : { type:'keyframe', resize : resize, transform : transform }})
+				this.$set('itemdata.frames', {0 : { type:'keyframe', name:'normal', resize : resize, transform : transform }})
 
 				delete itemdata.style
 				delete itemdata.background
@@ -242,7 +239,7 @@ return {
 		$item.draggable({
 			start : function(event, ui){
 				mSelf.selectItem()
-				mSelf.setKeyFrame()
+				mSelf.framedata.type = 'keyframe'
 			}
 			, drag : function(event, ui){
 				var resize = mSelf.framedata.resize
@@ -262,7 +259,7 @@ return {
 		$item.resizable({
 			start : function(event, ui){
 				mSelf.selectItem()
-				mSelf.setKeyFrame()
+				mSelf.framedata.type = 'keyframe'
 			}
 			, resize : function(event, ui){
 				var resize = mSelf.framedata.resize

@@ -11,23 +11,17 @@
 		.opacity(60); 
 	}
 
-	&.blankkeyframe, &.keyframe{
-		.handel{ .bgc(#5CD685); }
-		&.focus{
-			.handel{
-			}
-		}
-	}
-
 	&.keyframe{
+		.handel{.bgc(#5CD685);}
 		&:before{
 			top:50%;left:50%;.w(6px);.h(6px);.mt(-3px);.ml(-3px);.bgc(#000); .border-r(8px);
 		}
 	}
 
-	&.animateframe{
+	&.animate{
 		.handel{.bgc(#5CADD6);}
 	}
+
 }
 .track.focus{
 	.frame.focus{
@@ -44,7 +38,7 @@
 </style>
 
 <template>
-<div class="frame" :class="[framedata.type, focus_frame == time ? 'focus' : '']" @click.stop="selectFrame" :style="{width:timedata.framewidth-1 + 'px'}">
+<div class="frame" :class="[framedata.name, framedata.type, focus_frame == time ? 'focus' : '']" @click.stop="selectFrame" :style="{width:timedata.framewidth-1 + 'px'}">
 	<div class="handel"></div>
 </div>
 </template>
@@ -53,29 +47,31 @@
 <script>
 
 return {
-	props : ['focus_frame', 'framedata', 'time', 'timedata']
+	props : ['focus_frame', 'framedata', 'time', 'timedata', 'command']
 	, data : function(){
 		return {
 		}
 	}
 	, methods : {
 		selectFrame : function(){
-			console.log(this.time)
 			this.$dispatch('selectFrame', this.time)
 			this.$dispatch('loadTime', this.time)
-		}
-		, setKeyFrame : function(){
-			this.framedata.type = 'keyframe'
-		}
-		, setAnimateFrame : function(){
-			console.log(123)
-			this.framedata.type = 'animateframe'
+
+			if(!this.command)
+				return;
+
+
+			if(this.framedata.type == 'keyframe'){
+				if(this.framedata.name == 'animate')
+					this.$dispatch('serNormalFrame', this)
+				else
+					this.$dispatch('setAnimateFrame', this)
+			}
 		}
 	}
 	, events : {
 	}
 	, ready : function(){
-
 	}
 }
 </script>
