@@ -14,7 +14,7 @@
 		.h(14px);.ml(140px);
 
 		.timecontrol{
-			.pa;.h(100%);z-index:2;.w(6px);
+			.pa;.h(100%);z-index:2;.w(4px);
 
 			&:before, &:after{ content:'';.pa;z-index:1; }
 			&:before{
@@ -23,6 +23,8 @@
 			}
 			&:after{
 			}
+
+			span{.pa;top:0px;.w(14px);.h(14px);left:-5px;}
 			
 		}
 	}
@@ -45,7 +47,9 @@
 <template>
 <div class="flash">
 	<div class="times">
-		<div class="timecontrol" v-el:timecontrol :style="{left:140 + timedata.framewidth * timedata.time + timedata.framewidth/2 - 3 + 'px'}"></div>
+		<div class="timecontrol" v-el:timecontrol :style="{left:140 + timedata.framewidth * timedata.time + timedata.framewidth/2 - 2 + 'px'}">
+			<span></span>
+		</div>
 	</div>
 
 	<div class="tracks">
@@ -120,7 +124,16 @@ return {
 			, scroll : false
 			, grid: [ mSelf.timedata.framewidth, 0 ]
 		})
-	
+
+
+		$(window).on('keydown', function(e){
+			console.log(e.keyCode)
+
+			return;
+			switch(e.keyCode){
+			}
+
+		})
 	}
 }
 </script>

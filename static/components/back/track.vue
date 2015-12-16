@@ -22,7 +22,7 @@
 </style>
 
 <template>
-<div class="track" @keydown.enter="setAnimateFrame" @click.stop="selectTrack" :class="{focus:focus_track == item_id}">
+<div class="track" @click.stop="selectTrack" :class="{focus:focus_track == item_id}">
 	<div class="trackname">{{item_name}}</div>
 	<div class="trackframe" v-el:trackframe>
 		<frameitem v-ref:frame v-for="framedata in frameslist" :focus_frame="focus_frame" :framedata="framedata" :time="$index" :timedata="timedata"></frameitem>
