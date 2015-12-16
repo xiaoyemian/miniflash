@@ -138,12 +138,57 @@ return {
 
 			this.loadItemStyle()
 		}
+		, upgradeItem: function(){
+			var formatdata = this.formatdata
+			var itemdata = this.itemdata
+
+			if(!itemdata.original){
+				var original = {
+					width : 640 * itemdata.style['width']/100
+					, height : 640 * itemdata.style['padding-top']/100 
+				}
+				if(itemdata.background && itemdata.background.image){
+					original.imageUrl = itemdata.background.image
+				}
+
+				var resize = {
+					width : original.width 
+					, height : original.height 
+					, left : 640 * itemdata.style['left']/100
+					, top : 1136 * itemdata.style['top']/100
+				}
+
+				var transform = {}
+				for(var i in formatdata.transform){
+					transform[i] = {}
+					for(var j in formatdata.transform[i].opts){
+						var value = formatdata.transform[i].opts[j]
+						transform[i][value[0]] = value[2] || 0
+					}
+				}
+
+				this.$set('itemdata.original', original)
+				this.$set('itemdata.frames', {0 : { type:'keyframe', resize : resize, transform : transform }})
+
+				delete itemdata.style
+				delete itemdata.background
+				delete itemdata.scale
+			}
+
+			var type = itemdata.original.imageUrl ? 'image' : 'item'
+			itemdata.item_id = type + '|' + (this.index+1) + '|' 
+												+ (new Date()).valueOf() 
+												+ Math.floor(Math.random()*10000) 
+												+ Math.floor(Math.random()*100)
+		}
+
 	}
 	, events : {
 		loadItemByFrame : function(item_id, framedata){
 			if(item_id != this.itemdata.item_id)
 				return;
 
+			this.$dispatch('formatFrameData', framedata, this.itemdata)
 			this.framedata = framedata
 			this.loadItemStyle()
 		}
@@ -174,7 +219,7 @@ return {
 				mSelf.loadItemStyle()
 			}
 			, cursor: "move"
-			, containment : ".view"
+			, containment : "document"
 			, scroll : false
 			, snap : '.page'
 			, snapTolerance : '4'
@@ -196,7 +241,7 @@ return {
 		})
 	}
 	, created : function(){
-		this.$dispatch('upgradeItem', this)
+		this.upgradeItem()
 		this.loadItemOriginal()
 	}
 }
