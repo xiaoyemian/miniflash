@@ -62,7 +62,6 @@ return {
 			if(!this.command)
 				return;
 
-
 			if(this.framedata.type == 'keyframe'){
 				if(this.framedata.name == 'animate'){
 					this.framedata.name = 'normal'
@@ -73,6 +72,14 @@ return {
 		}
 	}
 	, events : {
+	}
+	, watch : {
+		'framedata.type' : function(){
+			if(this.framedata.type == 'keyframe')
+				this.framedata.name = 'normal'
+
+			this.$dispatch('reloadFrameAll')
+		}
 	}
 	, ready : function(){
 	}

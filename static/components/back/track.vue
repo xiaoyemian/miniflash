@@ -62,23 +62,6 @@ return {
 		, setFocusFrame : function(time){
 			this.$set('focus_frame', time)
 		}
-		, reloadFrameAll : function(){
-			var len = this.frameslist.length
-			var name = ''
-
-			for(var i = len-1; i >= 0; i--){
-				var framedata = this.frameslist[i]
-
-				if(framedata.type == 'keyframe'){
-					name = framedata.name
-
-				}else{
-					framedata.name = name
-				}
-
-				console.log(name, framedata.name, framedata.type)
-			}
-		}
 	}
 	, events : {
 		selectFrame : function(time){
@@ -119,6 +102,25 @@ return {
 
 			this.$dispatch('loadItemByFrame', this.item_id, framedata)
 		}
+		, reloadFrameAll : function(){
+			console.log(1111111111)
+			var len = this.frameslist.length
+			var name = ''
+
+			for(var i = len-1; i >= 0; i--){
+				var framedata = this.frameslist[i]
+
+				if(framedata.type == 'keyframe'){
+					name = framedata.name
+
+				}else{
+					framedata.name = name
+				}
+
+				console.log(name, framedata.name, framedata.type)
+			}
+		}
+
 	}
 	, watch : {
 		frameslist : function(){
@@ -147,7 +149,7 @@ return {
 					mSelf.frameslist = frames	
 
 					mSelf.$nextTick(function(){
-						this.reloadFrameAll()
+						this.$emit('reloadFrameAll')
 						mSelf.$dispatch('loadTime')
 					})
 
