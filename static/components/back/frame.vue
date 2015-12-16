@@ -24,7 +24,6 @@
 
 	}
 
-
 	&.animate{
 		.handel{.bgc(#5CADD6);}
 	}
@@ -59,6 +58,11 @@ return {
 		return {
 		}
 	}
+	, watch : {
+		'framedata.type' : function(){
+				console.log(arguments)
+			}
+	}
 	, methods : {
 		selectFrame : function(){
 			this.$dispatch('selectFrame', this.time)
@@ -76,31 +80,25 @@ return {
 			}
 			this.$dispatch('loadTrack')
 		}
-		, formatFrameData : function(){
-			var framedata = this.framedata
-			var formatdata = this.formatdata
-
-			if(!framedata.resize)
-				this.$set('framedata.resize', {})
-
-			if(!framedata.transform)
-				this.$set('framedata.transform', {})
-
-			for(var i in formatdata.transform){
-				if(!framedata.transform[i]){
-					framedata.transform[i] = {}
-					for(var j in formatdata.transform[i].opts){
-						var value = formatdata.transform[i].opts[j]
-						framedata.transform[i][value[0]] = value[2] || 0
-					}
-				}
-			}
-		}
 	}
 	, events : {
 	}
 	, created : function(){
-		this.formatFrameData()
+		var framedata = this.framedata
+		var formatdata = this.formatdata
+
+		if(!framedata.transform)
+			this.$set('framedata.transform', {})
+
+		for(var i in formatdata.transform){
+			if(!framedata.transform[i]){
+				framedata.transform[i] = {}
+				for(var j in formatdata.transform[i].opts){
+					var value = formatdata.transform[i].opts[j]
+					framedata.transform[i][value[0]] = value[2] || 0
+				}
+			}
+		}
 	}
 }
 </script>

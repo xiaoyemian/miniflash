@@ -62,6 +62,23 @@ return {
 		, setFocusFrame : function(time){
 			this.$set('focus_frame', time)
 		}
+		, loadTrack : function(){
+			var len = this.frameslist.length
+			var name = ''
+
+			for(var i = len-1; i >= 0; i--){
+				var framedata = this.frameslist[i]
+
+				if(framedata.type == 'keyframe'){
+					name = framedata.name
+
+				}else{
+					framedata.name = name
+				}
+
+				console.log(name, framedata.name, framedata.type)
+			}
+		}
 	}
 	, events : {
 		selectFrame : function(time){
@@ -95,7 +112,6 @@ return {
 						break;
 					}
 				}
-
 				this.$set('frameslist[' + time + '].resize', resize)
 				this.$set('frameslist[' + time + '].transform', transform)
 			}
@@ -103,29 +119,13 @@ return {
 			this.$dispatch('loadItemByFrame', this.item_id, framedata)
 		}
 		, loadTrack : function(){
-			if(this.focus_track !== this.item_id)
-				return;
+			if(this.focus_track == this.item_id)
+				this.loadTrack()
 
-			var len = this.frameslist.length
-			var name = ''
-
-			for(var i = len-1; i >= 0; i--){
-				var framedata = this.frameslist[i]
-
-				if(framedata.type == 'keyframe'){
-					name = framedata.name
-
-				}else{
-					framedata.name = name
-				}
-
-				console.log(name, framedata.name, framedata.type)
-			}
 		}
 	}
 	, watch : {
 		frameslist : function(){
-			console.log(this.item_id)
 		}
 	}
 	, ready : function(){
@@ -147,11 +147,11 @@ return {
 				mSelf.frameslist = []	
 
 				mSelf.$nextTick(function(){
-					mSelf.frameslist = frames	
+					this.frameslist = frames	
 
-					mSelf.$nextTick(function(){
-						this.$emit('loadTrack')
-						mSelf.$dispatch('loadTime')
+					this.$nextTick(function(){
+						this.loadTrack()
+						this.$dispatch('loadTime')
 					})
 
 				})

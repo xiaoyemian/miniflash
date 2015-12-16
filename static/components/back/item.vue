@@ -93,6 +93,9 @@ return {
 			var framedata = this.framedata
 			var itemdata = this.itemdata
 
+			if(!framedata.resize)
+				this.$set('framedata.resize', {})
+
 			if(!framedata.resize.width)
 				framedata.resize.width = itemdata.original.width || 0
 
@@ -171,17 +174,8 @@ return {
 					, top : 1136 * itemdata.style['top']/100
 				}
 
-				var transform = {}
-				for(var i in formatdata.transform){
-					transform[i] = {}
-					for(var j in formatdata.transform[i].opts){
-						var value = formatdata.transform[i].opts[j]
-						transform[i][value[0]] = value[2] || 0
-					}
-				}
-
 				this.$set('itemdata.original', original)
-				this.$set('itemdata.frames', {0 : { type:'keyframe', name:'normal', resize : resize, transform : transform }})
+				this.$set('itemdata.frames', {0 : { type:'keyframe', name:'normal', resize : resize}})
 
 				delete itemdata.style
 				delete itemdata.background
@@ -196,6 +190,16 @@ return {
 												+ (new Date()).valueOf() 
 												+ Math.floor(Math.random()*10000) 
 												+ Math.floor(Math.random()*100)
+		}
+		, formatItemData : function(){
+			var itemdata = this.itemdata
+
+			if(!itemdata.frames)
+				itemdata.frames = {}
+
+			if(!itemdata.frames[0])
+				itemdata.frames[0] = {type:'keyframe', name:'normal'}
+
 		}
 		, setKeyframe : function(){
 			this.framedata.type = 'keyframe'
@@ -263,7 +267,9 @@ return {
 	, created : function(){
 		this.upgradeItemData()
 		this.upgradeItemId()
+		this.formatItemData()
 		this.loadItemOriginal()
+
 	}
 }
 </script>

@@ -136,19 +136,11 @@ return {
 					, height : 100
 				}
 			}
-			this.formatItemData(itemdata)
 			this.itemsdata.push(itemdata)
 
 			this.$nextTick(function(){
 				this.$dispatch('loadTime')
 			})
-		}
-		, formatItemData : function(itemdata){
-			if(!itemdata.frames)
-				itemdata.frames = {}
-
-			if(!itemdata.frames[0])
-				itemdata.frames[0] = {type:'keyframe', name:'normal'}
 		}
 		, setFocusItem : function(item){
 			this.$set('focus_item', item)
@@ -164,8 +156,6 @@ return {
 		}
 	}
 	, created : function(){
-
-var mSelf = this
 		this.resizePrint({
 			width : 640
 			, height : 1136
