@@ -75,11 +75,15 @@ return {
 	}
 	, watch : {
 		'framedata.type' : function(){
-			if(this.framedata.type == 'keyframe')
+			if(this.framedata.type == 'keyframe' && this.framedata.name == '')
 				this.framedata.name = 'normal'
 
 			this.$dispatch('reloadFrameAll')
 		}
+		, 'framedata.name' : function(){
+			this.$dispatch('reloadFrameAll')
+		}
+
 	}
 	, ready : function(){
 	}

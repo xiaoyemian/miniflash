@@ -103,7 +103,6 @@ return {
 			this.$dispatch('loadItemByFrame', this.item_id, framedata)
 		}
 		, reloadFrameAll : function(){
-			console.log(1111111111)
 			var len = this.frameslist.length
 			var name = ''
 
