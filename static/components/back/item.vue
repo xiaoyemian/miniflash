@@ -89,26 +89,6 @@ return {
 				, 'background-image' : 'url("' + style.imageUrl + '")'
 			}
 		}
-		, formatFrameResize : function(){
-			var framedata = this.framedata
-			var itemdata = this.itemdata
-
-			if(!framedata.resize)
-				this.$set('framedata.resize', {})
-
-			if(!framedata.resize.width)
-				framedata.resize.width = itemdata.original.width || 0
-
-			if(!framedata.resize.height)
-				framedata.resize.height = itemdata.original.height || 0
-
-			if(!framedata.resize.top)
-				framedata.resize.top = 0
-
-			if(!framedata.resize.left)
-				framedata.resize.left = 0
-
-		}
 		, loadItemStyle : function(){
 			var formatdata = this.formatdata
 			var framedata = this.framedata
@@ -212,8 +192,21 @@ return {
 			if(item_id != this.itemdata.item_id)
 				return;
 
+			var itemdata = this.itemdata
+
+			if(!framedata.resize)
+				this.$set('framedata.resize', {})
+
+			var resize = framedata.resize
+			var original = itemdata.original
+
+			resize.width = resize.width || original.width || 0
+			resize.height = resize.height || original.height || 0
+			resize.top = resize.top || 0
+			resize.left = resize.left || 0
+
 			this.framedata = framedata
-			this.formatFrameResize()
+
 			this.loadItemStyle()
 		}
 		, focusItemById : function(item_id){
