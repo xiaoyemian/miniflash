@@ -109,7 +109,7 @@ return {
 
 				for(var i = time; i >= 0; i--){
 					var data = this.frameslist[i]
-					if(data.type && data.type != 'blankframe'){
+					if(data.type && data.type == 'keyframe'){
 
 						for(var i in data.resize){
 							resize[i] = data.resize[i]
@@ -125,10 +125,10 @@ return {
 						break;
 					}
 				}
-				this.$emit('formatTransform', framedata)
-
 				this.$set('frameslist[' + time + '].resize', resize)
 				this.$set('frameslist[' + time + '].transform', transform)
+
+				this.$emit('formatTransform', framedata)
 			}
 
 			this.$dispatch('loadItemByFrame', this.item_id, framedata)
