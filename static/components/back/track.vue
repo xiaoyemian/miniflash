@@ -43,7 +43,7 @@ return {
 		var frameslist = []
 
 		for(var i = 0; i <= this.timedata.length/this.timedata.step; i++){
-			frameslist.push(this.framesdata[i] || {type:'blankframe', name:'normal'})
+			frameslist.push(this.framesdata[i] || {type:'blankframe', name:''})
 		}
 
 		var item_name = this.item_id.split('|')
@@ -73,8 +73,12 @@ return {
 					name = framedata.name
 				}
 
-				if(name && framedata.type == 'blankframe'){
-					framedata.name = name
+				if(name){
+					if(framedata.type == 'blankframe'){
+						framedata.name = name
+					}
+				}else{
+						framedata.name = '' 
 				}
 
 				console.log(name, framedata.name, framedata.type)
@@ -152,6 +156,7 @@ return {
 					mSelf.frameslist = frames	
 
 					mSelf.$nextTick(function(){
+						mSelf.reloadFrameAll()
 						mSelf.$dispatch('loadTime')
 					})
 

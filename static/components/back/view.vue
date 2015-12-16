@@ -181,7 +181,7 @@ return {
 				itemdata.frames = {}
 
 			if(!itemdata.frames[0])
-				itemdata.frames[0] = {type:'keyframe', name:'normal'}
+				itemdata.frames[0] = {type:'keyframe', name:''}
 		}
 		, setFocusItem : function(item){
 			this.$set('focus_item', item)
