@@ -73,7 +73,7 @@ return {
 			this.setFocusFrame(time)
 
 			var framedata = this.frameslist[time]
-			console.log(framedata)
+			//console.log(framedata)
 
 			if(framedata.type == 'blankframe'){
 				var resize = {}

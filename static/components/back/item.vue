@@ -90,7 +90,7 @@ return {
 			}
 		}
 		, setKeyFrame : function(){
-			this.framedata.type = 'blankkeyframe'
+			this.framedata.type = 'keyframe'
 		}
 		, loadItemStyle : function(){
 			var formatdata = this.formatdata
@@ -174,7 +174,7 @@ return {
 				mSelf.loadItemStyle()
 			}
 			, cursor: "move"
-			, containment : "document"
+			, containment : ".view"
 			, scroll : false
 			, snap : '.page'
 			, snapTolerance : '4'
@@ -197,7 +197,6 @@ return {
 	}
 	, created : function(){
 		this.$dispatch('upgradeItem', this)
-		this.$dispatch('formatData', this.itemdata)
 		this.loadItemOriginal()
 	}
 }

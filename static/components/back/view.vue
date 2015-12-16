@@ -1,4 +1,7 @@
 <style>
+@flashHeight:120px;
+@settingsWidth:200px;
+
 .ui-resizable{
 	&-se, &-e, &-s{.pa;z-index:90;}
 	&-se{cursor:se-resize;}
@@ -7,15 +10,11 @@
 }
 
 .itemsettings{
-	.pa;.w(180px);right:0px;top:0px;bottom:100px;
-	.pl(4px);.pr(4px);
+	.pa;.w(@settingsWidth);right:0px;top:0px;bottom:@flashHeight;
 }
 .settingBox{
 	z-index:900;
-	.mt(4px);
-
-	padding:4px;
-
+	margin:4px; padding:4px;
 	.bgc(#333); border:1px solid #222;
 
 	.inputArea, .inputBox, .inputLabel{
@@ -50,7 +49,8 @@
 }
 
 .view{
-	.pa;left:0px;right:180px;top:0px;bottom:100px;
+	.pa;left:0px;right:@settingsWidth;top:0px;bottom:@flashHeight;
+	padding:2px;
 	.page{
 		.pa; .bgc(#fff); left:50%; top:50%;
 	}
@@ -169,7 +169,7 @@ return {
 					, height : 100
 				}
 			}
-			this.formatData(itemdata)
+			this.formatItemData(itemdata)
 			this.itemsdata.push(itemdata)
 
 			this.$nextTick(function(){
@@ -206,12 +206,11 @@ return {
 				}
 
 				item.$set('itemdata.original', original)
-				item.$set('itemdata.frames', {0 : { type:'blankkeyframe', resize : resize, transform : transform }})
+				item.$set('itemdata.frames', {0 : { type:'keyframe', resize : resize, transform : transform }})
 
 				delete itemdata.style
 				delete itemdata.background
 				delete itemdata.scale
-
 			}
 
 			var type = itemdata.original.imageUrl ? 'image' : 'item'
@@ -221,26 +220,23 @@ return {
 												+ Math.floor(Math.random()*100)
 
 		}
-		, formatData : function(itemdata){
-			var formatdata = this.formatdata
-			var original = itemdata.original
+		, formatFrameData : function(framedata, itemdata){
+			if(!framedata.resize)
+				framedata.resize = {}
 
-			if(!itemdata.frames)
-				itemdata.frames = {}
+			if(!framedata.resize.width)
+				framedata.resize.width = itemdata.original.width || 0
 
-			if(!itemdata.frames[0])
-				itemdata.frames[0] = {type:'blankkeyframe'}
+			if(!framedata.resize.height)
+				framedata.resize.height = itemdata.original.height || 0
 
-			if(!itemdata.frames[0].resize)
-				itemdata.frames[0].resize = {}
+			if(!framedata.resize.top)
+				framedata.resize.top = 0
 
-			if(!itemdata.frames[0].resize.width)
-				itemdata.frames[0].resize.width = original.width
+			if(!framedata.resize.left)
+				framedata.resize.left = 0
 
-			if(!itemdata.frames[0].resize.height)
-				itemdata.frames[0].resize.height = original.height
-
-			if(!itemdata.frames[0].transform){
+			if(!framedata.transform){
 				var transform = {}
 				for(var i in formatdata.transform){
 					transform[i] = {}
@@ -249,8 +245,21 @@ return {
 						transform[i][value[0]] = value[2] || 0
 					}
 				}
-				itemdata.frames[0].transform = transform
+				framedata.transform = transform
 			}
+		}
+		, formatItemData : function(itemdata){
+			var formatdata = this.formatdata
+
+			if(!itemdata.frames)
+				itemdata.frames = {}
+
+			if(!itemdata.frames[0])
+				itemdata.frames[0] = {type:'keyframe'}
+
+			this.formatFrameData(itemdata.frames[0], itemdata)
+
+			console.log(itemdata, 111111)
 
 		}
 		, setFocusItem : function(item){
