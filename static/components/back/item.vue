@@ -129,7 +129,6 @@ return {
 			}
 
 			this.framestyle.transform = transformList.join(' ')
-
 		}
 		, aspectRatio : function(){
 			var resize = this.framedata.resize

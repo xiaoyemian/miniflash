@@ -33,7 +33,6 @@
 
 <script>
 var frame = require('back/frame.vue')
-
 return {
   components : {
     frameitem : frame
@@ -75,8 +74,8 @@ return {
 			var framedata = this.frameslist[time]
 
 			if(framedata.type == 'blankframe'){
-				var resize = {}
-				var transform = {}
+				var resize = {} 
+				var transform = {} 
 
 				for(var i = time; i >= 0; i--){
 					var data = this.frameslist[i]
@@ -96,6 +95,7 @@ return {
 						break;
 					}
 				}
+
 				this.$set('frameslist[' + time + '].resize', resize)
 				this.$set('frameslist[' + time + '].transform', transform)
 			}

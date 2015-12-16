@@ -204,16 +204,17 @@ return {
 			if(!framedata.resize.left)
 				framedata.resize.left = 0
 
-			if(!framedata.transform){
-				var transform = {}
-				for(var i in formatdata.transform){
-					transform[i] = {}
+			if(!framedata.transform)
+				framedata.transform = {}
+
+			for(var i in formatdata.transform){
+				if(!framedata.transform[i]){
+					framedata.transform[i] = {}
 					for(var j in formatdata.transform[i].opts){
 						var value = formatdata.transform[i].opts[j]
-						transform[i][value[0]] = value[2] || 0
+						framedata.transform[i][value[0]] = value[2] || 0
 					}
 				}
-				framedata.transform = transform
 			}
 		}
 		, setFocusItem : function(item){
