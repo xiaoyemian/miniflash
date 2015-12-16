@@ -58,11 +58,6 @@ return {
 		return {
 		}
 	}
-	, watch : {
-		'framedata.type' : function(){
-				console.log(arguments)
-			}
-	}
 	, methods : {
 		selectFrame : function(){
 			this.$dispatch('selectFrame', this.time)
@@ -86,6 +81,15 @@ return {
 	, created : function(){
 		var framedata = this.framedata
 		var formatdata = this.formatdata
+		
+		if(!framedata.type)
+			this.$set('framedata.type', 'blankframe')
+
+		if(!framedata.name)
+			this.$set('framedata.name', '')
+
+		if(!framedata.resize)
+			this.$set('framedata.resize', {})
 
 		if(!framedata.transform)
 			this.$set('framedata.transform', {})

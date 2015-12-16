@@ -43,7 +43,7 @@ return {
 		var frameslist = []
 
 		for(var i = 0; i <= this.timedata.length/this.timedata.step; i++){
-			frameslist.push(this.framesdata[i] || {type:'blankframe', name:''})
+			frameslist.push(this.framesdata[i] || {})
 		}
 
 		var item_name = this.item_id.split('|')

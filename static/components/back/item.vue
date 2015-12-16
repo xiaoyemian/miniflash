@@ -155,7 +155,7 @@ return {
 				}
 
 				this.$set('itemdata.original', original)
-				this.$set('itemdata.frames', {0 : { type:'keyframe', name:'normal', resize : resize}})
+				this.$set('itemdata.frames', {})
 
 				delete itemdata.style
 				delete itemdata.background
@@ -171,16 +171,6 @@ return {
 												+ Math.floor(Math.random()*10000) 
 												+ Math.floor(Math.random()*100)
 		}
-		, formatItemData : function(){
-			var itemdata = this.itemdata
-
-			if(!itemdata.frames)
-				itemdata.frames = {}
-
-			if(!itemdata.frames[0])
-				itemdata.frames[0] = {type:'keyframe', name:'normal'}
-
-		}
 		, setKeyframe : function(){
 			this.framedata.type = 'keyframe'
 			this.framedata.name = this.framedata.name || 'normal'
@@ -192,13 +182,8 @@ return {
 			if(item_id != this.itemdata.item_id)
 				return;
 
-			var itemdata = this.itemdata
-
-			if(!framedata.resize)
-				this.$set('framedata.resize', {})
-
+			var original = this.itemdata.original
 			var resize = framedata.resize
-			var original = itemdata.original
 
 			resize.width = resize.width || original.width || 0
 			resize.height = resize.height || original.height || 0
@@ -226,9 +211,8 @@ return {
 				mSelf.setKeyframe()
 			}
 			, drag : function(event, ui){
-				var resize = mSelf.framedata.resize
-				resize.left = ui.position.left / mSelf.printdata.scale
-				resize.top = ui.position.top / mSelf.printdata.scale
+				mSelf.framedata.resize.left = ui.position.left / mSelf.printdata.scale
+				mSelf.framedata.resize.top = ui.position.top / mSelf.printdata.scale
 			}
 			, stop : function(event, ui){
 				mSelf.loadItemStyle()
@@ -246,9 +230,8 @@ return {
 				mSelf.setKeyframe()
 			}
 			, resize : function(event, ui){
-				var resize = mSelf.framedata.resize
-				resize.width = ui.size.width / mSelf.printdata.scale
-				resize.height = ui.size.height / mSelf.printdata.scale
+				mSelf.framedata.resize.width = ui.size.width / mSelf.printdata.scale
+				mSelf.framedata.resize.height = ui.size.height / mSelf.printdata.scale
 			}
 			, stop : function(event, ui){
 				mSelf.loadItemStyle()
@@ -258,7 +241,17 @@ return {
 	, created : function(){
 		this.upgradeItemData()
 		this.upgradeItemId()
-		this.formatItemData()
+
+		var itemdata = this.itemdata
+
+		if(!itemdata.frames)
+			this.$set('itemdata.frames', {})
+
+		if(!itemdata.frames[0])
+			this.$set('itemdata.frames[0]', {type:'keyframe', name:'normal'})
+
+
+		console.log(this.itemdata.frames)
 		this.loadItemOriginal()
 
 	}
