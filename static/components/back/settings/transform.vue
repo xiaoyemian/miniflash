@@ -38,6 +38,7 @@ return {
 			this.$set('focus_item.framedata.transform' + arr.join(''), value||0)
 			console.log(this.focus_item.framedata, value||0)
 
+			this.focus_item.setKeyframe()
 			this.focus_item.loadItemStyle()
 		}
 	}
