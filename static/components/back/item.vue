@@ -138,7 +138,7 @@ return {
 
 			this.loadItemStyle()
 		}
-		, upgradeItem: function(){
+		, upgradeItemData: function(){
 			var formatdata = this.formatdata
 			var itemdata = this.itemdata
 
@@ -174,14 +174,16 @@ return {
 				delete itemdata.background
 				delete itemdata.scale
 			}
-
+		}
+		, upgradeItemId : function(){
+			var itemdata = this.itemdata
 			var type = itemdata.original.imageUrl ? 'image' : 'item'
+
 			itemdata.item_id = type + '|' + (this.index+1) + '|' 
 												+ (new Date()).valueOf() 
 												+ Math.floor(Math.random()*10000) 
 												+ Math.floor(Math.random()*100)
 		}
-
 	}
 	, events : {
 		loadItemByFrame : function(item_id, framedata){
@@ -241,7 +243,8 @@ return {
 		})
 	}
 	, created : function(){
-		this.upgradeItem()
+		this.upgradeItemData()
+		this.upgradeItemId()
 		this.loadItemOriginal()
 	}
 }

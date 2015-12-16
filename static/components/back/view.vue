@@ -176,6 +176,18 @@ return {
 				this.$dispatch('loadTime')
 			})
 		}
+		, formatItemData : function(itemdata){
+			var formatdata = this.formatdata
+
+			if(!itemdata.frames)
+				itemdata.frames = {}
+
+			if(!itemdata.frames[0])
+				itemdata.frames[0] = {type:'keyframe'}
+
+			this.formatFrameData(itemdata.frames[0], itemdata)
+
+		}
 		, formatFrameData : function(framedata, itemdata){
 			if(!framedata.resize)
 				framedata.resize = {}
@@ -203,20 +215,6 @@ return {
 				}
 				framedata.transform = transform
 			}
-		}
-		, formatItemData : function(itemdata){
-			var formatdata = this.formatdata
-
-			if(!itemdata.frames)
-				itemdata.frames = {}
-
-			if(!itemdata.frames[0])
-				itemdata.frames[0] = {type:'keyframe'}
-
-			this.formatFrameData(itemdata.frames[0], itemdata)
-
-			console.log(itemdata, 111111)
-
 		}
 		, setFocusItem : function(item){
 			this.$set('focus_item', item)
