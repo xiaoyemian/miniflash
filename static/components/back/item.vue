@@ -202,8 +202,6 @@ return {
 
 			resize.width = resize.width || original.width || 0
 			resize.height = resize.height || original.height || 0
-			resize.top = resize.top || 0
-			resize.left = resize.left || 0
 
 			this.framedata = framedata
 
