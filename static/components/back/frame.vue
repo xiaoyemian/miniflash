@@ -52,7 +52,7 @@
 </style>
 
 <template>
-<div class="frame" :class="[framedata.type, focus_frame == time ? 'focus' : '']" @keyup.enter="" @click.stop="selectFrame" :style="{width:timedata.framewidth-1 + 'px'}">
+<div class="frame" :class="[framedata.type, focus_frame == time ? 'focus' : '']" @keyup.enter="setAnimateFrame" @click.stop="selectFrame" :style="{width:timedata.framewidth-1 + 'px'}">
 	<div class="handel"></div>
 </div>
 </template>
@@ -71,6 +71,12 @@ return {
 			console.log(this.time)
 			this.$dispatch('selectFrame', this.time)
 			this.$dispatch('loadTime', this.time)
+		}
+		, setKeyFrame : function(){
+			this.framedata.type = 'keyframe'
+		}
+		, setAnimateFrame : function(){
+			this.framedata.type = 'animateframe'
 		}
 	}
 	, events : {

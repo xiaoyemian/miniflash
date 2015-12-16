@@ -174,6 +174,38 @@ return {
 				delete itemdata.scale
 			}
 		}
+		, formatFrameData : function(framedata){
+			var itemdata = this.itemdata
+			var formatdata = this.formatdata
+
+			if(!framedata.resize)
+				framedata.resize = {}
+
+			if(!framedata.resize.width)
+				framedata.resize.width = itemdata.original.width || 0
+
+			if(!framedata.resize.height)
+				framedata.resize.height = itemdata.original.height || 0
+
+			if(!framedata.resize.top)
+				framedata.resize.top = 0
+
+			if(!framedata.resize.left)
+				framedata.resize.left = 0
+
+			if(!framedata.transform)
+				framedata.transform = {}
+
+			for(var i in formatdata.transform){
+				if(!framedata.transform[i]){
+					framedata.transform[i] = {}
+					for(var j in formatdata.transform[i].opts){
+						var value = formatdata.transform[i].opts[j]
+						framedata.transform[i][value[0]] = value[2] || 0
+					}
+				}
+			}
+		}
 		, upgradeItemId : function(){
 			var itemdata = this.itemdata
 			var type = itemdata.original.imageUrl ? 'image' : 'item'
@@ -189,8 +221,9 @@ return {
 			if(item_id != this.itemdata.item_id)
 				return;
 
-			this.$dispatch('formatFrameData', framedata, this.itemdata)
 			this.framedata = framedata
+
+			this.formatFrameData(this.framedata)
 			this.loadItemStyle()
 		}
 		, focusItemById : function(item_id){
@@ -244,6 +277,7 @@ return {
 	, created : function(){
 		this.upgradeItemData()
 		this.upgradeItemId()
+		this.formatFrameData(this.itemdata.frames[0])
 		this.loadItemOriginal()
 	}
 }

@@ -185,37 +185,6 @@ return {
 			if(!itemdata.frames[0])
 				itemdata.frames[0] = {type:'keyframe'}
 
-			this.formatFrameData(itemdata.frames[0], itemdata)
-
-		}
-		, formatFrameData : function(framedata, itemdata){
-			if(!framedata.resize)
-				framedata.resize = {}
-
-			if(!framedata.resize.width)
-				framedata.resize.width = itemdata.original.width || 0
-
-			if(!framedata.resize.height)
-				framedata.resize.height = itemdata.original.height || 0
-
-			if(!framedata.resize.top)
-				framedata.resize.top = 0
-
-			if(!framedata.resize.left)
-				framedata.resize.left = 0
-
-			if(!framedata.transform)
-				framedata.transform = {}
-
-			for(var i in formatdata.transform){
-				if(!framedata.transform[i]){
-					framedata.transform[i] = {}
-					for(var j in formatdata.transform[i].opts){
-						var value = formatdata.transform[i].opts[j]
-						framedata.transform[i][value[0]] = value[2] || 0
-					}
-				}
-			}
 		}
 		, setFocusItem : function(item){
 			this.$set('focus_item', item)
@@ -228,9 +197,6 @@ return {
 		}
 		, setFocusItem : function(item){
 			this.setFocusItem(item)
-		}
-		, formatFrameData : function(framedata, itemdata){
-			this.formatFrameData(framedata, itemdata)
 		}
 	}
 	, created : function(){
