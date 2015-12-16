@@ -53,7 +53,7 @@
 	</div>
 
 	<div class="tracks">
-		<track v-ref:track v-for="itemdata in itemsdata" :index="$index" :framesdata="itemdata.frames" :item_id="itemdata.item_id" :focus_track="focus_track" :timedata="timedata" :command="command"></track>
+		<track v-ref:track v-for="itemdata in itemsdata" :index="$index" :framesdata="itemdata.frames" :item_id="itemdata.item_id" :focus_track="focus_track" :timedata="timedata" :command="command" :formatdata="formatdata"></track>
 	</div>
 </div>
 
@@ -67,7 +67,7 @@ return {
   components : {
 		track : track
   }
-	, props:['itemsdata']
+	, props:['itemsdata', 'formatdata']
 	, data : function(){
 
 		return {

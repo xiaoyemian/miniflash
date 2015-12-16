@@ -32,7 +32,6 @@ return {
 			this.$set('focus_item.itemdata.original' + arr.join(''), value||0)
 
 			this.focus_item.loadItemStyle()
-			this.focus_item.setKeyFrame()
 		}
 	}
 }

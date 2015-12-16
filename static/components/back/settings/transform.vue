@@ -39,7 +39,6 @@ return {
 			console.log(this.focus_item.framedata, value||0)
 
 			this.focus_item.loadItemStyle()
-			this.focus_item.setKeyFrame()
 		}
 	}
 }

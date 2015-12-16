@@ -15,11 +15,16 @@
 		&:before{
 			top:50%;left:50%;.w(6px);.h(6px);.mt(-3px);.ml(-3px);.bgc(#000); .border-r(8px);
 		}
+		&.normal{
+			.handel{.bgc(#5CD685);}
+		}
 	}
 
-	&.normal{
-		.handel{.bgc(#5CD685);}
+	&.blankframe{
+
 	}
+
+
 	&.animate{
 		.handel{.bgc(#5CADD6);}
 	}
@@ -49,7 +54,7 @@
 <script>
 
 return {
-	props : ['focus_frame', 'framedata', 'time', 'timedata', 'command']
+	props : ['focus_frame', 'framedata', 'time', 'timedata', 'command', 'formatdata']
 	, data : function(){
 		return {
 		}
@@ -69,23 +74,33 @@ return {
 					this.framedata.name = 'animate'
 				}
 			}
+			this.$dispatch('loadTrack')
+		}
+		, formatFrameData : function(){
+			var framedata = this.framedata
+			var formatdata = this.formatdata
+
+			if(!framedata.resize)
+				this.$set('framedata.resize', {})
+
+			if(!framedata.transform)
+				this.$set('framedata.transform', {})
+
+			for(var i in formatdata.transform){
+				if(!framedata.transform[i]){
+					framedata.transform[i] = {}
+					for(var j in formatdata.transform[i].opts){
+						var value = formatdata.transform[i].opts[j]
+						framedata.transform[i][value[0]] = value[2] || 0
+					}
+				}
+			}
 		}
 	}
 	, events : {
 	}
-	, watch : {
-		'framedata.type' : function(){
-			if(this.framedata.type == 'keyframe' && this.framedata.name == '')
-				this.framedata.name = 'normal'
-
-			this.$dispatch('reloadFrameAll')
-		}
-		, 'framedata.name' : function(){
-			this.$dispatch('reloadFrameAll')
-		}
-
-	}
-	, ready : function(){
+	, created : function(){
+		this.formatFrameData()
 	}
 }
 </script>

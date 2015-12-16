@@ -25,7 +25,7 @@
 <div class="track" @click.stop="selectTrack" :class="{focus:focus_track == item_id}">
 	<div class="trackname">{{item_name}}</div>
 	<div class="trackframe" v-el:trackframe>
-		<frameitem v-ref:frame v-for="framedata in frameslist" :focus_frame="focus_frame" :framedata="framedata" :time="$index" :timedata="timedata" :command="command"></frameitem>
+		<frameitem v-ref:frame v-for="framedata in frameslist" :focus_frame="focus_frame" :framedata="framedata" :time="$index" :timedata="timedata" :command="command" :formatdata="formatdata"></frameitem>
 	</div>
 </div>
 
@@ -37,7 +37,7 @@ return {
   components : {
     frameitem : frame
 	}
-	, props : ['timedata', 'focus_track', 'item_id', 'framesdata', 'command']
+	, props : ['timedata', 'focus_track', 'item_id', 'framesdata', 'command', 'formatdata']
 	, data : function(){
 
 		var frameslist = []
@@ -102,7 +102,10 @@ return {
 
 			this.$dispatch('loadItemByFrame', this.item_id, framedata)
 		}
-		, reloadFrameAll : function(){
+		, loadTrack : function(){
+			if(this.focus_track !== this.item_id)
+				return;
+
 			var len = this.frameslist.length
 			var name = ''
 
@@ -119,7 +122,6 @@ return {
 				console.log(name, framedata.name, framedata.type)
 			}
 		}
-
 	}
 	, watch : {
 		frameslist : function(){
@@ -148,7 +150,7 @@ return {
 					mSelf.frameslist = frames	
 
 					mSelf.$nextTick(function(){
-						this.$emit('reloadFrameAll')
+						this.$emit('loadTrack')
 						mSelf.$dispatch('loadTime')
 					})
 

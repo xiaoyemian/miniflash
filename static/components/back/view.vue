@@ -90,38 +90,6 @@ var original = require('back/settings/original.vue')
 var transform = require('back/settings/transform.vue')
 var resize = require('back/settings/resize.vue')
 
-var formatdata = {}
-formatdata.original = {
-	width : {label : '原始宽度', unit : 'px'}
-	, height : {label : '原始高度', unit : 'px'}
-	, imageUrl : {label : '图片地址', type : 'text'}
-}
-formatdata.resize = {
-	width : {label : '宽度', unit : 'px'}
-	, height : {label : '高度', unit : 'px'}
-	, top : {label : '上边距', unit : 'px'}
-	, left : {label : '左边距', unit : 'px'}
-	, 'border-radius' : {label : '圆角', unit : 'px'}
-}
-formatdata.transform = {
-	translate : {
-		label : '偏移'
-		, opts : [['x', 'px'],['y', 'px']]
-	}
-	, scale : {
-		label : '缩放'
-		, opts : [['x', '', '1', '0.1'],['y', '', '1', '0.1']]
-	}
-	, rotate : {
-		label : '旋转'
-		, opts : [['angle', 'deg']]
-	}
-	, skew : {
-		label : '倾斜'
-		, opts : [['x-angle', 'deg'], ['y-angle', 'deg']]
-	}
-}
-
 return {
   components : {
     item : item
@@ -129,7 +97,7 @@ return {
 		, transform : transform
 		, resize : resize
   }
-	, props:['itemsdata']
+	, props:['itemsdata', 'formatdata']
 	, data : function(){
 
 		return {
@@ -139,7 +107,6 @@ return {
 				, height : 0
 				, scale : 0
 			}
-			, formatdata : formatdata
 			, pagestyle : {}
 		}
 	}
