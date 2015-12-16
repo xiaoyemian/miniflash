@@ -85,6 +85,19 @@ return {
 			this.setFocusFrame(time)
 			this.selectTrack()
 		}
+		, formatTransform : function(framedata){
+			var formatdata = this.formatdata
+
+			for(var i in formatdata.transform){
+				if(!framedata.transform[i]){
+					framedata.transform[i] = {}
+					for(var j in formatdata.transform[i].opts){
+						var value = formatdata.transform[i].opts[j]
+						framedata.transform[i][value[0]] = value[2] || 0
+					}
+				}
+			}
+		}
 		, loadItemByTime : function(time){
 			this.setFocusFrame(time)
 
@@ -112,6 +125,8 @@ return {
 						break;
 					}
 				}
+				this.$emit('formatTransform', framedata)
+
 				this.$set('frameslist[' + time + '].resize', resize)
 				this.$set('frameslist[' + time + '].transform', transform)
 			}
@@ -122,10 +137,6 @@ return {
 			if(this.focus_track == this.item_id)
 				this.loadTrack()
 
-		}
-	}
-	, watch : {
-		frameslist : function(){
 		}
 	}
 	, ready : function(){

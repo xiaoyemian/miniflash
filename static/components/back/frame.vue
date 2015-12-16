@@ -80,7 +80,6 @@ return {
 	}
 	, created : function(){
 		var framedata = this.framedata
-		var formatdata = this.formatdata
 		
 		if(!framedata.type)
 			this.$set('framedata.type', 'blankframe')
@@ -88,21 +87,14 @@ return {
 		if(!framedata.name)
 			this.$set('framedata.name', '')
 
-		if(!framedata.resize)
+		if(!framedata.resize){
 			this.$set('framedata.resize', {})
+		}
 
 		if(!framedata.transform)
 			this.$set('framedata.transform', {})
 
-		for(var i in formatdata.transform){
-			if(!framedata.transform[i]){
-				framedata.transform[i] = {}
-				for(var j in formatdata.transform[i].opts){
-					var value = formatdata.transform[i].opts[j]
-					framedata.transform[i][value[0]] = value[2] || 0
-				}
-			}
-		}
+		this.$dispatch('formatTransform', this.framedata)
 	}
 }
 </script>

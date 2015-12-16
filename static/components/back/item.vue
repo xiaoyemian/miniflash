@@ -97,7 +97,6 @@ return {
 			this.framestyle = {}
 
 			for(var i in framedata.resize){
-
 				var value = framedata.resize[i] || 0
 				var unit = formatdata.resize[i].unit || ''
 				
@@ -138,7 +137,15 @@ return {
 			var formatdata = this.formatdata
 			var itemdata = this.itemdata
 
-			if(!itemdata.original){
+			if(!itemdata.frames)
+				this.$set('itemdata.frames', {})
+
+			if(!itemdata.frames[0])
+				this.$set('itemdata.frames[0]', {type:'keyframe', name:'normal'})
+
+			var resize = {}
+
+			if(itemdata.style['padding-top']){
 				var original = {
 					width : 640 * itemdata.style['width']/100
 					, height : 640 * itemdata.style['padding-top']/100 
@@ -146,21 +153,26 @@ return {
 				if(itemdata.background && itemdata.background.image){
 					original.imageUrl = itemdata.background.image
 				}
+				this.$set('itemdata.original', original)
 
-				var resize = {
-					width : original.width 
-					, height : original.height 
-					, left : 640 * itemdata.style['left']/100
+				resize = {
+					left : 640 * itemdata.style['left']/100
 					, top : 1136 * itemdata.style['top']/100
 				}
-
-				this.$set('itemdata.original', original)
-				this.$set('itemdata.frames', {})
 
 				delete itemdata.style
 				delete itemdata.background
 				delete itemdata.scale
 			}
+
+			var original = this.itemdata.original
+			this.$set('itemdata.frames[0].resize', {
+				width : original.width
+				, height : original.height
+				, top : resize.top || 0
+				, left : resize.left || 0
+			})
+
 		}
 		, upgradeItemId : function(){
 			var itemdata = this.itemdata
@@ -176,20 +188,25 @@ return {
 			this.framedata.name = this.framedata.name || 'normal'
 			this.$dispatch('loadTrack')
 		}
+		,formatResize : function(){
+			var resize = this.framedata.resize
+			var original = this.itemdata.original
+
+			resize.width = resize.width || original.width || 0
+			resize.height = resize.height || original.height || 0
+			resize.top = resize.top || 0
+			resize.left = resize.left || 0
+
+			this.$set('framedata.resize', resize)
+		}
 	}
 	, events : {
 		loadItemByFrame : function(item_id, framedata){
 			if(item_id != this.itemdata.item_id)
 				return;
 
-			var original = this.itemdata.original
-			var resize = framedata.resize
-
-			resize.width = resize.width || original.width || 0
-			resize.height = resize.height || original.height || 0
-
 			this.framedata = framedata
-
+			this.formatResize()
 			this.loadItemStyle()
 		}
 		, focusItemById : function(item_id){
@@ -200,6 +217,12 @@ return {
 		, loadItemStyle : function(){
 			this.loadItemStyle()
 		}
+	}
+	, created : function(){
+		this.upgradeItemData()
+		this.upgradeItemId()
+
+		this.loadItemOriginal()
 	}
 	, ready : function(){
 		var mSelf = this
@@ -237,23 +260,6 @@ return {
 				mSelf.loadItemStyle()
 			}
 		})
-	}
-	, created : function(){
-		this.upgradeItemData()
-		this.upgradeItemId()
-
-		var itemdata = this.itemdata
-
-		if(!itemdata.frames)
-			this.$set('itemdata.frames', {})
-
-		if(!itemdata.frames[0])
-			this.$set('itemdata.frames[0]', {type:'keyframe', name:'normal'})
-
-
-		console.log(this.itemdata.frames)
-		this.loadItemOriginal()
-
 	}
 }
 </script>
