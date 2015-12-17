@@ -59,20 +59,23 @@ return {
 			this.$dispatch('selectTrack', this.item_id)
 		}
 		, loadTrack : function(){
-			var len = this.frameslist.length
 			var name = ''
+				, arr = []
 
-			for(var i = len-1; i >= 0; i--){
+			for(var i in this.frameslist){
 				var framedata = this.frameslist[i]
 
 				if(framedata.type == 'keyframe'){
+					for(var j in arr){
+						arr[j].name = name
+						console.log(name, arr)
+					}
+					arr = []
 					name = framedata.name
 
 				}else{
-					framedata.name = name
+					arr.push(framedata)
 				}
-
-				console.log(name, framedata.name, framedata.type)
 			}
 		}
 	}
