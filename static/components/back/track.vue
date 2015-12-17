@@ -25,7 +25,7 @@
 <div class="track" @click.stop="selectTrack" :class="{focus:focus_track == item_id}">
 	<div class="trackname">{{item_name}}</div>
 	<div class="trackframe" v-el:trackframe>
-		<frameitem v-ref:frame v-for="framedata in frameslist" :framedata="framedata" :time="$index" :timedata="timedata" :command="command" :formatdata="formatdata"></frameitem>
+		<frameitem v-ref:frame v-for="framedata in frameslist" :framedata="framedata" :time="$index" :timedata="timedata" :keybroad="keybroad" :formatdata="formatdata"></frameitem>
 	</div>
 </div>
 
@@ -37,7 +37,7 @@ return {
   components : {
     frameitem : frame
 	}
-	, props : ['timedata', 'focus_track', 'item_id', 'framesdata', 'command', 'formatdata']
+	, props : ['timedata', 'focus_track', 'item_id', 'framesdata', 'keybroad', 'formatdata']
 	, data : function(){
 
 		var frameslist = []
@@ -78,7 +78,10 @@ return {
 			for(var i in this.frameslist){
 				framedata = this.frameslist[i]
 
-				if(framedata.type == 'keyframe'){
+				if(framedata.type == 'blankframe'){
+					arr.push(framedata)
+
+				}else{
 
 					for(var k in arr){
 						arr[k].name = name 
@@ -87,10 +90,13 @@ return {
 					name = framedata.name
 					arr = []
 
-				}else{
-					arr.push(framedata)
 				}
 			}
+
+			for(var j in arr){
+				arr[j].name = '' 
+			}
+
 		}
 		, getStartData : function(time){
 			var data = {}
@@ -172,11 +178,12 @@ return {
 		, formatTransform : function(framedata){
 			this.formatTransform(framedata)
 		}
+		, cleanFrameData : function(framedata){
+			this.cleanFrameData(framedata)
+		}
 		, loadItemByTime : function(time){
 			var framedata = this.frameslist[time]
-
 			if(framedata.type == 'blankframe'){
-
 				if(framedata.name == 'animate'){
 					this.setAnimateFrameData(framedata, time)
 
@@ -189,14 +196,11 @@ return {
 		}
 		, loadTrack : function(){
 			this.loadTrack()
-
 		}
 		, loadTrackById : function(item_id){
 			if(item_id == this.item_id)
 				this.loadTrack()
-
 		}
-
 	}
 	, ready : function(){
 		var mSelf = this
@@ -220,8 +224,8 @@ return {
 					this.frameslist = frames	
 
 					this.$nextTick(function(){
-						this.loadTrack()
 						this.$dispatch('loadTime')
+						this.loadTrack()
 					})
 
 				})

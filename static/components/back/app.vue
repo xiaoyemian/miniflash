@@ -18,7 +18,7 @@ body{
 <div class="app">
 	<div class="headtop"></div>
 	<view v-ref:view :itemsdata="pagedata.items" :formatdata="formatdata"></view>
-	<flash v-ref:flash :itemsdata="pagedata.items" :formatdata="formatdata" :command="command"></flash>
+	<flash v-ref:flash :itemsdata="pagedata.items" :formatdata="formatdata" :keybroad="keybroad"></flash>
 </div>
 </template>
 
@@ -66,8 +66,13 @@ formatdata.transform = {
 
 var keycode = {
 	'91' : 'command'
+	, '93' : 'command'
+	, '16' : 'shift'
+	, '17' : 'control'
+	, '18' : 'alt'
+	, '189' : '+'
+	, '187' : '-'
 }
-
 
 
 return {
@@ -80,7 +85,7 @@ return {
 		return {
 			pagedata : this.pages[this.number]
 			, formatdata : formatdata
-			, command : {}
+			, keybroad : {}
 		}
 	}
 	, events : {
@@ -108,12 +113,12 @@ return {
 
 		$(window)
 			.on('keydown', function(e){
-				console.log(e.keyCode)
-				mSelf.$set('command["' + keycode[e.keyCode] + '"]', true)
+				console.log(e.keyCode, keycode[e.keyCode])
+				mSelf.$set('keybroad["' + keycode[e.keyCode] + '"]', true)
 
 			})
 			.on('keyup', function(e){
-				mSelf.$set('command["' + keycode[e.keyCode] + '"]', false)
+				mSelf.$set('keybroad["' + keycode[e.keyCode] + '"]', false)
 	
 			})
 

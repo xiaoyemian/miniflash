@@ -58,7 +58,7 @@
 <script>
 
 return {
-	props : ['framedata', 'time', 'timedata', 'command', 'formatdata']
+	props : ['framedata', 'time', 'timedata', 'keybroad', 'formatdata']
 	, data : function(){
 		return {
 		}
@@ -68,16 +68,18 @@ return {
 			this.$dispatch('selectFrame', this.time)
 			this.$dispatch('loadTime', this.time)
 
-			if(!this.command.command)
-				return;
+			var keybroad = this.keybroad
 
-			if(this.framedata.type == 'keyframe'){
-				if(this.framedata.name == 'animate'){
-					this.framedata.name = 'normal'
-				}else{
-					this.framedata.name = 'animate'
+			if(keybroad.command){
+				if(this.framedata.type == 'keyframe'){
+					if(this.framedata.name == 'animate'){
+						this.framedata.name = 'normal'
+					}else{
+						this.framedata.name = 'animate'
+					}
 				}
 			}
+
 			this.$dispatch('loadTrack')
 		}
 	}
