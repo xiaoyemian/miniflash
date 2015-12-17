@@ -92,16 +92,47 @@ return {
 				}
 			}
 		}
-		, setNormalFrameData : function(framedata, startdata){
-			for(var i in startdata.resize){
-				framedata.resize[i] = startdata.resize[i]
-			}
-
-			for(var i in startdata.transform){
-				for(var j in startdata.transform[i]){
-					framedata.transform[i][j] = startdata.transform[i][j]
+		, getStartData : function(time){
+			var framedata = {}
+			for(var i = time; i--; i>=0){
+				var data = this.frameslist[i]
+				if(data.type == 'keyframe'){
+					framedata = data
+					break;
 				}
 			}
+			return framedata
+		}
+		, getEndData : function(time){
+			var framedata = {}
+			var len = this.frameslist.length
+			for(var i = time; i++; i< len){
+				var data = this.frameslist[i]
+				if(data.type == 'keyframe'){
+					framedata = data
+					break;
+				}
+			}
+			return framedata
+		}
+		, setNormalFrameData : function(framedata, time){
+			var data = this.getStartData(time)
+
+			for(var i in data.resize){
+				framedata.resize[i] = data.resize[i]
+			}
+			for(var i in data.transform){
+				for(var j in data.transform[i]){
+					framedata.transform[i][j] = data.transform[i][j]
+				}
+			}
+		}
+		, setAnimateFrameData : function(framedata, time){
+			var startdata = this.getStartData(time)
+			var enddata = this.getEndData(time)
+
+			console.log(11111)
+
 		}
 	}
 	, events : {
@@ -115,16 +146,13 @@ return {
 			var framedata = this.frameslist[time]
 
 			if(framedata.type == 'blankframe'){
-				var startdata = {}
-				for(var i = time; i--; i>=0){
-					var data = this.frameslist[i]
-					if(data.type == 'keyframe'){
-						startdata = data
-						break;
-					}
-				}
 
-				this.setNormalFrameData(framedata, startdata)
+				if(framedata.name == 'animate'){
+					this.setAnimateFrameData(framedata, time)
+
+				}else{
+					this.setNormalFrameData(framedata, time)
+				}
 			}
 			
 			this.$dispatch('loadItemByFrame', this.item_id, framedata)
