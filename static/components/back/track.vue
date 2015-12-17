@@ -94,30 +94,34 @@ return {
 		}
 		, getStartData : function(time){
 			var data = {}
+				, index
 
 			for(var i = time; i--; i>=0){
 				var framedata = this.frameslist[i]
 				if(framedata.type == 'keyframe'){
-					data = {framedata:framedata, index:i}
+					data = framedata
+					index = i
 					break;
 				}
 			}
 
-			return data
+			return {framedata:data, index:index} 
 		}
 		, getEndData : function(time){
 			var data = {}
+				, index
 			var len = this.frameslist.length
 
 			for(var i = time; i++; i< len){
 				var framedata = this.frameslist[i]
 				if(framedata.type == 'keyframe'){
-					data = {framedata:framedata, index:i}
+					data = framedata
+					index = i
 					break;
 				}
 			}
 
-			return data
+			return {framedata:data, index:index} 
 		}
 		, setNormalFrameData : function(framedata, time){
 			var start = this.getStartData(time)
@@ -136,10 +140,21 @@ return {
 			var start = this.getStartData(time)
 			var end = this.getEndData(time)
 
-			var at = time/(end.index - start.index)
+			var at = (time - start.index)/(end.index - start.index)
 
-			console.log(start.index, end.index, time, at)
-			
+			var startdata = start.framedata
+			var enddata = end.framedata
+
+			for(var i in startdata.resize){
+				framedata.resize[i] = enddata.resize[i] * at + startdata.resize[i] * (1-at)
+			}
+
+			for(var i in startdata.transform){
+				for(var j in startdata.transform[i]){
+					framedata.transform[i][j] = enddata.transform[i][j] * at + startdata.transform[i][j] * (1-at)
+				}
+			}
+		
 		}
 	}
 	, events : {
