@@ -127,7 +127,7 @@ return {
 			this.$dispatch('loadItemByFrame', this.item_id, framedata)
 		}
 		, loadTrack : function(){
-			if(this.focus_track == this.item_id)
+			if(!this.focus_track || this.focus_track == this.item_id)
 				this.loadTrack()
 
 		}
