@@ -8,7 +8,7 @@
 
 	.handel{
 		.pa;top:0px;left:0px;right:0px;bottom:0px;
-	//	.opacity(60); 
+//		.opacity(40); 
 	}
 
 	&.keyframe{
@@ -33,11 +33,16 @@
 	.frame.focus{
 		.handel{
 			//border:1px solid red;
+			//.opacity(100);
+		}
+		&.blankframe{
+			.handel{
+			}
 		}
 	}
 	.frame{
 		.handel{
-			.opacity(100);
+	//		.opacity(100);
 		}
 	}
 }

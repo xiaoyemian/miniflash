@@ -88,14 +88,14 @@ return {
 		, focusTrackById : function(item_id){
       this.$refs.flash.setFocusTrack(item_id)
 		} 
+		, loadTrackById : function(item_id){
+			this.$refs.flash.$broadcast('loadTrackById', item_id)
+		}
 		, blurTrack : function(){
       this.$refs.flash.setFocusTrack(null)
 		} 
 		, loadTime : function(time){
 			this.$refs.flash.loadTime(time)
-		}
-		, loadTrack : function(){
-			this.$refs.flash.$broadcast('loadTrack')
 		}
 	}
 	, ready: function(){

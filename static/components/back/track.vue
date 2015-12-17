@@ -180,10 +180,15 @@ return {
 			this.$dispatch('loadItemByFrame', this.item_id, framedata)
 		}
 		, loadTrack : function(){
-			if(!this.focus_track || this.focus_track == this.item_id)
+			this.loadTrack()
+
+		}
+		, loadTrackById : function(item_id){
+			if(item_id == this.item_id)
 				this.loadTrack()
 
 		}
+
 	}
 	, ready : function(){
 		var mSelf = this
