@@ -25,7 +25,7 @@
 <div class="track" @click.stop="selectTrack" :class="{focus:focus_track == item_id}">
 	<div class="trackname">{{item_name}}</div>
 	<div class="trackframe" v-el:trackframe>
-		<frameitem v-ref:frame v-for="framedata in frameslist" :focus_frame="focus_frame" :framedata="framedata" :time="$index" :timedata="timedata" :command="command" :formatdata="formatdata"></frameitem>
+		<frameitem v-ref:frame v-for="framedata in frameslist" :framedata="framedata" :time="$index" :timedata="timedata" :command="command" :formatdata="formatdata"></frameitem>
 	</div>
 </div>
 
@@ -51,16 +51,12 @@ return {
 
 		return {
 			frameslist : frameslist
-			, focus_frame : null 
 			, item_name :item_name 
 		}
 	}
 	, methods : {
 		selectTrack : function(){
 			this.$dispatch('selectTrack', this.item_id)
-		}
-		, setFocusFrame : function(time){
-			this.$set('focus_frame', time)
 		}
 		, loadTrack : function(){
 			var len = this.frameslist.length
@@ -82,7 +78,6 @@ return {
 	}
 	, events : {
 		selectFrame : function(time){
-			this.setFocusFrame(time)
 			this.selectTrack()
 		}
 		, formatTransform : function(framedata){
@@ -99,8 +94,6 @@ return {
 			}
 		}
 		, loadItemByTime : function(time){
-			this.setFocusFrame(time)
-
 			var framedata = this.frameslist[time]
 
 			if(framedata.type == 'blankframe'){
