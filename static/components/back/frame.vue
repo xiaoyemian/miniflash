@@ -77,6 +77,11 @@ return {
 					}else{
 						this.framedata.name = 'animate'
 					}
+
+				}else{
+					this.framedata.type = 'keyframe'
+					this.framedata.name = 'normal'
+
 				}
 			}
 
