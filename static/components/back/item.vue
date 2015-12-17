@@ -145,7 +145,7 @@ return {
 
 			var resize = {}
 
-			if(itemdata.style['padding-top']){
+			if(itemdata.style && itemdata.style['padding-top']){
 				var original = {
 					width : 640 * itemdata.style['width']/100
 					, height : 640 * itemdata.style['padding-top']/100 
