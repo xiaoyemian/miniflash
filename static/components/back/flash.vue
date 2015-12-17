@@ -11,7 +11,7 @@
 	}
 
 	.times{
-		.h(14px);.ml(140px);
+		.h(24px);.ml(140px);
 
 		.timecontrol{
 			.pa;.h(100%);z-index:2;.w(4px);
@@ -21,10 +21,11 @@
 				top:0px;bottom:0px;border-right:1px solid red;
 				.w(50%);
 			}
-			&:after{
-			}
 
-			span{.pa;top:0px;.w(14px);.h(14px);left:-5px;}
+			span{.pa;top:0px;.w(12px);.h(22px);left:-5px;
+				.bgc(#FF7070);z-index:1;
+				border:1px solid red;
+			}
 			
 		}
 	}
