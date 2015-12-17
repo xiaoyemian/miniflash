@@ -106,6 +106,7 @@ return {
 	}
 	, ready : function(){
 		this.loadTime(0)
+		this.$broadcast('loadTrack')
 
 		var mSelf = this
 		var $timecontrol = $(this.$els.timecontrol)

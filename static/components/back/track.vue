@@ -58,31 +58,6 @@ return {
 		selectTrack : function(){
 			this.$dispatch('selectTrack', this.item_id)
 		}
-		, loadTrack : function(){
-			var name = ''
-				, arr = []
-
-			for(var i in this.frameslist){
-				var framedata = this.frameslist[i]
-
-				if(framedata.type == 'keyframe'){
-					for(var j in arr){
-						arr[j].name = name
-						console.log(name, arr)
-					}
-					arr = []
-					name = framedata.name
-
-				}else{
-					arr.push(framedata)
-				}
-			}
-		}
-	}
-	, events : {
-		selectFrame : function(time){
-			this.selectTrack()
-		}
 		, formatTransform : function(framedata){
 			var formatdata = this.formatdata
 
@@ -96,37 +71,62 @@ return {
 				}
 			}
 		}
+		, loadTrack : function(){
+			var name = ''
+				, arr = []
+
+			for(var i in this.frameslist){
+				framedata = this.frameslist[i]
+
+				if(framedata.type == 'keyframe'){
+
+					for(var k in arr){
+						arr[k].name = name 
+					}
+
+					name = framedata.name
+					arr = []
+
+				}else{
+					arr.push(framedata)
+				}
+			}
+		}
+		, setNormalFrameData : function(framedata, startdata){
+			for(var i in startdata.resize){
+				framedata.resize[i] = startdata.resize[i]
+			}
+
+			for(var i in startdata.transform){
+				for(var j in startdata.transform[i]){
+					framedata.transform[i][j] = startdata.transform[i][j]
+				}
+			}
+		}
+	}
+	, events : {
+		selectFrame : function(time){
+			this.selectTrack()
+		}
+		, formatTransform : function(framedata){
+			this.formatTransform(framedata)
+		}
 		, loadItemByTime : function(time){
 			var framedata = this.frameslist[time]
 
 			if(framedata.type == 'blankframe'){
-				var resize = {} 
-				var transform = {} 
-
-				for(var i = time; i >= 0; i--){
+				var startdata = {}
+				for(var i = time; i--; i>=0){
 					var data = this.frameslist[i]
-					if(data.type && data.type == 'keyframe'){
-
-						for(var i in data.resize){
-							resize[i] = data.resize[i]
-						}
-
-						for(var i in data.transform){
-							transform[i] = {}
-							for(var j in data.transform[i]){
-								transform[i][j] = data.transform[i][j]
-							}
-						}
-
+					if(data.type == 'keyframe'){
+						startdata = data
 						break;
 					}
 				}
-				this.$set('frameslist[' + time + '].resize', resize)
-				this.$set('frameslist[' + time + '].transform', transform)
 
-				this.$emit('formatTransform', framedata)
+				this.setNormalFrameData(framedata, startdata)
 			}
-
+			
 			this.$dispatch('loadItemByFrame', this.item_id, framedata)
 		}
 		, loadTrack : function(){

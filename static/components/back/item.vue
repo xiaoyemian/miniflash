@@ -184,6 +184,7 @@ return {
 												+ Math.floor(Math.random()*100)
 		}
 		, setKeyframe : function(){
+			console.log(this.framedata)
 			this.framedata.type = 'keyframe'
 			this.framedata.name = this.framedata.name || 'normal'
 			this.$dispatch('loadTrack')
