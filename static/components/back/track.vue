@@ -93,46 +93,53 @@ return {
 			}
 		}
 		, getStartData : function(time){
-			var framedata = {}
+			var data = {}
+
 			for(var i = time; i--; i>=0){
-				var data = this.frameslist[i]
-				if(data.type == 'keyframe'){
-					framedata = data
+				var framedata = this.frameslist[i]
+				if(framedata.type == 'keyframe'){
+					data = {framedata:framedata, index:i}
 					break;
 				}
 			}
-			return framedata
+
+			return data
 		}
 		, getEndData : function(time){
-			var framedata = {}
+			var data = {}
 			var len = this.frameslist.length
+
 			for(var i = time; i++; i< len){
-				var data = this.frameslist[i]
-				if(data.type == 'keyframe'){
-					framedata = data
+				var framedata = this.frameslist[i]
+				if(framedata.type == 'keyframe'){
+					data = {framedata:framedata, index:i}
 					break;
 				}
 			}
-			return framedata
+
+			return data
 		}
 		, setNormalFrameData : function(framedata, time){
-			var data = this.getStartData(time)
+			var start = this.getStartData(time)
+			var startdata = start.framedata
 
-			for(var i in data.resize){
-				framedata.resize[i] = data.resize[i]
+			for(var i in startdata.resize){
+				framedata.resize[i] = startdata.resize[i]
 			}
-			for(var i in data.transform){
-				for(var j in data.transform[i]){
-					framedata.transform[i][j] = data.transform[i][j]
+			for(var i in startdata.transform){
+				for(var j in startdata.transform[i]){
+					framedata.transform[i][j] = startdata.transform[i][j]
 				}
 			}
 		}
 		, setAnimateFrameData : function(framedata, time){
-			var startdata = this.getStartData(time)
-			var enddata = this.getEndData(time)
+			var start = this.getStartData(time)
+			var end = this.getEndData(time)
 
-			console.log(11111)
+			var at = time/(end.index - start.index)
 
+			console.log(start.index, end.index, time, at)
+			
 		}
 	}
 	, events : {
