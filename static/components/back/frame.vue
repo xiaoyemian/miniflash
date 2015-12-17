@@ -68,7 +68,7 @@ return {
 			this.$dispatch('selectFrame', this.time)
 			this.$dispatch('loadTime', this.time)
 
-			if(!this.command)
+			if(!this.command.command)
 				return;
 
 			if(this.framedata.type == 'keyframe'){

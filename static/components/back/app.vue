@@ -18,7 +18,7 @@ body{
 <div class="app">
 	<div class="headtop"></div>
 	<view v-ref:view :itemsdata="pagedata.items" :formatdata="formatdata"></view>
-	<flash v-ref:flash :itemsdata="pagedata.items" :formatdata="formatdata"></flash>
+	<flash v-ref:flash :itemsdata="pagedata.items" :formatdata="formatdata" :command="command"></flash>
 </div>
 </template>
 
@@ -64,6 +64,10 @@ formatdata.transform = {
 	}
 }
 
+var keycode = {
+	'91' : 'command'
+}
+
 
 
 return {
@@ -76,6 +80,7 @@ return {
 		return {
 			pagedata : this.pages[this.number]
 			, formatdata : formatdata
+			, command : {}
 		}
 	}
 	, events : {
@@ -98,7 +103,20 @@ return {
 			this.$refs.flash.loadTime(time)
 		}
 	}
-	, ready: function(){
+	, created: function(){
+		var mSelf = this
+
+		$(window)
+			.on('keydown', function(e){
+				console.log(e.keyCode)
+				mSelf.$set('command["' + keycode[e.keyCode] + '"]', true)
+
+			})
+			.on('keyup', function(e){
+				mSelf.$set('command["' + keycode[e.keyCode] + '"]', false)
+	
+			})
+
   }
 }
 </script>

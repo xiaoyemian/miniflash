@@ -68,7 +68,7 @@ return {
   components : {
 		track : track
   }
-	, props:['itemsdata', 'formatdata']
+	, props:['itemsdata', 'formatdata', 'command']
 	, data : function(){
 
 		return {
@@ -79,7 +79,6 @@ return {
 				, framewidth : 15
 				, time : 0
 			}
-			, command : false
 		}
 	}
 	, methods : {
@@ -127,32 +126,6 @@ return {
 			, scroll : false
 			, grid: [ mSelf.timedata.framewidth, 0 ]
 		})
-
-		$(window)
-			.on('keydown', function(e){
-				console.log(e.keyCode)
-
-				switch(e.keyCode){
-					case 91 :
-						mSelf.command = true
-						break;			
-
-					default : 
-						break;
-				}
-				console.log(mSelf.command)
-			})
-			.on('keyup', function(e){
-	
-				switch(e.keyCode){
-					case 91 :
-						mSelf.command = false
-						break;			
-
-					default : 
-						break;
-				}
-			})
 	}
 }
 </script>
