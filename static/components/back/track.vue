@@ -123,9 +123,17 @@ return {
 
 			return {framedata:data, index:index} 
 		}
+		, cleanFrameData : function(framedata){
+			framedata.resize = {}
+			framedata.transform = {}
+
+			this.formatTransform(framedata)
+		}
 		, setNormalFrameData : function(framedata, time){
 			var start = this.getStartData(time)
 			var startdata = start.framedata
+
+			this.cleanFrameData(framedata)
 
 			for(var i in startdata.resize){
 				framedata.resize[i] = startdata.resize[i]
@@ -145,16 +153,16 @@ return {
 			var startdata = start.framedata
 			var enddata = end.framedata
 
+			this.cleanFrameData(framedata)
+
 			for(var i in startdata.resize){
 				framedata.resize[i] = enddata.resize[i] * at + startdata.resize[i] * (1-at)
 			}
-
 			for(var i in startdata.transform){
 				for(var j in startdata.transform[i]){
 					framedata.transform[i][j] = enddata.transform[i][j] * at + startdata.transform[i][j] * (1-at)
 				}
 			}
-		
 		}
 	}
 	, events : {
