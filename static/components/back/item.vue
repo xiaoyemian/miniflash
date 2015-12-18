@@ -193,6 +193,8 @@ return {
 
 			this.framedata = framedata
 
+			console.log(item_id, this.framedata)
+
 			this.formatResizeByOriginal()
 			this.loadItemStyle()
 		}

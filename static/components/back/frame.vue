@@ -97,11 +97,11 @@ return {
 				}
 			}
 
-			this.$dispatch('loadTime', this.time)
+			this.$dispatch('setTime', this.time)
 			this.$dispatch('loadTrack')
 
 			this.$nextTick(function(){
-				this.$dispatch('loadTime', this.time)
+				this.$dispatch('setTime', this.time)
 			})
 		}
 		, formatFrameData : function(){

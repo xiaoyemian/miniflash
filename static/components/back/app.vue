@@ -129,8 +129,12 @@ return {
 		, blurTrack : function(){
       this.$refs.flash.setFocusTrack(null)
 		} 
-		, loadTime : function(time){
-			this.$refs.flash.loadTime(time)
+		, setTime : function(time){
+			console.log('app setTime')
+			this.$refs.flash.setTime(time)
+		}
+		, loadTime : function(){
+			this.$refs.flash.loadTime()
 		}
 	}
 	, created: function(){
