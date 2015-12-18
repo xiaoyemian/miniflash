@@ -77,7 +77,7 @@
 
 <div class="view" @click="blurItem">
 	<div class="page" :style="pagestyle">
-		<item v-ref:item v-for="itemdata in itemsdata" :itemdata="itemdata" :index="$index" :focus_item="focus_item" :printdata="printdata" :formatdata="formatdata"></item>
+		<item v-ref:item v-for="itemdata in itemsdata" :itemdata="itemdata" :index="$index" :focus_item="focus_item" :printdata="printdata" :formatdata="formatdata" :keybroad="keybroad"></item>
 	</div>
 </div>
 
@@ -97,7 +97,7 @@ return {
 		, transform : transform
 		, resize : resize
   }
-	, props:['itemsdata', 'formatdata']
+	, props:['itemsdata', 'formatdata', 'keybroad']
 	, data : function(){
 
 		return {

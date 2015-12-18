@@ -63,11 +63,12 @@ return {
 
 			for(var i in formatdata.transform){
 				if(!framedata.transform[i]){
-					framedata.transform[i] = {}
+					var data = {}
 					for(var j in formatdata.transform[i].opts){
 						var value = formatdata.transform[i].opts[j]
-						framedata.transform[i][value[0]] = value[2] || 0
+						data[value[0]] = value[2] || 0
 					}
+					Vue.set(framedata.transform, i, data)
 				}
 			}
 		}

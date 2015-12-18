@@ -6,18 +6,26 @@ body{
 }
 .app{
 	.pa;
-	bottom:0px;left:0px;top:26px;right:0px;
+	bottom:20px;left:0px;top:26px;right:0px;
 }
 .headtop{
-	z-index:998;
+	z-index:99;
 	.f(14px);.l(26px);.h(26px);.pf;top:0px;left:0px;right:0px;.pl(4px);.pr(4px);.bgc(#535353);.fc(white);
+}
+.keybroad{
+	.c;.f(12px);.l(26px);.h(26px);.pa;left:0px;right:0px;
+	span{.bgc(#9900ff);.fc(white);.pl(4px);.pr(4px);.border-r(2px);}
 }
 </style>
 
 <template>
 <div class="app">
-	<div class="headtop"></div>
-	<view v-ref:view :itemsdata="pagedata.items" :formatdata="formatdata"></view>
+	<div class="headtop">
+		<div class="keybroad">
+			<span v-for="keydata in keybroad" v-if="keydata">{{$key}}：{{keyIntro[$key]}}</span>
+		</div>
+	</div>
+	<view v-ref:view :itemsdata="pagedata.items" :formatdata="formatdata" :keybroad="keybroad"></view>
 	<flash v-ref:flash :itemsdata="pagedata.items" :formatdata="formatdata" :keybroad="keybroad"></flash>
 </div>
 </template>
@@ -46,6 +54,7 @@ formatdata.resize = {
 	, 'border-radius' : {label : '圆角', unit : 'px'}
 }
 formatdata.transform = {
+/*
 	translate : {
 		label : '偏移'
 		, opts : [['x', 'px'],['y', 'px']]
@@ -54,7 +63,7 @@ formatdata.transform = {
 		label : '缩放'
 		, opts : [['x', '', '1', '0.1'],['y', '', '1', '0.1']]
 	}
-	, rotate : {
+	, */rotate : {
 		label : '旋转'
 		, opts : [['angle', 'deg']]
 	}
@@ -64,16 +73,16 @@ formatdata.transform = {
 	}
 }
 
-var keycode = {
+var keyCode = {
 	'91' : 'command'
 	, '93' : 'command'
 	, '16' : 'shift'
-	, '17' : 'control'
 	, '18' : 'alt'
-	, '189' : '+'
-	, '187' : '-'
 }
-
+var keyIntro = {
+	'command' : '点击帧，切换关键帧类型'
+	, 'alt' : '点击帧，设为空白帧'
+}
 
 return {
   components: {
@@ -85,6 +94,7 @@ return {
 		return {
 			pagedata : this.pages[this.number]
 			, formatdata : formatdata
+			, keyIntro : keyIntro
 			, keybroad : {}
 		}
 	}
@@ -113,15 +123,16 @@ return {
 
 		$(window)
 			.on('keydown', function(e){
-				console.log(e.keyCode, keycode[e.keyCode])
-				mSelf.$set('keybroad["' + keycode[e.keyCode] + '"]', true)
+				console.log(e.keyCode, keyCode[e.keyCode])
+
+				if(keyCode[e.keyCode])
+					mSelf.$set('keybroad["' + keyCode[e.keyCode] + '"]', true)
 
 			})
 			.on('keyup', function(e){
-				mSelf.$set('keybroad["' + keycode[e.keyCode] + '"]', false)
+				mSelf.$set('keybroad["' + keyCode[e.keyCode] + '"]', false)
 	
 			})
-
   }
 }
 </script>

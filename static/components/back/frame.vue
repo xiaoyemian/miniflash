@@ -21,10 +21,10 @@
 	}
 
 	&.normal{
-		.handel{.bgc(#666);}
+		.handel{.bgc(#999);}
 	}
 	&.animate{
-		.handel{.bgc(#339366);}
+		.handel{.bgc(#33B666);}
 		//.handel{.bgc(#5CADD6);}
 	}
 
@@ -69,7 +69,6 @@ return {
 			this.$dispatch('loadTime', this.time)
 
 			var keybroad = this.keybroad
-
 			if(keybroad.command){
 				if(this.framedata.type == 'keyframe'){
 					if(this.framedata.name == 'animate'){
@@ -81,7 +80,6 @@ return {
 				}else{
 					this.framedata.type = 'keyframe'
 					this.framedata.name = 'normal'
-
 				}
 			}
 
@@ -107,6 +105,7 @@ return {
 			this.$set('framedata.transform', {})
 
 		this.$dispatch('formatTransform', this.framedata)
+			console.log(this.framedata)
 	}
 }
 </script>

@@ -65,7 +65,7 @@
 <script>
 
 return {
-	props:['focus_item', 'itemdata', 'index', 'printdata', 'formatdata']
+	props:['focus_item', 'itemdata', 'index', 'printdata', 'formatdata', 'keybroad']
 	, data:function(){
 		return {
 			framedata : null
