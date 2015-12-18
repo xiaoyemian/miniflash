@@ -58,32 +58,6 @@ return {
 		selectTrack : function(){
 			this.$dispatch('selectTrack', this.item_id)
 		}
-		, formatFrameData : function(framedata){
-			var formatdata = this.formatdata
-
-			if(!framedata.resize)
-				Vue.set(framedata, 'resize', {})
-
-			if(!framedata.transform)
-				Vue.set(framedata, 'transform', {})
-
-			for(var i in formatdata.transform){
-				if(!framedata.transform[i]){
-					var data = {}
-					for(var j in formatdata.transform[i].opts){
-						var value = formatdata.transform[i].opts[j]
-						data[value[0]] = value[2] || 0
-					}
-					Vue.set(framedata.transform, i, data)
-				}
-			}
-
-			for(var i in formatdata.resize){
-				if(!framedata.resize[i]){
-					Vue.set(framedata.resize, i, 0)
-				}
-			}
-		}
 		, loadTrack : function(){
 			var name = ''
 				, arr = []
@@ -137,20 +111,12 @@ return {
 
 			return {framedata:data, index:index} 
 		}
-		, cleanFrameData : function(framedata){
-			Vue.set(framedata, 'resize', {})
-			Vue.set(framedata, 'transform', {})
-
-			this.formatFrameData(framedata)
-		}
 		, setNormalFrameData : function(framedata, time){
 			var start = this.getStartData(time)
 			var startdata = start.framedata
 
-			this.cleanFrameData(framedata)
-
 			for(var i in startdata.resize){
-				Vue.set(framedata.resize, i , startdata.resize[i])
+				framedata.resize[i] = startdata.resize[i]
 			}
 			for(var i in startdata.transform){
 				for(var j in startdata.transform[i]){
@@ -167,8 +133,6 @@ return {
 
 			var startdata = start.framedata
 			var enddata = end.framedata
-
-			this.cleanFrameData(framedata)
 
 			for(var i in startdata.resize){
 				framedata.resize[i] = enddata.resize[i] * at + startdata.resize[i] * (1-at)
@@ -192,15 +156,13 @@ return {
 					this.$set('framesdata["' + i + '"]', framedata)
 			}
 		}
-		, cleanFrameData : function(framedata){
-			this.cleanFrameData(framedata)
-		}
-		, formatFrameData : function(framedata){
-			this.formatFrameData(framedata)
-		}
 		, loadItemByTime : function(time){
 			var framedata = this.frameslist[time]
+			var frame = this.$refs.frame[time]
+
 			if(framedata.type == 'blankframe'){
+				frame.cleanFrameData()
+
 				if(framedata.name == 'animate'){
 					this.setAnimateFrameData(framedata, time)
 
