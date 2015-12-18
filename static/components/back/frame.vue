@@ -66,7 +66,6 @@ return {
 	, methods : {
 		selectFrame : function(){
 			this.$dispatch('selectFrame', this.time)
-			this.$dispatch('loadTime', this.time)
 
 			var keybroad = this.keybroad
 			if(keybroad.command){
@@ -81,9 +80,20 @@ return {
 					this.framedata.type = 'keyframe'
 					this.framedata.name = 'normal'
 				}
+
+			}else{
+
+				if(keybroad.alt){
+					this.framedata.type = 'blankframe'
+				}
 			}
 
+			this.$dispatch('loadTime', this.time)
 			this.$dispatch('loadTrack')
+
+			this.$nextTick(function(){
+				this.$dispatch('loadTime', this.time)
+			})
 		}
 	}
 	, events : {

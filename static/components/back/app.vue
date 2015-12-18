@@ -13,8 +13,11 @@ body{
 	.f(14px);.l(26px);.h(26px);.pf;top:0px;left:0px;right:0px;.pl(4px);.pr(4px);.bgc(#535353);.fc(white);
 }
 .keybroad{
-	.c;.f(12px);.l(26px);.h(26px);.pa;left:0px;right:0px;
+	.c;.f(12px);.pa;left:0px;right:0px;
 	
+	p{
+		.i_block;
+	}
 	span{
 		.pl(4px);.pr(4px);.border-r(2px);
 		.mr(2px);
@@ -61,7 +64,7 @@ formatdata.resize = {
 	, height : {label : '高度', unit : 'px'}
 	, top : {label : '上边距', unit : 'px'}
 	, left : {label : '左边距', unit : 'px'}
-	, 'border-radius' : {label : '圆角', unit : 'px'}
+//	, 'border-radius' : {label : '圆角', unit : 'px'}
 }
 formatdata.transform = {
 /*
@@ -90,8 +93,8 @@ var keyCode = {
 	, '18' : 'alt'
 }
 var keyInfo = {
-	'command' : '+点击帧：转换为关键帧，插入/删除补间动画'
-	, 'alt' : '+点击帧：清除关键帧'
+	'command' : '转换为关键帧，插入/删除补间动画'
+	, 'alt' : '清除关键帧'
 }
 
 return {

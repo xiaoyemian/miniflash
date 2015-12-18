@@ -151,7 +151,6 @@ return {
 				}
 			}
 
-			console.log(framedata)
 		}
 		, setAnimateFrameData : function(framedata, time){
 			var start = this.getStartData(time)
