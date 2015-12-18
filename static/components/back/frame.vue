@@ -97,15 +97,10 @@ return {
 		if(!framedata.name)
 			this.$set('framedata.name', '')
 
-		if(!framedata.resize){
-			this.$set('framedata.resize', {})
-		}
-
 		if(!framedata.transform)
 			this.$set('framedata.transform', {})
 
 		this.$dispatch('formatTransform', this.framedata)
-			console.log(this.framedata)
 	}
 }
 </script>

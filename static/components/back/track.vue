@@ -131,8 +131,8 @@ return {
 			return {framedata:data, index:index} 
 		}
 		, cleanFrameData : function(framedata){
-			framedata.resize = {}
-			framedata.transform = {}
+			Vue.set(framedata, 'resize', {})
+			Vue.set(framedata, 'transform', {})
 
 			this.formatTransform(framedata)
 		}
@@ -143,13 +143,15 @@ return {
 			this.cleanFrameData(framedata)
 
 			for(var i in startdata.resize){
-				framedata.resize[i] = startdata.resize[i]
+				Vue.set(framedata.resize, i , startdata.resize[i])
 			}
 			for(var i in startdata.transform){
 				for(var j in startdata.transform[i]){
 					framedata.transform[i][j] = startdata.transform[i][j]
 				}
 			}
+
+			console.log(framedata)
 		}
 		, setAnimateFrameData : function(framedata, time){
 			var start = this.getStartData(time)
