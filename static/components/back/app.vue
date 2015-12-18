@@ -14,7 +14,17 @@ body{
 }
 .keybroad{
 	.c;.f(12px);.l(26px);.h(26px);.pa;left:0px;right:0px;
-	span{.bgc(#9900ff);.fc(white);.pl(4px);.pr(4px);.border-r(2px);}
+	
+	span{
+		.pl(4px);.pr(4px);.border-r(2px);
+		.mr(2px);
+		&:nth-child(1){
+			.bgc(#9900ff);.fc(white);
+		}
+		&:nth-child(2){
+			.bgc(#FF9);.fc(#666);
+		}
+	}
 }
 </style>
 
@@ -22,7 +32,7 @@ body{
 <div class="app">
 	<div class="headtop">
 		<div class="keybroad">
-			<span v-for="keydata in keybroad" v-if="keydata">{{$key}}：{{keyIntro[$key]}}</span>
+			<p v-for="keydata in keybroad" v-if="keydata"><span>{{$key}}</span><span>{{keyIntro[$key]}}</span></p>
 		</div>
 	</div>
 	<view v-ref:view :itemsdata="pagedata.items" :formatdata="formatdata" :keybroad="keybroad"></view>
