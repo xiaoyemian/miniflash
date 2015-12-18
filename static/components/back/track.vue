@@ -58,8 +58,14 @@ return {
 		selectTrack : function(){
 			this.$dispatch('selectTrack', this.item_id)
 		}
-		, formatTransform : function(framedata){
+		, formatFrameData : function(framedata){
 			var formatdata = this.formatdata
+
+			if(!framedata.resize)
+				Vue.set(framedata, 'resize', {})
+
+			if(!framedata.transform)
+				Vue.set(framedata, 'transform', {})
 
 			for(var i in formatdata.transform){
 				if(!framedata.transform[i]){
@@ -71,9 +77,6 @@ return {
 					Vue.set(framedata.transform, i, data)
 				}
 			}
-		}
-		, formatResize : function(framedata){
-			var formatdata = this.formatdata
 
 			for(var i in formatdata.resize){
 				if(!framedata.resize[i]){
@@ -138,8 +141,7 @@ return {
 			Vue.set(framedata, 'resize', {})
 			Vue.set(framedata, 'transform', {})
 
-			this.formatResize(framedata)
-			this.formatTransform(framedata)
+			this.formatFrameData(framedata)
 		}
 		, setNormalFrameData : function(framedata, time){
 			var start = this.getStartData(time)
@@ -190,14 +192,11 @@ return {
 					this.$set('framesdata["' + i + '"]', framedata)
 			}
 		}
-		, formatTransform : function(framedata){
-			this.formatTransform(framedata)
-		}
-		, formatResize : function(framedata){
-			this.formatResize(framedata)
-		}
 		, cleanFrameData : function(framedata){
 			this.cleanFrameData(framedata)
+		}
+		, formatFrameData : function(framedata){
+			this.formatFrameData(framedata)
 		}
 		, loadItemByTime : function(time){
 			var framedata = this.frameslist[time]

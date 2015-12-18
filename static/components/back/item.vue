@@ -137,12 +137,6 @@ return {
 			var formatdata = this.formatdata
 			var itemdata = this.itemdata
 
-			if(!itemdata.frames)
-				this.$set('itemdata.frames', {})
-
-			if(!itemdata.frames[0])
-				this.$set('itemdata.frames[0]', {type:'keyframe', name:'normal'})
-
 			if(itemdata.style && itemdata.style['padding-top']){
 				var original = {
 					width : 640 * itemdata.style['width']/100
@@ -160,6 +154,13 @@ return {
 				delete itemdata.background
 				delete itemdata.scale
 			}
+
+			if(!itemdata.frames)
+				this.$set('itemdata.frames', {})
+
+			if(!itemdata.frames[0])
+				this.$set('itemdata.frames[0]', {type:'keyframe', name:'normal'})
+
 		}
 		, upgradeItemId : function(){
 			var itemdata = this.itemdata
