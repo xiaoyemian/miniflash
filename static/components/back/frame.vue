@@ -108,10 +108,7 @@ return {
 		if(!framedata.name)
 			this.$set('framedata.name', '')
 
-		if(!framedata.transform)
-			this.$set('framedata.transform', {})
-
-		this.$dispatch('formatTransform', this.framedata)
+		this.$dispatch('cleanFrameData', this.framedata)
 	}
 }
 </script>

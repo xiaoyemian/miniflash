@@ -72,6 +72,16 @@ return {
 				}
 			}
 		}
+		, formatResize : function(framedata){
+			var formatdata = this.formatdata
+
+			for(var i in formatdata.resize){
+				if(!framedata.resize[i]){
+					Vue.set(framedata.resize, i, 0)
+				}
+			}
+			console.log(framedata)
+		}
 		, loadTrack : function(){
 			var name = ''
 				, arr = []
@@ -134,6 +144,7 @@ return {
 			Vue.set(framedata, 'resize', {})
 			Vue.set(framedata, 'transform', {})
 
+			this.formatResize(framedata)
 			this.formatTransform(framedata)
 		}
 		, setNormalFrameData : function(framedata, time){
@@ -179,6 +190,9 @@ return {
 		}
 		, formatTransform : function(framedata){
 			this.formatTransform(framedata)
+		}
+		, formatResize : function(framedata){
+			this.formatResize(framedata)
 		}
 		, cleanFrameData : function(framedata){
 			this.cleanFrameData(framedata)

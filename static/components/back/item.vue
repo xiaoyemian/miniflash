@@ -143,36 +143,23 @@ return {
 			if(!itemdata.frames[0])
 				this.$set('itemdata.frames[0]', {type:'keyframe', name:'normal'})
 
-			var resize = {}
-
 			if(itemdata.style && itemdata.style['padding-top']){
 				var original = {
 					width : 640 * itemdata.style['width']/100
 					, height : 640 * itemdata.style['padding-top']/100 
+
+					, left : 640 * itemdata.style['left']/100
+					, top : 1136 * itemdata.style['top']/100
 				}
 				if(itemdata.background && itemdata.background.image){
 					original.imageUrl = itemdata.background.image
 				}
 				this.$set('itemdata.original', original)
 
-				resize = {
-					left : 640 * itemdata.style['left']/100
-					, top : 1136 * itemdata.style['top']/100
-				}
-
 				delete itemdata.style
 				delete itemdata.background
 				delete itemdata.scale
 			}
-
-			var original = this.itemdata.original
-			this.$set('itemdata.frames[0].resize', {
-				width : original.width
-				, height : original.height
-				, top : resize.top || 0
-				, left : resize.left || 0
-			})
-
 		}
 		, upgradeItemId : function(){
 			var itemdata = this.itemdata
@@ -188,16 +175,13 @@ return {
 			this.framedata.name = 'normal'
 			this.$dispatch('loadTrackById', this.itemdata.item_id)
 		}
-		,formatResize : function(){
-			var resize = this.framedata.resize
+		, formatResizeByOriginal : function(){
 			var original = this.itemdata.original
-
-			resize.width = resize.width || original.width || 0
-			resize.height = resize.height || original.height || 0
-			resize.top = resize.top || 0
-			resize.left = resize.left || 0
-
-			this.$set('framedata.resize', resize)
+			var framedata = this.framedata
+			framedata.resize.width = framedata.resize.width || original.width || 0
+			framedata.resize.height = framedata.resize.height || original.height || 0
+			framedata.resize.top = framedata.resize.top || original.top || 0
+			framedata.resize.left = framedata.resize.left || original.left || 0
 		}
 	}
 	, events : {
@@ -206,7 +190,8 @@ return {
 				return;
 
 			this.framedata = framedata
-			this.formatResize()
+
+			this.formatResizeByOriginal()
 			this.loadItemStyle()
 		}
 		, focusItemById : function(item_id){
