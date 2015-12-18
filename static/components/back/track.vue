@@ -77,7 +77,7 @@ return {
 			}
 
 			for(var j in arr){
-				arr[j].name = 'hide' 
+				arr[j].name = '' 
 			}
 		}
 		, getStartData : function(time){

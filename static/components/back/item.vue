@@ -3,9 +3,10 @@
 	.pa;
 	background-size:100% 100%;
 	background-repeat:no-repeat;
+	.none;
 
-	&.hide{
-		.none;
+	&.animate, &.normal{
+		.block;
 	}
 
 	&.focus{

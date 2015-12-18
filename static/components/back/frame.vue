@@ -75,10 +75,18 @@ return {
 
 				}else{
 					if(this.framedata.type == 'keyframe'){
-						if(this.framedata.name == 'animate'){
-							this.framedata.name = 'normal'
-						}else{
-							this.framedata.name = 'animate'
+						switch(this.framedata.name){
+							case 'normal' : 
+								this.framedata.name = 'animate'
+								break;
+
+							case 'animate' : 
+								this.framedata.name = ''
+								break;
+
+							default : 
+								this.framedata.name = 'normal'
+								break;
 						}
 
 					}else{
@@ -104,7 +112,7 @@ return {
 				this.$set('framedata.type', 'blankframe')
 
 			if(!framedata.name)
-				this.$set('framedata.name', 'hide')
+				this.$set('framedata.name', '')
 
 			if(!framedata.resize)
 				this.$set('framedata.resize', {})
@@ -132,7 +140,6 @@ return {
 		, cleanFrameData : function(){
 			this.$set('framedata.resize', {})
 			this.$set('framedata.transform', {})
-
 			this.formatFrameData()
 		}
 	}
@@ -140,7 +147,6 @@ return {
 	}
 	, created : function(){
 		var framedata = this.framedata
-		
 		this.formatFrameData()
 	}
 }
