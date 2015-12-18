@@ -69,22 +69,23 @@ return {
 
 			var keybroad = this.keybroad
 			if(keybroad.command){
-				if(this.framedata.type == 'keyframe'){
-					if(this.framedata.name == 'animate'){
-						this.framedata.name = 'normal'
-					}else{
-						this.framedata.name = 'animate'
-					}
-
-				}else{
-					this.framedata.type = 'keyframe'
-					this.framedata.name = 'normal'
-				}
-
-			}else{
 
 				if(keybroad.alt){
 					this.framedata.type = 'blankframe'
+
+				}else{
+					if(this.framedata.type == 'keyframe'){
+						if(this.framedata.name == 'animate'){
+							this.framedata.name = 'normal'
+						}else{
+							this.framedata.name = 'animate'
+						}
+
+					}else{
+						this.framedata.type = 'keyframe'
+						this.framedata.name = 'normal'
+					}
+
 				}
 			}
 
