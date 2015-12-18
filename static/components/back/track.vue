@@ -87,26 +87,21 @@ return {
 
 			for(var i in this.frameslist){
 				framedata = this.frameslist[i]
-
 				if(framedata.type == 'blankframe'){
 					arr.push(framedata)
 
 				}else{
-
 					for(var k in arr){
 						arr[k].name = name 
 					}
-
 					name = framedata.name
 					arr = []
-
 				}
 			}
 
 			for(var j in arr){
 				arr[j].name = '' 
 			}
-
 		}
 		, getStartData : function(time){
 			var data = {}
@@ -186,6 +181,14 @@ return {
 	, events : {
 		selectFrame : function(time){
 			this.selectTrack()
+		}
+		, updateFramesData : function(){
+			for(var i in this.frameslist){
+				var framedata = this.frameslist[i]
+
+				if(framedata.type == 'keyframe')
+					this.$set('framesdata["' + i + '"]', framedata)
+			}
 		}
 		, formatTransform : function(framedata){
 			this.formatTransform(framedata)

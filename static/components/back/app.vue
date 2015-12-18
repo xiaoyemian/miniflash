@@ -33,9 +33,14 @@ body{
 			<span v-if="keybroad.command && keybroad.alt">清除关键帧</span>
 			<span v-if="keybroad.command && !keybroad.alt">转换为关键帧，插入/删除补间动画</span>
 		</div>
+
+		<div @click="save">保存</div>
 	</div>
+
 	<view v-ref:view :itemsdata="pagedata.items" :formatdata="formatdata" :keybroad="keybroad"></view>
+
 	<flash v-ref:flash :itemsdata="pagedata.items" :formatdata="formatdata" :keybroad="keybroad"></flash>
+
 </div>
 </template>
 
@@ -99,6 +104,13 @@ return {
 			pagedata : this.pages[this.number]
 			, formatdata : formatdata
 			, keybroad : {}
+		}
+	}
+	, methods : {
+		save : function(){
+			this.$refs.flash.$broadcast('updateFramesData')
+
+			console.log(JSON.stringify(this.pages[this.number]))
 		}
 	}
 	, events : {
