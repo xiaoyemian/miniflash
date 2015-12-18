@@ -86,7 +86,6 @@ return {
 			this.$set('focus_track', item_id)
 		}
 		, loadTime : function(){
-			console.log('loadTime')
 			this.$broadcast('loadItemByTime', this.timedata.time)
 		}
 		, setTime : function(time){
