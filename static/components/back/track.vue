@@ -80,7 +80,6 @@ return {
 					Vue.set(framedata.resize, i, 0)
 				}
 			}
-			console.log(framedata)
 		}
 		, loadTrack : function(){
 			var name = ''
