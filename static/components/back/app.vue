@@ -14,19 +14,13 @@ body{
 }
 .keybroad{
 	.c;.f(12px);.pa;left:0px;right:0px;
-	
-	p{
-		.i_block;
-	}
 	span{
 		.pl(4px);.pr(4px);.border-r(2px);
-		.mr(2px);
-		&:nth-child(1){
-			.bgc(#9900ff);.fc(white);
-		}
-		&:nth-child(2){
-			.bgc(#FF9);.fc(#666);
-		}
+		.ml(2px);.mr(2px);
+		.bgc(#FF9);.fc(#666);
+	}
+	.keypress{
+		.bgc(#9900ff);.fc(white);
 	}
 }
 </style>
@@ -35,7 +29,9 @@ body{
 <div class="app">
 	<div class="headtop">
 		<div class="keybroad">
-			<p v-for="keydata in keybroad" v-if="keydata"><span>{{$key}}</span><span>{{keyInfo[$key]}}</span></p>
+			<span class="keypress" v-for="keydata in keybroad" v-if="keydata">{{$key}}</span>
+			<span v-if="keybroad.command && keybroad.alt">清除关键帧</span>
+			<span v-if="keybroad.command && !keybroad.alt">转换为关键帧，插入/删除补间动画</span>
 		</div>
 	</div>
 	<view v-ref:view :itemsdata="pagedata.items" :formatdata="formatdata" :keybroad="keybroad"></view>
@@ -92,11 +88,6 @@ var keyCode = {
 	, '16' : 'shift'
 	, '18' : 'alt'
 }
-var keyInfo = {
-	'command' : '转换为关键帧，插入/删除补间动画'
-	, 'alt' : '清除关键帧'
-}
-
 return {
   components: {
 		flash : flash
@@ -107,7 +98,6 @@ return {
 		return {
 			pagedata : this.pages[this.number]
 			, formatdata : formatdata
-			, keyInfo : keyInfo
 			, keybroad : {}
 		}
 	}
@@ -138,13 +128,18 @@ return {
 			.on('keydown', function(e){
 				console.log(e.keyCode, keyCode[e.keyCode])
 
-				if(keyCode[e.keyCode])
-					mSelf.$set('keybroad["' + keyCode[e.keyCode] + '"]', true)
+				if(!keyCode[e.keyCode])
+					return;
+
+				mSelf.$set('keybroad["' + keyCode[e.keyCode] + '"]', true)
 
 			})
 			.on('keyup', function(e){
+				if(!keyCode[e.keyCode])
+					return;
+
 				mSelf.$set('keybroad["' + keyCode[e.keyCode] + '"]', false)
-	
+
 			})
   }
 }
