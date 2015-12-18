@@ -176,11 +176,6 @@ return {
 												+ Math.floor(Math.random()*10000) 
 												+ Math.floor(Math.random()*100)
 		}
-		, setKeyframe : function(){
-			this.framedata.type = 'keyframe'
-			this.framedata.name = 'normal'
-			this.$dispatch('loadTrackById', this.itemdata.item_id)
-		}
 		, formatResizeByOriginal : function(){
 			var original = this.itemdata.original
 			var framedata = this.framedata
@@ -222,7 +217,6 @@ return {
 		$item.draggable({
 			start : function(event, ui){
 				mSelf.selectItem()
-				mSelf.setKeyframe()
 			}
 			, drag : function(event, ui){
 				mSelf.framedata.resize.left = ui.position.left / mSelf.printdata.scale
@@ -241,7 +235,6 @@ return {
 		$item.resizable({
 			start : function(event, ui){
 				mSelf.selectItem()
-				mSelf.setKeyframe()
 			}
 			, resize : function(event, ui){
 				mSelf.framedata.resize.width = ui.size.width / mSelf.printdata.scale
