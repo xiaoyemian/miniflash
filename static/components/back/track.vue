@@ -77,7 +77,7 @@ return {
 			}
 
 			for(var j in arr){
-				arr[j].name = '' 
+				arr[j].name = 'hide' 
 			}
 		}
 		, getStartData : function(time){
@@ -123,12 +123,10 @@ return {
 					framedata.transform[i][j] = startdata.transform[i][j]
 				}
 			}
-
 		}
 		, setAnimateFrameData : function(framedata, time){
 			var start = this.getStartData(time)
 			var end = this.getEndData(time)
-
 			var at = (time - start.index)/(end.index - start.index)
 
 			var startdata = start.framedata

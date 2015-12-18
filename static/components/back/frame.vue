@@ -32,7 +32,7 @@
 .track.focus{
 	.frame.focus{
 		.handel{
-			//border:1px solid red;
+			border:1px solid red;
 			//.opacity(100);
 		}
 		&.blankframe{
@@ -100,6 +100,12 @@ return {
 			var formatdata = this.formatdata
 			var framedata = this.framedata
 
+			if(!framedata.type)
+				this.$set('framedata.type', 'blankframe')
+
+			if(!framedata.name)
+				this.$set('framedata.name', 'hide')
+
 			if(!framedata.resize)
 				this.$set('framedata.resize', {})
 
@@ -135,12 +141,6 @@ return {
 	, created : function(){
 		var framedata = this.framedata
 		
-		if(!framedata.type)
-			this.$set('framedata.type', 'blankframe')
-
-		if(!framedata.name)
-			this.$set('framedata.name', '')
-
 		this.formatFrameData()
 	}
 }
