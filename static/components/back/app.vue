@@ -31,7 +31,7 @@ body{
 		<div class="keybroad">
 			<span class="keypress" v-for="keydata in keybroad" v-if="keydata">{{$key}}</span>
 			<span v-if="keybroad.command && keybroad.alt">清除关键帧</span>
-			<span v-if="keybroad.command && !keybroad.alt">转换为关键帧</span>
+			<span v-if="keybroad.command && !keybroad.alt">插入关键帧</span>
 		</div>
 
 		<div @click="save">保存</div>
