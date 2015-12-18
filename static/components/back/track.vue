@@ -146,14 +146,6 @@ return {
 		selectFrame : function(time){
 			this.selectTrack()
 		}
-		, updateFramesData : function(){
-			for(var i in this.frameslist){
-				var framedata = this.frameslist[i]
-
-				if(framedata.type == 'keyframe')
-					this.$set('framesdata["' + i + '"]', framedata)
-			}
-		}
 		, loadItemByTime : function(time){
 			var framedata = this.frameslist[time]
 			var frame = this.$refs.frame[time]
@@ -177,6 +169,14 @@ return {
 		, loadTrackById : function(item_id){
 			if(item_id == this.item_id)
 				this.loadTrack()
+		}
+		, updateFramesData : function(){
+			for(var i in this.frameslist){
+				var framedata = this.frameslist[i]
+
+				if(framedata.type == 'keyframe')
+					this.$set('framesdata["' + i + '"]', framedata)
+			}
 		}
 	}
 	, ready : function(){
