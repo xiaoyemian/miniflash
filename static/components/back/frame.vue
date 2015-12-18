@@ -101,10 +101,10 @@ return {
 			var framedata = this.framedata
 
 			if(!framedata.resize)
-				Vue.set(framedata, 'resize', {})
+				this.$set('framedata.resize', {})
 
 			if(!framedata.transform)
-				Vue.set(framedata, 'transform', {})
+				this.$set('framedata.transform', {})
 
 			for(var i in formatdata.transform){
 				if(!framedata.transform[i]){
@@ -113,13 +113,13 @@ return {
 						var value = formatdata.transform[i].opts[j]
 						data[value[0]] = value[2] || 0
 					}
-					Vue.set(framedata.transform, i, data)
+					this.$set('framedata.transform["'+i+'"]', data)
 				}
 			}
 
 			for(var i in formatdata.resize){
 				if(!framedata.resize[i]){
-					Vue.set(framedata.resize, i, 0)
+					this.$set('framedata.resize["'+i+'"]', 0)
 				}
 			}
 		}
