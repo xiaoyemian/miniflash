@@ -32,7 +32,7 @@ body{
 <div class="app">
 	<div class="headtop">
 		<div class="keybroad">
-			<p v-for="keydata in keybroad" v-if="keydata"><span>{{$key}}</span><span>{{keyIntro[$key]}}</span></p>
+			<p v-for="keydata in keybroad" v-if="keydata"><span>{{$key}}</span><span>{{keyInfo[$key]}}</span></p>
 		</div>
 	</div>
 	<view v-ref:view :itemsdata="pagedata.items" :formatdata="formatdata" :keybroad="keybroad"></view>
@@ -89,9 +89,9 @@ var keyCode = {
 	, '16' : 'shift'
 	, '18' : 'alt'
 }
-var keyIntro = {
-	'command' : '点击帧，切换关键帧类型'
-	, 'alt' : '点击帧，设为空白帧'
+var keyInfo = {
+	'command' : '+点击帧：转换为关键帧，插入/删除补间动画'
+	, 'alt' : '+点击帧：清除关键帧'
 }
 
 return {
@@ -104,7 +104,7 @@ return {
 		return {
 			pagedata : this.pages[this.number]
 			, formatdata : formatdata
-			, keyIntro : keyIntro
+			, keyInfo : keyInfo
 			, keybroad : {}
 		}
 	}
