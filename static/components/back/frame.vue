@@ -69,7 +69,6 @@ return {
 
 			var keybroad = this.keybroad
 			if(keybroad.command){
-
 				if(keybroad.alt){
 					this.framedata.type = 'blankframe'
 
@@ -93,16 +92,12 @@ return {
 						this.framedata.type = 'keyframe'
 						this.framedata.name = 'normal'
 					}
-
 				}
 			}
 
 			this.$dispatch('setTime', this.time)
 			this.$dispatch('loadTrack')
 
-			this.$nextTick(function(){
-				this.$dispatch('setTime', this.time)
-			})
 		}
 		, formatFrameData : function(){
 			var formatdata = this.formatdata
