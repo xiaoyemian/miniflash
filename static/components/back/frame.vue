@@ -1,7 +1,6 @@
 <style>
 .frame{
 	.pr; .bgc(#333);
-
 	&:nth-child(5n+1){ .bgc(#383838); }
 
 	&:before, &:after{ content:'';.pa;z-index:1; }
@@ -11,21 +10,22 @@
 //		.opacity(40); 
 	}
 
-	&.keyframe{
-		&:before{
-			top:50%;left:50%;.w(6px);.h(6px);.mt(-3px);.ml(-3px);.bgc(#000); .border-r(8px);
-		}
-		&.normal{
-			.handel{.bgc(#5CD685);}
-		}
-	}
-
 	&.blankframe{
 
 	}
 
+	&.keyframe{
+		&:before{
+			top:50%;left:50%;.w(6px);.h(6px);.mt(-3px);.ml(-3px);.bgc(#000); .border-r(8px);
+		}
+	}
+
+	&.normal{
+		.handel{.bgc(#666);}
+	}
 	&.animate{
-		.handel{.bgc(#5CADD6);}
+		.handel{.bgc(#339366);}
+		//.handel{.bgc(#5CADD6);}
 	}
 
 }
