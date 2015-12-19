@@ -17,7 +17,7 @@
 			.pa;.h(100%);z-index:2;.w(2px);
 			.bgc(red);
 
-			span{.pa;top:0px;.w(12px);.h(22px);left:-6px;
+			span{.pa;top:0px;.h(22px);
 				.bgc(#FF7070);z-index:1;
 				border:1px solid red;
 			}
@@ -26,8 +26,9 @@
 	}
 
 	.frame, .ui-state-highlight{
-		.h(24px); .ml(-1px);
-		border-left:1px solid #222; border-right:1px solid #222;
+		.h(24px);
+		//.ml(-1px);
+		//border-left:1px solid #222; border-right:1px solid #222;
 	}
 	.ui-state-highlight{
 		.w(14px);
@@ -43,8 +44,8 @@
 <template>
 <div class="flash">
 	<div class="times">
-		<div class="timecontrol" v-el:timecontrol :style="{left:140 + timedata.framewidth * timedata.time + timedata.framewidth/2 - 1 + 'px'}">
-			<span></span>
+		<div class="timecontrol" v-el:timecontrol :style="{left:140 + timedata.framewidth * timedata.time + timedata.framewidth/2 + 'px'}">
+			<span :style="{width:timedata.framewidth-2 + 'px', left: -(timedata.framewidth-2)/2 + 'px'}"></span>
 		</div>
 	</div>
 
@@ -71,7 +72,7 @@ return {
 			, timedata : {
 				length : 10000
 				, step : 200
-				, framewidth : 15
+				, framewidth : 16
 				, time : 0
 			}
 		}
