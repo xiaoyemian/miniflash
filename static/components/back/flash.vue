@@ -8,7 +8,7 @@
 	border:1px solid #222;
 
 	.names{
-		.pa;left:-20px;top:27px;
+		.pa;left:0px;.w(20px);top:27px;
 	}
 	.name{
 		.pb(1px);
@@ -84,7 +84,7 @@
 			</div>
 
 
-			<track v-ref:track v-for="itemdata in itemsdata" :index="$index" :framesdata="itemdata.frames" :item_id="itemdata.item_id" :focus_track="focus_track" :timedata="timedata" :keybroad="keybroad" :formatdata="formatdata"></track>
+			<track v-ref:track v-for="itemdata in itemsdata" :index="$index" :itemdata="itemdata" :focus_track="focus_track" :timedata="timedata" :keybroad="keybroad" :formatdata="formatdata"></track>
 		</div>
 	</div>
 

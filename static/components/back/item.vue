@@ -164,7 +164,7 @@ return {
 			if(!itemdata.frames)
 				this.$set('itemdata.frames', {})
 
-			if(!itemdata.frames[0]){
+			if(JSON.stringify(itemdata.frames) == '{}'){
 				this.$set('itemdata.frames[0]', {type:'keyframe', name:'normal'})
 			}
 

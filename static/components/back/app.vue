@@ -114,6 +114,7 @@ return {
 
 			var pageConfigStr = JSON.stringify(this.pages[this.number])
 			localStorage.setItem("pageConfig",pageConfigStr)
+			console.log(pageConfigStr, JSON.parse(pageConfigStr))
 		}
 	}
 	, events : {
