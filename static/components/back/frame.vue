@@ -66,6 +66,7 @@ return {
 	, methods : {
 		selectFrame : function(){
 			this.$dispatch('selectFrame', this.time)
+			this.$dispatch('setTime', this.time)
 
 			var keybroad = this.keybroad
 			if(keybroad.command){
@@ -95,7 +96,6 @@ return {
 				}
 			}
 
-			this.$dispatch('setTime', this.time)
 			this.$dispatch('loadTrack')
 
 		}

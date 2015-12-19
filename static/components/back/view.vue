@@ -1,6 +1,6 @@
 <style>
 @flashHeight:120px;
-@settingsWidth:200px;
+@settingsWidth:180px;
 
 .ui-resizable{
 	&-se, &-e, &-s{.pa;z-index:90;}
@@ -31,7 +31,7 @@
 		.left;
 	}
 	.inputBox{
-		.ml(40px);
+		.ml(34px);
 	}
 
 	input{

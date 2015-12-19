@@ -150,6 +150,8 @@ return {
 			var framedata = this.frameslist[time]
 			var frame = this.$refs.frame[time]
 
+			console.log(framedata)
+
 			if(framedata.type == 'blankframe'){
 				frame.cleanFrameData()
 
