@@ -1,5 +1,20 @@
 <style>
 
+.view{
+	.pa;left:0px;right:360px;top:0px;bottom:0px;
+	box-sizing:border-box;
+
+	.page{
+		.pa; .bgc(#fff); left:50%; top:50%;
+	}
+}
+
+.viewcontrol{
+	.pa;z-index:100;top:50%;right:0px;
+	.bgc(white);
+}
+
+
 .ui-resizable{
 	&-se, &-e, &-s{.pa;z-index:90;}
 	&-se{cursor:se-resize;}
@@ -8,19 +23,27 @@
 }
 
 .itemsettings{
-	.pa;right:0px;top:0px;
+	.pa;bottom:0px;right:0px;top:434px;.w(360px);
+	z-index:10;
+	box-sizing:border-box;
+	.bgc(#333);
+	display:-webkit-box;
+	border:1px solid #222;
+
+	&>div{ -webkit-box-flex:1;
+	}
 }
 .settingBox{
 	z-index:900;
-	margin:4px; padding:4px;
-	.bgc(#333); border:1px solid #222;
+	padding:4px 0px;
 
 	.inputArea, .inputBox, .inputLabel{
 		.f(12px);.fc(#ccc); .l(20px);
 	}
 	.inputArea{
-		padding:4px 0px;
+		padding:4px;
 		border-bottom:1px solid #2E2E2E;
+
 		&:nth-last-child(1){
 			border:0 none;;
 		}
@@ -45,29 +68,16 @@
 		.i_block; .tr;
 	}
 }
-
-.view{
-	.pa;left:0px;right:180px;top:0px;bottom:140px;
-	box-sizing:border-box;
-
-	.page{
-		.pa; .bgc(#fff); left:50%; top:50%;
-	}
-}
-
-.viewcontrol{
-	.pa;z-index:100;top:50%;right:0px;
-	.bgc(white);
-}
-
 </style>
 
 
 <template>
 <div class="itemsettings">
 	<original :focus_item="focus_item" :formatdata="formatdata.original"></original>
-	<resize :focus_item="focus_item" :formatdata="formatdata.resize"></resize>
-	<transform :focus_item="focus_item" :formatdata="formatdata.transform"></transform>
+	<div class="frameSetting">
+		<resize :focus_item="focus_item" :formatdata="formatdata.resize"></resize>
+		<transform :focus_item="focus_item" :formatdata="formatdata.transform"></transform>
+	</div>
 </div>
 
 <div class="viewcontrol">

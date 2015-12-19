@@ -1,10 +1,9 @@
 <style>
 .flash{
-	z-index:900;
-	.pa;right:0px;left:0px;bottom:0px;
-	.pl(50px);
+	.pa;right:0px;top:0px;bottom:0px;
+	.pl(50px);.w(360px);
 	box-sizing:border-box;
-	overflow:auto;
+	.hidden;
 
 	.bgc(#333);.fc(#ccc);.l(26px);
 	border:1px solid #222;
@@ -21,7 +20,6 @@
 		.hidden;
 		overflow-x:auto;
 		box-sizing: border-box;
-		border-left:1px solid #222;
 	}
 
 	.tracks{

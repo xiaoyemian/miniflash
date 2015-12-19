@@ -57,9 +57,10 @@ var view = require('back/view.vue')
 
 var formatdata = {}
 formatdata.original = {
+/*
 	width : {label : '原始宽度', unit : 'px'}
 	, height : {label : '原始高度', unit : 'px'}
-	, imageUrl : {label : '图片地址', type : 'text'}
+	, */imageUrl : {label : '图片地址', type : 'text'}
 }
 formatdata.resize = {
 	width : {label : '宽度', unit : 'px'}
