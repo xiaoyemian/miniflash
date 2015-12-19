@@ -1,6 +1,4 @@
 <style>
-@flashHeight:120px;
-@settingsWidth:180px;
 
 .ui-resizable{
 	&-se, &-e, &-s{.pa;z-index:90;}
@@ -10,7 +8,7 @@
 }
 
 .itemsettings{
-	.pa;.w(@settingsWidth);right:0px;top:0px;bottom:@flashHeight;
+	.pa;right:0px;top:0px;
 }
 .settingBox{
 	z-index:900;
@@ -49,8 +47,9 @@
 }
 
 .view{
-	.pa;left:0px;right:@settingsWidth;top:0px;bottom:@flashHeight;
-	padding:2px;
+	.pa;left:0px;right:180px;top:0px;bottom:140px;
+	box-sizing:border-box;
+
 	.page{
 		.pa; .bgc(#fff); left:50%; top:50%;
 	}

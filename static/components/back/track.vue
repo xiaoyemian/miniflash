@@ -1,23 +1,8 @@
 <style>
-.track{
-	.l(24px); .fc(#ccc); .hidden;
-
-	.trackname, .trackframe{
-		border-top:1px solid #222;
-	}
-	.trackframe{
-		display:-webkit-box;
-	}
-	&.focus{
-		//.bgc(#f69);
-	}
-}
-
 </style>
 
 <template>
 <div class="track" @click.stop="selectTrack" :class="{focus:focus_track == item_id}">
-	<div class="trackname">{{item_name}}</div>
 	<div class="trackframe" v-el:trackframe>
 		<frameitem v-ref:frame v-for="framedata in frameslist" :framedata="framedata" :time="$index" :timedata="timedata" :keybroad="keybroad" :formatdata="formatdata"></frameitem>
 	</div>
@@ -40,12 +25,8 @@ return {
 			frameslist.push(this.framesdata[i] || {})
 		}
 
-		var item_name = this.item_id.split('|')
-		item_name = item_name[0] + item_name[1]
-
 		return {
 			frameslist : frameslist
-			, item_name :item_name 
 		}
 	}
 	, methods : {
@@ -143,8 +124,6 @@ return {
 		, loadItemByTime : function(time){
 			var framedata = this.frameslist[time]
 			var frame = this.$refs.frame[time]
-
-			console.log(framedata)
 
 			if(framedata.type == 'blankframe'){
 				frame.cleanFrameData()

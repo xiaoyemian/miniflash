@@ -1,31 +1,54 @@
 <style>
-
 .flash{
 	z-index:900;
-	.pa;left:0px;right:0px;bottom:0px;
-	.bgc(#333);
+	.pa;right:0px;left:0px;bottom:0px;
+	.pl(50px);
+	box-sizing:border-box;
+	overflow:auto;
+
+	.bgc(#333);.fc(#ccc);.l(26px);
 	border:1px solid #222;
-	.pl(80px);
+
+	.names{
+		.pa;left:0px;top:27px;
+	}
+	.name{
+		.pb(1px);
+	}
+
+	.trackbox{
+		.pr;
+		.hidden;
+		overflow-x:auto;
+		box-sizing: border-box;
+		border-left:1px solid #222;
+	}
 
 	.tracks{
-		.trackname{
-			.pa;left:0px;
-			.w(80px);
-		}
+		.left;.pr;
+	}
+
+	.track{
+		border-bottom:1px solid #222;
+
 		.trackframe{
-			border-left:1px solid #222;
+			display:-webkit-box;
+		}
+		&.focus{
+			//.bgc(#f69);
 		}
 	}
 
 	.times{
-		.h(24px);
+		.h(26px);
+		border-bottom:1px solid #222;
 
 		.timecontrol{
-			.pa;.h(100%);z-index:2;.w(2px);
+			.pa;.h(100%);z-index:2;.w(1px);
 			.bgc(red);
 
-			span{.pa;top:0px;.h(24px);
-				.bgc(#FF7070);z-index:1;
+			span{.pa;top:0px;.h(26px);
+				.bgc(#FF7070);z-index:10;
 				border:1px solid red;
 				box-sizing:border-box;
 			}
@@ -33,11 +56,8 @@
 		}
 	}
 
-	.frame, .ui-state-highlight{
-		.h(24px);
-		.ml(-1px);
-		border-left:1px solid #222;
-		border-right:1px solid #222;
+	.frame, .name, .ui-state-highlight{
+		.h(26px);
 	}
 	.ui-state-highlight{
 		.w(14px);
@@ -51,27 +71,38 @@
 
 
 <template>
+
 <div class="flash">
-	<div class="times">
-		<div class="timecontrol" v-el:timecontrol :style="{left:80 + timedata.framewidth * timedata.time + timedata.framewidth/2 + 'px'}">
-			<span :style="{width:timedata.framewidth + 'px', left: -(timedata.framewidth)/2 +1 + 'px'}"></span>
+
+	<div class="names">
+		<name v-ref:name v-for="itemdata in itemsdata" :index="$index" :item_id="itemdata.item_id" :focus_track="focus_track"></name>
+	</div>
+
+	<div class="trackbox">
+		<div class="tracks">
+			<div class="times">
+				<div class="timecontrol" v-el:timecontrol :style="{left:timedata.framewidth * timedata.time + timedata.framewidth/2 + 'px'}">
+					<span :style="{width:timedata.framewidth + 'px', left: -(timedata.framewidth)/2 + 'px'}"></span>
+				</div>
+			</div>
+
+
+			<track v-ref:track v-for="itemdata in itemsdata" :index="$index" :framesdata="itemdata.frames" :item_id="itemdata.item_id" :focus_track="focus_track" :timedata="timedata" :keybroad="keybroad" :formatdata="formatdata"></track>
 		</div>
 	</div>
 
-	<div class="tracks">
-		<track v-ref:track v-for="itemdata in itemsdata" :index="$index" :framesdata="itemdata.frames" :item_id="itemdata.item_id" :focus_track="focus_track" :timedata="timedata" :keybroad="keybroad" :formatdata="formatdata"></track>
-	</div>
 </div>
-
 </template>
 
 
 <script>
 var track = require('back/track.vue')
+var name = require('back/name.vue')
 
 return {
   components : {
 		track : track
+		, name : name
   }
 	, props:['itemsdata', 'formatdata', 'keybroad']
 	, data : function(){
@@ -81,7 +112,7 @@ return {
 			, timedata : {
 				length : 10000
 				, step : 200
-				, framewidth : 16
+				, framewidth : 14
 				, time : 0
 			}
 		}
@@ -121,7 +152,7 @@ return {
 			start : function(event, ui){
 			}
 			, drag : function(event, ui){
-				var time = ((ui.position.left - 80)/mSelf.timedata.framewidth)|0
+				var time = (ui.position.left/mSelf.timedata.framewidth)|0
 				if(mSelf.timedata.time != time)
 					mSelf.setTime(time)
 			}
@@ -129,7 +160,7 @@ return {
 			}
 			, cursor: "move"
 			, containment : "parent"
-			, scroll : false
+			, scroll : true
 			, grid: [ mSelf.timedata.framewidth, 0 ]
 		})
 	}

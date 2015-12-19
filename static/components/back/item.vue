@@ -228,7 +228,6 @@ return {
 				mSelf.loadItemStyle()
 			}
 			, cursor: "move"
-			, containment : "document"
 			, scroll : false
 			, snap : '.page'
 			, snapTolerance : '4'

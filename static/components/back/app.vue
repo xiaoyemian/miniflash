@@ -6,7 +6,7 @@ body{
 }
 .app{
 	.pa;
-	bottom:20px;left:0px;top:26px;right:0px;
+	bottom:0px;left:0px;top:26px;right:0px;
 }
 .headtop{
 	z-index:99;
@@ -40,6 +40,7 @@ body{
 	<view v-ref:view :itemsdata="pagedata.items" :formatdata="formatdata" :keybroad="keybroad"></view>
 
 	<flash v-ref:flash :itemsdata="pagedata.items" :formatdata="formatdata" :keybroad="keybroad"></flash>
+
 
 </div>
 </template>

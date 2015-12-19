@@ -1,7 +1,4 @@
 <style>
-.transformSetting{
-	right:10px;top:10px;
-}
 </style>
 
 <template>
