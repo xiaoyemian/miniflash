@@ -146,12 +146,15 @@ return {
 				this.loadTrack()
 		}
 		, updateFramesData : function(){
+			this.framesdata = {}
+			
 			for(var i in this.frameslist){
 				var framedata = this.frameslist[i]
 
 				if(framedata.type == 'keyframe')
 					this.$set('framesdata["' + i + '"]', framedata)
 			}
+
 		}
 	}
 	, ready : function(){

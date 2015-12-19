@@ -1,8 +1,11 @@
 <style>
+.settingOriginal{
+	border-right:1px solid #222;
+}
 </style>
 
 <template>
-<div class="settingBox" v-if="focus_item && focus_item.itemdata.original">
+<div class="settingBox settingOriginal" v-if="focus_item && focus_item.itemdata.original">
 	<div class="inputArea" v-for="(key, value) in formatdata">
 		<label for="{{key}}">{{value.label || key}}:</label>
 		<input type="{{value.type||'number'}}" @keydown="updateItem" id="{{key}}" placeholder="" value="{{focus_item.itemdata.original[key]}}" disabled/>{{value.unit||''}}

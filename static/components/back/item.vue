@@ -164,8 +164,9 @@ return {
 			if(!itemdata.frames)
 				this.$set('itemdata.frames', {})
 
-			if(!itemdata.frames[0])
+			if(!itemdata.frames[0]){
 				this.$set('itemdata.frames[0]', {type:'keyframe', name:'normal'})
+			}
 
 		}
 		, upgradeItemId : function(){

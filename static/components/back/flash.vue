@@ -1,15 +1,14 @@
 <style>
 .flash{
 	.pa;right:0px;top:0px;bottom:0px;
-	.pl(50px);.w(360px);
+	.pl(20px);.w(360px);
 	box-sizing:border-box;
-	.hidden;
 
 	.bgc(#333);.fc(#ccc);.l(26px);
 	border:1px solid #222;
 
 	.names{
-		.pa;left:0px;top:27px;
+		.pa;left:-20px;top:27px;
 	}
 	.name{
 		.pb(1px);
@@ -58,7 +57,7 @@
 		.h(26px);
 	}
 	.ui-state-highlight{
-		.w(14px);
+		.w(12px);
 	}
 
 	.ui-state-highlight{
@@ -110,7 +109,7 @@ return {
 			, timedata : {
 				length : 10000
 				, step : 200
-				, framewidth : 14
+				, framewidth : 12
 				, time : 0
 			}
 		}

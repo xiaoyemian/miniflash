@@ -3,7 +3,13 @@ Vue.config.debug = true
 var app = require('back/app.vue')
 
 var pages = require('data/pages')
-var number = 2
+
+var pageConfigStr = localStorage.getItem("pageConfig")
+var pages = [JSON.parse(pageConfigStr)]
+/*
+*/
+
+var number = 0
 
 var vm = new Vue({
   el: 'body'
