@@ -54,7 +54,7 @@
 <div class="flash">
 	<div class="times">
 		<div class="timecontrol" v-el:timecontrol :style="{left:80 + timedata.framewidth * timedata.time + timedata.framewidth/2 + 'px'}">
-			<span :style="{width:timedata.framewidth-1 + 'px', left: -(timedata.framewidth-1)/2 + 'px'}"></span>
+			<span :style="{width:timedata.framewidth + 'px', left: -(timedata.framewidth)/2 +1 + 'px'}"></span>
 		</div>
 	</div>
 

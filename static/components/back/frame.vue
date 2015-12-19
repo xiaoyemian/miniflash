@@ -49,7 +49,7 @@
 </style>
 
 <template>
-<div class="frame" :class="[framedata.name, framedata.type, time == timedata.time ? 'focus' : '']" @click.stop="selectFrame" :style="{width:timedata.framewidth -1 + 'px'}">
+<div class="frame" :class="[framedata.name, framedata.type, time == timedata.time ? 'focus' : '']" @click.stop="selectFrame" :style="{width:timedata.framewidth + 'px'}">
 	<div class="handel"></div>
 </div>
 </template>
