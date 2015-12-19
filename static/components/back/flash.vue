@@ -5,21 +5,29 @@
 	.pa;left:0px;right:0px;bottom:0px;
 	.bgc(#333);
 	border:1px solid #222;
+	.pl(80px);
 
 	.tracks{
-		border:1px solid #222;
+		.trackname{
+			.pa;left:0px;
+			.w(80px);
+		}
+		.trackframe{
+			border-left:1px solid #222;
+		}
 	}
 
 	.times{
-		.h(24px);.ml(140px);
+		.h(24px);
 
 		.timecontrol{
 			.pa;.h(100%);z-index:2;.w(2px);
 			.bgc(red);
 
-			span{.pa;top:0px;.h(22px);
+			span{.pa;top:0px;.h(24px);
 				.bgc(#FF7070);z-index:1;
 				border:1px solid red;
+				box-sizing:border-box;
 			}
 			
 		}
@@ -27,8 +35,9 @@
 
 	.frame, .ui-state-highlight{
 		.h(24px);
-		//.ml(-1px);
-		//border-left:1px solid #222; border-right:1px solid #222;
+		.ml(-1px);
+		border-left:1px solid #222;
+		border-right:1px solid #222;
 	}
 	.ui-state-highlight{
 		.w(14px);
@@ -44,8 +53,8 @@
 <template>
 <div class="flash">
 	<div class="times">
-		<div class="timecontrol" v-el:timecontrol :style="{left:140 + timedata.framewidth * timedata.time + timedata.framewidth/2 + 'px'}">
-			<span :style="{width:timedata.framewidth-2 + 'px', left: -(timedata.framewidth-2)/2 + 'px'}"></span>
+		<div class="timecontrol" v-el:timecontrol :style="{left:80 + timedata.framewidth * timedata.time + timedata.framewidth/2 + 'px'}">
+			<span :style="{width:timedata.framewidth-1 + 'px', left: -(timedata.framewidth-1)/2 + 'px'}"></span>
 		</div>
 	</div>
 
@@ -112,7 +121,7 @@ return {
 			start : function(event, ui){
 			}
 			, drag : function(event, ui){
-				var time = ((ui.position.left - 140)/mSelf.timedata.framewidth)|0
+				var time = ((ui.position.left - 80)/mSelf.timedata.framewidth)|0
 				if(mSelf.timedata.time != time)
 					mSelf.setTime(time)
 			}

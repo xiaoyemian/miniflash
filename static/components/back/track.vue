@@ -1,18 +1,12 @@
 <style>
 .track{
 	.l(24px); .fc(#ccc); .hidden;
-	.mt(-1px);
-	border-top:1px solid #222;
-	border-bottom:1px solid #222;
-	&:nth-last-child(1){
-		.mb(-1px);
-	}
 
-	.trackname{
-		.left;.w(140px); .h(100%);
+	.trackname, .trackframe{
+		border-top:1px solid #222;
 	}
 	.trackframe{
-		.ml(140px); display:-webkit-box;
+		display:-webkit-box;
 	}
 	&.focus{
 		//.bgc(#f69);
