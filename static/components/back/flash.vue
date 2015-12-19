@@ -14,15 +14,10 @@
 		.h(24px);.ml(140px);
 
 		.timecontrol{
-			.pa;.h(100%);z-index:2;.w(4px);
+			.pa;.h(100%);z-index:2;.w(2px);
+			.bgc(red);
 
-			&:before, &:after{ content:'';.pa;z-index:1; }
-			&:before{
-				top:0px;bottom:0px;border-right:1px solid red;
-				.w(50%);
-			}
-
-			span{.pa;top:0px;.w(12px);.h(22px);left:-5px;
+			span{.pa;top:0px;.w(12px);.h(22px);left:-6px;
 				.bgc(#FF7070);z-index:1;
 				border:1px solid red;
 			}
@@ -48,7 +43,7 @@
 <template>
 <div class="flash">
 	<div class="times">
-		<div class="timecontrol" v-el:timecontrol :style="{left:140 + timedata.framewidth * timedata.time + timedata.framewidth/2 - 2 + 'px'}">
+		<div class="timecontrol" v-el:timecontrol :style="{left:140 + timedata.framewidth * timedata.time + timedata.framewidth/2 - 1 + 'px'}">
 			<span></span>
 		</div>
 	</div>
