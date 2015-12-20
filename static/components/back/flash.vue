@@ -1,7 +1,7 @@
 <style>
 .flash{
 	.pa;right:0px;top:0px;bottom:0px;
-	.pl(20px);.w(360px);
+	.pl(20px);.w(40%);
 	box-sizing:border-box;
 
 	.bgc(#333);.fc(#ccc);.l(26px);
