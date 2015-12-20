@@ -11,7 +11,7 @@
 </template>
 
 <script>
-var frame = require('back/frame.vue')
+var frame = require('flash/front/frame.vue')
 return {
   components : {
     frameitem : frame

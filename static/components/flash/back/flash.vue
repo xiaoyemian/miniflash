@@ -93,8 +93,8 @@
 
 
 <script>
-var track = require('back/track.vue')
-var name = require('back/name.vue')
+var track = require('flash/back/track.vue')
+var name = require('flash/back/name.vue')
 
 return {
   components : {

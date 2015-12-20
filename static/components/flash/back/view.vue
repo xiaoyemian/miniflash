@@ -94,10 +94,10 @@
 
 
 <script>
-var item = require('back/item.vue')
-var original = require('back/settings/original.vue')
-var transform = require('back/settings/transform.vue')
-var resize = require('back/settings/resize.vue')
+var item = require('flash/back/item.vue')
+var original = require('flash/back/settings/original.vue')
+var transform = require('flash/back/settings/transform.vue')
+var resize = require('flash/back/settings/resize.vue')
 
 return {
   components : {

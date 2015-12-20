@@ -1,6 +1,6 @@
 Vue.config.debug = true
 
-var app = require('back/app.vue')
+var app = require('flash/front/app.vue')
 
 var pages = require('data/pages')
 
