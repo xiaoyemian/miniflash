@@ -97,12 +97,11 @@ return {
 				, 'background-image' : 'url("' + style.imageUrl + '")'
 			}
 		}
-		, loadItemStyle : function(){
+		, getStyleByFrame : function(framedata){
 			var formatdata = this.formatdata
-			var framedata = this.framedata
 			var transformList = []
 
-			this.framestyle = {}
+			var style = {}
 
 			for(var i in framedata.resize){
 				var value = framedata.resize[i] || 0
@@ -111,7 +110,7 @@ return {
 				if(unit == 'px'){
 					value *= this.printdata.scale
 				}
-				this.framestyle[i] = value + unit 
+				style[i] = value + unit 
 			}
 
 			for(var i in framedata.transform){
@@ -132,7 +131,12 @@ return {
 				transformList.push(i + '(' + arr.join(',') + ')')
 			}
 
-			this.framestyle.transform = transformList.join(' ')
+			style.transform = transformList.join(' ')
+			
+			return style
+		}
+		, loadItemStyle : function(){
+			this.framestyle = this.getStyleByFrame(this.framedata)
 		}
 		, aspectRatio : function(){
 			var resize = this.framedata.resize

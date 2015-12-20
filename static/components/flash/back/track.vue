@@ -147,10 +147,8 @@ return {
 		}
 		, updateFramesData : function(){
 			this.itemdata.frames = {}
-
 			for(var i in this.frameslist){
 				var framedata = this.frameslist[i]
-
 				if(framedata.type == 'keyframe')
 					this.$set('itemdata.frames["' + i + '"]', framedata)
 			}

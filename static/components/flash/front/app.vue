@@ -9,6 +9,7 @@ body{
 	.pa;left:0px;right:0;top:0px;bottom:0px;
 	.page{
 		.pa; .bgc(#fff); left:50%; top:50%;
+		.hidden;
 	}
 }
 

@@ -112,18 +112,27 @@ return {
 		save : function(){
 			this.$refs.flash.$broadcast('updateFramesData')
 
+/*
+			this.itemdata.styles = {}
+			for(var i = 0; i <= this.timedata.length/this.timedata.step; i++){
+				var framedata = this.itemdata.frames[i]
+				if(!framedata) return;
+					
+
+				if(framedata.name == 'normal')
+					this.itemdata.styles[i] = 
+
+			}
+*/
+
+
+
+
 			var pageConfigStr = JSON.stringify(this.pages[this.number])
 			localStorage.setItem("pageConfig",pageConfigStr)
 
 			var items = JSON.parse(pageConfigStr).items
-			var frameConfig = {}
-
-			for(var i in items){
-				var item_id = items[i].item_id
-				var frames = items[i].frames
-
-			}
-
+			console.log(items)
 		}
 	}
 	, events : {
