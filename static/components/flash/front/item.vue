@@ -213,40 +213,6 @@ return {
 		this.loadItemOriginal()
 	}
 	, ready : function(){
-		var mSelf = this
-		var $item = $(this.$el)
-
-		$item.draggable({
-			start : function(event, ui){
-				mSelf.selectItem()
-				mSelf.framedata.type = 'keyframe'
-			}
-			, drag : function(event, ui){
-				mSelf.framedata.resize.left = ui.position.left / mSelf.printdata.scale
-				mSelf.framedata.resize.top = ui.position.top / mSelf.printdata.scale
-			}
-			, stop : function(event, ui){
-				mSelf.loadItemStyle()
-			}
-			, cursor: "move"
-			, scroll : false
-			, snap : '.page'
-			, snapTolerance : '4'
-		})
-	
-		$item.resizable({
-			start : function(event, ui){
-				mSelf.selectItem()
-				mSelf.framedata.type = 'keyframe'
-			}
-			, resize : function(event, ui){
-				mSelf.framedata.resize.width = ui.size.width / mSelf.printdata.scale
-				mSelf.framedata.resize.height = ui.size.height / mSelf.printdata.scale
-			}
-			, stop : function(event, ui){
-				mSelf.loadItemStyle()
-			}
-		})
 	}
 }
 </script>

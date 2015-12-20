@@ -158,39 +158,6 @@ return {
 		}
 	}
 	, ready : function(){
-		var mSelf = this
-		var $trackframe = $(this.$els.trackframe)
-		var sortStart
-		var sortStop
-
-		$trackframe.sortable({
-			start : function(event, ui){
-				sortStart = ui.item.index()
-			}
-			, stop : function(event, ui){
-				sortStop = ui.item.index()
-				var frames = mSelf.frameslist
-
-				frames.splice(sortStop, 0, frames.splice(sortStart,1)[0])
-
-				mSelf.frameslist = []	
-
-				mSelf.$nextTick(function(){
-					this.frameslist = frames	
-
-					this.$nextTick(function(){
-						this.$dispatch('loadTime')
-						this.loadTrack()
-					})
-
-				})
-			}
-			, axis: "x"
-			, cursor: "move"
-			, placeholder: 'ui-state-highlight'
-		})
-
-		$trackframe.disableSelection()
 	}
 }
 </script>

@@ -27,31 +27,13 @@ body{
 
 <template>
 <div class="app">
-	<div class="headtop">
-		<div class="keybroad">
-			<span class="keypress" v-for="keydata in keybroad" v-if="keydata">{{$key}}</span>
-			<span v-if="keybroad.command && keybroad.alt">清除关键帧</span>
-			<span v-if="keybroad.command && !keybroad.alt">插入关键帧</span>
-		</div>
-
-		<div @click="save">保存</div>
-	</div>
-
 	<view v-ref:view :itemsdata="pagedata.items" :formatdata="formatdata" :keybroad="keybroad"></view>
-
 	<flash v-ref:flash :itemsdata="pagedata.items" :formatdata="formatdata" :keybroad="keybroad"></flash>
-
-
 </div>
 </template>
 
 
 <script>
-require('jquery')
-require('jqui/draggable')
-require('jqui/resizable')
-require('jqui/sortable')
-
 var flash = require('flash/front/flash.vue')
 var view = require('flash/front/view.vue')
 
@@ -150,25 +132,6 @@ return {
 		}
 	}
 	, created: function(){
-		var mSelf = this
-
-		$(window)
-			.on('keydown', function(e){
-				console.log(e.keyCode, keyCode[e.keyCode])
-
-				if(!keyCode[e.keyCode])
-					return;
-
-				mSelf.$set('keybroad["' + keyCode[e.keyCode] + '"]', true)
-
-			})
-			.on('keyup', function(e){
-				if(!keyCode[e.keyCode])
-					return;
-
-				mSelf.$set('keybroad["' + keyCode[e.keyCode] + '"]', false)
-
-			})
   }
 }
 </script>

@@ -142,24 +142,6 @@ return {
 		this.setTime(0)
 		this.$broadcast('loadTrack')
 
-		var mSelf = this
-		var $timecontrol = $(this.$els.timecontrol)
-
-		$timecontrol.draggable({
-			start : function(event, ui){
-			}
-			, drag : function(event, ui){
-				var time = (ui.position.left/mSelf.timedata.framewidth)|0
-				if(mSelf.timedata.time != time)
-					mSelf.setTime(time)
-			}
-			, stop : function(event, ui){
-			}
-			, cursor: "move"
-			, containment : "parent"
-			, scroll : true
-			, grid: [ mSelf.timedata.framewidth, 0 ]
-		})
 	}
 }
 </script>
