@@ -7,13 +7,6 @@
 	.bgc(#333);.fc(#ccc);.l(26px);
 	border:1px solid #222;
 
-	.names{
-		.pa;left:0px;.w(20px);top:27px;
-	}
-	.name{
-		.pb(1px);
-	}
-
 	.trackbox{
 		.pr;
 		.hidden;
@@ -114,41 +107,20 @@ return {
 		loadTime : function(){
 			this.$broadcast('loadItemByTime', this.timedata.time)
 		}
-		, setTime : function(time){
-			if(time > this.timedata.length/this.timedata.step)
-				return;
-
-			this.timedata.time = time
-			this.loadTime()
-		}
-	}
-	, events : {
-		setTime : function(time){
-			this.setTime(time)
-		}
 	}
 	, ready : function(){
-		this.setTime(0)
 		this.$broadcast('loadTrack')
 
 		var mSelf = this
-		var $timecontrol = $(this.$els.timecontrol)
+		var t = setInterval(function(){
 
-		$timecontrol.draggable({
-			start : function(event, ui){
-			}
-			, drag : function(event, ui){
-				var time = (ui.position.left/mSelf.timedata.framewidth)|0
-				if(mSelf.timedata.time != time)
-					mSelf.setTime(time)
-			}
-			, stop : function(event, ui){
-			}
-			, cursor: "move"
-			, containment : "parent"
-			, scroll : true
-			, grid: [ mSelf.timedata.framewidth, 0 ]
-		})
+			mSelf.loadTime()
+			mSelf.timedata.time++;
+
+			if(mSelf.timedata.time == mSelf.timedata.length/mSelf.timedata.step)
+				clearInterval(t)
+
+		}, 200)
 
 	}
 }

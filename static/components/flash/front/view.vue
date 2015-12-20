@@ -57,19 +57,6 @@ return {
 			this.$set('pagestyle["margin-left"]', printdata.width * printdata.scale/-2 + 'px')
 			this.$set('pagestyle["margin-top"]', printdata.height * printdata.scale/-2 + 'px')
     }
-		, addItem : function(){
-			var itemdata = {
-				original : {
-					width : 100
-					, height : 100
-				}
-			}
-			this.itemsdata.push(itemdata)
-
-			this.$nextTick(function(){
-				this.$dispatch('loadTime')
-			})
-		}
 	}
 	, created : function(){
 		this.resizePrint({

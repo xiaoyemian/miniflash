@@ -57,7 +57,7 @@
 </style>
 
 <template>
-<div class="frame" :class="[framedata.name, framedata.type, time == timedata.time ? 'focus' : '']" :style="{width:timedata.framewidth + 'px'}">
+<div class="frame" :class="[framedata.name, framedata.type]" :style="{width:timedata.framewidth + 'px'}">
 	<div class="handel"></div>
 </div>
 </template>

@@ -7,6 +7,7 @@
 
 	&.animate, &.normal{
 		.block;
+		transition:all 200ms linear;
 	}
 }
 </style>
@@ -75,45 +76,6 @@ return {
 
 			this.framestyle.transform = transformList.join(' ')
 		}
-		, upgradeItemData: function(){
-			var formatdata = this.formatdata
-			var itemdata = this.itemdata
-
-			if(itemdata.style && itemdata.style['padding-top']){
-				var original = {
-					width : 640 * itemdata.style['width']/100
-					, height : 640 * itemdata.style['padding-top']/100 
-
-					, left : 640 * itemdata.style['left']/100
-					, top : 1136 * itemdata.style['top']/100
-				}
-				if(itemdata.background && itemdata.background.image){
-					original.imageUrl = itemdata.background.image
-				}
-				this.$set('itemdata.original', original)
-
-				delete itemdata.style
-				delete itemdata.background
-				delete itemdata.scale
-			}
-
-			if(!itemdata.frames)
-				this.$set('itemdata.frames', {})
-
-			if(JSON.stringify(itemdata.frames) == '{}'){
-				this.$set('itemdata.frames[0]', {type:'keyframe', name:'normal'})
-			}
-
-		}
-		, upgradeItemId : function(){
-			var itemdata = this.itemdata
-			var type = itemdata.original.imageUrl ? 'image' : 'item'
-
-			itemdata.item_id = type + '|' + (this.index+1) + '|' 
-												+ (new Date()).valueOf() 
-												+ Math.floor(Math.random()*10000) 
-												+ Math.floor(Math.random()*100)
-		}
 		, formatResizeByOriginal : function(){
 			var original = this.itemdata.original
 			var framedata = this.framedata
@@ -133,14 +95,8 @@ return {
 			this.formatResizeByOriginal()
 			this.loadItemStyle()
 		}
-		, loadItemStyle : function(){
-			this.loadItemStyle()
-		}
 	}
 	, created : function(){
-		this.upgradeItemData()
-		this.upgradeItemId()
-
 		this.loadItemOriginal()
 	}
 }
