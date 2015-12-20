@@ -1,17 +1,12 @@
 <style>
 body{
-	.bgc(#393939);
-	.f(12px);
-	.hidden;
+	.bgc(#393939); .f(12px); .hidden;
 }
 .app{
-	.pa;
-	bottom:0px;left:0px;top:0px;right:0px;
+	.pa; bottom:0px;left:0px;top:0px;right:0px;
 }
-
 .view{
 	.pa;left:0px;right:0;top:0px;bottom:0px;
-
 	.page{
 		.pa; .bgc(#fff); left:50%; top:50%;
 	}
