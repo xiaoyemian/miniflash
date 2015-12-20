@@ -14,7 +14,7 @@
 
 <div class="view">
 	<div class="page" :style="pagestyle">
-		<item v-ref:item v-for="itemdata in itemsdata" :itemdata="itemdata" :index="$index" :printdata="printdata" :formatdata="formatdata"></item>
+		<item v-ref:item v-for="itemdata in itemsdata" :itemdata="itemdata" :index="$index" :printdata="printdata" :formatdata="formatdata" :timedata="timedata"></item>
 	</div>
 </div>
 
@@ -28,7 +28,7 @@ return {
   components : {
     item : item
   }
-	, props:['itemsdata', 'formatdata']
+	, props:['itemsdata', 'formatdata', 'timedata']
 	, data : function(){
 
 		return {

@@ -12,15 +12,13 @@ body{
 
 <template>
 <div class="app">
-	<view v-ref:view :itemsdata="pagedata.items" :formatdata="formatdata"></view>
-	<track v-ref:track v-for="itemdata in pagedata.items" :itemdata="itemdata" :timedata="timedata"></track>
+	<view v-ref:view :itemsdata="pagedata.items" :formatdata="formatdata" :itemdata="itemdata" :timedata="timedata"></view>
 </div>
 </template>
 
 
 <script>
 var view = require('flash/front/view.vue')
-var track = require('flash/front/track.vue')
 
 var formatdata = {}
 formatdata.original = {
@@ -46,7 +44,6 @@ formatdata.transform = {
 return {
   components: {
 		view : view
-		, track : track
   }
 	, props:['pages','number']
 	, data : function(){
@@ -78,8 +75,6 @@ return {
 				clearInterval(t)
 
 		}, 200)
-
-
   }
 }
 </script>

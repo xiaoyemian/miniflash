@@ -21,7 +21,7 @@
 <script>
 
 return {
-	props:['itemdata', 'index', 'printdata', 'formatdata']
+	props:['itemdata', 'index', 'printdata', 'formatdata', 'timedata']
 	, data:function(){
 		return {
 			framedata : null
@@ -83,6 +83,15 @@ return {
 			framedata.resize.height = framedata.resize.height || original.height || 0
 			framedata.resize.top = framedata.resize.top || original.top || 0
 			framedata.resize.left = framedata.resize.left || original.left || 0
+		}
+	}
+	, watch : {
+		'timedata.time' : function(time, oldTime){
+			var framedata = this.itemdata.frames[time]
+			if(framedata){
+				console.log(this.itemdata.item_id, framedata)
+				this.$dispatch('loadItemByFrame', this.itemdata.item_id, framedata)
+			}
 		}
 	}
 	, events : {
