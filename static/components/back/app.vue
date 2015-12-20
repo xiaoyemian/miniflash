@@ -114,7 +114,16 @@ return {
 
 			var pageConfigStr = JSON.stringify(this.pages[this.number])
 			localStorage.setItem("pageConfig",pageConfigStr)
-			console.log(pageConfigStr, JSON.parse(pageConfigStr))
+
+			var items = JSON.parse(pageConfigStr).items
+			var frameConfig = {}
+
+			for(var i in items){
+				var item_id = items[i].item_id
+				var frames = items[i].frames
+
+			}
+
 		}
 	}
 	, events : {
