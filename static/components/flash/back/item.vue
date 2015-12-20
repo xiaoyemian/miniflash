@@ -11,6 +11,7 @@
 	}
 
 	&.focus{
+		transition:all 0ms linear;
 		.handel{
 			.pa;
 			.w(100%);.h(100%);
