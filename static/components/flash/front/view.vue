@@ -1,14 +1,12 @@
 <style>
 
 .view{
-	.pa;left:0px;right:40%;top:0px;bottom:0px;
-	box-sizing:border-box;
+	.pa;left:0px;right:0;top:0px;bottom:0px;
 
 	.page{
 		.pa; .bgc(#fff); left:50%; top:50%;
 	}
 }
-
 </style>
 
 

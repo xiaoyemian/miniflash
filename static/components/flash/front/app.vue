@@ -13,14 +13,14 @@ body{
 <template>
 <div class="app">
 	<view v-ref:view :itemsdata="pagedata.items" :formatdata="formatdata"></view>
-	<flash v-ref:flash :itemsdata="pagedata.items" :formatdata="formatdata"></flash>
+	<track v-ref:track v-for="itemdata in pagedata.items" :itemdata="itemdata" :timedata="timedata"></track>
 </div>
 </template>
 
 
 <script>
-var flash = require('flash/front/flash.vue')
 var view = require('flash/front/view.vue')
+var track = require('flash/front/track.vue')
 
 var formatdata = {}
 formatdata.original = {
@@ -45,14 +45,20 @@ formatdata.transform = {
 
 return {
   components: {
-		flash : flash
-		, view : view
+		view : view
+		, track : track
   }
 	, props:['pages','number']
 	, data : function(){
 		return {
 			pagedata : this.pages[this.number]
 			, formatdata : formatdata
+			, timedata : {
+				length : 10000
+				, step : 200
+				, framewidth : 12
+				, time : 0
+			}
 		}
 	}
 	, methods : {
@@ -62,7 +68,18 @@ return {
       this.$refs.view.$broadcast('loadItemByFrame', item_id, framedata)
 		}
 	}
-	, created: function(){
+	, ready: function(){
+		var mSelf = this
+
+		var t = setInterval(function(){
+			mSelf.timedata.time++
+
+			if(mSelf.timedata.time == mSelf.timedata.length/mSelf.timedata.step)
+				clearInterval(t)
+
+		}, 200)
+
+
   }
 }
 </script>
