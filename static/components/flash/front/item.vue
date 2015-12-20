@@ -7,7 +7,8 @@
 
 	&.animate, &.normal{
 		.block;
-		transition:all 200ms linear;
+		transition-timing-function : linear;
+		transition-property : all;
 	}
 }
 </style>
@@ -39,12 +40,16 @@ return {
 				, 'background-image' : 'url("' + style.imageUrl + '")'
 			}
 		}
-		, loadItemStyle : function(){
+		, loadItemStyle : function(duration){
 			var formatdata = this.formatdata
 			var framedata = this.framedata
 			var transformList = []
 
 			this.framestyle = {}
+
+			if(duration){
+				this.framestyle['transition-duration'] = duration * this.timedata.step + 'ms'
+			}
 
 			for(var i in framedata.resize){
 				var value = framedata.resize[i] || 0
@@ -81,10 +86,21 @@ return {
 		'timedata.time' : function(time, oldTime){
 			var framedata = this.itemdata.frames[time]
 			if(framedata){
-				console.log(this.itemdata.item_id, framedata)
-
 				this.framedata = framedata
 				this.loadItemStyle()
+
+				if(framedata.name == 'animate'){
+					for(var i = time+1; i < this.timedata.length/this.timedata.step; i++){
+						if(this.itemdata.frames[i]){
+							var mSelf = this
+							var t = setTimeout(function(){
+								mSelf.framedata = mSelf.itemdata.frames[i]
+								mSelf.loadItemStyle(i - time)
+							}, 1)
+							break;
+						}
+					}
+				}
 			}
 		}
 	}

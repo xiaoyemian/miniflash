@@ -64,7 +64,7 @@ return {
 				length : 10000
 				, step : 200
 				, framewidth : 12
-				, time : 0
+				, time : null
 			}
 			, printdata : {
 				width : 0
@@ -99,6 +99,8 @@ return {
 	}
 	, ready: function(){
 		var mSelf = this
+
+		this.timedata.time = 0
 
 		var t = setInterval(function(){
 			mSelf.timedata.time++
