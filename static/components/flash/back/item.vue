@@ -194,11 +194,13 @@ return {
 		}
 	}
 	, events : {
-		loadItemByFrame : function(item_id, framedata){
+		loadItemByFrame : function(item_id, frame){
 			if(item_id != this.itemdata.item_id)
 				return;
 
-			this.framedata = framedata
+			console.log(frame)
+			this.framedata = frame.framedata
+			this.framestyle = frame.framestyle
 
 			this.formatResizeByOriginal()
 			this.loadItemStyle()

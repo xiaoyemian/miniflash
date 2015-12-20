@@ -136,8 +136,8 @@ return {
 		}
 	}
 	, events : {
-		loadItemByFrame : function(item_id, framedata){
-      this.$refs.view.$broadcast('loadItemByFrame', item_id, framedata)
+		loadItemByFrame : function(item_id, frame){
+      this.$refs.view.$broadcast('loadItemByFrame', item_id, frame)
 		}
 		, focusItemById : function(item_id){
       this.$refs.view.$broadcast('focusItemById', item_id)

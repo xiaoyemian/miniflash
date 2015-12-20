@@ -122,8 +122,8 @@ return {
 			this.selectTrack()
 		}
 		, loadItemByTime : function(time){
-			var framedata = this.frameslist[time]
 			var frame = this.$refs.frame[time]
+			var framedata = frame.framedata 
 
 			if(framedata.type == 'blankframe'){
 				frame.cleanFrameData()
@@ -136,7 +136,7 @@ return {
 				}
 			}
 			
-			this.$dispatch('loadItemByFrame', this.itemdata.item_id, framedata)
+			this.$dispatch('loadItemByFrame', this.itemdata.item_id, frame)
 		}
 		, loadTrack : function(){
 			this.loadTrack()
