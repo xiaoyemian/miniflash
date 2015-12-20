@@ -198,9 +198,7 @@ return {
 			if(item_id != this.itemdata.item_id)
 				return;
 
-			console.log(frame)
 			this.framedata = frame.framedata
-			this.framestyle = frame.framestyle
 
 			this.formatResizeByOriginal()
 			this.loadItemStyle()
