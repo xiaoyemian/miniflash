@@ -71,20 +71,9 @@
 
 <div class="flash">
 
-	<div class="names">
-		<name v-ref:name v-for="itemdata in itemsdata" :index="$index" :item_id="itemdata.item_id" :focus_track="focus_track"></name>
-	</div>
-
 	<div class="trackbox">
 		<div class="tracks">
-			<div class="times">
-				<div class="timecontrol" v-el:timecontrol :style="{left:timedata.framewidth * timedata.time + timedata.framewidth/2 + 'px'}">
-					<span :style="{width:timedata.framewidth + 'px', left: -(timedata.framewidth)/2 + 'px'}"></span>
-				</div>
-			</div>
-
-
-			<track v-ref:track v-for="itemdata in itemsdata" :index="$index" :itemdata="itemdata" :focus_track="focus_track" :timedata="timedata" :keybroad="keybroad" :formatdata="formatdata"></track>
+			<track v-ref:track v-for="itemdata in itemsdata" :index="$index" :itemdata="itemdata" :focus_track="focus_track" :timedata="timedata" :formatdata="formatdata"></track>
 		</div>
 	</div>
 
@@ -94,14 +83,12 @@
 
 <script>
 var track = require('flash/front/track.vue')
-var name = require('flash/front/name.vue')
 
 return {
   components : {
 		track : track
-		, name : name
   }
-	, props:['itemsdata', 'formatdata', 'keybroad']
+	, props:['itemsdata', 'formatdata']
 	, data : function(){
 
 		return {

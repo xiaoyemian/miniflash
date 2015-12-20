@@ -60,7 +60,7 @@
 </style>
 
 <template>
-<div class="item" @click.stop="selectItem" :class="[framedata && framedata.type, framedata && framedata.name, focus_item && focus_item.itemdata.item_id == itemdata.item_id ? 'focus' : '']" :style="[originalstyle, framestyle]">
+<div class="item" :class="[framedata && framedata.type, framedata && framedata.name, focus_item && focus_item.itemdata.item_id == itemdata.item_id ? 'focus' : '']" :style="[originalstyle, framestyle]">
 	<div class="handel">
 		<div @click.stop="aspectRatio" class="aspectRatioBtn"></div>
 	</div>
@@ -71,7 +71,7 @@
 <script>
 
 return {
-	props:['focus_item', 'itemdata', 'index', 'printdata', 'formatdata', 'keybroad']
+	props:['focus_item', 'itemdata', 'index', 'printdata', 'formatdata']
 	, data:function(){
 		return {
 			framedata : null
@@ -80,10 +80,7 @@ return {
 		}
 	}
 	, methods : {
-		selectItem : function(){
-			this.$dispatch('selectItem', this)
-		}
-		, setFocusItem : function(){
+		setFocusItem : function(){
 			this.$dispatch('setFocusItem', this)
 		}
 		, loadItemOriginal : function(){

@@ -6,29 +6,14 @@ body{
 }
 .app{
 	.pa;
-	bottom:0px;left:0px;top:26px;right:0px;
-}
-.headtop{
-	z-index:99;
-	.f(14px);.l(26px);.h(26px);.pf;top:0px;left:0px;right:0px;.pl(4px);.pr(4px);.bgc(#535353);.fc(white);
-}
-.keybroad{
-	.c;.f(12px);.pa;left:0px;right:0px;
-	span{
-		.pl(4px);.pr(4px);.border-r(2px);
-		.ml(2px);.mr(2px);
-		.bgc(#FF9);.fc(#666);
-	}
-	.keypress{
-		.bgc(#9900ff);.fc(white);
-	}
+	bottom:0px;left:0px;top:0px;right:0px;
 }
 </style>
 
 <template>
 <div class="app">
-	<view v-ref:view :itemsdata="pagedata.items" :formatdata="formatdata" :keybroad="keybroad"></view>
-	<flash v-ref:flash :itemsdata="pagedata.items" :formatdata="formatdata" :keybroad="keybroad"></flash>
+	<view v-ref:view :itemsdata="pagedata.items" :formatdata="formatdata"></view>
+	<flash v-ref:flash :itemsdata="pagedata.items" :formatdata="formatdata"></flash>
 </div>
 </template>
 
@@ -87,7 +72,6 @@ return {
 		return {
 			pagedata : this.pages[this.number]
 			, formatdata : formatdata
-			, keybroad : {}
 		}
 	}
 	, methods : {

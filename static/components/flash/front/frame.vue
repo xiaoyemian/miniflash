@@ -66,7 +66,7 @@
 <script>
 
 return {
-	props : ['framedata', 'time', 'timedata', 'keybroad', 'formatdata']
+	props : ['framedata', 'time', 'timedata', 'formatdata']
 	, data : function(){
 		return {
 		}
@@ -76,36 +76,7 @@ return {
 			this.$dispatch('selectFrame', this.time)
 			this.$dispatch('setTime', this.time)
 
-			var keybroad = this.keybroad
-			if(keybroad.command){
-				if(keybroad.alt){
-					this.framedata.type = 'blankframe'
-
-				}else{
-					if(this.framedata.type == 'keyframe'){
-						switch(this.framedata.name){
-							case 'normal' : 
-								this.framedata.name = 'animate'
-								break;
-
-							case 'animate' : 
-								this.framedata.name = ''
-								break;
-
-							default : 
-								this.framedata.name = 'normal'
-								break;
-						}
-
-					}else{
-						this.framedata.type = 'keyframe'
-						this.framedata.name = 'normal'
-					}
-				}
-			}
-
 			this.$dispatch('loadTrack')
-
 		}
 		, formatFrameData : function(){
 			var formatdata = this.formatdata

@@ -16,7 +16,7 @@
 
 <div class="view" @click="blurItem">
 	<div class="page" :style="pagestyle">
-		<item v-ref:item v-for="itemdata in itemsdata" :itemdata="itemdata" :index="$index" :focus_item="focus_item" :printdata="printdata" :formatdata="formatdata" :keybroad="keybroad"></item>
+		<item v-ref:item v-for="itemdata in itemsdata" :itemdata="itemdata" :index="$index" :focus_item="focus_item" :printdata="printdata" :formatdata="formatdata"></item>
 	</div>
 </div>
 
@@ -30,7 +30,7 @@ return {
   components : {
     item : item
   }
-	, props:['itemsdata', 'formatdata', 'keybroad']
+	, props:['itemsdata', 'formatdata']
 	, data : function(){
 
 		return {
@@ -80,11 +80,7 @@ return {
 		}
 	}
 	, events : {
-		selectItem : function(item){
-			this.setFocusItem(item)
-			this.$dispatch('focusTrackById', item.itemdata.item_id)
-		}
-		, setFocusItem : function(item){
+		setFocusItem : function(item){
 			this.setFocusItem(item)
 		}
 	}
