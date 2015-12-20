@@ -36,6 +36,7 @@
 		.timecontrol{
 			.pa;.h(100%);z-index:2;.w(1px);
 			.bgc(red);
+			transition:all 200ms linear;
 
 			span{.pa;top:0px;.h(26px);
 				.bgc(#FF7070);z-index:10;
@@ -46,15 +47,8 @@
 		}
 	}
 
-	.frame, .name, .ui-state-highlight{
+	.frame{
 		.h(26px);
-	}
-	.ui-state-highlight{
-		.w(12px);
-	}
-
-	.ui-state-highlight{
-		.bgc(#222);
 	}
 }
 </style>
@@ -103,25 +97,16 @@ return {
 			}
 		}
 	}
-	, methods : {
-		loadTime : function(){
-			this.$broadcast('loadItemByTime', this.timedata.time)
-		}
-	}
 	, ready : function(){
-		this.$broadcast('loadTrack')
-
 		var mSelf = this
-		var t = setInterval(function(){
 
-			mSelf.loadTime()
-			mSelf.timedata.time++;
+		var t = setInterval(function(){
+			mSelf.timedata.time++
 
 			if(mSelf.timedata.time == mSelf.timedata.length/mSelf.timedata.step)
 				clearInterval(t)
 
 		}, 200)
-
 	}
 }
 </script>

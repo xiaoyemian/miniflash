@@ -61,9 +61,6 @@ return {
 		loadItemByFrame : function(item_id, framedata){
       this.$refs.view.$broadcast('loadItemByFrame', item_id, framedata)
 		}
-		, loadTime : function(){
-			this.$refs.flash.loadTime()
-		}
 	}
 	, created: function(){
   }

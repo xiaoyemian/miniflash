@@ -158,6 +158,8 @@ return {
 		}
 	}
 	, ready : function(){
+		this.loadTrack()
+
 		var mSelf = this
 		var $trackframe = $(this.$els.trackframe)
 		var sortStart

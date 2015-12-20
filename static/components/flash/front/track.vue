@@ -114,9 +114,7 @@ return {
 				}
 			}
 		}
-	}
-	, events : {
-		loadItemByTime : function(time){
+		, loadItemByTime : function(time){
 			var framedata = this.frameslist[time]
 			var frame = this.$refs.frame[time]
 
@@ -133,11 +131,14 @@ return {
 			
 			this.$dispatch('loadItemByFrame', this.itemdata.item_id, framedata)
 		}
-		, loadTrack : function(){
-			this.loadTrack()
+	}
+	, watch : {
+		'timedata.time' : function(time, oldTime){
+			this.loadItemByTime(time)
 		}
 	}
 	, ready : function(){
+		this.loadTrack()
 	}
 }
 </script>
