@@ -84,18 +84,7 @@ return {
 			framedata.resize.top = framedata.resize.top || original.top || 0
 			framedata.resize.left = framedata.resize.left || original.left || 0
 		}
-	}
-	, watch : {
-		'timedata.time' : function(time, oldTime){
-			var framedata = this.itemdata.frames[time]
-			if(framedata){
-				console.log(this.itemdata.item_id, framedata)
-				this.$dispatch('loadItemByFrame', this.itemdata.item_id, framedata)
-			}
-		}
-	}
-	, events : {
-		loadItemByFrame : function(item_id, framedata){
+		, loadItemByFrame : function(item_id, framedata){
 			if(item_id != this.itemdata.item_id)
 				return;
 
@@ -103,6 +92,15 @@ return {
 
 			this.formatResizeByOriginal()
 			this.loadItemStyle()
+		}
+	}
+	, watch : {
+		'timedata.time' : function(time, oldTime){
+			var framedata = this.itemdata.frames[time]
+			if(framedata){
+				console.log(this.itemdata.item_id, framedata)
+				this.loadItemByFrame(this.itemdata.item_id, framedata)
+			}
 		}
 	}
 	, created : function(){
