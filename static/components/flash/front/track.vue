@@ -2,7 +2,8 @@
 </style>
 
 <template>
-<div class="track" @click.stop="selectTrack" :class="{focus:focus_track == itemdata.item_id}">
+	
+<div class="track">
 	<div class="trackframe" v-el:trackframe>
 		<frameitem v-ref:frame v-for="framedata in frameslist" :framedata="framedata" :time="$index" :timedata="timedata" :formatdata="formatdata"></frameitem>
 	</div>
@@ -16,7 +17,7 @@ return {
   components : {
     frameitem : frame
 	}
-	, props : ['timedata', 'focus_track', 'itemdata', 'formatdata']
+	, props : ['timedata', 'itemdata', 'formatdata']
 	, data : function(){
 
 		var frameslist = []
@@ -30,10 +31,7 @@ return {
 		}
 	}
 	, methods : {
-		selectTrack : function(){
-			this.$dispatch('selectTrack', this.itemdata.item_id)
-		}
-		, loadTrack : function(){
+		loadTrack : function(){
 			var name = ''
 				, arr = []
 
@@ -118,10 +116,7 @@ return {
 		}
 	}
 	, events : {
-		selectFrame : function(time){
-			this.selectTrack()
-		}
-		, loadItemByTime : function(time){
+		loadItemByTime : function(time){
 			var framedata = this.frameslist[time]
 			var frame = this.$refs.frame[time]
 
@@ -140,21 +135,6 @@ return {
 		}
 		, loadTrack : function(){
 			this.loadTrack()
-		}
-		, loadTrackById : function(item_id){
-			if(item_id == this.itemdata.item_id)
-				this.loadTrack()
-		}
-		, updateFramesData : function(){
-			this.itemdata.frames = {}
-
-			for(var i in this.frameslist){
-				var framedata = this.frameslist[i]
-
-				if(framedata.type == 'keyframe')
-					this.$set('itemdata.frames["' + i + '"]', framedata)
-			}
-
 		}
 	}
 	, ready : function(){

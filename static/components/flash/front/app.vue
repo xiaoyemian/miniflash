@@ -75,39 +75,11 @@ return {
 		}
 	}
 	, methods : {
-		save : function(){
-			this.$refs.flash.$broadcast('updateFramesData')
-
-			var pageConfigStr = JSON.stringify(this.pages[this.number])
-			localStorage.setItem("pageConfig",pageConfigStr)
-
-			var items = JSON.parse(pageConfigStr).items
-			var frameConfig = {}
-
-			for(var i in items){
-				var item_id = items[i].item_id
-				var frames = items[i].frames
-
-			}
-
-		}
 	}
 	, events : {
 		loadItemByFrame : function(item_id, framedata){
       this.$refs.view.$broadcast('loadItemByFrame', item_id, framedata)
 		}
-		, focusItemById : function(item_id){
-      this.$refs.view.$broadcast('focusItemById', item_id)
-		} 
-		, loadTrackById : function(item_id){
-			this.$refs.flash.$broadcast('loadTrackById', item_id)
-		}
-		, focusTrackById : function(item_id){
-      this.$refs.flash.setFocusTrack(item_id)
-		} 
-		, blurTrack : function(){
-      this.$refs.flash.setFocusTrack(null)
-		} 
 		, setTime : function(time){
 			this.$refs.flash.setTime(time)
 		}

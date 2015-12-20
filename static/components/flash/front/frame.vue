@@ -57,7 +57,7 @@
 </style>
 
 <template>
-<div class="frame" :class="[framedata.name, framedata.type, time == timedata.time ? 'focus' : '']" @click.stop="selectFrame" :style="{width:timedata.framewidth + 'px'}">
+<div class="frame" :class="[framedata.name, framedata.type, time == timedata.time ? 'focus' : '']" :style="{width:timedata.framewidth + 'px'}">
 	<div class="handel"></div>
 </div>
 </template>
@@ -72,13 +72,7 @@ return {
 		}
 	}
 	, methods : {
-		selectFrame : function(){
-			this.$dispatch('selectFrame', this.time)
-			this.$dispatch('setTime', this.time)
-
-			this.$dispatch('loadTrack')
-		}
-		, formatFrameData : function(){
+		formatFrameData : function(){
 			var formatdata = this.formatdata
 			var framedata = this.framedata
 
@@ -116,8 +110,6 @@ return {
 			this.$set('framedata.transform', {})
 			this.formatFrameData()
 		}
-	}
-	, events : {
 	}
 	, created : function(){
 		var framedata = this.framedata

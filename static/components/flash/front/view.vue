@@ -14,9 +14,9 @@
 
 <template>
 
-<div class="view" @click="blurItem">
+<div class="view">
 	<div class="page" :style="pagestyle">
-		<item v-ref:item v-for="itemdata in itemsdata" :itemdata="itemdata" :index="$index" :focus_item="focus_item" :printdata="printdata" :formatdata="formatdata"></item>
+		<item v-ref:item v-for="itemdata in itemsdata" :itemdata="itemdata" :index="$index" :printdata="printdata" :formatdata="formatdata"></item>
 	</div>
 </div>
 
@@ -34,8 +34,7 @@ return {
 	, data : function(){
 
 		return {
-			focus_item : null
-			, printdata : {
+			printdata : {
 				width : 0
 				, height : 0
 				, scale : 0
@@ -44,11 +43,7 @@ return {
 		}
 	}
 	, methods : {
-		blurItem : function(){
-			this.setFocusItem(null)
-			this.$dispatch('blurTrack')
-		}
-		, resizePrint : function(printdata){
+		resizePrint : function(printdata){
 			for(var i in printdata){
 				this.$set('printdata["'+i+'"]', printdata[i]||0)
 			}
@@ -74,14 +69,6 @@ return {
 			this.$nextTick(function(){
 				this.$dispatch('loadTime')
 			})
-		}
-		, setFocusItem : function(item){
-			this.$set('focus_item', item)
-		}
-	}
-	, events : {
-		setFocusItem : function(item){
-			this.setFocusItem(item)
 		}
 	}
 	, created : function(){

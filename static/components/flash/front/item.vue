@@ -8,62 +8,11 @@
 	&.animate, &.normal{
 		.block;
 	}
-
-	&.focus{
-		.handel{
-			.pa;
-			.w(100%);.h(100%);
-			.ml(-1px);.mt(-1px);
-			border:1px solid #5CADD6;
-		
-			.aspectRatioBtn{
-				.pa;left:50%;top:50%;.ml(-5px);.mt(-5px);.w(9px);.h(9px);.bgc(#fff);.cursor;
-				border:1px solid #222;
-				.border-r(8px);
-				.opacity(80);
-
-				&:before, &:after{ content:'';.pa;z-index:1; }
-				&:before{
-					top:0px;left:0px;.w(9px);.h(4px);
-					border-bottom:1px solid #222;
-				}
-				&:after{
-					top:0px;left:0px;.w(4px);.h(9px);
-					border-right:1px solid #222;
-				}
-			}
-		}
-		.ui-resizable{
-			&-se, &-e, &-s{
-				border:1px solid #222;
-				.bgc(#fff);
-				.opacity(80);
-				.w(10px);.h(10px);
-			}
-			&-se{ 
-				bottom:-6px;right:-6px;
-				.border-r(8px);
-			}
-			&-e, &-s{
-				.border-r(3px);
-			}
-			&-e{
-				top:50%;right:-6px;.mt(-5px);
-			}
-			&-s{ 
-				left:50%;bottom:-6px;.ml(-5px);
-			}
-		}
-
-	}
 }
 </style>
 
 <template>
-<div class="item" :class="[framedata && framedata.type, framedata && framedata.name, focus_item && focus_item.itemdata.item_id == itemdata.item_id ? 'focus' : '']" :style="[originalstyle, framestyle]">
-	<div class="handel">
-		<div @click.stop="aspectRatio" class="aspectRatioBtn"></div>
-	</div>
+<div class="item" :class="[framedata && framedata.type, framedata && framedata.name]" :style="[originalstyle, framestyle]">
 </div>
 </template>
 
@@ -71,7 +20,7 @@
 <script>
 
 return {
-	props:['focus_item', 'itemdata', 'index', 'printdata', 'formatdata']
+	props:['itemdata', 'index', 'printdata', 'formatdata']
 	, data:function(){
 		return {
 			framedata : null
@@ -80,10 +29,7 @@ return {
 		}
 	}
 	, methods : {
-		setFocusItem : function(){
-			this.$dispatch('setFocusItem', this)
-		}
-		, loadItemOriginal : function(){
+		loadItemOriginal : function(){
 			var style = this.itemdata.original
 
 			this.originalstyle = {
@@ -128,13 +74,6 @@ return {
 			}
 
 			this.framestyle.transform = transformList.join(' ')
-		}
-		, aspectRatio : function(){
-			var resize = this.framedata.resize
-			var original = this.itemdata.original
-			resize.height = resize.width * original.height / original.width
-
-			this.loadItemStyle()
 		}
 		, upgradeItemData: function(){
 			var formatdata = this.formatdata
@@ -194,11 +133,6 @@ return {
 			this.formatResizeByOriginal()
 			this.loadItemStyle()
 		}
-		, focusItemById : function(item_id){
-			if(item_id == this.itemdata.item_id){
-				this.setFocusItem()
-			}
-		}
 		, loadItemStyle : function(){
 			this.loadItemStyle()
 		}
@@ -208,8 +142,6 @@ return {
 		this.upgradeItemId()
 
 		this.loadItemOriginal()
-	}
-	, ready : function(){
 	}
 }
 </script>

@@ -73,7 +73,14 @@
 
 	<div class="trackbox">
 		<div class="tracks">
-			<track v-ref:track v-for="itemdata in itemsdata" :index="$index" :itemdata="itemdata" :focus_track="focus_track" :timedata="timedata" :formatdata="formatdata"></track>
+
+			<div class="times">
+				<div class="timecontrol" v-el:timecontrol :style="{left:timedata.framewidth * timedata.time + timedata.framewidth/2 + 'px'}">
+					<span :style="{width:timedata.framewidth + 'px', left: -(timedata.framewidth)/2 + 'px'}"></span>
+				</div>
+			</div>
+
+			<track v-ref:track v-for="itemdata in itemsdata" :index="$index" :itemdata="itemdata" :timedata="timedata" :formatdata="formatdata"></track>
 		</div>
 	</div>
 
@@ -82,6 +89,9 @@
 
 
 <script>
+require('jquery')
+require('jqui/draggable')
+
 var track = require('flash/front/track.vue')
 
 return {
@@ -92,8 +102,7 @@ return {
 	, data : function(){
 
 		return {
-			focus_track : null
-			, timedata : {
+			timedata : {
 				length : 10000
 				, step : 200
 				, framewidth : 12
@@ -102,10 +111,7 @@ return {
 		}
 	}
 	, methods : {
-		setFocusTrack : function(item_id){
-			this.$set('focus_track', item_id)
-		}
-		, loadTime : function(){
+		loadTime : function(){
 			this.$broadcast('loadItemByTime', this.timedata.time)
 		}
 		, setTime : function(time){
@@ -117,17 +123,32 @@ return {
 		}
 	}
 	, events : {
-		selectTrack : function(item_id){
-			this.setFocusTrack(item_id)
-			this.$dispatch('focusItemById', item_id)
-		}
-		, setTime : function(time){
+		setTime : function(time){
 			this.setTime(time)
 		}
 	}
 	, ready : function(){
 		this.setTime(0)
 		this.$broadcast('loadTrack')
+
+		var mSelf = this
+		var $timecontrol = $(this.$els.timecontrol)
+
+		$timecontrol.draggable({
+			start : function(event, ui){
+			}
+			, drag : function(event, ui){
+				var time = (ui.position.left/mSelf.timedata.framewidth)|0
+				if(mSelf.timedata.time != time)
+					mSelf.setTime(time)
+			}
+			, stop : function(event, ui){
+			}
+			, cursor: "move"
+			, containment : "parent"
+			, scroll : true
+			, grid: [ mSelf.timedata.framewidth, 0 ]
+		})
 
 	}
 }
