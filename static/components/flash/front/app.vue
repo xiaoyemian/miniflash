@@ -32,7 +32,6 @@ body{
 
 <script>
 require('zepto')
-console.log($)
 
 var formatdata = {}
 formatdata.original = {
@@ -92,18 +91,29 @@ return {
 
 			this.$set('pagestyle.width', printdata.width * printdata.scale + 'px')
 			this.$set('pagestyle.height', printdata.height * printdata.scale + 'px')
+
+			this.$broadcast('reloadItem')
     }
 	}
 	, created : function(){
 		var $win = $(window)
 			, win_h = $win.height()
 			, win_w = $win.width()
+
+		var mSelf = this
 		
 		this.resizePrint({
 			width : 640
 			, height : 1136
-			, scale : win_w/640
-			//, scale : win_h/1136
+			, scale : $win.width()/640
+			//, scale : $win.height()/1136
+		})
+
+		$win.on('resize', function(){
+			mSelf.resizePrint({
+				scale : $win.width()/640
+				//scale : $win.height()/1136
+			})
 		})
 	}
 	, ready: function(){

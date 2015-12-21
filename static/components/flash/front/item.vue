@@ -30,6 +30,12 @@ return {
 			, framestyle : {} 
 		}
 	}
+	, events : {
+		reloadItem : function(){
+			this.loadItemOriginal()
+			this.loadItemStyle()
+		}
+	}
 	, methods : {
 		loadItemOriginal : function(){
 			var style = this.itemdata.original
@@ -41,8 +47,11 @@ return {
 			}
 		}
 		, loadItemStyle : function(duration){
-			var formatdata = this.formatdata
 			var framedata = this.framedata
+
+			if(!framedata) return;
+
+			var formatdata = this.formatdata
 			var transformList = []
 
 			this.framestyle = {}
