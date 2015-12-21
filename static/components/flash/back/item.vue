@@ -62,7 +62,7 @@
 </style>
 
 <template>
-<div class="item" @click.stop="selectItem" :class="[framedata && framedata.type, framedata && framedata.name, focus_item && focus_item.itemdata.item_id == itemdata.item_id ? 'focus' : '']" :style="[originalstyle, framestyle]">
+<div class="item" @click.stop="selectItem" :class="[framedata && framedata.name, focus_item && focus_item.itemdata.item_id == itemdata.item_id ? 'focus' : '']" :style="[originalstyle, framestyle]">
 	<div class="handel">
 		<div @click.stop="aspectRatio" class="aspectRatioBtn"></div>
 	</div>
@@ -168,10 +168,13 @@ return {
 			}
 
 			if(!itemdata.frames)
-				this.$set('itemdata.frames', {})
+				this.$set('itemdata.frames', [])
 
-			if(JSON.stringify(itemdata.frames) == '{}'){
-				this.$set('itemdata.frames[0]', {type:'keyframe', name:'normal'})
+			if(itemdata.frames.length == 0){
+				itemdata.frames.push({duration:1, name:'normal'})
+				itemdata.frames.push({duration:20, name:'animate'})
+				itemdata.frames.push({duration:6, name:'normal'})
+				itemdata.frames.push({duration:10, name:'animate'})
 			}
 
 		}
@@ -194,11 +197,11 @@ return {
 		}
 	}
 	, events : {
-		loadItemByFrame : function(item_id, frame){
+		loadItemByFrame : function(item_id, framedata){
 			if(item_id != this.itemdata.item_id)
 				return;
 
-			this.framedata = frame.framedata
+			this.framedata = framedata
 
 			this.formatResizeByOriginal()
 			this.loadItemStyle()
@@ -225,7 +228,6 @@ return {
 		$item.draggable({
 			start : function(event, ui){
 				mSelf.selectItem()
-				mSelf.framedata.type = 'keyframe'
 			}
 			, drag : function(event, ui){
 				mSelf.framedata.resize.left = ui.position.left / mSelf.printdata.scale
@@ -243,7 +245,6 @@ return {
 		$item.resizable({
 			start : function(event, ui){
 				mSelf.selectItem()
-				mSelf.framedata.type = 'keyframe'
 			}
 			, resize : function(event, ui){
 				mSelf.framedata.resize.width = ui.size.width / mSelf.printdata.scale

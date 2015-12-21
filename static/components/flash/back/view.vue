@@ -10,27 +10,25 @@
 }
 
 .viewcontrol{
-	.pa;z-index:100;top:50%;right:0px;
+	.pa;z-index:100;top:60%;right:0px;
 	.bgc(white);
 }
 
 
-.ui-resizable{
-	&-se, &-e, &-s{.pa;z-index:90;}
-	&-se{cursor:se-resize;}
-	&-e{cursor:e-resize;}
-	&-s{cursor:s-resize;}
-}
-
 .itemsettings{
-	.pa;bottom:0px;right:0px;top:434px;.w(50%);
+	.pa;bottom:0px;right:0px;top:60%;.w(50%);
 	z-index:10;
 	box-sizing:border-box;
-	.bgc(#333);
 	display:-webkit-box;
+
+/*
+	.bgc(#333);
 	border:1px solid #222;
+	padding:4px;
+*/
 
 	&>div{ -webkit-box-flex:1;
+
 	}
 }
 .settingBox{
@@ -68,6 +66,14 @@
 		.i_block; .tr;
 	}
 }
+
+.ui-resizable{
+	&-se, &-e, &-s{.pa;z-index:90;}
+	&-se{cursor:se-resize;}
+	&-e{cursor:e-resize;}
+	&-s{cursor:s-resize;}
+}
+
 </style>
 
 

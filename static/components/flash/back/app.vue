@@ -112,22 +112,6 @@ return {
 		save : function(){
 			this.$refs.flash.$broadcast('updateFramesData')
 
-/*
-			this.itemdata.styles = {}
-			for(var i = 0; i <= this.timedata.length/this.timedata.step; i++){
-				var framedata = this.itemdata.frames[i]
-				if(!framedata) return;
-					
-
-				if(framedata.name == 'normal')
-					this.itemdata.styles[i] = 
-
-			}
-*/
-
-
-
-
 			var pageConfigStr = JSON.stringify(this.pages[this.number])
 			localStorage.setItem("pageConfig",pageConfigStr)
 
@@ -136,8 +120,8 @@ return {
 		}
 	}
 	, events : {
-		loadItemByFrame : function(item_id, frame){
-      this.$refs.view.$broadcast('loadItemByFrame', item_id, frame)
+		loadItemByFrame : function(item_id, framedata){
+      this.$refs.view.$broadcast('loadItemByFrame', item_id, framedata)
 		}
 		, focusItemById : function(item_id){
       this.$refs.view.$broadcast('focusItemById', item_id)

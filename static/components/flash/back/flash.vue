@@ -1,50 +1,45 @@
 <style>
 .flash{
-	.pa;right:0px;top:0px;bottom:0px;
-	.pl(20px);.w(50%);
+	.pa;right:0px;top:0px;
+	.h(60%);.w(50%);
 	box-sizing:border-box;
+	padding:4px;
 
-	.bgc(#333);.fc(#ccc);.l(26px);
-	border:1px solid #222;
-
-	.names{
-		.pa;left:0px;.w(20px);top:27px;
-	}
-	.name{
-		.pb(1px);
+	.track, .times, .name{
+		.mb(1px);
 	}
 
-	.trackbox{
+	.tracknames{
+		.left;.pr;z-index:10;
+	}
+	.frame{.h(100%);}
+
+	.flashbox{
 		.pr;
 		.hidden;
 		overflow-x:auto;
-		box-sizing: border-box;
+		.h(100%);
+
+		.bgc(#333);.fc(#ccc);.l(26px);
+		border:1px solid #222;
+
 	}
 
-	.tracks{
-		.left;.pr;
-	}
-
-	.track{
-		border-bottom:1px solid #222;
-
-		.trackframe{
+	.trackbox{
+		.left;
+		.h(100%);
+		
+		.track{
 			display:-webkit-box;
-		}
-		&.focus{
-			//.bgc(#f69);
 		}
 	}
 
 	.times{
-		.h(26px);
-		border-bottom:1px solid #222;
-
 		.timecontrol{
 			.pa;.h(100%);z-index:2;.w(1px);
 			.bgc(red);
 
-			span{.pa;top:0px;.h(26px);
+			span{.pa;top:0px;
 				.bgc(#FF7070);z-index:10;
 				border:1px solid red;
 				box-sizing:border-box;
@@ -53,15 +48,11 @@
 		}
 	}
 
-	.frame, .name, .ui-state-highlight{
-		.h(26px);
-	}
-	.ui-state-highlight{
-		.w(12px);
-	}
-
-	.ui-state-highlight{
-		.bgc(#222);
+	.tracks{
+		.h(100%);
+		.hidden;
+		overflow-y:auto;
+		box-sizing:border-box;
 	}
 }
 </style>
@@ -70,21 +61,24 @@
 <template>
 
 <div class="flash">
-
-	<div class="names">
-		<name v-ref:name v-for="itemdata in itemsdata" :index="$index" :item_id="itemdata.item_id" :focus_track="focus_track"></name>
-	</div>
-
-	<div class="trackbox">
-		<div class="tracks">
-			<div class="times">
-				<div class="timecontrol" v-el:timecontrol :style="{left:timedata.framewidth * timedata.time + timedata.framewidth/2 + 'px'}">
-					<span :style="{width:timedata.framewidth + 'px', left: -(timedata.framewidth)/2 + 'px'}"></span>
+	<div class="flashbox">
+		<div class="trackbox" :style="{'min-width':timedata.frameWidth * timedata.min + 'px'}">
+			<div class="times" :style="{'margin-left':flashdata.frameNameWidth + 'px', height:timedata.frameHeight + 'px'}">
+				<div class="timecontrol" v-el:timecontrol :style="{left:flashdata.frameNameWidth + timedata.frameWidth * timedata.time + timedata.frameWidth/2 + 'px'}">
+					<span :style="{height:timedata.frameHeight + 'px', width:timedata.frameWidth + 'px', left: -(timedata.frameWidth)/2 + 'px'}"></span>
 				</div>
 			</div>
 
+			<div class="tracks" :style="{'padding-bottom':timedata.frameHeight + 'px'}">
+				<div class="tracknames" :style="{width:flashdata.frameNameWidth + 'px'}">
+					<name v-ref:name v-for="itemdata in itemsdata" :index="$index" :item_id="itemdata.item_id" :focus_track="focus_track" :style="{height:timedata.frameHeight + 'px'}"></name>
+				</div>
 
-			<track v-ref:track v-for="itemdata in itemsdata" :index="$index" :itemdata="itemdata" :focus_track="focus_track" :timedata="timedata" :keybroad="keybroad" :formatdata="formatdata"></track>
+
+				<div class="trackframes">
+					<track v-ref:track v-for="itemdata in itemsdata" :index="$index" :itemdata="itemdata" :focus_track="focus_track" :timedata="timedata" :keybroad="keybroad" :formatdata="formatdata" :style="{height:timedata.frameHeight + 'px'}"></track>
+				</div>
+			</div>
 		</div>
 	</div>
 
@@ -106,10 +100,14 @@ return {
 
 		return {
 			focus_track : null
+			, flashdata : {
+				frameNameWidth : 60
+			}
 			, timedata : {
-				length : 10000
-				, step : 200
-				, framewidth : 12
+				min : 10
+				, step : 100
+				, frameWidth : 12
+				, frameHeight : 26
 				, time : 0
 			}
 		}
@@ -122,9 +120,6 @@ return {
 			this.$broadcast('loadItemByTime', this.timedata.time)
 		}
 		, setTime : function(time){
-			if(time > this.timedata.length/this.timedata.step)
-				return;
-
 			this.timedata.time = time
 			this.loadTime()
 		}
@@ -148,7 +143,7 @@ return {
 			start : function(event, ui){
 			}
 			, drag : function(event, ui){
-				var time = (ui.position.left/mSelf.timedata.framewidth)|0
+				var time = ((ui.position.left-mSelf.timedata.frameNameWidth)/mSelf.timedata.frameWidth)|0
 				if(mSelf.timedata.time != time)
 					mSelf.setTime(time)
 			}
@@ -157,7 +152,7 @@ return {
 			, cursor: "move"
 			, containment : "parent"
 			, scroll : true
-			, grid: [ mSelf.timedata.framewidth, 0 ]
+			, grid: [ mSelf.timedata.frameWidth, 0 ]
 		})
 	}
 }

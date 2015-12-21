@@ -2,10 +2,8 @@
 </style>
 
 <template>
-<div class="track" @click.stop="selectTrack" :class="{focus:focus_track == itemdata.item_id}">
-	<div class="trackframe" v-el:trackframe>
-		<frameitem v-ref:frame v-for="framedata in frameslist" :framedata="framedata" :time="$index" :timedata="timedata" :keybroad="keybroad" :formatdata="formatdata"></frameitem>
-	</div>
+<div class="track" @click.stop="selectTrack">
+	<frameitem v-ref:frame v-for="framedata in itemdata.frames" :framedata="framedata" :timedata="timedata" :keybroad="keybroad" :formatdata="formatdata"></frameitem>
 </div>
 
 </template>
@@ -18,15 +16,7 @@ return {
 	}
 	, props : ['timedata', 'focus_track', 'itemdata', 'keybroad', 'formatdata']
 	, data : function(){
-
-		var frameslist = []
-
-		for(var i = 0; i <= this.timedata.length/this.timedata.step; i++){
-			frameslist.push(this.itemdata.frames[i] || {})
-		}
-
 		return {
-			frameslist : frameslist
 		}
 	}
 	, methods : {
@@ -34,6 +24,8 @@ return {
 			this.$dispatch('selectTrack', this.itemdata.item_id)
 		}
 		, loadTrack : function(){
+			return;
+
 			var name = ''
 				, arr = []
 
@@ -122,25 +114,33 @@ return {
 		}
 	}
 	, events : {
-		selectFrame : function(time){
+		selectFrame : function(){
 			this.selectTrack()
 		}
 		, loadItemByTime : function(time){
-			var frame = this.$refs.frame[time]
-			var framedata = frame.framedata 
+			var frames = this.itemdata.frames
+			var framedata = frames[time]
 
-			if(framedata.type == 'blankframe'){
-				frame.cleanFrameData()
-
-				if(framedata.name == 'animate'){
-					this.setAnimateFrameData(framedata, time)
-
-				}else{
-					this.setNormalFrameData(framedata, time)
+			if(!framedata){
+				for(var i = time; i>=0; i--){
+					if(frames[i]){
+						framedata = frames[i]
+						break;
+					}
 				}
 			}
-			
-			this.$dispatch('loadItemByFrame', this.itemdata.item_id, frame)
+
+			console.log(framedata)
+
+/*
+			if(framedata.name == 'animate'){
+				//this.setAnimateFrameData(framedata, time)
+
+			}else{
+				this.setNormalFrameData(framedata, time)
+			}
+	*/		
+			this.$dispatch('loadItemByFrame', this.itemdata.item_id, framedata)
 		}
 		, loadTrack : function(){
 			this.loadTrack()
@@ -160,14 +160,17 @@ return {
 		}
 	}
 	, ready : function(){
+
+/*
 		this.loadTrack()
 
 		var mSelf = this
-		var $trackframe = $(this.$els.trackframe)
+
+		var $track = $(this.$els)
 		var sortStart
 		var sortStop
 
-		$trackframe.sortable({
+		$track.sortable({
 			start : function(event, ui){
 				sortStart = ui.item.index()
 			}
@@ -194,7 +197,8 @@ return {
 			, placeholder: 'ui-state-highlight'
 		})
 
-		$trackframe.disableSelection()
+		$track.disableSelection()
+*/
 	}
 }
 </script>
