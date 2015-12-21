@@ -2,10 +2,16 @@
 body{
 	.bgc(#393939); .f(12px); .hidden;
 }
-.view{
-	.page{
-		.pa; .bgc(#fff);
-		.hidden;
+.app{
+	.pa;
+	.w(100%);.h(100%);
+
+	.view{
+		.w(100%);.h(100%);
+		.page{
+			.auto;.pr;.bgc(#fff);
+			.hidden;
+		}
 	}
 }
 
@@ -25,6 +31,9 @@ body{
 
 
 <script>
+require('zepto')
+console.log($)
+
 var formatdata = {}
 formatdata.original = {
 	imageUrl : {label : '图片地址', type : 'text'}
@@ -86,10 +95,15 @@ return {
     }
 	}
 	, created : function(){
+		var $win = $(window)
+			, win_h = $win.height()
+			, win_w = $win.width()
+		
 		this.resizePrint({
 			width : 640
 			, height : 1136
-			, scale : 0.4
+			, scale : win_w/640
+			//, scale : win_h/1136
 		})
 	}
 	, ready: function(){
