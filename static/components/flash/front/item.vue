@@ -38,12 +38,12 @@ return {
 	}
 	, methods : {
 		loadItemOriginal : function(){
-			var style = this.itemdata.original
+			var original = this.itemdata.original
 
 			this.originalstyle = {
-				width : style.width * this.printdata.scale + 'px'
-				, height : style.height * this.printdata.scale + 'px'
-				, 'background-image' : 'url("' + style.imageUrl + '")'
+				width : original.width * this.printdata.scale + 'px'
+				, height : original.height * this.printdata.scale + 'px'
+				, 'background-image' : 'url("' + original.imageUrl + '")'
 			}
 		}
 		, loadItemStyle : function(duration){
@@ -90,6 +90,16 @@ return {
 
 			this.framestyle.transform = transformList.join(' ')
 		}
+		, loadImage : function(cbk) {
+			var mSelf = this
+			var img = new Image()
+			img.onload = function(){
+				img.onload = null
+				mSelf.$dispatch('loadedImage')	
+			}
+			img.src = this.itemdata.original.imageUrl
+		}
+
 	}
 	, watch : {
 		'timedata.time' : function(time, oldTime){
@@ -114,6 +124,7 @@ return {
 		}
 	}
 	, created : function(){
+		this.loadImage()
 		this.loadItemOriginal()
 	}
 }

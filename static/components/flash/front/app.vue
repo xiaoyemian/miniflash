@@ -22,7 +22,7 @@ body{
 
 	<div class="view">
 		<div class="page" :style="pagestyle">
-			<item v-ref:item v-for="itemdata in pagedata.items" :itemdata="itemdata" :index="$index" :printdata="printdata" :formatdata="formatdata" :timedata="timedata"></item>
+			<item v-ref:item v-for="itemdata in items" :itemdata="itemdata" :index="$index" :printdata="printdata" :formatdata="formatdata" :timedata="timedata"></item>
 		</div>
 	</div>
 
@@ -62,8 +62,11 @@ return {
   }
 	, props:['pages','number']
 	, data : function(){
+		var items = this.pages[this.number].items
+
 		return {
-			pagedata : this.pages[this.number]
+			items : items
+			, waitImageNumber : items.length
 			, formatdata : formatdata
 			, timedata : {
 				length : 10000
@@ -95,6 +98,29 @@ return {
 			this.$broadcast('reloadItem')
     }
 	}
+	, events : {
+		loadedImage : function(){
+			this.waitImageNumber--
+		}
+	}
+	, watch : {
+		'waitImageNumber' : function(number){
+			if(number !== 0)
+				return;
+			
+			var mSelf = this
+
+			this.timedata.time = 0
+
+			var t = setInterval(function(){
+				mSelf.timedata.time++
+
+				if(mSelf.timedata.time == mSelf.timedata.length/mSelf.timedata.step)
+					clearInterval(t)
+
+			}, 200)
+		}
+	}
 	, created : function(){
 		var $win = $(window)
 			, win_h = $win.height()
@@ -116,19 +142,6 @@ return {
 			})
 		})
 	}
-	, ready: function(){
-		var mSelf = this
-
-		this.timedata.time = 0
-
-		var t = setInterval(function(){
-			mSelf.timedata.time++
-
-			if(mSelf.timedata.time == mSelf.timedata.length/mSelf.timedata.step)
-				clearInterval(t)
-
-		}, 200)
-  }
 }
 </script>
 

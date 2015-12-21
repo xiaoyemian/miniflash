@@ -89,12 +89,12 @@ return {
 			this.$dispatch('setFocusItem', this)
 		}
 		, loadItemOriginal : function(){
-			var style = this.itemdata.original
+			var original = this.itemdata.original
 
 			this.originalstyle = {
-				width : style.width * this.printdata.scale + 'px'
-				, height : style.height * this.printdata.scale + 'px'
-				, 'background-image' : 'url("' + style.imageUrl + '")'
+				width : original.width * this.printdata.scale + 'px'
+				, height : original.height * this.printdata.scale + 'px'
+				, 'background-image' : 'url("' + original.imageUrl + '")'
 			}
 		}
 		, getStyleByFrame : function(framedata){
