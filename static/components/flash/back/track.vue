@@ -26,17 +26,38 @@ return {
 	}
 	, methods : {
 		selectTrack : function(event){
-			this.time = Math.floor(event.offsetX / this.timedata.framewidth)
-			this.$dispatch('setTime', this.time)	
+			var time = Math.floor(event.offsetX / this.timedata.framewidth)
+			this.setTrackByTime(time)
+		}
+		, setTrackByTime : function(time){
+
+			this.$dispatch('setTime', time)	
 			this.$dispatch('selectTrack', this.itemdata.item_id)
 
-			console.log(this.frame)
-			
+			var frames = this.$refs.frame
+			var frame = null
+			for(var i in frames){
+				if(frames[i].time + frames[i].frametime >= time){
+					frame = frames[i]
+					break;
+				}
+			}
+
+			if(!this.keybroad.command)
+				return;
+
+			if(!frame)
+				this.addFrame(time)	
+
+		}
+		, addFrame : function(time){
+
+			this.itemdata.frames.push({duration:1, name:'normal'})
 		}
 	}
 	, events : {
-		setFrame : function(frame){
-			this.frame = frame
+		setTrackByFrame : function(frame){
+			this.setTrackByTime(frame.time + frame.frametime)
 		}
 		, loadItemByTime : function(time){
 			var frames = this.$refs.frame

@@ -4,7 +4,9 @@
 
 	.keyframe{
 		.h(100%);.pa;left:0px;
+		border-left:1px solid #222;
 		box-sizing:border-box;
+
 		&:before, &:after{ content:'';.pa;z-index:1; }
 		&:before{
 			top:50%;left:50%;.w(6px);.h(6px);.mt(-3px);.ml(-3px);.bgc(#000); .border-r(8px);
@@ -22,7 +24,7 @@
 </style>
 
 <template>
-<div class="frame" :class="[framedata.name]" @click="selectFrame" :style="{width:framedata.duration * timedata.framewidth + 'px'}">
+<div class="frame" :class="[framedata.name]" @click.stop="selectFrame" :style="{width:framedata.duration * timedata.framewidth + 'px'}">
 	<div class="keyframe" :style="{width:timedata.framewidth + 'px'}"></div>
 </div>
 </template>
@@ -43,7 +45,7 @@ return {
 			this.time = Math.floor(event.offsetX / this.timedata.framewidth)
 			this.frametime = Math.floor(($(this.$el).position().left - this.timedata.namewidth + this.timedata.scrollleft) / this.timedata.framewidth) 
 
-			this.$dispatch('setFrame', this)
+			this.$dispatch('setTrackByFrame', this)
 		}
 		, formatFrameData : function(){
 			var formatdata = this.formatdata
