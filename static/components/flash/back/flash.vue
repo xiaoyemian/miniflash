@@ -61,22 +61,22 @@
 <template>
 
 <div class="flash">
-	<div class="flashbox">
-		<div class="trackbox" :style="{'min-width':timedata.frameWidth * timedata.min + 'px'}">
-			<div class="times" :style="{'margin-left':flashdata.frameNameWidth + 'px', height:timedata.frameHeight + 'px'}">
-				<div class="timecontrol" v-el:timecontrol :style="{left:flashdata.frameNameWidth + timedata.frameWidth * timedata.time + timedata.frameWidth/2 + 'px'}">
-					<span :style="{height:timedata.frameHeight + 'px', width:timedata.frameWidth + 'px', left: -(timedata.frameWidth)/2 + 'px'}"></span>
+	<div class="flashbox" v-el:flashbox>
+		<div class="trackbox" :style="{'min-width':timedata.framewidth * timedata.min + 'px'}">
+			<div class="times" :style="{'margin-left':timedata.namewidth + 'px', height:timedata.frameheight + 'px'}">
+				<div class="timecontrol" v-el:timecontrol :style="{left:timedata.namewidth + timedata.framewidth * timedata.time + timedata.framewidth/2 + 'px'}">
+					<span :style="{height:timedata.frameheight + 'px', width:timedata.framewidth + 'px', left: -(timedata.framewidth)/2 + 'px'}"></span>
 				</div>
 			</div>
 
-			<div class="tracks" :style="{'padding-bottom':timedata.frameHeight + 'px'}">
-				<div class="tracknames" :style="{width:flashdata.frameNameWidth + 'px'}">
-					<name v-ref:name v-for="itemdata in itemsdata" :index="$index" :item_id="itemdata.item_id" :focus_track="focus_track" :style="{height:timedata.frameHeight + 'px'}"></name>
+			<div class="tracks" :style="{'padding-bottom':timedata.frameheight + 'px'}">
+				<div class="tracknames" :style="{width:timedata.namewidth + 'px'}">
+					<name v-ref:name v-for="itemdata in itemsdata" :index="$index" :item_id="itemdata.item_id" :focus_track="focus_track" :style="{height:timedata.frameheight + 'px'}"></name>
 				</div>
 
 
 				<div class="trackframes">
-					<track v-ref:track v-for="itemdata in itemsdata" :index="$index" :itemdata="itemdata" :focus_track="focus_track" :timedata="timedata" :keybroad="keybroad" :formatdata="formatdata" :style="{height:timedata.frameHeight + 'px'}"></track>
+					<track v-ref:track v-for="itemdata in itemsdata" :index="$index" :itemdata="itemdata" :focus_track="focus_track" :timedata="timedata" :keybroad="keybroad" :formatdata="formatdata" :style="{height:timedata.frameheight + 'px'}"></track>
 				</div>
 			</div>
 		</div>
@@ -100,15 +100,14 @@ return {
 
 		return {
 			focus_track : null
-			, flashdata : {
-				frameNameWidth : 60
-			}
 			, timedata : {
 				min : 10
 				, step : 100
-				, frameWidth : 12
-				, frameHeight : 26
-				, time : 0
+				, framewidth : 12
+				, frameheight : 26
+				, namewidth : 60
+				, scrollleft : null
+				, time : null
 			}
 		}
 	}
@@ -134,16 +133,26 @@ return {
 		}
 	}
 	, ready : function(){
+
 		this.setTime(0)
 
 		var mSelf = this
+
+		this.timedata.scrollleft = 0
+		var $flashbox = $(this.$els.flashbox)
+		$flashbox.on('scroll', function(){
+			mSelf.timedata.scrollleft = $(this).scrollLeft()
+		})
+
+
+
 		var $timecontrol = $(this.$els.timecontrol)
 
 		$timecontrol.draggable({
 			start : function(event, ui){
 			}
 			, drag : function(event, ui){
-				var time = ((ui.position.left-mSelf.timedata.frameNameWidth)/mSelf.timedata.frameWidth)|0
+				var time = ((ui.position.left-mSelf.timedata.namewidth)/mSelf.timedata.framewidth)|0
 				if(mSelf.timedata.time != time)
 					mSelf.setTime(time)
 			}
@@ -152,7 +161,7 @@ return {
 			, cursor: "move"
 			, containment : "parent"
 			, scroll : true
-			, grid: [ mSelf.timedata.frameWidth, 0 ]
+			, grid: [ mSelf.timedata.framewidth, 0 ]
 		})
 	}
 }

@@ -22,8 +22,8 @@
 </style>
 
 <template>
-<div class="frame" :class="[framedata.name]" @click.stop="selectFrame" :style="{width:framedata.duration * timedata.frameWidth + 'px'}">
-	<div class="keyframe" :style="{width:timedata.frameWidth + 'px'}"></div>
+<div class="frame" :class="[framedata.name]" @click="selectFrame" :style="{width:framedata.duration * timedata.framewidth + 'px'}">
+	<div class="keyframe" :style="{width:timedata.framewidth + 'px'}"></div>
 </div>
 </template>
 
@@ -34,47 +34,20 @@ return {
 	props : ['framedata', 'timedata', 'keybroad', 'formatdata']
 	, data : function(){
 		return {
+			frametime : 0
+			, time : 0
 		}
 	}
 	, methods : {
-		selectFrame : function(){
-			this.$dispatch('selectFrame', this.time)
-			this.$dispatch('setTime', this.time)
+		selectFrame : function(event){
+			this.time = Math.floor(event.offsetX / this.timedata.framewidth)
+			this.frametime = Math.floor(($(this.$el).position().left - this.timedata.namewidth + this.timedata.scrollleft) / this.timedata.framewidth) 
 
-			var keybroad = this.keybroad
-			if(keybroad.command){
-				if(keybroad.alt){
-					this.framedata.type = 'blankframe'
-
-				}else{
-					if(this.framedata.type == 'keyframe'){
-						switch(this.framedata.name){
-							case 'normal' : 
-								this.framedata.name = 'animate'
-								break;
-
-							case 'animate' : 
-								this.framedata.name = ''
-								break;
-
-							default : 
-								this.framedata.name = 'normal'
-								break;
-						}
-
-					}else{
-						this.framedata.type = 'keyframe'
-						this.framedata.name = 'normal'
-					}
-				}
-			}
+			this.$dispatch('setFrame', this)
 		}
 		, formatFrameData : function(){
 			var formatdata = this.formatdata
 			var framedata = this.framedata
-
-			if(!framedata.type)
-				this.$set('framedata.type', 'blankframe')
 
 			if(!framedata.name)
 				this.$set('framedata.name', '')
@@ -108,10 +81,7 @@ return {
 			this.formatFrameData()
 		}
 	}
-	, events : {
-	}
 	, created : function(){
-		var framedata = this.framedata
 		this.formatFrameData()
 	}
 }

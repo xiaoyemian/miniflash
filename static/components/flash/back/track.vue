@@ -14,42 +14,15 @@ return {
   components : {
     frameitem : frame
 	}
-	, props : ['timedata', 'focus_track', 'itemdata', 'keybroad', 'formatdata']
+	, props : ['timedata', 'itemdata', 'keybroad', 'formatdata']
 	, data : function(){
 		return {
+			frame : null
 		}
 	}
 	, methods : {
 		selectTrack : function(){
 			this.$dispatch('selectTrack', this.itemdata.item_id)
-		}
-		, loadTrack : function(){
-			return;
-
-			var name = ''
-				, arr = []
-
-			for(var i in this.frameslist){
-				framedata = this.frameslist[i]
-				if(framedata.type == 'blankframe'){
-					arr.push(framedata)
-
-				}else{
-					for(var k in arr){
-						arr[k].name = name 
-					}
-					name = framedata.name
-					arr = []
-				}
-			}
-
-			for(var j in arr){
-				if(name == 'animate'){
-					arr[j].name = 'normal'
-				}else{
-					arr[j].name = name 
-				}
-			}
 		}
 		, getStartData : function(time){
 			var data = {}
@@ -114,40 +87,22 @@ return {
 		}
 	}
 	, events : {
-		selectFrame : function(){
-			this.selectTrack()
+		setFrame : function(frame){
+			this.frame = frame
+			this.$dispatch('setTime', frame.frametime + frame.time)	
 		}
 		, loadItemByTime : function(time){
-			var frames = this.itemdata.frames
-			var framedata = frames[time]
-
-			if(!framedata){
-				for(var i = time; i>=0; i--){
-					if(frames[i]){
-						framedata = frames[i]
-						break;
-					}
+			var frames = this.$refs.frame
+			var framedata
+			for(var i in frames){
+				var frame = frames[i]
+				if(frame.frametime <= time){
+					framedata = frame.framedata
+					break;
 				}
 			}
 
-			console.log(framedata)
-
-/*
-			if(framedata.name == 'animate'){
-				//this.setAnimateFrameData(framedata, time)
-
-			}else{
-				this.setNormalFrameData(framedata, time)
-			}
-	*/		
 			this.$dispatch('loadItemByFrame', this.itemdata.item_id, framedata)
-		}
-		, loadTrack : function(){
-			this.loadTrack()
-		}
-		, loadTrackById : function(item_id){
-			if(item_id == this.itemdata.item_id)
-				this.loadTrack()
 		}
 		, updateFramesData : function(){
 			this.itemdata.frames = {}
@@ -162,8 +117,6 @@ return {
 	, ready : function(){
 
 /*
-		this.loadTrack()
-
 		var mSelf = this
 
 		var $track = $(this.$els)
@@ -187,7 +140,6 @@ return {
 
 					this.$nextTick(function(){
 						this.$dispatch('loadTime')
-						this.loadTrack()
 					})
 
 				})
