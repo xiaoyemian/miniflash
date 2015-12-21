@@ -30,6 +30,7 @@ return {
 			this.$dispatch('setTime', this.time)	
 			this.$dispatch('selectTrack', this.itemdata.item_id)
 
+			console.log(this.frame)
 			
 		}
 	}
