@@ -1,7 +1,7 @@
 <style>
 
 .view{
-	.pa;left:0px;right:40%;top:0px;bottom:0px;
+	.pa;left:0px;right:50%;top:0px;bottom:0px;
 	box-sizing:border-box;
 
 	.page{
@@ -23,7 +23,7 @@
 }
 
 .itemsettings{
-	.pa;bottom:0px;right:0px;top:434px;.w(40%);
+	.pa;bottom:0px;right:0px;top:434px;.w(50%);
 	z-index:10;
 	box-sizing:border-box;
 	.bgc(#333);

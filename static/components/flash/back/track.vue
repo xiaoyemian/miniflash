@@ -52,7 +52,11 @@ return {
 			}
 
 			for(var j in arr){
-				arr[j].name = '' 
+				if(name == 'animate'){
+					arr[j].name = 'normal'
+				}else{
+					arr[j].name = name 
+				}
 			}
 		}
 		, getStartData : function(time){
