@@ -1,7 +1,4 @@
 <style>
-.settingOriginal{
-	border-right:1px solid #222;
-}
 </style>
 
 <template>

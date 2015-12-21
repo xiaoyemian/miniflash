@@ -28,6 +28,7 @@
 	.trackbox{
 		.left;
 		.h(100%);
+		min-width:100%;
 		
 		.track{
 			display:-webkit-box;
@@ -62,7 +63,7 @@
 
 <div class="flash">
 	<div class="flashbox" v-el:flashbox>
-		<div class="trackbox" :style="{'min-width':timedata.framewidth * timedata.min + 'px'}">
+		<div class="trackbox">
 			<div class="times" :style="{'margin-left':timedata.namewidth + 'px', height:timedata.frameheight + 'px'}">
 				<div class="timecontrol" v-el:timecontrol :style="{left:timedata.namewidth + timedata.framewidth * timedata.time + timedata.framewidth/2 + 'px'}">
 					<span :style="{height:timedata.frameheight + 'px', width:timedata.framewidth + 'px', left: -(timedata.framewidth)/2 + 'px'}"></span>

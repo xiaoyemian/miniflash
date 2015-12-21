@@ -172,9 +172,6 @@ return {
 
 			if(itemdata.frames.length == 0){
 				itemdata.frames.push({duration:3, name:'normal'})
-				itemdata.frames.push({duration:20, name:'animate'})
-				itemdata.frames.push({duration:6, name:'normal'})
-				itemdata.frames.push({duration:10, name:'animate'})
 			}
 
 		}

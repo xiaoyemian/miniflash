@@ -1,4 +1,8 @@
 <style>
+.name{
+	.opacity(60);
+	&.focus{.opacity(100);}
+}
 
 </style>
 
