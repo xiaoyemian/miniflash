@@ -32,7 +32,7 @@
 <script>
 
 return {
-	props : ['framedata', 'timedata', 'keybroad', 'formatdata']
+	props : ['framedata', 'timedata', 'keybroad', 'formatdata', 'index']
 	, data : function(){
 		return {
 			startTime : 0

@@ -7,7 +7,7 @@
 
 <template>
 <div class="track" @click.stop="selectTrack" :class="{focus : focus_track == itemdata.item_id}">
-	<frameitem v-ref:frame v-for="framedata in itemdata.frames" :framedata="framedata" :timedata="timedata" :keybroad="keybroad" :formatdata="formatdata"></frameitem>
+	<frameitem v-ref:frame v-for="framedata in itemdata.frames" :index="$index" :framedata="framedata" :timedata="timedata" :keybroad="keybroad" :formatdata="formatdata"></frameitem>
 </div>
 
 </template>
@@ -91,6 +91,7 @@ return {
 			this.$dispatch('loadItemByFrame', this.itemdata.item_id, frame.framedata)
 		}
 		, loadItemAnimate : function(frame){
+			console.log(frame.index)
 			this.$dispatch('loadItemByFrame', this.itemdata.item_id, frame.framedata)
 		}
 	}
