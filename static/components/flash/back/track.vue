@@ -171,8 +171,13 @@ return {
 		}
 	}
 	, watch : {
-		'itemdata.frames' : function(){
-			console.log(arguments)
+		'itemdata.frames' : function(frames){
+			var len = frames.length
+			if(len){
+				var framedata = frames[len-1]
+				framedata.name = 'normal'
+				framedata.duration = 1
+			}
 		}
 	}
 	, ready : function(){
