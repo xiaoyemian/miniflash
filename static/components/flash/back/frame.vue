@@ -36,16 +36,21 @@ return {
 	props : ['framedata', 'timedata', 'keybroad', 'formatdata']
 	, data : function(){
 		return {
-			frametime : 0
+			startTime : 0
 			, time : 0
 		}
 	}
 	, methods : {
 		selectFrame : function(event){
-			this.time = Math.floor(event.offsetX / this.timedata.framewidth)
-			this.frametime = Math.floor(($(this.$el).position().left - this.timedata.namewidth + this.timedata.scrollleft) / this.timedata.framewidth) 
-
+			this.setStartTime()
+			this.setTime()
 			this.$dispatch('setTrackByFrame', this)
+		}
+		, setTime : function(){
+			this.time = Math.floor(event.offsetX / this.timedata.framewidth)
+		}
+		, setStartTime : function(){
+			this.startTime = Math.floor(($(this.$el).position().left - this.timedata.namewidth + this.timedata.scrollleft) / this.timedata.framewidth) 
 		}
 		, formatFrameData : function(){
 			var formatdata = this.formatdata

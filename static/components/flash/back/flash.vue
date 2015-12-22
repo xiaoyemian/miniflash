@@ -9,9 +9,13 @@
 		.mb(1px);
 	}
 
-	.tracknames{
-		.left;.pr;z-index:10;
+	.trackframes{
+		min-width:100%;
 	}
+	.tracknames{
+		.pr;z-index:10;
+	}
+
 	.frame{.h(100%);}
 
 	.flashbox{
@@ -54,6 +58,7 @@
 		.hidden;
 		overflow-y:auto;
 		box-sizing:border-box;
+		display:-webkit-box;
 	}
 }
 </style>
@@ -77,7 +82,7 @@
 
 
 				<div class="trackframes">
-					<track v-ref:track v-for="itemdata in itemsdata" :index="$index" :itemdata="itemdata" :focus_track="focus_track" :timedata="timedata" :keybroad="keybroad" :formatdata="formatdata" :style="{height:timedata.frameheight + 'px'}"></track>
+					<track v-ref:track v-for="itemdata in itemsdata" :index="$index" :itemdata="itemdata" :focus_track="focus_track" :timedata="timedata" :keybroad="keybroad" :formatdata="formatdata" :style="{height:timedata.frameheight + 'px', 'padding-right':timedata.framewidth + 'px'}"></track>
 				</div>
 			</div>
 		</div>

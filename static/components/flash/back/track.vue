@@ -37,7 +37,7 @@ return {
 			var frames = this.$refs.frame
 			var frame = null
 			for(var i in frames){
-				if(frames[i].time + frames[i].frametime >= time){
+				if(frames[i].time + frames[i].startTime >= time){
 					frame = frames[i]
 					break;
 				}
@@ -51,21 +51,24 @@ return {
 
 		}
 		, addFrame : function(time){
-
+			var startTime = 0
+			for(var i in this.itemdata.frames){
+				startTime += this.itemdata.frames[i].duration
+			}
+			this.itemdata.frames.push({duration:time - startTime, name:'blank'})
 			this.itemdata.frames.push({duration:1, name:'normal'})
 		}
 	}
 	, events : {
 		setTrackByFrame : function(frame){
-			this.setTrackByTime(frame.time + frame.frametime)
+			this.setTrackByTime(frame.time + frame.startTime)
 		}
 		, loadItemByTime : function(time){
 			var frames = this.$refs.frame
 			var frame = frames[0]
 			for(var i in frames){
 				frame = frames[i]
-
-				if(frame.frametime >= time){
+				if(frame.startTime >= time){
 					break;
 				}
 			}
@@ -73,42 +76,6 @@ return {
 		}
 	}
 	, ready : function(){
-
-/*
-		var mSelf = this
-
-		var $track = $(this.$els)
-		var sortStart
-		var sortStop
-
-		$track.sortable({
-			start : function(event, ui){
-				sortStart = ui.item.index()
-			}
-			, stop : function(event, ui){
-				sortStop = ui.item.index()
-				var frames = mSelf.frameslist
-
-				frames.splice(sortStop, 0, frames.splice(sortStart,1)[0])
-
-				mSelf.frameslist = []	
-
-				mSelf.$nextTick(function(){
-					this.frameslist = frames	
-
-					this.$nextTick(function(){
-						this.$dispatch('loadTime')
-					})
-
-				})
-			}
-			, axis: "x"
-			, cursor: "move"
-			, placeholder: 'ui-state-highlight'
-		})
-
-		$track.disableSelection()
-*/
 	}
 }
 </script>
