@@ -220,6 +220,7 @@ return {
 				mSelf.$nextTick(function(){
 					this.itemdata.frames = framesdata
 					this.$nextTick(function(){
+						this.$dispatch('loadTime')
 					})
 				})
 			}

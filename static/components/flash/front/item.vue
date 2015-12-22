@@ -50,11 +50,15 @@ return {
 			}
 			img.src = this.itemdata.original.imageUrl
 		}
-		, getStyleByFrame : function(framedata){
+		, getStyleByFrame : function(framedata, duration){
 			var formatdata = this.formatdata
 			var transformList = []
 
 			var style = {}
+
+			if(duration){
+				style['transition-duration'] = duration + 'ms'
+			}
 
 			for(var i in framedata.resize){
 				var value = framedata.resize[i] || 0
@@ -107,23 +111,21 @@ return {
 				return;
 
 			var mSelf = this
+			var framedata = this.itemdata.frames[index] 
+			var time = framedata.duration * this.timedata.step
 
-			this.framedata = this.itemdata.frames[index] 
+			this.framedata = framedata
+			
+			this.framestyle = this.getStyleByFrame(framedata)
 
-			var time = this.framedata.duration * this.timedata.step
-			this.framestyle = this.getStyleByFrame(this.framedata)
-
-			if(this.framedata.name == 'animate'){
-				this.framestyle['transition-duration'] = time + 'ms'
-
+			if(framedata.name == 'animate'){
 				var t = setTimeout(function(){
 					var enddata = mSelf.itemdata.frames[index+1]
-					mSelf.framestyle = mSelf.getStyleByFrame(enddata)
-					mSelf.framestyle['transition-duration'] = time + 'ms'
+					mSelf.framestyle = mSelf.getStyleByFrame(enddata, time)
 				}, 1)
 			}
 
-			var t = setTimeout(function(){
+			var t2 = setTimeout(function(){
 				mSelf.frameindex++;
 			}, time)
 

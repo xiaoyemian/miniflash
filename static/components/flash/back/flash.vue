@@ -141,6 +141,9 @@ return {
 		, setTime : function(time){
 			this.setTime(time)
 		}
+		, loadTime : function(){
+			this.loadTime()
+		}
 	}
 	, ready : function(){
 
