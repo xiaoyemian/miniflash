@@ -110,23 +110,19 @@ return {
 			this.$dispatch('loadItemByFrame', this.itemdata.item_id, frame.framedata)
 		}
 		, loadItemAnimate : function(frame){
-			var framedata = frame.framedata
-			if(framedata.duration > 1){
+			var framedata = {name:'animate'}
+			this.formatFrameData(framedata)
 
-				framedata = {name:'animate'}
-				this.formatFrameData(framedata)
+			var startdata = frame.framedata 
+			var enddata = this.itemdata.frames[frame.index+1]
+			var line = frame.time / frame.framedata.duration
 
-				var startdata = frame.framedata 
-				var enddata = this.itemdata.frames[frame.index+1]
-				var line = frame.time / frame.framedata.duration
-
-				for(var i in startdata.resize){
-					framedata.resize[i] = enddata.resize[i] * line + startdata.resize[i] * (1-line)
-				}
-				for(var i in startdata.transform){
-					for(var j in startdata.transform[i]){
-						framedata.transform[i][j] = enddata.transform[i][j] * line + startdata.transform[i][j] * (1-line)
-					}
+			for(var i in startdata.resize){
+				framedata.resize[i] = enddata.resize[i] * line + startdata.resize[i] * (1-line)
+			}
+			for(var i in startdata.transform){
+				for(var j in startdata.transform[i]){
+					framedata.transform[i][j] = enddata.transform[i][j] * line + startdata.transform[i][j] * (1-line)
 				}
 			}
 
@@ -180,7 +176,12 @@ return {
 					frame.time = time - frame.startTime
 
 					if(frame.framedata.name == 'animate'){
-						this.loadItemAnimate(frame)
+						if(frame.time == 0){
+							this.loadItemNormal(frame)
+
+						}else{
+							this.loadItemAnimate(frame)
+						}
 
 					}else{
 						this.loadItemNormal(frame)
@@ -218,6 +219,8 @@ return {
 				mSelf.itemdata.frames = []	
 				mSelf.$nextTick(function(){
 					this.itemdata.frames = framesdata
+					this.$nextTick(function(){
+					})
 				})
 			}
 			, axis: "x"
