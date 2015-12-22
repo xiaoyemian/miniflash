@@ -165,6 +165,34 @@ return {
 		}
 	}
 	, ready : function(){
+		var mSelf = this
+		var $track = $(this.$el)
+		var sortStart
+		var sortStop
+
+		$track.sortable({
+			start : function(event, ui){
+				sortStart = ui.item.index()
+			}
+			, stop : function(event, ui){
+				sortStop = ui.item.index()
+				var framesdata = mSelf.itemdata.frames
+
+				framesdata.splice(sortStop, 0, framesdata.splice(sortStart,1)[0])
+
+				mSelf.itemdata.frames = []	
+
+				mSelf.$nextTick(function(){
+					this.itemdata.frames = framesdata
+				})
+			}
+			, axis: "x"
+			, cursor: "move"
+			, placeholder: 'ui-state-highlight'
+		})
+
+		$track.disableSelection()
+
 	}
 }
 </script>
