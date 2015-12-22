@@ -38,41 +38,42 @@ return {
 				}
 			}
 
+			if(this.keybroad.command){
+
+				if(frame){
+					if(this.keybroad.alt){
+						this.clearKeyFrame(frame)	
+
+					}else{
+						switch(frame.framedata.name){
+							case 'normal' :
+								frame.framedata.name = 'animate'
+								break;
+
+							case 'animate' :
+								frame.framedata.name = 'blank'
+								break;
+
+							case 'blank' :
+								frame.framedata.name = 'normal'
+								break;
+
+							default : 
+								break;
+						}
+					}
+
+				}else{
+					this.addKeyFrame(time)	
+				}
+			}
+
 			this.$nextTick(function(){
 				this.$dispatch('setTime', time)	
 				this.$dispatch('selectTrack', this.itemdata.item_id)
 			})
 
-			if(!this.keybroad.command)
-				return;
 
-
-			if(frame){
-				if(this.keybroad.alt){
-					this.clearKeyFrame(frame)	
-
-				}else{
-					switch(frame.framedata.name){
-						case 'normal' :
-							frame.framedata.name = 'animate'
-							break;
-
-						case 'animate' :
-							frame.framedata.name = 'blank'
-							break;
-
-						case 'blank' :
-							frame.framedata.name = 'normal'
-							break;
-
-						default : 
-							break;
-					}
-				}
-
-			}else{
-				this.addKeyFrame(time)	
-			}
 		}
 		, clearKeyFrame : function(frame){
 				var framesdata = this.itemdata.frames
