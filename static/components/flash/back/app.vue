@@ -110,8 +110,6 @@ return {
 	}
 	, methods : {
 		save : function(){
-			this.$refs.flash.$broadcast('updateFramesData')
-
 			var pageConfigStr = JSON.stringify(this.pages[this.number])
 			localStorage.setItem("pageConfig",pageConfigStr)
 
