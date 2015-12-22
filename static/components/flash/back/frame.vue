@@ -42,7 +42,6 @@ return {
 	, methods : {
 		selectFrame : function(event){
 			this.time = Math.floor(event.offsetX / this.timedata.framewidth)
-			this.line = this.time / this.framedata.duration
 			this.$dispatch('setTrackByFrame', this)
 		}
 	}

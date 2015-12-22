@@ -121,12 +121,12 @@ return {
 		setFocusTrack : function(item_id){
 			this.$set('focus_track', item_id)
 		}
-		, loadTime : function(){
-			this.$broadcast('loadItemByTime', this.timedata.time)
-		}
 		, setTime : function(time){
 			this.timedata.time = time
 			this.loadTime()
+		}
+		, loadTime : function(){
+			this.$broadcast('loadItemByTime', this.timedata.time)
 		}
 	}
 	, events : {

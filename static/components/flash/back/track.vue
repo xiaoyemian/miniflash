@@ -96,13 +96,14 @@ return {
 
 			var startdata = frame.framedata 
 			var enddata = this.itemdata.frames[frame.index+1]
+			var line = frame.time / frame.framedata.duration
 
 			for(var i in startdata.resize){
-				framedata.resize[i] = enddata.resize[i] * frame.line + startdata.resize[i] * (1-frame.line)
+				framedata.resize[i] = enddata.resize[i] * line + startdata.resize[i] * (1-line)
 			}
 			for(var i in startdata.transform){
 				for(var j in startdata.transform[i]){
-					framedata.transform[i][j] = enddata.transform[i][j] * frame.line + startdata.transform[i][j] * (1-frame.line)
+					framedata.transform[i][j] = enddata.transform[i][j] * line + startdata.transform[i][j] * (1-line)
 				}
 			}
 
@@ -150,14 +151,14 @@ return {
 			for(var i in frames){
 				var frame = frames[i]
 				if(time >= frame.startTime && time < frame.startTime + frame.framedata.duration){
+					frame.time = time - frame.startTime
+
 					if(frame.framedata.name == 'animate'){
 						this.loadItemAnimate(frame)
 
 					}else{
 						this.loadItemNormal(frame)
-
 					}
-
 					break;
 				}
 			}

@@ -200,17 +200,15 @@ return {
 
 			this.framedata = framedata
 
-			this.formatResizeByOriginal()
+			console.log(this.framedata.resize.left)
 
+			this.formatResizeByOriginal()
 			this.loadItemStyle()
 		}
 		, focusItemById : function(item_id){
 			if(item_id == this.itemdata.item_id){
 				this.setFocusItem()
 			}
-		}
-		, loadItemStyle : function(){
-			this.loadItemStyle()
 		}
 	}
 	, created : function(){
