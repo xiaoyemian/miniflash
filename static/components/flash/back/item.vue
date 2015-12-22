@@ -7,7 +7,6 @@
 
 	&.animate, &.normal{
 		.block;
-		transition:all 200ms linear;
 	}
 
 	&.focus{

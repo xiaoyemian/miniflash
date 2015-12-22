@@ -42,9 +42,29 @@ return {
 
 			if(this.keybroad.command){
 
-				if(!frame)
-					this.addFrame(time)	
+				if(frame){
 
+					switch(frame.framedata.name){
+						case 'normal' :
+							frame.framedata.name = 'animate'
+							break;
+
+						case 'animate' :
+							frame.framedata.name = 'blank'
+							break;
+
+						case 'blank' :
+							frame.framedata.name = 'normal'
+							break;
+
+						default : 
+							break;
+
+					}
+
+				}else{
+					this.addFrame(time)	
+				}
 			}
 
 			this.$nextTick(function(){
