@@ -16,7 +16,11 @@
 		.pr;z-index:10;
 	}
 
-	.frame{.h(100%);}
+	.frame, .ui-state-highlight{.h(100%);}
+
+	.ui-state-highlight{
+		.bgc(#222);.w(12px);
+	}
 
 	.flashbox{
 		.pr;
