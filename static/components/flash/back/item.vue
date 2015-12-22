@@ -136,7 +136,6 @@ return {
 		}
 		, loadItemStyle : function(){
 			this.framestyle = this.getStyleByFrame(this.framedata)
-
 		}
 		, aspectRatio : function(){
 			var resize = this.framedata.resize

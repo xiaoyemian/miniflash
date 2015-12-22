@@ -2,12 +2,12 @@ Vue.config.debug = true
 
 var app = require('flash/front/app.vue')
 
+/*
 var pages = require('data/pages')
+*/
 
 var pageConfigStr = localStorage.getItem("pageConfig")
 var pages = [JSON.parse(pageConfigStr)]
-/*
-*/
 
 var number = 0
 

@@ -68,18 +68,15 @@ return {
 			items : items
 			, waitImageNumber : items.length
 			, formatdata : formatdata
-			, timedata : {
-				length : 10000
-				, step : 200
-				, framewidth : 12
-				, time : null
-			}
 			, printdata : {
 				width : 0
 				, height : 0
 				, scale : 0
 			}
 			, pagestyle : {}
+			, timedata : {
+				step :200
+			}
 		}
 	}
 	, methods : {
@@ -101,24 +98,9 @@ return {
 	, events : {
 		loadedImage : function(){
 			this.waitImageNumber--
-		}
-	}
-	, watch : {
-		'waitImageNumber' : function(number){
-			if(number !== 0)
-				return;
-			
-			var mSelf = this
 
-			this.timedata.time = 0
-
-			var t = setInterval(function(){
-				mSelf.timedata.time++
-
-				if(mSelf.timedata.time == mSelf.timedata.length/mSelf.timedata.step)
-					clearInterval(t)
-
-			}, 200)
+			if(this.waitImageNumber === 0)
+				this.$broadcast('startFrame')
 		}
 	}
 	, created : function(){

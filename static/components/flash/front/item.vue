@@ -14,7 +14,7 @@
 </style>
 
 <template>
-<div class="item" :class="[framedata && framedata.type, framedata && framedata.name]" :style="[originalstyle, framestyle]">
+<div class="item" :class="[framedata && framedata.name]" :style="[originalstyle, framestyle]">
 </div>
 </template>
 
@@ -28,12 +28,7 @@ return {
 			framedata : null
 			, originalstyle : {}
 			, framestyle : {} 
-		}
-	}
-	, events : {
-		reloadItem : function(){
-			this.loadItemOriginal()
-			this.loadItemStyle()
+			, frameindex : null
 		}
 	}
 	, methods : {
@@ -46,19 +41,20 @@ return {
 				, 'background-image' : 'url("' + original.imageUrl + '")'
 			}
 		}
-		, loadItemStyle : function(duration){
-			var framedata = this.framedata
-
-			if(!framedata) return;
-
+		, loadImage : function(cbk) {
+			var mSelf = this
+			var img = new Image()
+			img.onload = function(){
+				img.onload = null
+				mSelf.$dispatch('loadedImage')	
+			}
+			img.src = this.itemdata.original.imageUrl
+		}
+		, getStyleByFrame : function(framedata){
 			var formatdata = this.formatdata
 			var transformList = []
 
-			this.framestyle = {}
-
-			if(duration){
-				this.framestyle['transition-duration'] = duration * this.timedata.step + 'ms'
-			}
+			var style = {}
 
 			for(var i in framedata.resize){
 				var value = framedata.resize[i] || 0
@@ -67,7 +63,7 @@ return {
 				if(unit == 'px'){
 					value *= this.printdata.scale
 				}
-				this.framestyle[i] = value + unit 
+				style[i] = value + unit 
 			}
 
 			for(var i in framedata.transform){
@@ -88,39 +84,49 @@ return {
 				transformList.push(i + '(' + arr.join(',') + ')')
 			}
 
-			this.framestyle.transform = transformList.join(' ')
+			style.transform = transformList.join(' ')
+			
+			return style
 		}
-		, loadImage : function(cbk) {
-			var mSelf = this
-			var img = new Image()
-			img.onload = function(){
-				img.onload = null
-				mSelf.$dispatch('loadedImage')	
-			}
-			img.src = this.itemdata.original.imageUrl
+		, loadItemStyle : function(){
+			this.framestyle = this.getStyleByFrame(this.framedata)
 		}
-
+	}
+	, events : {
+		reloadItem : function(){
+			this.loadItemOriginal()
+			this.loadItemStyle()
+		}
+		, startFrame : function(){
+			this.frameindex = 0
+		}
 	}
 	, watch : {
-		'timedata.time' : function(time, oldTime){
-			var framedata = this.itemdata.frames[time]
-			if(framedata){
-				this.framedata = framedata
-				this.loadItemStyle()
+		'frameindex' : function(index){
+			if(index >= this.itemdata.frames.length)
+				return;
 
-				if(framedata.name == 'animate'){
-					for(var i = time+1; i < this.timedata.length/this.timedata.step; i++){
-						if(this.itemdata.frames[i]){
-							var mSelf = this
-							var t = setTimeout(function(){
-								mSelf.framedata = mSelf.itemdata.frames[i]
-								mSelf.loadItemStyle(i - time)
-							}, 1)
-							break;
-						}
-					}
-				}
+			var mSelf = this
+
+			this.framedata = this.itemdata.frames[index] 
+
+			var time = this.framedata.duration * this.timedata.step
+			this.framestyle = this.getStyleByFrame(this.framedata)
+
+			if(this.framedata.name == 'animate'){
+				this.framestyle['transition-duration'] = time + 'ms'
+
+				var t = setTimeout(function(){
+					var enddata = mSelf.itemdata.frames[index+1]
+					mSelf.framestyle = mSelf.getStyleByFrame(enddata)
+					mSelf.framestyle['transition-duration'] = time + 'ms'
+				}, 1)
 			}
+
+			var t = setTimeout(function(){
+				mSelf.frameindex++;
+			}, time)
+
 		}
 	}
 	, created : function(){
