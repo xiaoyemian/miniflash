@@ -3,10 +3,8 @@
 	.pr; .bgc(#333);
 
 	.keyframe{
-		.h(100%);.pa;left:0px;
-		border-left:1px solid #222;
-		border-right:1px solid #222;
-		.ml(-1px);
+		.pa;left:-1px;top:-1px;bottom:-1px;right:-1px;
+		border:1px solid #222;
 
 		&:before, &:after{ content:'';.pa;z-index:1; }
 		&:before{
@@ -75,11 +73,6 @@ return {
 					this.$set('framedata.resize["'+i+'"]', 0)
 				}
 			}
-		}
-		, cleanFrameData : function(){
-			this.$set('framedata.resize', {})
-			this.$set('framedata.transform', {})
-			this.formatFrameData()
 		}
 	}
 	, created : function(){

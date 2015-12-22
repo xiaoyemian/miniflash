@@ -59,7 +59,6 @@ return {
 
 						default : 
 							break;
-
 					}
 
 				}else{
@@ -97,9 +96,27 @@ return {
 			var frames = this.$refs.frame
 			for(var i in frames){
 				var frame = frames[i]
-
 				if(time >= frame.startTime && time < frame.startTime + frame.framedata.duration){
-					this.$dispatch('loadItemByFrame', this.itemdata.item_id, frame.framedata)
+
+					var framedata
+
+					switch(frame.framedata.name){
+						case 'normal' :
+							framedata = frame.framedata
+							break;
+
+						case 'animate' :
+							break;
+
+						case 'blank' :
+							break;
+
+						default : 
+							break;
+					}
+
+					this.$dispatch('loadItemByFrame', this.itemdata.item_id, framedata)
+
 					break;
 				}
 			}
