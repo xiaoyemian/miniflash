@@ -53,11 +53,11 @@ return {
 			})
 		}
 		, addFrame : function(time){
-			var frames = this.itemdata.frames
+			var framesdata = this.itemdata.frames
 			var startTime = 0
 			var framedata
-			for(var i in frames){
-				framedata = frames[i]
+			for(var i in framesdata){
+				framedata = framesdata[i]
 				startTime += framedata.duration
 			}
 			
@@ -66,7 +66,7 @@ return {
 			var framenew = JSON.parse(JSON.stringify(framedata))
 			framenew.duration = 1
 			framenew.name = 'normal'
-			this.itemdata.frames.push(framenew)
+			framesdata.push(framenew)
 		}
 	}
 	, events : {
@@ -77,7 +77,6 @@ return {
 			var frames = this.$refs.frame
 			for(var i in frames){
 				var frame = frames[i]
-				console.log(time, i, frame.startTime, frame.framedata.duration)
 
 				if(time >= frame.startTime && time < frame.startTime + frame.framedata.duration){
 					this.$dispatch('loadItemByFrame', this.itemdata.item_id, frame.framedata)

@@ -203,7 +203,6 @@ return {
 
 			this.formatResizeByOriginal()
 
-			console.log(this.itemdata.item_id)
 			this.loadItemStyle()
 		}
 		, focusItemById : function(item_id){
