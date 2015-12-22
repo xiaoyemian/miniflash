@@ -76,16 +76,23 @@ return {
 
 		}
 		, clearKeyFrame : function(frame){
-				var framesdata = this.itemdata.frames
-				var framedata = frame.framedata
-				var index = frame.index
+			var framesdata = this.itemdata.frames
+			var framedata = frame.framedata
+			var index = frame.index
 
+			if(index != 0){
+				framesdata[index-1].duration += framedata.duration
+			}
+			framesdata.splice(index, 1)
 
-				if(index != 0){
-					framesdata[index-1].duration += framedata.duration
-				}
-				framesdata.splice(index, 1)
-				
+			this.itemdata.frames = []	
+			this.$nextTick(function(){
+				this.itemdata.frames = framesdata
+				this.$nextTick(function(){
+					this.$dispatch('loadTime')
+				})
+			})
+
 		}
 		, addKeyFrame : function(time){
 			var framesdata = this.itemdata.frames
