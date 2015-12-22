@@ -51,11 +51,15 @@ return {
 
 		}
 		, addFrame : function(time){
+			var frames = this.itemdata.frames
 			var startTime = 0
-			for(var i in this.itemdata.frames){
-				startTime += this.itemdata.frames[i].duration
+			var frame
+			for(var i in frames){
+				frame = frames[i]
+				startTime += frame.duration
 			}
-			this.itemdata.frames.push({duration:time - startTime, name:'blank'})
+			
+			frame.duration += time - startTime	
 			this.itemdata.frames.push({duration:1, name:'normal'})
 		}
 	}
@@ -75,7 +79,6 @@ return {
 		}
 	}
 	, ready : function(){
-		console.log(this.$refs.frame)
 	}
 }
 </script>

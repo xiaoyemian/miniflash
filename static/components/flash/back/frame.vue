@@ -4,7 +4,8 @@
 
 	.keyframe{
 		.h(100%);.pa;left:0px;
-		box-sizing:border-box;
+		border-left:1px solid #222;
+		.ml(-1px);
 
 		&:before, &:after{ content:'';.pa;z-index:1; }
 		&:before{
