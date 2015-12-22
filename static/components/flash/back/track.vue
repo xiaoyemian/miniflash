@@ -82,9 +82,12 @@ return {
 			
 			framedata.duration += time - startTime	
 
-			var framenew = JSON.parse(JSON.stringify(framedata))
-			framenew.duration = 1
-			framenew.name = 'normal'
+			var framenew = JSON.parse(JSON.stringify({
+				resize : framedata.resize
+				, transform : framedata.transform
+			}))
+			this.formatFrameData(framenew)
+			
 			framesdata.push(framenew)
 		}
 		, loadItemNormal : function(frame){
@@ -113,7 +116,10 @@ return {
 			var formatdata = this.formatdata
 
 			if(!framedata.name)
-				Vue.set(framedata, 'name', '')
+				Vue.set(framedata, 'name', 'normal')
+
+			if(!framedata.duration)
+				Vue.set(framedata, 'duration', 1)
 
 			if(!framedata.resize)
 				Vue.set(framedata, 'resize', {})

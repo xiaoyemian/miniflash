@@ -171,7 +171,7 @@ return {
 				this.$set('itemdata.frames', [])
 
 			if(itemdata.frames.length == 0){
-				itemdata.frames.push({duration:1, name:'normal'})
+				itemdata.frames.push({name:'normal'})
 			}
 
 		}

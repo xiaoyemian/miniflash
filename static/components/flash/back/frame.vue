@@ -47,7 +47,6 @@ return {
 	}
 	, created : function(){
 		this.$dispatch('formatFrameData', this.framedata)
-		console.log(this.framedata)
 	}
 	, ready : function(){
 		this.startTime = Math.floor(($(this.$el).position().left - this.timedata.namewidth + this.timedata.scrollleft) / this.timedata.framewidth) 
