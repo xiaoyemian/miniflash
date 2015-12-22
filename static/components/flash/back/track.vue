@@ -87,6 +87,12 @@ return {
 			framenew.name = 'normal'
 			framesdata.push(framenew)
 		}
+		, loadItemNormal : function(frame){
+			this.$dispatch('loadItemByFrame', this.itemdata.item_id, frame.framedata)
+		}
+		, loadItemAnimate : function(frame){
+			this.$dispatch('loadItemByFrame', this.itemdata.item_id, frame.framedata)
+		}
 	}
 	, events : {
 		setTrackByFrame : function(frame){
@@ -97,25 +103,13 @@ return {
 			for(var i in frames){
 				var frame = frames[i]
 				if(time >= frame.startTime && time < frame.startTime + frame.framedata.duration){
+					if(frame.framedata.name == 'animate'){
+						this.loadItemAnimate(frame)
 
-					var framedata
+					}else{
+						this.loadItemNormal(frame)
 
-					switch(frame.framedata.name){
-						case 'normal' :
-							framedata = frame.framedata
-							break;
-
-						case 'animate' :
-							break;
-
-						case 'blank' :
-							break;
-
-						default : 
-							break;
 					}
-
-					this.$dispatch('loadItemByFrame', this.itemdata.item_id, framedata)
 
 					break;
 				}
