@@ -55,14 +55,18 @@ return {
 		, addFrame : function(time){
 			var frames = this.itemdata.frames
 			var startTime = 0
-			var frame
+			var framedata
 			for(var i in frames){
-				frame = frames[i]
-				startTime += frame.duration
+				framedata = frames[i]
+				startTime += framedata.duration
 			}
 			
-			frame.duration += time - startTime	
-			this.itemdata.frames.push({duration:1, name:'normal'})
+			framedata.duration += time - startTime	
+
+			var framenew = JSON.parse(JSON.stringify(framedata))
+			framenew.duration = 1
+			framenew.name = 'normal'
+			this.itemdata.frames.push(framenew)
 		}
 	}
 	, events : {
