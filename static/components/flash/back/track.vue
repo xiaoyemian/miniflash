@@ -21,7 +21,6 @@ return {
 	, props : ['timedata', 'itemdata', 'keybroad', 'formatdata', 'focus_track']
 	, data : function(){
 		return {
-			frame : null
 		}
 	}
 	, methods : {
@@ -30,7 +29,6 @@ return {
 			this.setTrackByTime(time)
 		}
 		, setTrackByTime : function(time){
-
 			var frames = this.$refs.frame
 			var frame = null
 			for(var i in frames){
@@ -40,10 +38,20 @@ return {
 				}
 			}
 
-			if(this.keybroad.command){
+			this.$nextTick(function(){
+				this.$dispatch('setTime', time)	
+				this.$dispatch('selectTrack', this.itemdata.item_id)
+			})
 
-				if(frame){
+			if(!this.keybroad.command)
+				return;
 
+
+			if(frame){
+				if(this.keybroad.alt){
+					this.clearKeyFrame(frame)	
+
+				}else{
 					switch(frame.framedata.name){
 						case 'normal' :
 							frame.framedata.name = 'animate'
@@ -60,18 +68,25 @@ return {
 						default : 
 							break;
 					}
-
-				}else{
-					this.addFrame(time)	
 				}
-			}
 
-			this.$nextTick(function(){
-				this.$dispatch('setTime', time)	
-				this.$dispatch('selectTrack', this.itemdata.item_id)
-			})
+			}else{
+				this.addKeyFrame(time)	
+			}
 		}
-		, addFrame : function(time){
+		, clearKeyFrame : function(frame){
+				var framesdata = this.itemdata.frames
+				var framedata = frame.framedata
+				var index = frame.index
+
+
+				if(index != 0){
+					framesdata[index-1].duration += framedata.duration
+				}
+				framesdata.splice(index, 1)
+				
+		}
+		, addKeyFrame : function(time){
 			var framesdata = this.itemdata.frames
 			var startTime = 0
 			var framedata
