@@ -80,10 +80,7 @@
 <template>
 <div class="itemsettings">
 	<original :focus_item="focus_item" :formatdata="formatdata.original"></original>
-	<div class="frameSetting">
-		<resize :focus_item="focus_item" :formatdata="formatdata.resize"></resize>
-		<transform :focus_item="focus_item" :formatdata="formatdata.transform"></transform>
-	</div>
+	<framesetting :focus_item="focus_item" :formatdata="formatdata"></framesetting>
 </div>
 
 <div class="viewcontrol">
@@ -102,15 +99,13 @@
 <script>
 var item = require('flash/back/item.vue')
 var original = require('flash/back/settings/original.vue')
-var transform = require('flash/back/settings/transform.vue')
-var resize = require('flash/back/settings/resize.vue')
+var framesetting = require('flash/back/settings/framesetting.vue')
 
 return {
   components : {
     item : item
 		, original : original
-		, transform : transform
-		, resize : resize
+		, framesetting : framesetting
   }
 	, props:['itemsdata', 'formatdata', 'keybroad']
 	, data : function(){
