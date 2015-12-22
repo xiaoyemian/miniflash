@@ -3,8 +3,8 @@
 	.pr; .bgc(#333);
 
 	.keyframe{
-		.pa;left:-1px;top:-1px;bottom:-1px;right:-1px;
-		border:1px solid #222;
+		.pa;
+		.h(100%);
 
 		&:before, &:after{ content:'';.pa;z-index:1; }
 		&:before{
