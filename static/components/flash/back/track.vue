@@ -110,19 +110,23 @@ return {
 			this.$dispatch('loadItemByFrame', this.itemdata.item_id, frame.framedata)
 		}
 		, loadItemAnimate : function(frame){
-			var framedata = {name:'animate'}
-			this.formatFrameData(framedata)
+			var framedata = frame.framedata
+			if(framedata.duration > 1){
 
-			var startdata = frame.framedata 
-			var enddata = this.itemdata.frames[frame.index+1]
-			var line = frame.time / frame.framedata.duration
+				framedata = {name:'animate'}
+				this.formatFrameData(framedata)
 
-			for(var i in startdata.resize){
-				framedata.resize[i] = enddata.resize[i] * line + startdata.resize[i] * (1-line)
-			}
-			for(var i in startdata.transform){
-				for(var j in startdata.transform[i]){
-					framedata.transform[i][j] = enddata.transform[i][j] * line + startdata.transform[i][j] * (1-line)
+				var startdata = frame.framedata 
+				var enddata = this.itemdata.frames[frame.index+1]
+				var line = frame.time / frame.framedata.duration
+
+				for(var i in startdata.resize){
+					framedata.resize[i] = enddata.resize[i] * line + startdata.resize[i] * (1-line)
+				}
+				for(var i in startdata.transform){
+					for(var j in startdata.transform[i]){
+						framedata.transform[i][j] = enddata.transform[i][j] * line + startdata.transform[i][j] * (1-line)
+					}
 				}
 			}
 
