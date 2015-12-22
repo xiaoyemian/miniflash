@@ -4,7 +4,6 @@
 
 	.keyframe{
 		.h(100%);.pa;left:0px;
-		border-left:1px solid #222;
 		box-sizing:border-box;
 
 		&:before, &:after{ content:'';.pa;z-index:1; }
@@ -42,15 +41,11 @@ return {
 	}
 	, methods : {
 		selectFrame : function(event){
-			this.setStartTime()
 			this.setTime()
 			this.$dispatch('setTrackByFrame', this)
 		}
 		, setTime : function(){
 			this.time = Math.floor(event.offsetX / this.timedata.framewidth)
-		}
-		, setStartTime : function(){
-			this.startTime = Math.floor(($(this.$el).position().left - this.timedata.namewidth + this.timedata.scrollleft) / this.timedata.framewidth) 
 		}
 		, formatFrameData : function(){
 			var formatdata = this.formatdata
@@ -90,6 +85,9 @@ return {
 	}
 	, created : function(){
 		this.formatFrameData()
+	}
+	, ready : function(){
+		this.startTime = Math.floor(($(this.$el).position().left - this.timedata.namewidth + this.timedata.scrollleft) / this.timedata.framewidth) 
 	}
 }
 </script>

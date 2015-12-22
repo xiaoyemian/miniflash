@@ -65,17 +65,16 @@ return {
 		}
 		, loadItemByTime : function(time){
 			var frames = this.$refs.frame
-			var frame = frames[0]
 			for(var i in frames){
-				frame = frames[i]
-				if(frame.startTime >= time){
-					break;
+				var frame = frames[i]
+				if(time >= frame.startTime && time <= frame.startTime + frame.framedata.duration){
+					this.$dispatch('loadItemByFrame', this.itemdata.item_id, frame.framedata)
 				}
 			}
-			this.$dispatch('loadItemByFrame', this.itemdata.item_id, frame.framedata)
 		}
 	}
 	, ready : function(){
+		console.log(this.$refs.frame)
 	}
 }
 </script>
