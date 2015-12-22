@@ -43,11 +43,8 @@ return {
 	}
 	, methods : {
 		selectFrame : function(event){
-			this.setTime()
-			this.$dispatch('setTrackByFrame', this)
-		}
-		, setTime : function(){
 			this.time = Math.floor(event.offsetX / this.timedata.framewidth)
+			this.$dispatch('setTrackByFrame', this)
 		}
 		, formatFrameData : function(){
 			var formatdata = this.formatdata
