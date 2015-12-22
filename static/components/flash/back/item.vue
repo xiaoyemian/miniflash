@@ -137,6 +137,7 @@ return {
 		}
 		, loadItemStyle : function(){
 			this.framestyle = this.getStyleByFrame(this.framedata)
+
 		}
 		, aspectRatio : function(){
 			var resize = this.framedata.resize
@@ -201,6 +202,8 @@ return {
 			this.framedata = framedata
 
 			this.formatResizeByOriginal()
+
+			console.log(this.itemdata.item_id)
 			this.loadItemStyle()
 		}
 		, focusItemById : function(item_id){

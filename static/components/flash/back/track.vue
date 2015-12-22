@@ -67,8 +67,9 @@ return {
 			var frames = this.$refs.frame
 			for(var i in frames){
 				var frame = frames[i]
-				if(time >= frame.startTime && time <= frame.startTime + frame.framedata.duration){
+				if(time >= frame.startTime && time < frame.startTime + frame.framedata.duration){
 					this.$dispatch('loadItemByFrame', this.itemdata.item_id, frame.framedata)
+					break;
 				}
 			}
 		}
