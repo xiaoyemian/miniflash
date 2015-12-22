@@ -31,9 +31,6 @@ return {
 		}
 		, setTrackByTime : function(time){
 
-			this.$dispatch('setTime', time)	
-			this.$dispatch('selectTrack', this.itemdata.item_id)
-
 			var frames = this.$refs.frame
 			var frame = null
 			for(var i in frames){
@@ -43,12 +40,17 @@ return {
 				}
 			}
 
-			if(!this.keybroad.command)
-				return;
+			if(this.keybroad.command){
 
-			if(!frame)
-				this.addFrame(time)	
+				if(!frame)
+					this.addFrame(time)	
 
+			}
+
+			this.$nextTick(function(){
+				this.$dispatch('setTime', time)	
+				this.$dispatch('selectTrack', this.itemdata.item_id)
+			})
 		}
 		, addFrame : function(time){
 			var frames = this.itemdata.frames
@@ -71,6 +73,8 @@ return {
 			var frames = this.$refs.frame
 			for(var i in frames){
 				var frame = frames[i]
+				console.log(time, i, frame.startTime, frame.framedata.duration)
+
 				if(time >= frame.startTime && time < frame.startTime + frame.framedata.duration){
 					this.$dispatch('loadItemByFrame', this.itemdata.item_id, frame.framedata)
 					break;

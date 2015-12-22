@@ -7,7 +7,7 @@
 </style>
 
 <template>
-<div class="name" @click.stop="selectTrack" :class="{focus:focus_track == item_id}">
+<div class="name" :class="{focus:focus_track == item_id}">
 	<div>{{item_name}}</div>
 </div>
 
@@ -28,9 +28,6 @@ return {
 		}
 	}
 	, methods : {
-		selectTrack : function(){
-			this.$dispatch('selectTrack', this.item_id)
-		}
 	}
 	, ready : function(){
 	}
