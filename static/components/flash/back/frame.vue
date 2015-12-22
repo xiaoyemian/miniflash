@@ -32,7 +32,7 @@
 <script>
 
 return {
-	props : ['framedata', 'timedata', 'keybroad', 'formatdata', 'index']
+	props : ['framedata', 'timedata', 'keybroad', 'index']
 	, data : function(){
 		return {
 			startTime : 0
@@ -42,41 +42,13 @@ return {
 	, methods : {
 		selectFrame : function(event){
 			this.time = Math.floor(event.offsetX / this.timedata.framewidth)
+			this.line = this.time / this.framedata.duration
 			this.$dispatch('setTrackByFrame', this)
-		}
-		, formatFrameData : function(){
-			var formatdata = this.formatdata
-			var framedata = this.framedata
-
-			if(!framedata.name)
-				this.$set('framedata.name', '')
-
-			if(!framedata.resize)
-				this.$set('framedata.resize', {})
-
-			if(!framedata.transform)
-				this.$set('framedata.transform', {})
-
-			for(var i in formatdata.transform){
-				if(!framedata.transform[i]){
-					var data = {}
-					for(var j in formatdata.transform[i].opts){
-						var value = formatdata.transform[i].opts[j]
-						data[value[0]] = value[2] || 0
-					}
-					this.$set('framedata.transform["'+i+'"]', data)
-				}
-			}
-
-			for(var i in formatdata.resize){
-				if(!framedata.resize[i]){
-					this.$set('framedata.resize["'+i+'"]', 0)
-				}
-			}
 		}
 	}
 	, created : function(){
-		this.formatFrameData()
+		this.$dispatch('formatFrameData', this.framedata)
+		console.log(this.framedata)
 	}
 	, ready : function(){
 		this.startTime = Math.floor(($(this.$el).position().left - this.timedata.namewidth + this.timedata.scrollleft) / this.timedata.framewidth) 

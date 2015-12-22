@@ -7,7 +7,7 @@
 
 <template>
 <div class="track" @click.stop="selectTrack" :class="{focus : focus_track == itemdata.item_id}">
-	<frameitem v-ref:frame v-for="framedata in itemdata.frames" :index="$index" :framedata="framedata" :timedata="timedata" :keybroad="keybroad" :formatdata="formatdata"></frameitem>
+	<frameitem v-ref:frame v-for="framedata in itemdata.frames" :index="$index" :framedata="framedata" :timedata="timedata" :keybroad="keybroad"></frameitem>
 </div>
 
 </template>
@@ -91,13 +91,59 @@ return {
 			this.$dispatch('loadItemByFrame', this.itemdata.item_id, frame.framedata)
 		}
 		, loadItemAnimate : function(frame){
-			console.log(frame.index)
-			this.$dispatch('loadItemByFrame', this.itemdata.item_id, frame.framedata)
+			var framedata = {name:'animate'}
+			this.formatFrameData(framedata)
+
+			var startdata = frame.framedata 
+			var enddata = this.itemdata.frames[frame.index+1]
+
+			for(var i in startdata.resize){
+				framedata.resize[i] = enddata.resize[i] * frame.line + startdata.resize[i] * (1-frame.line)
+			}
+			for(var i in startdata.transform){
+				for(var j in startdata.transform[i]){
+					framedata.transform[i][j] = enddata.transform[i][j] * frame.line + startdata.transform[i][j] * (1-frame.line)
+				}
+			}
+
+			this.$dispatch('loadItemByFrame', this.itemdata.item_id, framedata)
+		}
+		, formatFrameData : function(framedata){
+			var formatdata = this.formatdata
+
+			if(!framedata.name)
+				Vue.set(framedata, 'name', '')
+
+			if(!framedata.resize)
+				Vue.set(framedata, 'resize', {})
+
+			if(!framedata.transform)
+				Vue.set(framedata, 'transform', {})
+
+			for(var i in formatdata.transform){
+				if(!framedata.transform[i]){
+					var data = {}
+					for(var j in formatdata.transform[i].opts){
+						var value = formatdata.transform[i].opts[j]
+						data[value[0]] = value[2] || 0
+					}
+					Vue.set(framedata.transform, i, data)
+				}
+			}
+
+			for(var i in formatdata.resize){
+				if(!framedata.resize[i]){
+					Vue.set(framedata.resize, i, 0)
+				}
+			}
 		}
 	}
 	, events : {
 		setTrackByFrame : function(frame){
 			this.setTrackByTime(frame.time + frame.startTime)
+		}
+		, formatFrameData : function(framedata){
+			this.formatFrameData(framedata)
 		}
 		, loadItemByTime : function(time){
 			var frames = this.$refs.frame
