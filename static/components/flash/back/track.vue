@@ -170,6 +170,11 @@ return {
 			}
 		}
 	}
+	, watch : {
+		'itemdata.frames' : function(){
+			console.log(arguments)
+		}
+	}
 	, ready : function(){
 		var mSelf = this
 		var $track = $(this.$el)
@@ -183,11 +188,9 @@ return {
 			, stop : function(event, ui){
 				sortStop = ui.item.index()
 				var framesdata = mSelf.itemdata.frames
-
 				framesdata.splice(sortStop, 0, framesdata.splice(sortStart,1)[0])
 
 				mSelf.itemdata.frames = []	
-
 				mSelf.$nextTick(function(){
 					this.itemdata.frames = framesdata
 				})
@@ -198,7 +201,6 @@ return {
 		})
 
 		$track.disableSelection()
-
 	}
 }
 </script>
