@@ -5,7 +5,7 @@
 		.opacity(100);
 
 		.frame.focus{
-			&:before{
+			&:after{
 				content:'';.pa;.h(1px);left:6px;right:6px;.bgc(black);bottom:50%;z-index:2;
 			}
 		}

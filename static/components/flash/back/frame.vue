@@ -2,15 +2,17 @@
 .frame{
 
 	.pr; .bgc(#333);
-	&:after{ content:'';.pa;.h(100%);.w(1px);.bgc(#222);right:-1px;}
+	&:before{ content:'';.pa;.h(100%);.w(1px);.bgc(#222);right:-1px;}
 
 	.keyframe{
 		.pa;
 		.h(100%);
-		border-left:1px solid #222;
 
 		&:before, &:after{ content:'';.pa;z-index:1; }
 		&:before{
+			left:-1px;.h(100%);.w(1px);.bgc(#222);
+		}
+		&:after{
 			top:50%;left:50%;.w(6px);.h(6px);.mt(-3px);.ml(-3px);.bgc(#000); .border-r(8px);
 		}
 	}
