@@ -34,12 +34,12 @@ return {
 	, methods : {
 		selectTrack : function(event){
 			var time = Math.floor(event.offsetX / this.timedata.framewidth)
+			this.$emit('focusTrack')
+			this.$dispatch('setTime', time)	
 
 			if(this.keybroad.command){
 				this.$emit('addKeyFrame', time)	
 			}
-
-			this.$emit('setFocusTrackByTime', time)
 		}
 		, loadItemNormal : function(frame){
 			this.$dispatch('loadItemByFrame', this.itemdata.item_id, frame.framedata)
@@ -97,12 +97,12 @@ return {
 		}
 	}
 	, events : {
-		formatFrameData : function(framedata){
-			this.formatFrameData(framedata)
+		focusTrack : function(){
+			this.$dispatch('setFocusTrack', this.itemdata.item_id)
+			this.$dispatch('focusItemById', this.itemdata.item_id)
 		}
-		, setFocusTrackByTime : function(time){
-			this.$dispatch('setTime', time)	
-			this.$dispatch('focusTrack', this.itemdata.item_id)
+		, formatFrameData : function(framedata){
+			this.formatFrameData(framedata)
 		}
 		, splitKeyFrame : function(frame){
 			console.log(frame)
@@ -121,8 +121,7 @@ return {
 			this.itemdata.frames.push(framenew)
 
 			this.$nextTick(function(){
-				this.$dispatch('loadTime')
-				this.$emit('setFocusTrackByTime', time)
+				this.$dispatch('setTime', time)	
 			})
 		}
 		, clearKeyFrame : function(frame, keepTime){

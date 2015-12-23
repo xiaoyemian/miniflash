@@ -124,15 +124,9 @@ return {
 			}
 		}
 	}
-	, methods : {
+	, events : {
 		setFocusTrack : function(item_id){
 			this.$set('focus_track', item_id)
-		}
-	}
-	, events : {
-		focusTrack : function(item_id){
-			this.setFocusTrack(item_id)
-			this.$dispatch('focusItemById', item_id)
 		}
 		, setTime : function(time){
 			this.timedata.time = time

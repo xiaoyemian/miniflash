@@ -49,7 +49,8 @@ return {
 			this.time = Math.floor(event.offsetX / this.timedata.framewidth)
 
 			this.$nextTick(function(){
-				this.$dispatch('setFocusTrackByTime', this.time + this.startTime)
+				this.$dispatch('focusTrack')
+				this.$dispatch('setTime', this.time + this.startTime)	
 			})
 
 			if(this.keybroad.command && this.keybroad.alt){
@@ -68,7 +69,8 @@ return {
 			this.time = Math.floor(event.offsetX / this.timedata.framewidth)
 
 			this.$nextTick(function(){
-				this.$dispatch('setFocusTrackByTime', this.time + this.startTime)
+				this.$dispatch('focusTrack')
+				this.$dispatch('setTime', this.time + this.startTime)	
 			})
 
 			if(this.keybroad.command && this.keybroad.alt){

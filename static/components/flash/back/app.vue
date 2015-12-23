@@ -128,10 +128,10 @@ return {
 			this.$refs.flash.$emit('loadTime')
 		}
 		, focusTrackById : function(item_id){
-      this.$refs.flash.setFocusTrack(item_id)
+      this.$refs.flash.$emit('setFocusTrack', item_id)
 		} 
 		, blurTrack : function(){
-      this.$refs.flash.setFocusTrack(null)
+      this.$refs.flash.$emit('setFocusTrack', null)
 		} 
 	}
 	, created: function(){
