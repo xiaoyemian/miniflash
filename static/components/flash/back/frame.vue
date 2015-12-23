@@ -51,18 +51,24 @@ return {
 		selectFrame : function(event){
 			this.time = Math.floor(event.offsetX / this.timedata.framewidth)
 			this.$dispatch('loadTrack', this.time + this.startTime)
+
+			if(this.keybroad.command && this.keybroad.alt){
+				//清除关键帧 保留时长
+				this.$dispatch('clearKeyFrame', this, true)
+				return;
+			}
 		}
 		, setFrameName : function(event){
 			this.time = Math.floor(event.offsetX / this.timedata.framewidth)
 			this.$dispatch('loadTrack', this.time + this.startTime)
 
-			if(!this.keybroad.command)
+			if(this.keybroad.command && this.keybroad.alt){
+				//清除关键帧 不保留时长
+				this.$dispatch('clearKeyFrame', this, false)
 				return;
+			}
 
-			if(this.keybroad.alt){
-				this.$dispatch('clearKeyFrame', this)
-
-			}else{
+			if(this.keybroad.command){
 				switch(this.framedata.name){
 					case 'normal' :
 						this.framedata.name = 'animate'
@@ -79,6 +85,7 @@ return {
 					default : 
 						break;
 				}
+				return;
 			}
 		}
 	}

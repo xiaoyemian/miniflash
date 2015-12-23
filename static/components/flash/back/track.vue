@@ -31,7 +31,13 @@ return {
 				this.addKeyFrame(time)	
 			}
 
-			this.$emit('loadTrack', time)
+			this.loadTrack(time)
+		}
+		, loadTrack : function(time){
+			this.$nextTick(function(){
+				this.$dispatch('setTime', time)	
+				this.$dispatch('focusTrack', this.itemdata.item_id)
+			})
 		}
 		, addKeyFrame : function(time){
 			var framesdata = this.itemdata.frames
@@ -112,17 +118,14 @@ return {
 			this.formatFrameData(framedata)
 		}
 		, loadTrack : function(time){
-			this.$nextTick(function(){
-				this.$dispatch('setTime', time)	
-				this.$dispatch('focusTrack', this.itemdata.item_id)
-			})
+			this.loadTrack(time)
 		}
-		, clearKeyFrame : function(frame){
+		, clearKeyFrame : function(frame, keepTime){
 			var framesdata = this.itemdata.frames
 			var framedata = frame.framedata
 			var index = frame.index
 
-			if(index != 0){
+			if(index != 0 && keepTime){
 				framesdata[index-1].duration += framedata.duration
 			}
 			framesdata.splice(index, 1)
