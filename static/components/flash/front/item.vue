@@ -116,14 +116,14 @@ return {
 			var time = framedata.duration * this.timedata.step
 
 			this.framedata = framedata
+			this.framestyle = this.getStyleByFrame(framedata)
 			
-			if(framedata.name == 'animate'){
-				this.framestyle = this.getStyleByFrame(framedata, time)
-				var enddata = mSelf.itemdata.frames[index+1]
-				this.framestyle = this.getStyleByFrame(enddata, time)
-
-			}else{
-				this.framestyle = this.getStyleByFrame(framedata)
+			if(framedata.name == 'animate' && framedata.duration > 1){
+				var delay = 10
+				var t = setTimeout(function(){
+					var enddata = mSelf.itemdata.frames[index+1]
+					mSelf.framestyle = mSelf.getStyleByFrame(enddata, time-delay)
+				}, delay)
 			}
 
 			var t2 = setTimeout(function(){

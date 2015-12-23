@@ -28,7 +28,7 @@ return {
 			var time = Math.floor(event.offsetX / this.timedata.framewidth)
 
 			if(this.keybroad.command){
-				this.addKeyFrame(time)	
+				this.$emit('addKeyFrame', time)	
 			}
 
 			this.loadTrack(time)
@@ -38,25 +38,6 @@ return {
 				this.$dispatch('setTime', time)	
 				this.$dispatch('focusTrack', this.itemdata.item_id)
 			})
-		}
-		, addKeyFrame : function(time){
-			var framesdata = this.itemdata.frames
-			var startTime = 0
-			var framedata
-			for(var i in framesdata){
-				framedata = framesdata[i]
-				startTime += framedata.duration
-			}
-			
-			framedata.duration += time - startTime	
-
-			var framenew = JSON.parse(JSON.stringify({
-				resize : framedata.resize
-				, transform : framedata.transform
-			}))
-			this.formatFrameData(framenew)
-			
-			framesdata.push(framenew)
 		}
 		, loadItemNormal : function(frame){
 			this.$dispatch('loadItemByFrame', this.itemdata.item_id, frame.framedata)
@@ -119,6 +100,19 @@ return {
 		}
 		, loadTrack : function(time){
 			this.loadTrack(time)
+		}
+		, addKeyFrame : function(time){
+			var frames = this.$refs.frame
+			var len = frames.length
+			var endframe = frames[len-1]
+			endframe.framedata.duration = time - endframe.startTime 
+
+			var framenew = JSON.parse(JSON.stringify({
+				resize : endframe.framedata.resize
+				, transform : endframe.framedata.transform
+			}))
+			this.formatFrameData(framenew)
+			this.itemdata.frames.push(framenew)
 		}
 		, clearKeyFrame : function(frame, keepTime){
 			var framesdata = this.itemdata.frames
