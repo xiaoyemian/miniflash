@@ -1,8 +1,5 @@
 <style>
 .frame{
-	&.focus{
-		
-	}
 
 	.pr; .bgc(#333);
 	&:after{ content:'';.pa;.h(100%);.w(1px);.bgc(#222);right:-1px;}

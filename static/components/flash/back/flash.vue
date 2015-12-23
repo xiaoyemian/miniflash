@@ -48,7 +48,7 @@
 
 	.times{
 		.timecontrol{
-			.pa;.h(100%);z-index:2;.w(1px);
+			.pa;.h(100%);z-index:4;.w(1px);
 			.bgc(red);
 
 			span{.pa;top:0px;

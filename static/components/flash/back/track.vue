@@ -1,7 +1,15 @@
 <style>
 .track{
 	.opacity(60);
-	&.focus{.opacity(100);}
+	&.focus{
+		.opacity(100);
+
+		.frame.focus{
+			&:before{
+				content:'';.pa;.h(1px);left:6px;right:6px;.bgc(black);bottom:50%;z-index:2;
+			}
+		}
+	}
 }
 </style>
 
