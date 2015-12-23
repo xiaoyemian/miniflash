@@ -46,19 +46,21 @@ return {
 				return frame.framedata
 			}
 
+			var enddata = this.itemdata.frames[frame.index+1]
+			if(!enddata){
+				return frame.framedata
+			}
+				
 			var framedata = {name:'animate'}
 			this.formatFrameData(framedata)
 
-			var startdata = frame.framedata 
-			var enddata = this.itemdata.frames[frame.index+1]
 			var line = frame.time / frame.framedata.duration
-
-			for(var i in startdata.resize){
-				framedata.resize[i] = enddata.resize[i] * line + startdata.resize[i] * (1-line)
+			for(var i in frame.framedata.resize){
+				framedata.resize[i] = enddata.resize[i] * line + frame.framedata.resize[i] * (1-line)
 			}
-			for(var i in startdata.transform){
-				for(var j in startdata.transform[i]){
-					framedata.transform[i][j] = enddata.transform[i][j] * line + startdata.transform[i][j] * (1-line)
+			for(var i in frame.framedata.transform){
+				for(var j in frame.framedata.transform[i]){
+					framedata.transform[i][j] = enddata.transform[i][j] * line + frame.framedata.transform[i][j] * (1-line)
 				}
 			}
 			return framedata
@@ -148,12 +150,8 @@ return {
 			}
 			framesdata.splice(index, 1)
 
-			this.itemdata.frames = []	
 			this.$nextTick(function(){
-				this.itemdata.frames = framesdata
-				this.$nextTick(function(){
-					this.$dispatch('loadTime')
-				})
+				this.$dispatch('loadTime')
 			})
 		}
 		, loadItemByTime : function(time){
@@ -179,9 +177,9 @@ return {
 		'itemdata.frames' : function(frames){
 			var len = frames.length
 			if(len){
-				var framedata = frames[len-1]
-				framedata.name = 'normal'
-				framedata.duration = 1
+				var enddata = frames[len-1]
+//				enddata.name = 'normal'
+				enddata.duration = 1
 			}
 		}
 	}

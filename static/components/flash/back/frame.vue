@@ -75,7 +75,10 @@ return {
 
 			if(this.keybroad.command && this.keybroad.alt){
 				//清除关键帧 不保留时长
-				this.$dispatch('clearKeyFrame', this, false)
+				//this.$dispatch('clearKeyFrame', this, false)
+
+				//清除关键帧 保留时长
+				this.$dispatch('clearKeyFrame', this, true)
 				return;
 			}
 
