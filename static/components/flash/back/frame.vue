@@ -47,7 +47,10 @@ return {
 	, methods : {
 		selectFrame : function(event){
 			this.time = Math.floor(event.offsetX / this.timedata.framewidth)
-			this.$dispatch('loadTrack', this.time + this.startTime)
+
+			this.$nextTick(function(){
+				this.$dispatch('setFocusTrackByTime', this.time + this.startTime)
+			})
 
 			if(this.keybroad.command && this.keybroad.alt){
 				//清除关键帧 保留时长
@@ -57,12 +60,16 @@ return {
 
 			if(this.keybroad.command){
 				this.$dispatch('splitKeyFrame', this)
+				return;
 			}
 			
 		}
 		, selectKeyFrame : function(event){
 			this.time = Math.floor(event.offsetX / this.timedata.framewidth)
-			this.$dispatch('loadTrack', this.time + this.startTime)
+
+			this.$nextTick(function(){
+				this.$dispatch('setFocusTrackByTime', this.time + this.startTime)
+			})
 
 			if(this.keybroad.command && this.keybroad.alt){
 				//清除关键帧 不保留时长

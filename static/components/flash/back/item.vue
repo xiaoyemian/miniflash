@@ -199,8 +199,6 @@ return {
 
 			this.framedata = framedata
 
-			console.log(this.framedata.resize.left)
-
 			this.formatResizeByOriginal()
 			this.loadItemStyle()
 		}

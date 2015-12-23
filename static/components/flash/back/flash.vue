@@ -128,10 +128,6 @@ return {
 		setFocusTrack : function(item_id){
 			this.$set('focus_track', item_id)
 		}
-		, setTime : function(time){
-			this.timedata.time = time
-			this.$emit('loadTime')
-		}
 	}
 	, events : {
 		focusTrack : function(item_id){
@@ -139,7 +135,8 @@ return {
 			this.$dispatch('focusItemById', item_id)
 		}
 		, setTime : function(time){
-			this.setTime(time)
+			this.timedata.time = time
+			this.$emit('loadTime')
 		}
 		, loadTime : function(){
 			this.$broadcast('loadItemByTime', this.timedata.time)
@@ -147,7 +144,7 @@ return {
 	}
 	, ready : function(){
 
-		this.setTime(0)
+		this.$emit('setTime', 0)
 
 		var mSelf = this
 
@@ -167,7 +164,7 @@ return {
 			, drag : function(event, ui){
 				var time = ((ui.position.left-mSelf.timedata.namewidth)/mSelf.timedata.framewidth)|0
 				if(mSelf.timedata.time != time)
-					mSelf.setTime(time)
+					mSelf.$emit('setTime', time)
 			}
 			, stop : function(event, ui){
 			}

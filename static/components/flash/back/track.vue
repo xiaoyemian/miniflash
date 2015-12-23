@@ -39,13 +39,7 @@ return {
 				this.$emit('addKeyFrame', time)	
 			}
 
-			this.loadTrack(time)
-		}
-		, loadTrack : function(time){
-			this.$nextTick(function(){
-				this.$dispatch('setTime', time)	
-				this.$dispatch('focusTrack', this.itemdata.item_id)
-			})
+			this.$emit('setFocusTrackByTime', time)
 		}
 		, loadItemNormal : function(frame){
 			this.$dispatch('loadItemByFrame', this.itemdata.item_id, frame.framedata)
@@ -106,13 +100,12 @@ return {
 		formatFrameData : function(framedata){
 			this.formatFrameData(framedata)
 		}
-		, loadTrack : function(time){
-			this.loadTrack(time)
+		, setFocusTrackByTime : function(time){
+			this.$dispatch('setTime', time)	
+			this.$dispatch('focusTrack', this.itemdata.item_id)
 		}
 		, splitKeyFrame : function(frame){
-			
 			console.log(frame)
-			
 		}
 		, addKeyFrame : function(time){
 			var frames = this.$refs.frame
@@ -126,6 +119,11 @@ return {
 			}))
 			this.formatFrameData(framenew)
 			this.itemdata.frames.push(framenew)
+
+			this.$nextTick(function(){
+				this.$dispatch('loadTime')
+				this.$emit('setFocusTrackByTime', time)
+			})
 		}
 		, clearKeyFrame : function(frame, keepTime){
 			var framesdata = this.itemdata.frames
