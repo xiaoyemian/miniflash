@@ -1,6 +1,14 @@
 <style>
 .frame{
 	.pr; .bgc(#333);
+	&:before, &:after{ content:'';.pa;.h(100%);.w(1px);z-index:1;.bgc(#222);}
+	&:before{
+		left:0px;
+	}
+	&:after{
+		right:-1px;
+	}
+
 
 	.keyframe{
 		.pa;
@@ -24,7 +32,7 @@
 
 <template>
 <div class="frame" :class="[framedata.name]" @click.stop="selectFrame" :style="{width:framedata.duration * timedata.framewidth + 'px'}">
-	<div class="keyframe" :style="{width:timedata.framewidth + 'px'}"></div>
+	<div class="keyframe" @click.stop="setFrameName" :style="{width:timedata.framewidth + 'px'}"></div>
 </div>
 </template>
 
@@ -42,7 +50,36 @@ return {
 	, methods : {
 		selectFrame : function(event){
 			this.time = Math.floor(event.offsetX / this.timedata.framewidth)
-			this.$dispatch('setTrackByFrame', this)
+			this.$dispatch('loadTrack', this.time + this.startTime)
+		}
+		, setFrameName : function(event){
+			this.time = Math.floor(event.offsetX / this.timedata.framewidth)
+			this.$dispatch('loadTrack', this.time + this.startTime)
+
+			if(!this.keybroad.command)
+				return;
+
+			if(this.keybroad.alt){
+				this.$dispatch('clearKeyFrame', this)
+
+			}else{
+				switch(this.framedata.name){
+					case 'normal' :
+						this.framedata.name = 'animate'
+						break;
+
+					case 'animate' :
+						this.framedata.name = 'blank'
+						break;
+
+					case 'blank' :
+						this.framedata.name = 'normal'
+						break;
+
+					default : 
+						break;
+				}
+			}
 		}
 	}
 	, created : function(){

@@ -127,14 +127,11 @@ return {
 		}
 		, setTime : function(time){
 			this.timedata.time = time
-			this.loadTime()
-		}
-		, loadTime : function(){
-			this.$broadcast('loadItemByTime', this.timedata.time)
+			this.$emit('loadTime')
 		}
 	}
 	, events : {
-		selectTrack : function(item_id){
+		focusTrack : function(item_id){
 			this.setFocusTrack(item_id)
 			this.$dispatch('focusItemById', item_id)
 		}
@@ -142,7 +139,7 @@ return {
 			this.setTime(time)
 		}
 		, loadTime : function(){
-			this.loadTime()
+			this.$broadcast('loadItemByTime', this.timedata.time)
 		}
 	}
 	, ready : function(){

@@ -26,73 +26,12 @@ return {
 	, methods : {
 		selectTrack : function(event){
 			var time = Math.floor(event.offsetX / this.timedata.framewidth)
-			this.setTrackByTime(time)
-		}
-		, setTrackByTime : function(time){
-			var frames = this.$refs.frame
-			var frame = null
-			for(var i in frames){
-				if(frames[i].time + frames[i].startTime >= time){
-					frame = frames[i]
-					break;
-				}
-			}
 
 			if(this.keybroad.command){
-
-				if(frame){
-					if(this.keybroad.alt){
-						this.clearKeyFrame(frame)	
-
-					}else{
-						switch(frame.framedata.name){
-							case 'normal' :
-								frame.framedata.name = 'animate'
-								break;
-
-							case 'animate' :
-								frame.framedata.name = 'blank'
-								break;
-
-							case 'blank' :
-								frame.framedata.name = 'normal'
-								break;
-
-							default : 
-								break;
-						}
-					}
-
-				}else{
-					this.addKeyFrame(time)	
-				}
+				this.addKeyFrame(time)	
 			}
 
-			this.$nextTick(function(){
-				this.$dispatch('setTime', time)	
-				this.$dispatch('selectTrack', this.itemdata.item_id)
-			})
-
-
-		}
-		, clearKeyFrame : function(frame){
-			var framesdata = this.itemdata.frames
-			var framedata = frame.framedata
-			var index = frame.index
-
-			if(index != 0){
-				framesdata[index-1].duration += framedata.duration
-			}
-			framesdata.splice(index, 1)
-
-			this.itemdata.frames = []	
-			this.$nextTick(function(){
-				this.itemdata.frames = framesdata
-				this.$nextTick(function(){
-					this.$dispatch('loadTime')
-				})
-			})
-
+			this.$emit('loadTrack', time)
 		}
 		, addKeyFrame : function(time){
 			var framesdata = this.itemdata.frames
@@ -169,11 +108,32 @@ return {
 		}
 	}
 	, events : {
-		setTrackByFrame : function(frame){
-			this.setTrackByTime(frame.time + frame.startTime)
-		}
-		, formatFrameData : function(framedata){
+		formatFrameData : function(framedata){
 			this.formatFrameData(framedata)
+		}
+		, loadTrack : function(time){
+			this.$nextTick(function(){
+				this.$dispatch('setTime', time)	
+				this.$dispatch('focusTrack', this.itemdata.item_id)
+			})
+		}
+		, clearKeyFrame : function(frame){
+			var framesdata = this.itemdata.frames
+			var framedata = frame.framedata
+			var index = frame.index
+
+			if(index != 0){
+				framesdata[index-1].duration += framedata.duration
+			}
+			framesdata.splice(index, 1)
+
+			this.itemdata.frames = []	
+			this.$nextTick(function(){
+				this.itemdata.frames = framesdata
+				this.$nextTick(function(){
+					this.$dispatch('loadTime')
+				})
+			})
 		}
 		, loadItemByTime : function(time){
 			var frames = this.$refs.frame

@@ -124,15 +124,15 @@ return {
 		, focusItemById : function(item_id){
       this.$refs.view.$broadcast('focusItemById', item_id)
 		} 
+		, loadTime : function(){
+			this.$refs.flash.$emit('loadTime')
+		}
 		, focusTrackById : function(item_id){
       this.$refs.flash.setFocusTrack(item_id)
 		} 
 		, blurTrack : function(){
       this.$refs.flash.setFocusTrack(null)
 		} 
-		, loadTime : function(){
-			this.$refs.flash.loadTime()
-		}
 	}
 	, created: function(){
 		var mSelf = this
