@@ -101,6 +101,11 @@ return {
 		, loadTrack : function(time){
 			this.loadTrack(time)
 		}
+		, splitKeyFrame : function(frame){
+			
+			console.log(frame)
+			
+		}
 		, addKeyFrame : function(time){
 			var frames = this.$refs.frame
 			var len = frames.length

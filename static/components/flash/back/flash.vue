@@ -5,8 +5,21 @@
 	box-sizing:border-box;
 	padding:4px;
 
-	.track, .times, .name{
-		.mb(1px);
+	.track, .name{
+		border-top:1px solid #222;
+
+		&:nth-last-child(1){
+			border-bottom:1px solid #222;
+		}
+	}
+
+	.track{
+		display:-webkit-box;
+	}
+	.trackbox{
+		.left;
+		.h(100%);
+		min-width:100%;
 	}
 
 	.trackframes{
@@ -19,7 +32,7 @@
 	.frame, .ui-state-highlight{.h(100%);}
 
 	.ui-state-highlight{
-		.bgc(#222);.w(12px);
+		.bgc(#222);.w(24px);
 	}
 
 	.flashbox{
@@ -31,16 +44,6 @@
 		.bgc(#333);.fc(#ccc);.l(26px);
 		border:1px solid #222;
 
-	}
-
-	.trackbox{
-		.left;
-		.h(100%);
-		min-width:100%;
-		
-		.track{
-			display:-webkit-box;
-		}
 	}
 
 	.times{

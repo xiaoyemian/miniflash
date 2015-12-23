@@ -1,18 +1,16 @@
 <style>
 .frame{
-	.pr; .bgc(#333);
-	&:before, &:after{ content:'';.pa;.h(100%);.w(1px);z-index:1;.bgc(#222);}
-	&:before{
-		left:0px;
-	}
-	&:after{
-		right:-1px;
+	&.focus{
+		
 	}
 
+	.pr; .bgc(#333);
+	&:after{ content:'';.pa;.h(100%);.w(1px);.bgc(#222);right:-1px;}
 
 	.keyframe{
 		.pa;
 		.h(100%);
+		border-left:1px solid #222;
 
 		&:before, &:after{ content:'';.pa;z-index:1; }
 		&:before{
@@ -31,7 +29,7 @@
 </style>
 
 <template>
-<div class="frame" :class="[framedata.name]" @click.stop="selectFrame" :style="{width:framedata.duration * timedata.framewidth + 'px'}">
+<div class="frame" :class="[framedata.name, timedata.time == startTime + time ? 'focus' : '']" @click.stop="selectFrame" :style="{width:framedata.duration * timedata.framewidth + 'px'}">
 	<div class="keyframe" @click.stop="selectKeyFrame" :style="{width:timedata.framewidth + 'px'}"></div>
 </div>
 </template>
@@ -59,8 +57,7 @@ return {
 			}
 
 			if(this.keybroad.command){
-
-				
+				this.$dispatch('splitKeyFrame', this)
 			}
 			
 		}
