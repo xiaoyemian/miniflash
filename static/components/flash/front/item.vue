@@ -107,8 +107,9 @@ return {
 	}
 	, watch : {
 		'frameindex' : function(index){
-			if(index >= this.itemdata.frames.length)
+			if(index >= this.itemdata.frames.length){
 				return;
+			}
 
 			var mSelf = this
 			var framedata = this.itemdata.frames[index] 
@@ -116,14 +117,13 @@ return {
 
 			this.framedata = framedata
 			
-			this.framestyle = this.getStyleByFrame(framedata)
-
 			if(framedata.name == 'animate'){
-				delay = 10
-				var t = setTimeout(function(){
-					var enddata = mSelf.itemdata.frames[index+1]
-					mSelf.framestyle = mSelf.getStyleByFrame(enddata, time-delay)
-				}, delay)
+				this.framestyle = this.getStyleByFrame(framedata, time)
+				var enddata = mSelf.itemdata.frames[index+1]
+				this.framestyle = this.getStyleByFrame(enddata, time)
+
+			}else{
+				this.framestyle = this.getStyleByFrame(framedata)
 			}
 
 			var t2 = setTimeout(function(){
