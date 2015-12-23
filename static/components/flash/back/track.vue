@@ -41,10 +41,11 @@ return {
 				this.$emit('addKeyFrame', time)	
 			}
 		}
-		, loadItemNormal : function(frame){
-			this.$dispatch('loadItemByFrame', this.itemdata.item_id, frame.framedata)
-		}
-		, loadItemAnimate : function(frame){
+		, getAnimateFrameData : function(frame){
+			if(frame.time == 0){
+				return frame.framedata
+			}
+
 			var framedata = {name:'animate'}
 			this.formatFrameData(framedata)
 
@@ -60,8 +61,7 @@ return {
 					framedata.transform[i][j] = enddata.transform[i][j] * line + startdata.transform[i][j] * (1-line)
 				}
 			}
-
-			this.$dispatch('loadItemByFrame', this.itemdata.item_id, framedata)
+			return framedata
 		}
 		, formatFrameData : function(framedata){
 			var formatdata = this.formatdata
@@ -95,6 +95,9 @@ return {
 				}
 			}
 		}
+		, loadItemByFrame : function(framedata){
+			this.$dispatch('loadItemByFrame', this.itemdata.item_id, framedata)
+		}
 	}
 	, events : {
 		focusTrack : function(){
@@ -104,25 +107,36 @@ return {
 		, formatFrameData : function(framedata){
 			this.formatFrameData(framedata)
 		}
-		, splitKeyFrame : function(frame){
-			console.log(frame)
-		}
 		, addKeyFrame : function(time){
 			var frames = this.$refs.frame
 			var len = frames.length
 			var endframe = frames[len-1]
 			endframe.framedata.duration = time - endframe.startTime 
 
-			var framenew = JSON.parse(JSON.stringify({
+			var framedatanew = JSON.parse(JSON.stringify({
 				resize : endframe.framedata.resize
 				, transform : endframe.framedata.transform
 			}))
-			this.formatFrameData(framenew)
-			this.itemdata.frames.push(framenew)
+			this.formatFrameData(framedatanew)
+			this.itemdata.frames.push(framedatanew)
 
 			this.$nextTick(function(){
 				this.$dispatch('setTime', time)	
 			})
+		}
+		, splitKeyFrame : function(frame){
+			var data = frame.framedata
+			if(frame.framedata.name == 'animate'){
+				data = this.getAnimateFrameData(frame)
+			}
+
+			var framedatanew = JSON.parse(JSON.stringify(data))
+
+			framedatanew.duration = frame.framedata.duration - frame.time
+			frame.framedata.duration = frame.time
+
+			this.formatFrameData(framedatanew)
+			this.itemdata.frames.splice(frame.index+1, 0, framedatanew)
 		}
 		, clearKeyFrame : function(frame, keepTime){
 			var framesdata = this.itemdata.frames
@@ -150,15 +164,11 @@ return {
 					frame.time = time - frame.startTime
 
 					if(frame.framedata.name == 'animate'){
-						if(frame.time == 0){
-							this.loadItemNormal(frame)
-
-						}else{
-							this.loadItemAnimate(frame)
-						}
+						var framedata = this.getAnimateFrameData(frame)
+						this.loadItemByFrame(framedata)
 
 					}else{
-						this.loadItemNormal(frame)
+						this.loadItemByFrame(frame.framedata)
 					}
 					break;
 				}
