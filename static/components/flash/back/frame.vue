@@ -32,7 +32,7 @@
 
 <template>
 <div class="frame" :class="[framedata.name]" @click.stop="selectFrame" :style="{width:framedata.duration * timedata.framewidth + 'px'}">
-	<div class="keyframe" @click.stop="setFrameName" :style="{width:timedata.framewidth + 'px'}"></div>
+	<div class="keyframe" @click.stop="selectKeyFrame" :style="{width:timedata.framewidth + 'px'}"></div>
 </div>
 </template>
 
@@ -57,8 +57,13 @@ return {
 				this.$dispatch('clearKeyFrame', this, true)
 				return;
 			}
+
+			if(this.keybroad.command){
+				
+			}
+			
 		}
-		, setFrameName : function(event){
+		, selectKeyFrame : function(event){
 			this.time = Math.floor(event.offsetX / this.timedata.framewidth)
 			this.$dispatch('loadTrack', this.time + this.startTime)
 
@@ -69,6 +74,7 @@ return {
 			}
 
 			if(this.keybroad.command){
+				//切换关键帧类型
 				switch(this.framedata.name){
 					case 'normal' :
 						this.framedata.name = 'animate'
