@@ -17,7 +17,6 @@
 
 .settings{
 	.h(100%);
-	padding:1px;
 	.pa;right:0px;top:0px;.w(50%);
 	z-index:10;
 	box-sizing:border-box;
@@ -26,8 +25,10 @@
 	border:1px solid #222;
 
 }
-.settingBox{
-	z-index:900;
+.settingItem{
+	.hidden;
+	border-bottom:1px solid #222;
+	display:-webkit-box;
 
 	.inputArea, .inputBox, .inputLabel{
 		.f(12px);.fc(#ccc); .l(20px);
@@ -81,8 +82,10 @@
 <div class="settings">
 	<flash v-ref:flash :itemsdata="itemsdata" :formatdata="formatdata" :keybroad="keybroad"></flash>
 
-	<original :focus_item="focus_item" :formatdata="formatdata.original"></original>
-	<framesetting :focus_item="focus_item" :formatdata="formatdata"></framesetting>
+	<div class="settingItem">
+		<original :focus_item="focus_item" :formatdata="formatdata.original"></original>
+		<framesetting :focus_item="focus_item" :formatdata="formatdata"></framesetting>
+	</div>
 
 
 	<div class="viewcontrol">
