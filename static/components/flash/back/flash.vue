@@ -1,9 +1,8 @@
 <style>
 .flash{
-	.pa;right:0px;top:0px;
-	.h(60%);.w(50%);
+	.pr;
 	box-sizing:border-box;
-	padding:4px;
+	border:1px solid #222;
 
 	.track, .name{
 		border-top:1px solid #222;
@@ -39,11 +38,11 @@
 		.pr;
 		.hidden;
 		overflow-x:auto;
-		.h(100%);
 
 		.bgc(#333);.fc(#ccc);.l(26px);
-		border:1px solid #222;
 
+		box-sizing:border-box;
+		.pa;top:0px;bottom:0px;left:0px;right:0px;
 	}
 
 	.times{
@@ -73,7 +72,7 @@
 
 <template>
 
-<div class="flash">
+<div class="flash" :style="{height:(timedata.frameheight+1) * (timedata.min+1) + 2  + 'px'}">
 	<div class="flashbox" v-el:flashbox>
 		<div class="trackbox">
 			<div class="times" :style="{'margin-left':timedata.namewidth + 'px', height:timedata.frameheight + 'px'}">

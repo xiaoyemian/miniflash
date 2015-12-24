@@ -15,25 +15,19 @@
 }
 
 
-.itemsettings{
-	.pa;bottom:0px;right:0px;top:60%;.w(50%);
+.settings{
+	.h(100%);
+	padding:1px;
+	.pa;right:0px;top:0px;.w(50%);
 	z-index:10;
 	box-sizing:border-box;
-	display:-webkit-box;
 
-/*
 	.bgc(#333);
 	border:1px solid #222;
-	padding:4px;
-*/
 
-	&>div{ -webkit-box-flex:1;
-
-	}
 }
 .settingBox{
 	z-index:900;
-	padding:4px 0px;
 
 	.inputArea, .inputBox, .inputLabel{
 		.f(12px);.fc(#ccc); .l(20px);
@@ -78,18 +72,21 @@
 
 
 <template>
-<div class="itemsettings">
-	<original :focus_item="focus_item" :formatdata="formatdata.original"></original>
-	<framesetting :focus_item="focus_item" :formatdata="formatdata"></framesetting>
-</div>
-
-<div class="viewcontrol">
-	<div @click="addItem">addItem</div>
-</div>
-
 <div class="view" @click="blurItem">
 	<div class="page" :style="pagestyle">
 		<item v-ref:item v-for="itemdata in itemsdata" :itemdata="itemdata" :index="$index" :focus_item="focus_item" :printdata="printdata" :formatdata="formatdata" :keybroad="keybroad"></item>
+	</div>
+</div>
+
+<div class="settings">
+	<flash v-ref:flash :itemsdata="itemsdata" :formatdata="formatdata" :keybroad="keybroad"></flash>
+
+	<original :focus_item="focus_item" :formatdata="formatdata.original"></original>
+	<framesetting :focus_item="focus_item" :formatdata="formatdata"></framesetting>
+
+
+	<div class="viewcontrol">
+		<div @click="addItem">addItem</div>
 	</div>
 </div>
 
@@ -97,6 +94,44 @@
 
 
 <script>
+
+var formatdata = {}
+formatdata.original = {
+/*
+	width : {label : '原始宽度', unit : 'px'}
+	, height : {label : '原始高度', unit : 'px'}
+	, */imageUrl : {label : '图片地址', type : 'text'}
+}
+formatdata.resize = {
+	width : {label : '宽度', unit : 'px'}
+	, height : {label : '高度', unit : 'px'}
+	, top : {label : '上边距', unit : 'px'}
+	, left : {label : '左边距', unit : 'px'}
+//	, 'border-radius' : {label : '圆角', unit : 'px'}
+}
+formatdata.transform = {
+/*
+	translate : {
+		label : '偏移'
+		, opts : [['x', 'px'],['y', 'px']]
+	}
+	, scale : {
+		label : '缩放'
+		, opts : [['x', '', '1', '0.1'],['y', '', '1', '0.1']]
+	}
+	, */rotate : {
+		label : '旋转'
+		, opts : [['angle', 'deg']]
+	}
+	, skew : {
+		label : '倾斜'
+		, opts : [['x-angle', 'deg'], ['y-angle', 'deg']]
+	}
+}
+
+
+
+var flash = require('flash/back/flash.vue')
 var item = require('flash/back/item.vue')
 var original = require('flash/back/settings/original.vue')
 var framesetting = require('flash/back/settings/framesetting.vue')
@@ -104,10 +139,11 @@ var framesetting = require('flash/back/settings/framesetting.vue')
 return {
   components : {
     item : item
+		, flash : flash
 		, original : original
 		, framesetting : framesetting
   }
-	, props:['itemsdata', 'formatdata', 'keybroad']
+	, props:['itemsdata', 'keybroad']
 	, data : function(){
 
 		return {
@@ -118,6 +154,7 @@ return {
 				, scale : 0
 			}
 			, pagestyle : {}
+			, formatdata : formatdata
 		}
 	}
 	, methods : {
@@ -164,6 +201,24 @@ return {
 		, setFocusItem : function(item){
 			this.setFocusItem(item)
 		}
+
+		, loadTime : function(){
+			this.$refs.flash.$emit('loadTime')
+		}
+		, focusTrackById : function(item_id){
+      this.$refs.flash.$emit('setFocusTrack', item_id)
+		} 
+		, blurTrack : function(){
+      this.$refs.flash.$emit('setFocusTrack', null)
+		} 
+
+		, loadItemByFrame : function(item_id, framedata){
+      this.$broadcast('loadItemByFrame', item_id, framedata)
+		}
+		, focusItemById : function(item_id){
+      this.$broadcast('focusItemById', item_id)
+		} 
+
 	}
 	, created : function(){
 		this.resizePrint({
