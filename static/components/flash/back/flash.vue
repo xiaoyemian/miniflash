@@ -72,7 +72,7 @@
 
 <template>
 
-<div class="flash" :style="{height:(timedata.frameheight+1) * (timedata.min+1) + 2  + 'px'}">
+<div class="flash" :style="{height:(timedata.frameheight+1) * (timedata.min+1) + 1 + 'px'}">
 	<div class="flashbox" v-el:flashbox>
 		<div class="trackbox">
 			<div class="times" :style="{'margin-left':timedata.namewidth + 'px', height:timedata.frameheight + 'px'}">

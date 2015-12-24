@@ -17,6 +17,7 @@
 
 .settings{
 	.h(100%);
+	overflow:auto;
 	.pa;right:0px;top:0px;.w(50%);
 	z-index:10;
 	box-sizing:border-box;
@@ -80,11 +81,15 @@
 </div>
 
 <div class="settings">
-	<flash v-ref:flash :itemsdata="itemsdata" :formatdata="formatdata" :keybroad="keybroad"></flash>
+	<flash v-ref:flash :focus_frame="focus_frame" :itemsdata="itemsdata" :formatdata="formatdata" :keybroad="keybroad"></flash>
+
+	<div class="settingFrame">
+		<framesetting :focus_frame="focus_frame" :formatdata="formatdata.flash"></framesetting>
+	</div>
 
 	<div class="settingItem">
 		<original :focus_item="focus_item" :formatdata="formatdata.original"></original>
-		<framesetting :focus_item="focus_item" :formatdata="formatdata"></framesetting>
+		<itemsetting :focus_item="focus_item" :formatdata="formatdata"></itemsetting>
 	</div>
 
 
@@ -137,6 +142,7 @@ formatdata.transform = {
 var flash = require('flash/back/flash.vue')
 var item = require('flash/back/item.vue')
 var original = require('flash/back/settings/original.vue')
+var itemsetting = require('flash/back/settings/itemsetting.vue')
 var framesetting = require('flash/back/settings/framesetting.vue')
 
 return {
@@ -144,6 +150,7 @@ return {
     item : item
 		, flash : flash
 		, original : original
+		, itemsetting : itemsetting
 		, framesetting : framesetting
   }
 	, props:['itemsdata', 'keybroad']
@@ -151,6 +158,7 @@ return {
 
 		return {
 			focus_item : null
+			, focus_frame : null
 			, printdata : {
 				width : 0
 				, height : 0
@@ -221,7 +229,6 @@ return {
 		, focusItemById : function(item_id){
       this.$broadcast('focusItemById', item_id)
 		} 
-
 	}
 	, created : function(){
 		this.resizePrint({
