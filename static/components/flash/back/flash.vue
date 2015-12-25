@@ -39,7 +39,7 @@
 		.hidden;
 		overflow-x:auto;
 
-		.bgc(#333);.fc(#ccc);.l(26px);
+		.bgc(#333);.fc(#ccc);
 
 		box-sizing:border-box;
 		.pa;top:0px;bottom:0px;left:0px;right:0px;
@@ -113,10 +113,10 @@ return {
 		return {
 			focus_track : null
 			, timedata : {
-				min : 10
+				min : 15
 				, step : 100
 				, framewidth : 12
-				, frameheight : 26
+				, frameheight : 20
 				, namewidth : 60
 				, scrollleft : null
 				, time : null
