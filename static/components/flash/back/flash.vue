@@ -113,10 +113,10 @@ return {
 		return {
 			focus_track : null
 			, timedata : {
-				min : 15
+				min : 12
 				, step : 100
 				, framewidth : 12
-				, frameheight : 20
+				, frameheight : 22
 				, namewidth : 60
 				, scrollleft : null
 				, time : null

@@ -13,7 +13,7 @@
 			left:-1px;.h(100%);.w(1px);.bgc(#222);
 		}
 		&:after{
-			top:50%;left:50%;.w(6px);.h(6px);.mt(-3px);.ml(-3px);.bgc(#000); .border-r(8px);
+			top:50%;left:50%;.w(4px);.h(4px);.mt(-2px);.ml(-2px);.bgc(#000); .border-r(8px);
 		}
 	}
 
