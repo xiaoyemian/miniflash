@@ -52,7 +52,7 @@
 	input{
 		&[type="text"],&[type="number"]{
 			.i_block;.fc(#ccc);.bgc(#383838);
-			padding:2px 6px;
+			padding:2px 0px 2px 6px;
 			border:1px solid #2E2E2E;
 		}
 		&[type="text"]{ .w(88px); }
