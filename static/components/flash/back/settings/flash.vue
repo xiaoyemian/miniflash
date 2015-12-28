@@ -10,7 +10,7 @@
 			<option value="{{option}}" selected="{{option == (focus_frame.framedata[key] || 'linear')}}" v-for="(name, option) in value.options">{{option}}</option>
 		</select>
 
-		<input v-else type="{{value.type||'number'}}" @keydown="updateFrame" id="{{key}}" placeholder="" value="{{focus_frame.framedata[key]}}" />{{value.unit||''}}
+		<input v-else type="{{value.type||'number'}}" @keyup="updateFrame" id="{{key}}" placeholder="" value="{{focus_frame.framedata[key]}}" />{{value.unit||''}}
 	</div>
 
 </div>
@@ -49,6 +49,7 @@ return {
 				arr.push('["' + type[i] + '"]')
 			}
 
+			console.log(value)
 			this.$set('focus_frame.framedata' + arr.join(''), value||0)
 			console.log(this.focus_frame.framedata)
 		}
