@@ -170,7 +170,7 @@ return {
 	}
 	, methods : {
 		blurItem : function(){
-			this.setFocusItem(null)
+			this.$set('focus_item', null)
 			this.$dispatch('blurTrack')
 		}
 		, resizePrint : function(printdata){
@@ -200,19 +200,18 @@ return {
 				this.$dispatch('loadTime')
 			})
 		}
-		, setFocusItem : function(item){
-			this.$set('focus_item', item)
-		}
 	}
 	, events : {
 		selectItem : function(item){
-			this.setFocusItem(item)
+			this.$set('focus_item', item)
 			this.$dispatch('focusTrackById', item.itemdata.item_id)
 		}
 		, setFocusItem : function(item){
-			this.setFocusItem(item)
+			this.$set('focus_item', item)
 		}
-
+		, setFocusFrame : function(frame){
+			this.$set('focus_frame', frame)
+		}
 		, loadTime : function(){
 			this.$refs.flash.$emit('loadTime')
 		}

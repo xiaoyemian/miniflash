@@ -49,15 +49,17 @@ return {
 		selectFrame : function(event){
 			this.time = Math.floor(event.offsetX / this.timedata.framewidth)
 			this.$dispatch('focusTrack')
+			this.$dispatch('setFocusFrame', this)
 
 			if(this.keybroad.command){
 				if(this.keybroad.alt){
-					//清除关键帧 保留时长
-					this.$dispatch('clearKeyFrame', this, true)
+					//清除关键帧 不保留时长
+					this.$dispatch('clearKeyFrame', this, false)
 
 				}else{
 					this.$dispatch('splitKeyFrame', this)
 				}
+
 			}else{
 				this.$dispatch('setTime', this.time + this.startTime)	
 			}
@@ -65,37 +67,36 @@ return {
 		}
 		, selectKeyFrame : function(event){
 			this.time = Math.floor(event.offsetX / this.timedata.framewidth)
-
-			this.$nextTick(function(){
-				this.$dispatch('focusTrack')
-				this.$dispatch('setTime', this.time + this.startTime)	
-			})
-
-			if(this.keybroad.command && this.keybroad.alt){
-				//清除关键帧 保留时长
-				this.$dispatch('clearKeyFrame', this, true)
-				return;
-			}
+			this.$dispatch('focusTrack')
+			this.$dispatch('setFocusFrame', this)
 
 			if(this.keybroad.command){
-				//切换关键帧类型
-				switch(this.framedata.name){
-					case 'normal' :
-						this.framedata.name = 'animate'
-						break;
+				if(this.keybroad.alt){
+					//清除关键帧 保留时长
+					this.$dispatch('clearKeyFrame', this, true)
 
-					case 'animate' :
-						this.framedata.name = 'blank'
-						break;
+				}else{
+					//切换关键帧类型
+					switch(this.framedata.name){
+						case 'normal' :
+							this.framedata.name = 'animate'
+							break;
 
-					case 'blank' :
-						this.framedata.name = 'normal'
-						break;
+						case 'animate' :
+							this.framedata.name = 'blank'
+							break;
 
-					default : 
-						break;
+						case 'blank' :
+							this.framedata.name = 'normal'
+							break;
+
+						default : 
+							break;
+					}
 				}
-				return;
+
+			}else{
+				this.$dispatch('setTime', this.time + this.startTime)	
 			}
 		}
 	}
