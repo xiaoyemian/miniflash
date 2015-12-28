@@ -18,6 +18,12 @@
 
 	&.focus{
 		.opacity(100);
+		.frame{
+			.opacity(20);
+			&.focus{
+				.opacity(100);
+			}
+		}
 		.focusframe{.block;}
 	}
 }

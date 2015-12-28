@@ -81,7 +81,7 @@
 </div>
 
 <div class="settings">
-	<flash v-ref:flash :focus_frame="focus_frame" :itemsdata="itemsdata" :formatdata="formatdata" :keybroad="keybroad"></flash>
+	<flash v-ref:flash :itemsdata="itemsdata" :formatdata="formatdata" :keybroad="keybroad"></flash>
 
 	<div class="settingFrame">
 		<framesetting :focus_frame="focus_frame" :formatdata="formatdata.flash"></framesetting>
