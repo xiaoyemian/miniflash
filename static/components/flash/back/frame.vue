@@ -100,11 +100,23 @@ return {
 			}
 		}
 	}
+	, events : {
+		setStartTime : function(){
+			this.startTime = Math.floor(($(this.$el).position().left + this.timedata.scrollleft) / this.timedata.framewidth) 
+		}
+	}
+	, watch : {
+		'framedata.duration' : function(){
+			this.$nextTick(function(){
+				this.$parent.$broadcast('setStartTime')
+			})
+		}
+	}
 	, created : function(){
 		this.$dispatch('formatFrameData', this.framedata)
 	}
 	, ready : function(){
-		this.startTime = Math.floor(($(this.$el).position().left + this.timedata.scrollleft) / this.timedata.framewidth) 
+		this.$emit('setStartTime')
 	}
 }
 </script>

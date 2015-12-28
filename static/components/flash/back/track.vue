@@ -203,7 +203,6 @@ return {
 			var len = frames.length
 			if(len){
 				var enddata = frames[len-1]
-//				enddata.name = 'normal'
 				enddata.duration = 1
 			}
 		}
