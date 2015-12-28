@@ -8,7 +8,6 @@
 		.h(100%);
 		.bgc(#FF7070);
 		.opacity(60);
-		.none;
 		.eventNone;
 		z-index:2;
 		border:1px solid red;
@@ -24,14 +23,13 @@
 				.opacity(100);
 			}
 		}
-		.focusframe{.block;}
 	}
 }
 </style>
 
 <template>
 <div class="track" @click.stop="selectTrack" :class="{focus : focus_track == itemdata.item_id}">
-	<div class="focusframe" :style="{width:timedata.framewidth + 'px', left:timedata.time * timedata.framewidth + 'px'}"></div>
+	<div class="focusframe" v-if="focus_frame && focus_track == itemdata.item_id" :style="{width:timedata.framewidth + 'px', left:timedata.time * timedata.framewidth + 'px'}"></div>
 	<frameitem v-ref:frame v-for="framedata in itemdata.frames" :index="$index" :framedata="framedata" :timedata="timedata" :keybroad="keybroad"></frameitem>
 </div>
 
@@ -43,7 +41,7 @@ return {
   components : {
     frameitem : frame
 	}
-	, props : ['timedata', 'itemdata', 'keybroad', 'formatdata', 'focus_track']
+	, props : ['timedata', 'itemdata', 'keybroad', 'formatdata', 'focus_track', 'focus_frame']
 	, data : function(){
 		return {
 		}
