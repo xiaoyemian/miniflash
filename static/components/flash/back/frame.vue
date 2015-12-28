@@ -47,23 +47,20 @@ return {
 	, methods : {
 		selectFrame : function(event){
 			this.time = Math.floor(event.offsetX / this.timedata.framewidth)
-
-			this.$nextTick(function(){
-				this.$dispatch('focusTrack')
-				this.$dispatch('setTime', this.time + this.startTime)	
-			})
-
-			if(this.keybroad.command && this.keybroad.alt){
-				//清除关键帧 保留时长
-				this.$dispatch('clearKeyFrame', this, true)
-				return;
-			}
+			this.$dispatch('focusTrack')
 
 			if(this.keybroad.command){
-				this.$dispatch('splitKeyFrame', this)
-				return;
+				if(this.keybroad.alt){
+					//清除关键帧 保留时长
+					this.$dispatch('clearKeyFrame', this, true)
+
+				}else{
+					this.$dispatch('splitKeyFrame', this)
+				}
+
+			}else{
+				this.$dispatch('setTime', this.time + this.startTime)	
 			}
-			
 		}
 		, selectKeyFrame : function(event){
 			this.time = Math.floor(event.offsetX / this.timedata.framewidth)
@@ -74,9 +71,6 @@ return {
 			})
 
 			if(this.keybroad.command && this.keybroad.alt){
-				//清除关键帧 不保留时长
-				//this.$dispatch('clearKeyFrame', this, false)
-
 				//清除关键帧 保留时长
 				this.$dispatch('clearKeyFrame', this, true)
 				return;
@@ -109,6 +103,7 @@ return {
 	}
 	, ready : function(){
 		this.startTime = Math.floor(($(this.$el).position().left - this.timedata.namewidth + this.timedata.scrollleft) / this.timedata.framewidth) 
+		console.log(this.startTime)
 	}
 }
 </script>

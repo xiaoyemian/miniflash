@@ -139,9 +139,14 @@ return {
 
 			framedatanew.duration = frame.framedata.duration - frame.time
 			frame.framedata.duration = frame.time
+			frame.time = 0
 
 			this.formatFrameData(framedatanew)
 			this.itemdata.frames.splice(frame.index+1, 0, framedatanew)
+
+			this.$nextTick(function(){
+				this.$dispatch('loadTime')
+			})
 		}
 		, clearKeyFrame : function(frame, keepTime){
 			var framesdata = this.itemdata.frames
