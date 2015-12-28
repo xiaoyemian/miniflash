@@ -10,24 +10,15 @@
 		.opacity(60);
 		.none;
 		.eventNone;
-		z-index:1;
+		z-index:2;
+		border:1px solid red;
+		box-sizing:border-box;
 	}
 
 
 	&.focus{
 		.opacity(100);
 		.focusframe{.block;}
-
-		.frame.focus{
-/*
-			&:after{
-				content:'';.pa;.h(1px);left:6px;.w(100%);.bgc(black);bottom:50%;z-index:2;
-			}
-			&:nth-last-child(1){
-				&:after{.none;}
-			}
-*/
-		}
 	}
 }
 </style>
@@ -221,10 +212,10 @@ return {
 
 		$track.sortable({
 			start : function(event, ui){
-				sortStart = ui.item.index()
+				sortStart = ui.item.index()-1
 			}
 			, stop : function(event, ui){
-				sortStop = ui.item.index()
+				sortStop = ui.item.index()-1
 				var framesdata = mSelf.itemdata.frames
 				framesdata.splice(sortStop, 0, framesdata.splice(sortStart,1)[0])
 
