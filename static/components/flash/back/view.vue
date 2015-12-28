@@ -138,8 +138,8 @@ formatdata.transform = {
 var flash = require('flash/back/flash.vue')
 var item = require('flash/back/item.vue')
 var original = require('flash/back/settings/original.vue')
-var framesetting = require('flash/back/settings/framesetting.vue')
-var flashsetting = require('flash/back/settings/flashsetting.vue')
+var framesetting = require('flash/back/settings/frame.vue')
+var flashsetting = require('flash/back/settings/flash.vue')
 
 return {
   components : {
