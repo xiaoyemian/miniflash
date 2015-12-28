@@ -3,12 +3,14 @@
 
 <template>
 <div class="settingFlash" v-if="focus_frame">
-	<div class="inputArea" v-for="(name, setting) in formatdata">
-		<label for="{{name}}">{{setting.label}}:</label>
-		
-		<select id="{{name}}" @change="setFrame" v-if="setting.type == 'select'">
-			<option value="{{value}}" selected="{{value == (focus_frame.framedata[name] || 'linear')}}" v-for="(key, value) in setting.options">{{value}}</option>
+	<div class="inputArea" v-for="(key, value) in formatdata">
+		<label for="{{key}}">{{value.label}}:</label>
+
+		<select id="{{key}}" @change="updateFrame" v-if="value.options">
+			<option value="{{option}}" selected="{{option == (focus_frame.framedata[key] || 'linear')}}" v-for="(name, option) in value.options">{{option}}</option>
 		</select>
+
+		<input v-else type="{{value.type||'number'}}" @keydown="updateFrame" id="{{key}}" placeholder="" value="{{focus_frame.framedata[key]}}" />{{value.unit||''}}
 	</div>
 
 </div>
@@ -16,27 +18,28 @@
 
 <script>
 
-var formatdata = {}
-formatdata.name = {
-	label : '帧类型'
-	, options : [ 'normal', 'animate', 'blank']
-	, type : 'select'
-}
-formatdata['timing-function'] = {
-	label : '速度曲线'
-	, options : ['linear', 'ease', 'ease-in', 'ease-out', 'ease-in-out']
-	, type : 'select'
-}
-
 return {
-	props : ['focus_frame']
+	props : ['focus_frame', 'timedata']
 	, data : function(){
 		return {
-			formatdata : formatdata
+			formatdata : {
+				name : {
+					label : '帧类型'
+					, options : [ 'normal', 'animate', 'blank']
+				}
+				, 'timing-function' : {
+					label : '速度曲线'
+					, options : ['linear', 'ease', 'ease-in', 'ease-out', 'ease-in-out']
+				}
+				, duration : {
+					label : '时长'
+					, unit : '*' + this.timedata.step + 'ms'
+				}
+			}
 		}
 	}
 	, methods : {
-		setFrame : function(event){
+		updateFrame : function(event){
 			var setting = event.target
 			var type = setting.id.split('|')
 			var value = setting.value

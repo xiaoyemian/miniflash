@@ -82,7 +82,6 @@
 
 <div class="settings">
 	<flash v-ref:flash :focus_frame="focus_frame" :itemsdata="itemsdata" :formatdata="formatdata" :keybroad="keybroad"></flash>
-	<flashsetting :focus_frame="focus_frame"></flashsetting>
 
 	<original :focus_item="focus_item" :formatdata="formatdata.original"></original>
 	<framesetting :focus_item="focus_item" :formatdata="formatdata"></framesetting>
@@ -137,7 +136,6 @@ var flash = require('flash/back/flash.vue')
 var item = require('flash/back/item.vue')
 var original = require('flash/back/settings/original.vue')
 var framesetting = require('flash/back/settings/frame.vue')
-var flashsetting = require('flash/back/settings/flash.vue')
 
 return {
   components : {
@@ -145,7 +143,6 @@ return {
 		, flash : flash
 		, original : original
 		, framesetting : framesetting
-		, flashsetting : flashsetting
   }
 	, props:['itemsdata', 'keybroad']
 	, data : function(){
