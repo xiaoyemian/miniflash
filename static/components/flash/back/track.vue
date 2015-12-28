@@ -164,21 +164,26 @@ return {
 		}
 		, loadItemByTime : function(time){
 			var frames = this.$refs.frame
+			var frame
+			var framedata
 			for(var i in frames){
-				var frame = frames[i]
+				frame = frames[i]
 				if(time >= frame.startTime && time < frame.startTime + frame.framedata.duration){
 					frame.time = time - frame.startTime
 
 					if(frame.framedata.name == 'animate'){
-						var framedata = this.getAnimateFrameData(frame)
-						this.loadItemByFrame(framedata)
+						framedata = this.getAnimateFrameData(frame)
 
 					}else{
-						this.loadItemByFrame(frame.framedata)
+						framedata = frame.framedata
 					}
 					break;
 				}
 			}
+			if(!framedata){
+				framedata = frame.framedata
+			}
+			this.loadItemByFrame(framedata)
 		}
 	}
 	, watch : {
