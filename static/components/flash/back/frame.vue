@@ -4,6 +4,15 @@
 	.pr; .bgc(#333);
 	&:before{ content:'';.pa;.h(100%);.w(1px);.bgc(#222);right:-1px;}
 
+
+	.focusframe{
+		.pa;
+		.h(100%);
+		.bgc(#FF7070);
+		.opacity(60);
+		.none;
+		.eventNone;
+	}
 	.keyframe{
 		.pa;
 		.h(100%);
@@ -29,6 +38,7 @@
 
 <template>
 <div class="frame" :class="[framedata.name, timedata.time == startTime + time ? 'focus' : '']" @click.stop="selectFrame" :style="{width:framedata.duration * timedata.framewidth + 'px'}">
+	<div class="focusframe" :style="{width:timedata.framewidth + 'px', left:time * timedata.framewidth + 'px'}"></div>
 	<div class="keyframe" @click.stop="selectKeyFrame" :style="{width:timedata.framewidth + 'px'}"></div>
 </div>
 </template>
@@ -57,10 +67,10 @@ return {
 				}else{
 					this.$dispatch('splitKeyFrame', this)
 				}
-
 			}else{
 				this.$dispatch('setTime', this.time + this.startTime)	
 			}
+
 		}
 		, selectKeyFrame : function(event){
 			this.time = Math.floor(event.offsetX / this.timedata.framewidth)

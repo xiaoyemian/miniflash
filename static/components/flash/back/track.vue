@@ -5,12 +5,15 @@
 		.opacity(100);
 
 		.frame.focus{
+			.focusframe{.block;}
+/*
 			&:after{
 				content:'';.pa;.h(1px);left:6px;.w(100%);.bgc(black);bottom:50%;z-index:2;
 			}
 			&:nth-last-child(1){
 				&:after{.none;}
 			}
+*/
 		}
 	}
 }
