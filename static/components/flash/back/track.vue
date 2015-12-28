@@ -1,11 +1,24 @@
 <style>
 .track{
 	.opacity(60);
+	.pr;
+
+	.focusframe{
+		.pa;
+		.h(100%);
+		.bgc(#FF7070);
+		.opacity(60);
+		.none;
+		.eventNone;
+		z-index:1;
+	}
+
+
 	&.focus{
 		.opacity(100);
+		.focusframe{.block;}
 
 		.frame.focus{
-			.focusframe{.block;}
 /*
 			&:after{
 				content:'';.pa;.h(1px);left:6px;.w(100%);.bgc(black);bottom:50%;z-index:2;
@@ -21,6 +34,7 @@
 
 <template>
 <div class="track" @click.stop="selectTrack" :class="{focus : focus_track == itemdata.item_id}">
+	<div class="focusframe" :style="{width:timedata.framewidth + 'px', left:timedata.time * timedata.framewidth + 'px'}"></div>
 	<frameitem v-ref:frame v-for="framedata in itemdata.frames" :index="$index" :framedata="framedata" :timedata="timedata" :keybroad="keybroad"></frameitem>
 </div>
 

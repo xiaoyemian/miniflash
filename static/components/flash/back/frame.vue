@@ -5,14 +5,6 @@
 	&:before{ content:'';.pa;.h(100%);.w(1px);.bgc(#222);right:-1px;}
 
 
-	.focusframe{
-		.pa;
-		.h(100%);
-		.bgc(#FF7070);
-		.opacity(60);
-		.none;
-		.eventNone;
-	}
 	.keyframe{
 		.pa;
 		.h(100%);
@@ -38,7 +30,6 @@
 
 <template>
 <div class="frame" :class="[framedata.name, timedata.time == startTime + time ? 'focus' : '']" @click.stop="selectFrame" :style="{width:framedata.duration * timedata.framewidth + 'px'}">
-	<div class="focusframe" :style="{width:timedata.framewidth + 'px', left:time * timedata.framewidth + 'px'}"></div>
 	<div class="keyframe" @click.stop="selectKeyFrame" :style="{width:timedata.framewidth + 'px'}"></div>
 </div>
 </template>
@@ -112,8 +103,7 @@ return {
 		this.$dispatch('formatFrameData', this.framedata)
 	}
 	, ready : function(){
-		this.startTime = Math.floor(($(this.$el).position().left - this.timedata.namewidth + this.timedata.scrollleft) / this.timedata.framewidth) 
-		console.log(this.startTime)
+		this.startTime = Math.floor(($(this.$el).position().left + this.timedata.scrollleft) / this.timedata.framewidth) 
 	}
 }
 </script>
