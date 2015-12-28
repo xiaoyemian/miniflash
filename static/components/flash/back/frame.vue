@@ -4,10 +4,10 @@
 	.pr; .bgc(#333);
 	&:before{ content:'';.pa;.h(100%);.w(1px);.bgc(#222);right:-1px;}
 
-
 	.keyframe{
 		.pa;
 		.h(100%);
+		z-index:3;
 
 		&:before, &:after{ content:'';.pa;z-index:1; }
 		&:before{

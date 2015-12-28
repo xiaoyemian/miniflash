@@ -14,7 +14,6 @@
 	.bgc(white);
 }
 
-
 .settings{
 	.h(100%);
 	overflow:auto;
@@ -26,10 +25,9 @@
 	border:1px solid #222;
 
 }
-.settingItem{
+.settingFrame, .settingOriginal, .settingFlash{
 	.hidden;
 	border-bottom:1px solid #222;
-	display:-webkit-box;
 
 	.inputArea, .inputBox, .inputLabel{
 		.f(12px);.fc(#ccc); .l(20px);
@@ -37,6 +35,7 @@
 	.inputArea{
 		padding:4px;
 		//border-bottom:1px solid #2E2E2E;
+		.left;
 
 		&:nth-last-child(1){
 			border:0 none;
@@ -63,6 +62,7 @@
 	}
 }
 
+
 .ui-resizable{
 	&-se, &-e, &-s{.pa;z-index:90;}
 	&-se{cursor:se-resize;}
@@ -83,14 +83,10 @@
 <div class="settings">
 	<flash v-ref:flash :itemsdata="itemsdata" :formatdata="formatdata" :keybroad="keybroad"></flash>
 
-	<div class="settingFrame">
-		<framesetting :focus_frame="focus_frame" :formatdata="formatdata.flash"></framesetting>
-	</div>
+	<flashsetting :focus_frame="focus_frame" :formatdata="formatdata.flash"></flashsetting>
 
-	<div class="settingItem">
-		<original :focus_item="focus_item" :formatdata="formatdata.original"></original>
-		<itemsetting :focus_item="focus_item" :formatdata="formatdata"></itemsetting>
-	</div>
+	<original :focus_item="focus_item" :formatdata="formatdata.original"></original>
+	<framesetting :focus_item="focus_item" :formatdata="formatdata"></framesetting>
 
 
 	<div class="viewcontrol">
@@ -142,16 +138,16 @@ formatdata.transform = {
 var flash = require('flash/back/flash.vue')
 var item = require('flash/back/item.vue')
 var original = require('flash/back/settings/original.vue')
-var itemsetting = require('flash/back/settings/itemsetting.vue')
 var framesetting = require('flash/back/settings/framesetting.vue')
+var flashsetting = require('flash/back/settings/flashsetting.vue')
 
 return {
   components : {
     item : item
 		, flash : flash
 		, original : original
-		, itemsetting : itemsetting
 		, framesetting : framesetting
+		, flashsetting : flashsetting
   }
 	, props:['itemsdata', 'keybroad']
 	, data : function(){
