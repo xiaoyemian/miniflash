@@ -199,7 +199,7 @@ return {
 	, events : {
 		selectItem : function(item){
 			this.$set('focus_item', item)
-			this.$dispatch('focusTrackById', item.itemdata.item_id)
+      this.$refs.flash.$emit('setFocusTrack', item.itemdata.item_id)
 		}
 		, setFocusItem : function(item){
 			this.$set('focus_item', item)
@@ -210,9 +210,6 @@ return {
 		, loadTime : function(){
 			this.$refs.flash.$emit('loadTime')
 		}
-		, focusTrackById : function(item_id){
-      this.$refs.flash.$emit('setFocusTrack', item_id)
-		} 
 		, blurTrack : function(){
       this.$refs.flash.$emit('setFocusTrack', null)
 		} 
