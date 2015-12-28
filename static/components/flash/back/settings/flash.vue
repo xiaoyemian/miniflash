@@ -33,7 +33,7 @@ return {
 				}
 				, duration : {
 					label : '时长'
-					, unit : '*' + this.timedata.step + 'ms'
+					, unit : '*' + this.timedata.step + '毫秒'
 				}
 			}
 		}
