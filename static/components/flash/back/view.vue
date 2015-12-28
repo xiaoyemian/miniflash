@@ -83,11 +83,10 @@
 <div class="settings">
 	<flash v-ref:flash :itemsdata="itemsdata" :formatdata="formatdata" :keybroad="keybroad"></flash>
 
-	<flashsetting :focus_frame="focus_frame" :formatdata="formatdata.flash"></flashsetting>
+	<flashsetting :focus_frame="focus_frame"></flashsetting>
 
 	<original :focus_item="focus_item" :formatdata="formatdata.original"></original>
 	<framesetting :focus_item="focus_item" :formatdata="formatdata"></framesetting>
-
 
 	<div class="viewcontrol">
 		<div @click="addItem">addItem</div>
