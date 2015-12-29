@@ -103,12 +103,15 @@ return {
 	, events : {
 		setStartTime : function(){
 			this.startTime = Math.floor(($(this.$el).position().left + this.timedata.scrollleft) / this.timedata.framewidth) 
+			console.log(this.startTime)
 		}
 	}
 	, watch : {
 		'framedata.duration' : function(){
+			this.framedata.duration -= 0
 			this.$nextTick(function(){
 				this.$parent.$broadcast('setStartTime')
+				this.$dispatch('loadTime')
 			})
 		}
 	}
