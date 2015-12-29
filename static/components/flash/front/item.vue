@@ -14,10 +14,24 @@
 </style>
 
 <template>
-<div class="item" :class="[framedata && framedata.name]" :style="[originalstyle, framestyle]">
+<style>
+{{
+	'.' + itemdata.item_id + '{'
+	+'width:' + itemdata.original.width * printdata.scale + 'px' + ';'
+	+'height:' + itemdata.original.height * printdata.scale + 'px' + ';'
+	+'background-image:' + 'url("' + itemdata.original.imageUrl + '")' + ';'
+	+ '}'
+}}
+{{
+	'@-webkit-keyframes ' + itemdata.item_id + '{'
+	+ 'from {' + '}'
+	+ 'to {' + '}'
+	+ '}'
+}} 
+</style>
+<div class="item" :class="[itemdata.item_id, framedata && framedata.name]" :style="[framestyle]">
 </div>
 </template>
-
 
 <script>
 
@@ -26,22 +40,12 @@ return {
 	, data:function(){
 		return {
 			framedata : null
-			, originalstyle : {}
 			, framestyle : {} 
 			, frameindex : null
 		}
 	}
 	, methods : {
-		loadItemOriginal : function(){
-			var original = this.itemdata.original
-
-			this.originalstyle = {
-				width : original.width * this.printdata.scale + 'px'
-				, height : original.height * this.printdata.scale + 'px'
-				, 'background-image' : 'url("' + original.imageUrl + '")'
-			}
-		}
-		, loadImage : function(cbk) {
+		loadImage : function(cbk) {
 			var mSelf = this
 			var img = new Image()
 			img.onload = function(){
@@ -92,14 +96,10 @@ return {
 			
 			return style
 		}
-		, loadItemStyle : function(){
-			this.framestyle = this.getStyleByFrame(this.framedata)
-		}
 	}
 	, events : {
 		reloadItem : function(){
-			this.loadItemOriginal()
-			this.loadItemStyle()
+			this.framestyle = this.getStyleByFrame(this.framedata)
 		}
 		, startFrame : function(){
 			this.frameindex = 0
@@ -134,7 +134,6 @@ return {
 	}
 	, created : function(){
 		this.loadImage()
-		this.loadItemOriginal()
 	}
 }
 </script>
