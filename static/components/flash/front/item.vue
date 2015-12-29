@@ -22,21 +22,6 @@
 }}
 </style>
 
-<style v-if="framedata && !enddata">
-{{
-'.' + itemdata.item_id + '{'
-+'width:' + framedata.resize.width * printdata.scale + 'px' + ';'
-+'height:' + framedata.resize.height * printdata.scale + 'px' + ';'
-+'top:' + framedata.resize.top * printdata.scale + 'px' + ';'
-+'left:' + framedata.resize.left * printdata.scale + 'px' + ';'
-+'transform:'
-	+ 'rotate(' + framedata.transform.rotate.angle + 'deg)'
-	+ ' skew(' + framedata.transform.skew['x-angle'] + 'deg,' + framedata.transform.skew['y-angle'] + 'deg)'
-	+ ';'
-+ '}'
-}} 
-</style>
-
 <style v-if="framedata && enddata">
 {{
 '.' + itemdata.item_id + '{'
@@ -78,7 +63,7 @@
 <script>
 
 return {
-	props:['itemdata', 'index', 'printdata', 'timedata']
+	props:['itemdata', 'printdata', 'timedata']
 	, data:function(){
 		return {
 			framedata : null

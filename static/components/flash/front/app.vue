@@ -22,7 +22,7 @@ body{
 
 	<div class="view">
 		<div class="page" :style="{width:printdata.width * printdata.scale + 'px', height:printdata.height * printdata.scale + 'px'}">
-			<item v-ref:item v-for="itemdata in items" :itemdata="itemdata" :index="$index" :printdata="printdata" :timedata="timedata"></item>
+			<item v-ref:item v-for="itemdata in items" :itemdata="itemdata" :printdata="printdata" :timedata="timedata"></item>
 		</div>
 	</div>
 
