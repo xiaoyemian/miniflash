@@ -19,8 +19,8 @@ body{
 
 <template>
 <div class="app">
-	<canvas id="canvas" :width="printdata.width * printdata.scale + 'px'" :height="printdata.height * printdata.scale + 'px'"></canvas>
-	<item v-ref:item v-for="itemdata in items" :itemdata="itemdata" :ctx="ctx" :printdata="printdata" :timedata="timedata"></item>
+	<canvas id="canvas" :width="printdata.width + 'px'" :height="printdata.height + 'px'" :style="{width:printdata.width * printdata.scale + 'px', height:printdata.height * printdata.scale + 'px'}"></canvas>
+	<item v-ref:item v-for="itemdata in items" :itemdata="itemdata" :cxt="cxt" :printdata="printdata" :timedata="timedata"></item>
 </div>
 </template>
 
@@ -41,7 +41,7 @@ return {
 		return {
 			items : items
 			, waitImageNumber : items.length
-			, ctx : null
+			, cxt : null
 			, printdata : {
 				width : 0
 				, height : 0
@@ -91,8 +91,8 @@ return {
 	, ready : function(){
 
 		var canvas=document.getElementById('canvas');
-		var ctx=canvas.getContext('2d');
-		this.ctx = ctx
+		var cxt=canvas.getContext('2d');
+		this.cxt = cxt
 
 	}
 }

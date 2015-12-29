@@ -13,7 +13,7 @@
 
 <script>
 return {
-	props:['itemdata', 'printdata', 'timedata', 'ctx']
+	props:['itemdata', 'printdata', 'timedata', 'cxt']
 	, data:function(){
 		return {
 			framedata : null
@@ -35,6 +35,10 @@ return {
 	, events : {
 		startFrame : function(){
 			this.frameindex = 0
+
+			var img = new Image()
+			img.src = this.itemdata.original.imageUrl
+			this.cxt.drawImage(img,0,0);
 		}
 	}
 	, watch : {
@@ -57,11 +61,6 @@ return {
 		this.loadImage()
 	}
 	, ready : function(){
-		var mSelf = this
-		$(this.$els.item)
-			.on('webkitAnimationEnd', function(){
-				mSelf.frameindex++;
-			})
 	}
 }
 </script>
