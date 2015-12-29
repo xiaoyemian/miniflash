@@ -21,7 +21,7 @@ body{
 <div class="app">
 
 	<div class="view">
-		<div class="page" :style="pagestyle">
+		<div class="page" :style="{width:printdata.width * printdata.scale + 'px', height:printdata.height * printdata.scale + 'px'}">
 			<item v-ref:item v-for="itemdata in items" :itemdata="itemdata" :index="$index" :printdata="printdata" :timedata="timedata"></item>
 		</div>
 	</div>
@@ -51,7 +51,6 @@ return {
 				, height : 0
 				, scale : 0
 			}
-			, pagestyle : {}
 			, timedata : {
 				step :100
 			}
@@ -62,13 +61,7 @@ return {
 			for(var i in printdata){
 				this.$set('printdata["'+i+'"]', printdata[i]||0)
 			}
-			this.updatePage()
 		}
-		, updatePage : function(){
-			var printdata = this.printdata
-			this.$set('pagestyle.width', printdata.width * printdata.scale + 'px')
-			this.$set('pagestyle.height', printdata.height * printdata.scale + 'px')
-    }
 	}
 	, events : {
 		loadedImage : function(){

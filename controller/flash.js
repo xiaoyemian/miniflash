@@ -5,4 +5,7 @@ return {
 	, 'front' : function(args, mods){
 		this.render('flash/front')
 	}
+	, 'canvas' : function(args, mods){
+		this.render('flash/canvas')
+	}
 }
