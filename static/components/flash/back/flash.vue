@@ -88,14 +88,14 @@
 
 
 				<div class="trackframes">
-					<track v-ref:track v-for="itemdata in itemsdata" :index="$index" :itemdata="itemdata" :focus_frame="focus_frame" :focus_item="focus_item" :timedata="timedata" :keybroad="keybroad" :formatdata="formatdata" :style="{height:timedata.frameheight + 'px', 'padding-right':timedata.min * timedata.framewidth + 'px'}"></track>
+					<track v-ref:track v-for="itemdata in itemsdata" :index="$index" :itemdata="itemdata" :focus_track="focus_track" :focus_item="focus_item" :timedata="timedata" :keybroad="keybroad" :formatdata="formatdata" :style="{height:timedata.frameheight + 'px', 'padding-right':timedata.min * timedata.framewidth + 'px'}"></track>
 				</div>
 			</div>
 		</div>
 	</div>
 </div>
 
-<flashsetting :focus_frame="focus_frame" :timedata="timedata"></flashsetting>
+<flashsetting :focus_track="focus_track" :timedata="timedata"></flashsetting>
 
 </template>
 
@@ -111,7 +111,7 @@ return {
 		, name : name
 		, flashsetting : flashsetting
   }
-	, props:['itemsdata', 'formatdata', 'keybroad', 'focus_frame', 'focus_item']
+	, props:['itemsdata', 'formatdata', 'keybroad', 'focus_track', 'focus_item']
 	, data : function(){
 
 		return {
@@ -127,9 +127,7 @@ return {
 		}
 	}
 	, events : {
-		setFocusTrack : function(track){
-		}
-		, setTime : function(time){
+		setTime : function(time){
 			this.timedata.time = time
 			this.$emit('loadTime')
 		}

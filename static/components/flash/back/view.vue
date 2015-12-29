@@ -81,7 +81,7 @@
 </div>
 
 <div class="settings">
-	<flash v-ref:flash :focus_item="focus_item" :focus_frame="focus_frame" :itemsdata="itemsdata" :formatdata="formatdata" :keybroad="keybroad"></flash>
+	<flash v-ref:flash :focus_item="focus_item" :focus_track="focus_track" :itemsdata="itemsdata" :formatdata="formatdata" :keybroad="keybroad"></flash>
 
 	<original :focus_item="focus_item" :formatdata="formatdata.original"></original>
 	<framesetting :focus_item="focus_item" :formatdata="formatdata"></framesetting>
@@ -149,7 +149,7 @@ return {
 
 		return {
 			focus_item : null
-			, focus_frame : null
+			, focus_track : null
 			, printdata : {
 				width : 0
 				, height : 0
@@ -198,8 +198,8 @@ return {
 		, setFocusItem : function(item){
 			this.$set('focus_item', item)
 		}
-		, setFocusFrame : function(frame){
-			this.$set('focus_frame', frame)
+		, setFocusTrack : function(track){
+			this.$set('focus_track', track)
 		}
 		, loadTime : function(){
 			this.$refs.flash.$emit('loadTime')

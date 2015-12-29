@@ -101,7 +101,6 @@ return {
 	, events : {
 		setStartTime : function(){
 			this.startTime = Math.floor(($(this.$el).position().left + this.timedata.scrollleft) / this.timedata.framewidth) 
-			console.log(this.startTime)
 		}
 	}
 	, watch : {

@@ -41,15 +41,16 @@ return {
   components : {
     frameitem : frame
 	}
-	, props : ['timedata', 'itemdata', 'keybroad', 'formatdata', 'focus_frame', 'focus_item']
+	, props : ['timedata', 'itemdata', 'keybroad', 'formatdata', 'focus_track', 'focus_item']
 	, data : function(){
 		return {
+			frame : null 
 		}
 	}
 	, methods : {
 		selectTrack : function(event){
 			var time = Math.floor(event.offsetX / this.timedata.framewidth)
-			this.$emit('focusTrack')
+			this.focusTrack()
 			this.$dispatch('setTime', time)	
 
 			if(this.keybroad.command){
@@ -115,16 +116,18 @@ return {
 		, loadItemByFrame : function(framedata){
 			this.$dispatch('loadItemByFrame', this.itemdata.item_id, framedata)
 		}
-	}
-	, events : {
-		focusTrack : function(){
+		, setFocusFrame : function(frame){
+			this.$set('frame', frame)
+		}
+		, focusTrack : function(){
 			this.$dispatch('setFocusTrack', this)
 			this.$dispatch('focusItemById', this.itemdata.item_id)
 		}
-		, focusTrackByFrame : function(frame){
-			this.frame = frame
-			this.$dispatch('setFocusTrack', this)
-			this.$dispatch('focusItemById', this.itemdata.item_id)
+	}
+	, events : {
+		focusTrackByFrame : function(frame){
+			this.setFocusFrame(frame)
+			this.focusTrack()
 		}
 		, formatFrameData : function(framedata){
 			this.formatFrameData(framedata)
@@ -201,6 +204,7 @@ return {
 				framedata = frame.framedata
 			}
 			this.loadItemByFrame(framedata)
+			this.setFocusFrame(frame)
 		}
 	}
 	, watch : {

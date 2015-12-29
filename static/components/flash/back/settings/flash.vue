@@ -2,15 +2,15 @@
 </style>
 
 <template>
-<div class="settingFlash" v-if="focus_frame">
+<div class="settingFlash" v-if="focus_track && focus_track.frame">
 	<div class="inputArea" v-for="(key, value) in formatdata">
 		<label for="{{key}}">{{value.label}}:</label>
 
 		<select id="{{key}}" @change="updateFrame" v-if="value.options">
-			<option value="{{option}}" selected="{{option == (focus_frame.framedata[key] || 'linear')}}" v-for="(name, option) in value.options">{{option}}</option>
+			<option value="{{option}}" selected="{{option == (focus_track.frame.framedata[key] || 'linear')}}" v-for="(name, option) in value.options">{{option}}</option>
 		</select>
 
-		<input v-else type="{{value.type||'number'}}" @keyup="updateFrame" id="{{key}}" placeholder="" value="{{focus_frame.framedata[key]}}" />{{value.unit||''}}
+		<input v-else type="{{value.type||'number'}}" @keyup="updateFrame" id="{{key}}" placeholder="" value="{{focus_track.frame.framedata[key]}}" />{{value.unit||''}}
 	</div>
 
 </div>
@@ -19,7 +19,7 @@
 <script>
 
 return {
-	props : ['focus_frame', 'timedata']
+	props : ['focus_track', 'timedata']
 	, data : function(){
 		return {
 			formatdata : {
@@ -50,8 +50,8 @@ return {
 			}
 
 			console.log(value)
-			this.$set('focus_frame.framedata' + arr.join(''), value||0)
-			console.log(this.focus_frame.framedata)
+			this.$set('focus_track.frame.framedata' + arr.join(''), value||0)
+			console.log(this.focus_track.frame.framedata)
 		}
 	}
 }
