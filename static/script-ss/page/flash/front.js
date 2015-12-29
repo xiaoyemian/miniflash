@@ -1,5 +1,3 @@
-Vue.config.debug = true
-
 var app = require('flash/front/app.vue')
 
 /*

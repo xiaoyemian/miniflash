@@ -1,6 +1,7 @@
 <style>
 .name{
 	.opacity(60);
+	.hidden;
 	&.focus{.opacity(100);}
 }
 
@@ -20,8 +21,7 @@ return {
 	, props : ['item_id', 'focus_item']
 	, data : function(){
 
-		var item_name = this.item_id.split('|')
-		item_name = item_name[0] + item_name[1]
+		var item_name = this.item_id
 
 		return {
 			item_name :item_name 

@@ -177,7 +177,7 @@ return {
 			var itemdata = this.itemdata
 			var type = itemdata.original.imageUrl ? 'image' : 'item'
 
-			itemdata.item_id = type + '|' + (this.index+1) + '|' 
+			itemdata.item_id = type 
 												+ (new Date()).valueOf() 
 												+ Math.floor(Math.random()*10000) 
 												+ Math.floor(Math.random()*100)

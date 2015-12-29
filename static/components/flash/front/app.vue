@@ -22,7 +22,7 @@ body{
 
 	<div class="view">
 		<div class="page" :style="pagestyle">
-			<item v-ref:item v-for="itemdata in items" :itemdata="itemdata" :index="$index" :printdata="printdata" :formatdata="formatdata" :timedata="timedata"></item>
+			<item v-ref:item v-for="itemdata in items" :itemdata="itemdata" :index="$index" :printdata="printdata" :timedata="timedata"></item>
 		</div>
 	</div>
 
@@ -32,27 +32,6 @@ body{
 
 <script>
 require('zepto')
-
-var formatdata = {}
-formatdata.original = {
-	imageUrl : {label : '图片地址', type : 'text'}
-}
-formatdata.resize = {
-	width : {label : '宽度', unit : 'px'}
-	, height : {label : '高度', unit : 'px'}
-	, top : {label : '上边距', unit : 'px'}
-	, left : {label : '左边距', unit : 'px'}
-}
-formatdata.transform = {
-	rotate : {
-		label : '旋转'
-		, opts : [['angle', 'deg']]
-	}
-	, skew : {
-		label : '倾斜'
-		, opts : [['x-angle', 'deg'], ['y-angle', 'deg']]
-	}
-}
 
 var item = require('flash/front/item.vue')
 
@@ -67,7 +46,6 @@ return {
 		return {
 			items : items
 			, waitImageNumber : items.length
-			, formatdata : formatdata
 			, printdata : {
 				width : 0
 				, height : 0

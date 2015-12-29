@@ -7,8 +7,6 @@
 
 	&.animate, &.normal{
 		.block;
-		transition-timing-function : linear;
-		transition-property : all;
 	}
 }
 </style>
@@ -16,31 +14,75 @@
 <template>
 <style>
 {{
-	'.' + itemdata.item_id + '{'
-	+'width:' + itemdata.original.width * printdata.scale + 'px' + ';'
-	+'height:' + itemdata.original.height * printdata.scale + 'px' + ';'
-	+'background-image:' + 'url("' + itemdata.original.imageUrl + '")' + ';'
-	+ '}'
+'.' + itemdata.item_id + '{'
++'width:' + itemdata.original.width * printdata.scale + 'px' + ';'
++'height:' + itemdata.original.height * printdata.scale + 'px' + ';'
++'background-image:' + 'url("' + itemdata.original.imageUrl + '")' + ';'
++ '}'
 }}
+</style>
+
+<style v-if="framedata && !enddata">
 {{
-	'@-webkit-keyframes ' + itemdata.item_id + '{'
-	+ 'from {' + '}'
-	+ 'to {' + '}'
-	+ '}'
+'.' + itemdata.item_id + '{'
++'width:' + framedata.resize.width * printdata.scale + 'px' + ';'
++'height:' + framedata.resize.height * printdata.scale + 'px' + ';'
++'top:' + framedata.resize.top * printdata.scale + 'px' + ';'
++'left:' + framedata.resize.left * printdata.scale + 'px' + ';'
++'transform:'
+	+ 'rotate(' + framedata.transform.rotate.angle + 'deg)'
+	+ ' skew(' + framedata.transform.skew['x-angle'] + 'deg,' + framedata.transform.skew['y-angle'] + 'deg)'
+	+ ';'
++ '}'
 }} 
 </style>
-<div class="item" :class="[itemdata.item_id, framedata && framedata.name]" :style="[framestyle]">
+
+<style v-if="framedata && enddata">
+{{
+'.' + itemdata.item_id + '{'
++ '-webkit-animation:' + itemdata.item_id + frameindex + ' ' + framedata.duration * timedata.step + 'ms ' + 'linear 0ms 1 normal;'
++ '-webkit-animation-fill-mode:both;'
++ '}'
+}}
+
+{{
+'@-webkit-keyframes ' + itemdata.item_id + frameindex + '{'
+	+ 'from {'
+		+'width:' + framedata.resize.width * printdata.scale + 'px' + ';'
+		+'height:' + framedata.resize.height * printdata.scale + 'px' + ';'
+		+'top:' + framedata.resize.top * printdata.scale + 'px' + ';'
+		+'left:' + framedata.resize.left * printdata.scale + 'px' + ';'
+		+'transform:'
+			+ 'rotate(' + framedata.transform.rotate.angle + 'deg)'
+			+ ' skew(' + framedata.transform.skew['x-angle'] + 'deg,' + framedata.transform.skew['y-angle'] + 'deg)'
+			+ ';'
+	+ '}'
+	+ 'to {'
+		+'width:' + enddata.resize.width * printdata.scale + 'px' + ';'
+		+'height:' + enddata.resize.height * printdata.scale + 'px' + ';'
+		+'top:' + enddata.resize.top * printdata.scale + 'px' + ';'
+		+'left:' + enddata.resize.left * printdata.scale + 'px' + ';'
+		+'transform:'
+			+ 'rotate(' + enddata.transform.rotate.angle + 'deg)'
+			+ ' skew(' + enddata.transform.skew['x-angle'] + 'deg,' + enddata.transform.skew['y-angle'] + 'deg)'
+			+ ';'
+	+ '}'
++ '}'
+}} 
+</style>
+
+<div class="item" v-el:item :class="[itemdata.item_id, framedata && framedata.name]">
 </div>
 </template>
 
 <script>
 
 return {
-	props:['itemdata', 'index', 'printdata', 'formatdata', 'timedata']
+	props:['itemdata', 'index', 'printdata', 'timedata']
 	, data:function(){
 		return {
 			framedata : null
-			, framestyle : {} 
+			, enddata : null
 			, frameindex : null
 		}
 	}
@@ -54,86 +96,37 @@ return {
 			}
 			img.src = this.itemdata.original.imageUrl
 		}
-		, getStyleByFrame : function(framedata, duration){
-			var formatdata = this.formatdata
-			var transformList = []
-
-			var style = {}
-
-			if(duration){
-				style['transition-duration'] = duration + 'ms'
-			}
-
-			for(var i in framedata.resize){
-				var value = framedata.resize[i] || 0
-				var unit = formatdata.resize[i].unit || ''
-				
-				if(unit == 'px'){
-					value *= this.printdata.scale
-				}
-				style[i] = value + unit 
-			}
-
-			for(var i in framedata.transform){
-				var transform = framedata.transform[i]
-				var opts = formatdata.transform[i].opts
-				var arr = []
-				for(var j in opts){
-					var opt = opts[j]
-
-					var value = transform[opt[0]] || opt[2] || 0
-					var unit = opt[1] || ''
-
-					if(unit == 'px'){
-						value *= this.printdata.scale
-					}
-					arr.push(value + unit)
-				}
-				transformList.push(i + '(' + arr.join(',') + ')')
-			}
-
-			style.transform = transformList.join(' ')
-			
-			return style
-		}
 	}
 	, events : {
-		reloadItem : function(){
-			this.framestyle = this.getStyleByFrame(this.framedata)
-		}
-		, startFrame : function(){
+		startFrame : function(){
 			this.frameindex = 0
 		}
 	}
 	, watch : {
 		'frameindex' : function(index){
-			if(index >= this.itemdata.frames.length){
+			var len = this.itemdata.frames.length
+			if(index >= len)
 				return;
+
+			this.framedata = this.itemdata.frames[index] 
+
+			if(this.framedata.duration > 1 && index+1 < len){
+				this.enddata = this.itemdata.frames[index+1]
+
+			}else{
+				this.enddata = this.framedata 
 			}
-
-			var mSelf = this
-			var framedata = this.itemdata.frames[index] 
-			var time = framedata.duration * this.timedata.step
-
-			this.framedata = framedata
-			this.framestyle = this.getStyleByFrame(framedata)
-			
-			if(framedata.name == 'animate' && framedata.duration > 1){
-				var delay = 10
-				var t = setTimeout(function(){
-					var enddata = mSelf.itemdata.frames[index+1]
-					mSelf.framestyle = mSelf.getStyleByFrame(enddata, time-delay)
-				}, delay)
-			}
-
-			var t2 = setTimeout(function(){
-				mSelf.frameindex++;
-			}, time)
-
 		}
 	}
 	, created : function(){
 		this.loadImage()
+	}
+	, ready : function(){
+		var mSelf = this
+		$(this.$els.item)
+			.on('webkitAnimationEnd', function(){
+				mSelf.frameindex++;
+			})
 	}
 }
 </script>
