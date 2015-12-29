@@ -19,6 +19,7 @@ return {
 			framedata : null
 			, enddata : null
 			, frameindex : null
+			, img : null
 		}
 	}
 	, methods : {
@@ -30,15 +31,7 @@ return {
 				mSelf.$dispatch('loadedImage')	
 			}
 			img.src = this.itemdata.original.imageUrl
-		}
-	}
-	, events : {
-		startFrame : function(){
-			this.frameindex = 0
-
-			var img = new Image()
-			img.src = this.itemdata.original.imageUrl
-			this.cxt.drawImage(img,0,0);
+			this.img = img
 		}
 	}
 	, watch : {

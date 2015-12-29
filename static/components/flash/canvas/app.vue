@@ -58,13 +58,23 @@ return {
 				this.$set('printdata["'+i+'"]', printdata[i]||0)
 			}
 		}
+		, action : function(index){
+			var items = this.$refs.item
+
+			for(var i in items){
+				var item = items[i]
+				console.log(item)
+
+			}
+
+		}
 	}
 	, events : {
 		loadedImage : function(){
 			this.waitImageNumber--
 
-			if(this.waitImageNumber === 0)
-				this.$broadcast('startFrame')
+			if(this.waitImageNumber == 0)
+				this.action(0)
 		}
 	}
 	, created : function(){
@@ -89,11 +99,9 @@ return {
 		})
 	}
 	, ready : function(){
-
 		var canvas=document.getElementById('canvas');
 		var cxt=canvas.getContext('2d');
 		this.cxt = cxt
-
 	}
 }
 </script>
