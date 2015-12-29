@@ -7,7 +7,7 @@
 </style>
 
 <template>
-<div class="name" :class="{focus:focus_track == item_id}">
+<div class="name" :class="{focus : focus_item && focus_item.itemdata.item_id == item_id}">
 	<div>{{item_name}}</div>
 </div>
 
@@ -17,7 +17,7 @@
 return {
   components : {
 	}
-	, props : ['focus_track', 'item_id']
+	, props : ['item_id', 'focus_item']
 	, data : function(){
 
 		var item_name = this.item_id.split('|')

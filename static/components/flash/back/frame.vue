@@ -48,8 +48,7 @@ return {
 	, methods : {
 		selectFrame : function(event){
 			this.time = Math.floor(event.offsetX / this.timedata.framewidth)
-			this.$dispatch('focusTrack')
-			this.$dispatch('setFocusFrame', this)
+			this.$dispatch('focusTrackByFrame', this)
 
 			if(this.keybroad.command){
 				if(this.keybroad.alt){
@@ -67,8 +66,7 @@ return {
 		}
 		, selectKeyFrame : function(event){
 			this.time = Math.floor(event.offsetX / this.timedata.framewidth)
-			this.$dispatch('focusTrack')
-			this.$dispatch('setFocusFrame', this)
+			this.$dispatch('focusTrackByFrame', this)
 
 			if(this.keybroad.command){
 				if(this.keybroad.alt){

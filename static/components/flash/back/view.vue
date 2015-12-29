@@ -81,7 +81,7 @@
 </div>
 
 <div class="settings">
-	<flash v-ref:flash :focus_frame="focus_frame" :itemsdata="itemsdata" :formatdata="formatdata" :keybroad="keybroad"></flash>
+	<flash v-ref:flash :focus_item="focus_item" :focus_frame="focus_frame" :itemsdata="itemsdata" :formatdata="formatdata" :keybroad="keybroad"></flash>
 
 	<original :focus_item="focus_item" :formatdata="formatdata.original"></original>
 	<framesetting :focus_item="focus_item" :formatdata="formatdata"></framesetting>
@@ -162,7 +162,6 @@ return {
 	, methods : {
 		blurItem : function(){
 			this.$set('focus_item', null)
-			this.$dispatch('blurTrack')
 		}
 		, resizePrint : function(printdata){
 			for(var i in printdata){
@@ -195,7 +194,6 @@ return {
 	, events : {
 		selectItem : function(item){
 			this.$set('focus_item', item)
-      this.$refs.flash.$emit('setFocusTrack', item.itemdata.item_id)
 		}
 		, setFocusItem : function(item){
 			this.$set('focus_item', item)
@@ -206,9 +204,6 @@ return {
 		, loadTime : function(){
 			this.$refs.flash.$emit('loadTime')
 		}
-		, blurTrack : function(){
-      this.$refs.flash.$emit('setFocusTrack', null)
-		} 
 
 		, loadItemByFrame : function(item_id, framedata){
       this.$broadcast('loadItemByFrame', item_id, framedata)
