@@ -1,4 +1,4 @@
-Vue.config.debug = true
+//Vue.config.debug = true
 
 var app = require('flash/back/app.vue')
 

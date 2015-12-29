@@ -117,7 +117,7 @@ return {
 		return {
 			timedata : {
 				min : 12
-				, step : 200
+				, step : 100
 				, framewidth : 12
 				, frameheight : 22
 				, namewidth : 60

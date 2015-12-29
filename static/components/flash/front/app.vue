@@ -53,7 +53,7 @@ return {
 			}
 			, pagestyle : {}
 			, timedata : {
-				step :200
+				step :100
 			}
 		}
 	}
@@ -66,11 +66,8 @@ return {
 		}
 		, updatePage : function(){
 			var printdata = this.printdata
-
 			this.$set('pagestyle.width', printdata.width * printdata.scale + 'px')
 			this.$set('pagestyle.height', printdata.height * printdata.scale + 'px')
-
-			this.$broadcast('reloadItem')
     }
 	}
 	, events : {
