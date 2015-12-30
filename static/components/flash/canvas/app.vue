@@ -20,7 +20,7 @@ body{
 <template>
 <div class="app">
 	<canvas id="canvas" :width="printdata.width + 'px'" :height="printdata.height + 'px'" :style="{width:printdata.width * printdata.scale + 'px', height:printdata.height * printdata.scale + 'px'}"></canvas>
-	<item v-ref:item v-for="itemdata in items" :itemdata="itemdata" :cxt="cxt" :printdata="printdata" :timedata="timedata"></item>
+	<item v-ref:item v-for="itemdata in pages[number].items" :itemdata="itemdata" :cxt="cxt" :timedata="timedata"></item>
 </div>
 </template>
 
@@ -36,11 +36,11 @@ return {
   }
 	, props:['pages','number']
 	, data : function(){
-		var items = this.pages[this.number].items
 
 		return {
-			items : items
-			, waitImageNumber : items.length
+			items : null
+			, len : null
+			, waitNumber : null 
 			, cxt : null
 			, printdata : {
 				width : 0
@@ -48,7 +48,8 @@ return {
 				, scale : 0
 			}
 			, timedata : {
-				step :100
+				step : 100
+				, time : null
 			}
 		}
 	}
@@ -58,23 +59,38 @@ return {
 				this.$set('printdata["'+i+'"]', printdata[i]||0)
 			}
 		}
-		, action : function(index){
-			var items = this.$refs.item
-
-			for(var i in items){
-				var item = items[i]
-				console.log(item)
-
+		, action : function(){
+			for(var i in this.items){
+				var item = this.items[i]
+				item.drawImage()
 			}
-
 		}
 	}
 	, events : {
 		loadedImage : function(){
-			this.waitImageNumber--
+			this.waitNumber--
 
-			if(this.waitImageNumber == 0)
-				this.action(0)
+			if(this.waitNumber == 0){
+				this.timedata.time = 0
+			}
+		}
+	}
+	, watch : {
+		'timedata.time' : function(){
+			var mSelf = this
+			mSelf.action()
+
+			var t = setTimeout(function(){
+
+				if(mSelf.timedata.time == 100){
+					console.log('done')
+					return;
+				}
+
+				mSelf.timedata.time++
+
+			}, this.timedata.step)
+
 		}
 	}
 	, created : function(){
@@ -102,6 +118,10 @@ return {
 		var canvas=document.getElementById('canvas');
 		var cxt=canvas.getContext('2d');
 		this.cxt = cxt
+
+		this.items = this.$refs.item
+		this.len = this.items.length
+		this.waitNumber = this.len
 	}
 }
 </script>

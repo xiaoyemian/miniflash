@@ -1,29 +1,22 @@
-<style>
-.item{
-	.pa;
-	background-size:100% 100%;
-	background-repeat:no-repeat;
-	.none;
-
-	&.animate, &.normal{
-		.block;
-	}
-}
 </style>
 
 <script>
 return {
-	props:['itemdata', 'printdata', 'timedata', 'cxt']
+	props:['itemdata', 'timedata', 'cxt']
 	, data:function(){
+		var frameLength = this.itemdata.frames.length
+
 		return {
-			framedata : null
+			frameIndex : 0
+			, frameLength : frameLength
+			, time : 0
+			, framedata : null
 			, enddata : null
-			, frameindex : null
 			, img : null
 		}
 	}
 	, methods : {
-		loadImage : function(cbk) {
+		loadImage : function() {
 			var mSelf = this
 			var img = new Image()
 			img.onload = function(){
@@ -33,23 +26,35 @@ return {
 			img.src = this.itemdata.original.imageUrl
 			this.img = img
 		}
-	}
-	, watch : {
-		'frameindex' : function(index){
-			var len = this.itemdata.frames.length
-			if(index >= len)
-				return;
+		, drawImage : function(){
 
-			this.framedata = this.itemdata.frames[index] 
+			if(this.time == 0){
+				this.framedata = this.itemdata.frames[this.frameIndex]
 
-			if(this.framedata.duration > 1 && index+1 < len){
-				this.enddata = this.itemdata.frames[index+1]
+				if(this.frameIndex+1 == this.frameLength){
+					this.enddata = null
+
+				}else{
+					this.enddata = this.itemdata.frames[this.frameIndex+1]
+				}
+
+			}
+
+			var resize = this.framedata.resize
+			this.cxt.drawImage(this.img, resize.left, resize.top, resize.width, resize.height)
+
+			if(this.time == this.framedata.duration){
+				if(this.frameIndex < this.frameLength-1){
+					this.frameIndex++
+					this.time = 0
+				}
 
 			}else{
-				this.enddata = this.framedata 
+				this.time++
 			}
 		}
 	}
+
 	, created : function(){
 		this.loadImage()
 	}

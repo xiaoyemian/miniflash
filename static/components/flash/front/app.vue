@@ -42,10 +42,11 @@ return {
 	, props:['pages','number']
 	, data : function(){
 		var items = this.pages[this.number].items
+		var len = items.length
 
 		return {
 			items : items
-			, waitImageNumber : items.length
+			, waitNumber : len
 			, printdata : {
 				width : 0
 				, height : 0
@@ -65,9 +66,9 @@ return {
 	}
 	, events : {
 		loadedImage : function(){
-			this.waitImageNumber--
+			this.waitNumber--
 
-			if(this.waitImageNumber === 0)
+			if(this.waitNumber === 0)
 				this.$broadcast('startFrame')
 		}
 	}
