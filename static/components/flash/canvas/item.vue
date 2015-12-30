@@ -2,7 +2,7 @@
 
 <script>
 return {
-	props:['itemdata', 'timedata', 'ctx']
+	props:['itemdata', 'timedata', 'ctx', 'printdata']
 	, data:function(){
 		var frameLength = this.itemdata.frames.length
 
@@ -40,10 +40,16 @@ return {
 
 			}
 
+			var print = this.printdata
 			var resize = this.framedata.resize
-			this.ctx.drawImage(this.img, resize.left, resize.top, resize.width, resize.height)
+			var transform = this.framedata.transform
 
+			this.ctx.translate(resize.left + resize.width/2, resize.top + resize.height/2)
+			this.ctx.rotate(transform.rotate.angle * Math.PI/180)
+			this.ctx.drawImage(this.img, -resize.width/2, -resize.height/2, resize.width, resize.height)
 
+			this.ctx.rotate(-transform.rotate.angle * Math.PI/180)
+			this.ctx.translate(-(resize.left + resize.width/2), -(resize.top + resize.height/2))
 
 			if(this.time == this.framedata.duration){
 				if(this.frameIndex < this.frameLength-1){
