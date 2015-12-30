@@ -20,7 +20,7 @@ body{
 <template>
 <div class="app">
 	<canvas id="canvas" :width="printdata.width + 'px'" :height="printdata.height + 'px'" :style="{width:printdata.width * printdata.scale + 'px', height:printdata.height * printdata.scale + 'px'}"></canvas>
-	<item v-ref:item v-for="itemdata in pages[number].items" :printdata="printdata" :itemdata="itemdata" :ctx="ctx" :timedata="timedata"></item>
+	<item v-ref:item v-for="itemdata in pages[number].items" :itemdata="itemdata" :ctx="ctx" :timedata="timedata"></item>
 </div>
 </template>
 
@@ -94,7 +94,6 @@ return {
 				mSelf.timedata.time++
 
 			}, this.timedata.step)
-
 		}
 	}
 	, created : function(){
