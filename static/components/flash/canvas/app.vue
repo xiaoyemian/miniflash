@@ -60,11 +60,8 @@ return {
 				this.$set('printdata["'+i+'"]', printdata[i]||0)
 			}
 		}
-		, clearPrint : function(){
-			this.ctx.clearRect(0, 0, this.printdata.width, this.printdata.height)
-		}
 		, action : function(){
-			this.clearPrint()
+			this.ctx.clearRect(0, 0, this.printdata.width, this.printdata.height)
 
 			for(var i in this.items){
 				var item = this.items[i]
