@@ -65,7 +65,7 @@ return {
 
 			for(var i in this.items){
 				var item = this.items[i]
-				item.drawImage()
+				item.draw()
 			}
 		}
 	}
@@ -86,7 +86,7 @@ return {
 			var mSelf = this
 			var t = setTimeout(function(){
 
-				if(mSelf.timedata.time == 20*mSelf.timedata.step){
+				if(mSelf.timedata.time == 100*mSelf.timedata.step){
 					return;
 				}
 

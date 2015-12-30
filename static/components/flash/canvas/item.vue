@@ -8,6 +8,7 @@ return {
 			frameIndex : 0
 			, frameLength : frameLength
 			, time : 0
+			, duration : null
 			, framedata : null
 			, enddata : null
 			, img : null
@@ -24,7 +25,7 @@ return {
 			img.src = this.itemdata.original.imageUrl
 			this.img = img
 		}
-		, drawImage : function(){
+		, draw : function(){
 
 			if(this.time == 0){
 				this.framedata = this.itemdata.frames[this.frameIndex]
@@ -35,10 +36,24 @@ return {
 				}else{
 					this.enddata = this.framedata 
 				}
+
+				this.duration = this.framedata.duration * this.timedata.scale
 			}
 
+			this.drawImage()
 
-			var duration = this.framedata.duration * this.timedata.scale
+			if(this.time == this.duration){
+				if(this.frameIndex < this.frameLength-1){
+					this.frameIndex++
+					this.time = 0
+				}
+
+			}else{
+				this.time++
+			}
+
+		}
+		, drawImage : function(){
 
 			var resize = this.framedata.resize
 			var transform = this.framedata.transform
@@ -51,17 +66,9 @@ return {
 			this.ctx.rotate(-transform.rotate.angle * Math.PI/180)
 			this.ctx.translate(-(resize.left + resize.width/2), -(resize.top + resize.height/2))
 
-			if(this.time == duration){
-				if(this.frameIndex < this.frameLength-1){
-					this.frameIndex++
-					this.time = 0
-				}
-
-			}else{
-				this.time++
-			}
 
 		}
+
 	}
 
 	, created : function(){
