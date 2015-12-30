@@ -48,7 +48,8 @@ return {
 				, scale : 0
 			}
 			, timedata : {
-				step : 100
+				step : 10
+				, unit : 10
 				, time : null
 			}
 		}
@@ -87,11 +88,11 @@ return {
 			var mSelf = this
 			var t = setTimeout(function(){
 
-				if(mSelf.timedata.time == 100){
+				if(mSelf.timedata.time == 100*mSelf.timedata.step*mSelf.timedata.unit){
 					return;
 				}
 
-				mSelf.timedata.time++
+				mSelf.timedata.time += mSelf.timedata.step
 
 			}, this.timedata.step)
 		}

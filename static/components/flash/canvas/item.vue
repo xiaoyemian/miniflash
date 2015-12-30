@@ -1,6 +1,6 @@
 <script>
 return {
-	props:['itemdata', 'timedata', 'ctx']
+	props:['itemdata', 'ctx', 'timedata']
 	, data:function(){
 		var frameLength = this.itemdata.frames.length
 
@@ -48,7 +48,7 @@ return {
 			this.ctx.rotate(-transform.rotate.angle * Math.PI/180)
 			this.ctx.translate(-(resize.left + resize.width/2), -(resize.top + resize.height/2))
 
-			if(this.time == this.framedata.duration){
+			if(this.time == this.framedata.duration * this.timedata.unit){
 				if(this.frameIndex < this.frameLength-1){
 					this.frameIndex++
 					this.time = 0
@@ -57,6 +57,7 @@ return {
 			}else{
 				this.time++
 			}
+
 		}
 	}
 
