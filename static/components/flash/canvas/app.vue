@@ -20,7 +20,7 @@ body{
 <template>
 <div class="app">
 	<canvas id="canvas" :width="printdata.width + 'px'" :height="printdata.height + 'px'" :style="{width:printdata.width * printdata.scale + 'px', height:printdata.height * printdata.scale + 'px'}"></canvas>
-	<item v-ref:item v-for="itemdata in pages[number].items" :itemdata="itemdata" :cxt="cxt" :timedata="timedata"></item>
+	<item v-ref:item v-for="itemdata in pages[number].items" :itemdata="itemdata" :ctx="ctx" :timedata="timedata"></item>
 </div>
 </template>
 
@@ -41,7 +41,7 @@ return {
 			items : null
 			, len : null
 			, waitNumber : null 
-			, cxt : null
+			, ctx : null
 			, printdata : {
 				width : 0
 				, height : 0
@@ -59,7 +59,12 @@ return {
 				this.$set('printdata["'+i+'"]', printdata[i]||0)
 			}
 		}
+		, clearPrint : function(){
+			this.ctx.clearRect(0, 0, this.printdata.width, this.printdata.height)
+		}
 		, action : function(){
+			this.clearPrint()
+
 			for(var i in this.items){
 				var item = this.items[i]
 				item.drawImage()
@@ -77,13 +82,12 @@ return {
 	}
 	, watch : {
 		'timedata.time' : function(){
-			var mSelf = this
-			mSelf.action()
+			this.action()
 
+			var mSelf = this
 			var t = setTimeout(function(){
 
 				if(mSelf.timedata.time == 100){
-					console.log('done')
 					return;
 				}
 
@@ -116,8 +120,8 @@ return {
 	}
 	, ready : function(){
 		var canvas=document.getElementById('canvas');
-		var cxt=canvas.getContext('2d');
-		this.cxt = cxt
+		var ctx=canvas.getContext('2d');
+		this.ctx = ctx
 
 		this.items = this.$refs.item
 		this.len = this.items.length

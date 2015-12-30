@@ -2,7 +2,7 @@
 
 <script>
 return {
-	props:['itemdata', 'timedata', 'cxt']
+	props:['itemdata', 'timedata', 'ctx']
 	, data:function(){
 		var frameLength = this.itemdata.frames.length
 
@@ -31,17 +31,19 @@ return {
 			if(this.time == 0){
 				this.framedata = this.itemdata.frames[this.frameIndex]
 
-				if(this.frameIndex+1 == this.frameLength){
-					this.enddata = null
+				if(this.framedata.duration > 1 && this.frameIndex+1 < this.frameLength){
+					this.enddata = this.itemdata.frames[this.frameIndex+1]
 
 				}else{
-					this.enddata = this.itemdata.frames[this.frameIndex+1]
+					this.enddata = this.framedata 
 				}
 
 			}
 
 			var resize = this.framedata.resize
-			this.cxt.drawImage(this.img, resize.left, resize.top, resize.width, resize.height)
+			this.ctx.drawImage(this.img, resize.left, resize.top, resize.width, resize.height)
+
+
 
 			if(this.time == this.framedata.duration){
 				if(this.frameIndex < this.frameLength-1){
