@@ -37,6 +37,9 @@ return {
 				}
 			}
 
+
+			var duration = this.framedata.duration * this.timedata.scale
+
 			var resize = this.framedata.resize
 			var transform = this.framedata.transform
 
@@ -48,7 +51,7 @@ return {
 			this.ctx.rotate(-transform.rotate.angle * Math.PI/180)
 			this.ctx.translate(-(resize.left + resize.width/2), -(resize.top + resize.height/2))
 
-			if(this.time == this.framedata.duration * this.timedata.unit){
+			if(this.time == duration){
 				if(this.frameIndex < this.frameLength-1){
 					this.frameIndex++
 					this.time = 0

@@ -48,8 +48,8 @@ return {
 				, scale : 0
 			}
 			, timedata : {
-				step : 10
-				, unit : 10
+				step : 100
+				, scale : 10
 				, time : null
 			}
 		}
@@ -84,17 +84,18 @@ return {
 	, watch : {
 		'timedata.time' : function(){
 			this.action()
+			var step = this.timedata.step / this.timedata.scale
 
 			var mSelf = this
 			var t = setTimeout(function(){
 
-				if(mSelf.timedata.time == 100*mSelf.timedata.step*mSelf.timedata.unit){
+				if(mSelf.timedata.time == 20*mSelf.timedata.step){
 					return;
 				}
 
-				mSelf.timedata.time += mSelf.timedata.step
+				mSelf.timedata.time += step 
 
-			}, this.timedata.step)
+			}, step)
 		}
 	}
 	, created : function(){
