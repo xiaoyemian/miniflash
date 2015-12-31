@@ -25,7 +25,7 @@
 <style v-if="framedata && enddata">
 {{
 '.' + itemdata.item_id + '{'
-+ '-webkit-animation:' + itemdata.item_id + frameindex + ' ' + framedata.duration * timedata.step + 'ms ' + 'linear 0ms 1 normal;'
++ '-webkit-animation:' + itemdata.item_id + frameindex + ' ' + framedata.duration * timedata.step + 'ms ' + (framedata['timing-function']||'linear') + ' 0ms 1 normal;'
 + '-webkit-animation-fill-mode:both;'
 + '}'
 }}
