@@ -17,19 +17,21 @@
 
 	&.focus{
 		.opacity(100);
+/*
 		.frame{
 			.opacity(20);
 			&.focus{
 				.opacity(100);
 			}
 		}
+*/
 	}
 }
 </style>
 
 <template>
-<div class="track" @click.stop="selectTrack" :class="{focus : focus_item && focus_item.itemdata.item_id == itemdata.item_id}">
-	<div class="focusframe" v-if="focus_item && focus_item.itemdata.item_id == itemdata.item_id" :style="{width:timedata.framewidth + 'px', left:timedata.time * timedata.framewidth + 'px'}"></div>
+<div class="track" @click.stop="selectTrack" :class="{focus : focus_track && focus_track.itemdata.item_id == itemdata.item_id}">
+	<div class="focusframe" v-if="focus_track && focus_track.itemdata.item_id == itemdata.item_id" :style="{width:timedata.framewidth + 'px', left:timedata.time * timedata.framewidth + 'px'}"></div>
 	<frameitem v-ref:frame v-for="framedata in itemdata.frames" :index="$index" :framedata="framedata" :timedata="timedata" :keybroad="keybroad"></frameitem>
 </div>
 
@@ -41,7 +43,7 @@ return {
   components : {
     frameitem : frame
 	}
-	, props : ['timedata', 'itemdata', 'keybroad', 'formatdata', 'focus_item']
+	, props : ['timedata', 'itemdata', 'keybroad', 'formatdata', 'focus_track']
 	, data : function(){
 		return {
 			frame : null 

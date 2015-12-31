@@ -83,12 +83,12 @@
 
 			<div class="tracks" :style="{'padding-bottom':timedata.frameheight + 'px'}">
 				<div class="tracknames" :style="{width:timedata.namewidth + 'px'}">
-					<name v-ref:name v-for="itemdata in itemsdata" :index="$index" :item_id="itemdata.item_id" :focus_item="focus_item" :style="{height:timedata.frameheight + 'px'}"></name>
+					<name v-ref:name v-for="itemdata in itemsdata" :index="$index" :item_id="itemdata.item_id" :focus_track="focus_track" :style="{height:timedata.frameheight + 'px'}"></name>
 				</div>
 
 
 				<div class="trackframes">
-					<track v-ref:track v-for="itemdata in itemsdata" :index="$index" :itemdata="itemdata" :focus_item="focus_item" :timedata="timedata" :keybroad="keybroad" :formatdata="formatdata" :style="{height:timedata.frameheight + 'px', 'padding-right':timedata.min * timedata.framewidth + 'px'}"></track>
+					<track v-ref:track v-for="itemdata in itemsdata" :index="$index" :itemdata="itemdata" :focus_track="focus_track" :timedata="timedata" :keybroad="keybroad" :formatdata="formatdata" :style="{height:timedata.frameheight + 'px', 'padding-right':timedata.min * timedata.framewidth + 'px'}"></track>
 				</div>
 			</div>
 		</div>
@@ -111,7 +111,7 @@ return {
 		, name : name
 		, flashsetting : flashsetting
   }
-	, props:['itemsdata', 'formatdata', 'keybroad', 'focus_track', 'focus_item']
+	, props:['itemsdata', 'formatdata', 'keybroad', 'focus_track']
 	, data : function(){
 
 		return {
