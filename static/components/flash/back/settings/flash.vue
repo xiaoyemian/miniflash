@@ -7,10 +7,10 @@
 		<label for="{{key}}">{{value.label}}:</label>
 
 		<select id="{{key}}" @change="updateFrame" v-if="value.options">
-			<option value="{{option}}" selected="{{option == (focus_track.frame.framedata[key] || 'linear')}}" v-for="(name, option) in value.options">{{option}}</option>
+			<option value="{{option}}" selected="{{option == focus_track.frame.framedata[key]}}" v-for="(name, option) in value.options">{{option}}</option>
 		</select>
 
-		<input v-else type="{{value.type||'number'}}" @keyup="updateFrame" id="{{key}}" placeholder="" value="{{focus_track.frame.framedata[key]}}" />{{value.unit||''}}
+		<input v-else type="{{value.type||'number'}}" @keyup="updateFrame" id="{{key}}" placeholder="" value="{{focus_track.frame.framedata[key]}}" />{{value.unit}}
 	</div>
 
 </div>
@@ -27,13 +27,17 @@ return {
 					label : '帧类型'
 					, options : [ 'normal', 'animate', 'blank']
 				}
+				, duration : {
+					label : '时长'
+					, unit : '*' + this.timedata.step + '毫秒'
+				}
 				, 'timing-function' : {
 					label : '速度曲线'
 					, options : ['linear', 'ease', 'ease-in', 'ease-out', 'ease-in-out']
 				}
-				, duration : {
-					label : '时长'
-					, unit : '*' + this.timedata.step + '毫秒'
+				, 'iteration-count' : {
+					label : '次数'
+
 				}
 			}
 		}

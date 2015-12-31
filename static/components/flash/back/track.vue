@@ -90,6 +90,12 @@ return {
 			if(!framedata.duration)
 				Vue.set(framedata, 'duration', 1)
 
+			if(!framedata['timing-function'])
+				Vue.set(framedata, 'timing-function', 'linear')
+
+			if(!framedata['iteration-count'])
+				Vue.set(framedata, 'iteration-count', 1)
+
 			if(!framedata.resize)
 				Vue.set(framedata, 'resize', {})
 
