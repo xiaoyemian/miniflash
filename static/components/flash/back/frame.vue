@@ -25,11 +25,14 @@
 		.bgc(#33B666);
 	}
 
+	&.infinite{
+		&:after{ content:'无限循环';.pa;.w(100%);.c;.fc(#222);left:0px;}
+	}
 }
 </style>
 
 <template>
-<div class="frame" :class="[framedata.name, timedata.time == startTime + time ? 'focus' : '']" @click.stop="selectFrame" :style="{width:framedata.duration * timedata.framewidth + 'px'}">
+<div class="frame" :class="[framedata['iteration-count'] == 'infinite' ? 'infinite' : '', framedata.name, timedata.time == startTime + time ? 'focus' : '']" @click.stop="selectFrame" :style="{width:framedata.duration * timedata.framewidth + 'px'}">
 	<div class="keyframe" @click.stop="selectKeyFrame" :style="{width:timedata.framewidth + 'px'}"></div>
 </div>
 </template>

@@ -19,7 +19,7 @@
 <script>
 
 return {
-	props : ['focus_track', 'timedata']
+	props : ['focus_item', 'focus_track', 'timedata']
 	, data : function(){
 		return {
 			formatdata : {
@@ -53,9 +53,9 @@ return {
 				arr.push('["' + type[i] + '"]')
 			}
 
-			console.log(value)
 			this.$set('focus_track.frame.framedata' + arr.join(''), value||0)
-			console.log(this.focus_track.frame.framedata)
+
+			this.focus_item.loadItemStyle()
 		}
 	}
 }
