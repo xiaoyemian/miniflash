@@ -81,9 +81,6 @@ return {
 	}
 	, methods : {
 		selectItem : function(){
-			this.$dispatch('selectItem', this)
-		}
-		, setFocusItem : function(){
 			this.$dispatch('setFocusItem', this)
 		}
 		, loadItemOriginal : function(){
@@ -203,7 +200,7 @@ return {
 		}
 		, focusItemById : function(item_id){
 			if(item_id == this.itemdata.item_id){
-				this.setFocusItem()
+				this.selectItem()
 			}
 		}
 	}

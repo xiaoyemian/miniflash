@@ -192,10 +192,7 @@ return {
 		}
 	}
 	, events : {
-		selectItem : function(item){
-			this.$set('focus_item', item)
-		}
-		, setFocusItem : function(item){
+		setFocusItem : function(item){
 			this.$set('focus_item', item)
 		}
 		, setFocusTrack : function(track){
