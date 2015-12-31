@@ -10,7 +10,7 @@
 			<option value="{{option}}" selected="{{option == focus_track.frame.framedata[key]}}" v-for="(name, option) in value.options">{{option}}</option>
 		</select>
 
-		<input v-else type="{{value.type||'number'}}" @keyup="updateFrame" id="{{key}}" placeholder="" value="{{focus_track.frame.framedata[key]}}" />{{value.unit}}
+		<input v-else type="{{value.type||'number'}}" @keyup="updateFrame" id="{{key}}" min="1" placeholder="" value="{{focus_track.frame.framedata[key]}}" />{{value.unit}}
 	</div>
 
 </div>
