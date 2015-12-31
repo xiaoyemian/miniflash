@@ -81,8 +81,8 @@ return {
 	}
 	, methods : {
 		selectItem : function(){
-			this.$dispatch('blurTrack')
 			this.setFocusItem()
+			this.$dispatch('focusTrackById', this.itemdata.item_id)
 		}
 		, setFocusItem : function(){
 			this.$dispatch('setFocusItem', this)

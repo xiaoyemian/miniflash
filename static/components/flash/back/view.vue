@@ -198,18 +198,19 @@ return {
 		, setFocusTrack : function(track){
 			this.$set('focus_track', track)
 		}
+		, focusItemById : function(item_id){
+      this.$broadcast('focusItemById', item_id)
+		} 
+		, focusTrackById : function(item_id){
+      this.$broadcast('focusTrackById', item_id)
+		} 
 		, loadTime : function(){
 			this.$refs.flash.$emit('loadTime')
-		}
-		, blurTrack : function(){
-			this.$set('focus_track', null)
 		}
 		, loadItemByFrame : function(item_id, framedata){
       this.$broadcast('loadItemByFrame', item_id, framedata)
 		}
-		, focusItemById : function(item_id){
-      this.$broadcast('focusItemById', item_id)
-		} 
+
 	}
 	, created : function(){
 		this.resizePrint({
