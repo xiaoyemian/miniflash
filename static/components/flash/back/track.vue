@@ -41,7 +41,7 @@ return {
   components : {
     frameitem : frame
 	}
-	, props : ['timedata', 'itemdata', 'keybroad', 'formatdata', 'focus_track', 'focus_item']
+	, props : ['timedata', 'itemdata', 'keybroad', 'formatdata', 'focus_item']
 	, data : function(){
 		return {
 			frame : null 

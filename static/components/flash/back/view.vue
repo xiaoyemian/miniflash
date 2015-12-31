@@ -201,7 +201,9 @@ return {
 		, loadTime : function(){
 			this.$refs.flash.$emit('loadTime')
 		}
-
+		, blurTrack : function(){
+			this.$set('focus_track', null)
+		}
 		, loadItemByFrame : function(item_id, framedata){
       this.$broadcast('loadItemByFrame', item_id, framedata)
 		}
