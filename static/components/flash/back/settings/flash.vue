@@ -25,7 +25,7 @@ return {
 			formatdata : {
 				name : {
 					label : '帧类型'
-					, options : [ 'normal', 'animate', 'blank']
+					, options : [ 'normal', 'transition', 'blank']
 				}
 				, duration : {
 					label : '时长'

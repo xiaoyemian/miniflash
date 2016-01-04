@@ -21,7 +21,7 @@
 	&.normal{
 		.bgc(#999);
 	}
-	&.animate{
+	&.transition{
 		.bgc(#33B666);
 	}
 
@@ -84,10 +84,10 @@ return {
 					//切换关键帧类型
 					switch(this.framedata.name){
 						case 'normal' :
-							this.framedata.name = 'animate'
+							this.framedata.name = 'transition'
 							break;
 
-						case 'animate' :
+						case 'transition' :
 							this.framedata.name = 'blank'
 							break;
 

@@ -70,7 +70,7 @@ return {
 				return frame.framedata
 			}
 				
-			var framedata = {name:'animate'}
+			var framedata = {name:'transition'}
 			this.formatFrameData(framedata)
 
 			var line = frame.time / frame.framedata.duration
@@ -165,7 +165,7 @@ return {
 		}
 		, splitKeyFrame : function(frame){
 			var data = frame.framedata
-			if(frame.framedata.name == 'animate'){
+			if(frame.framedata.name == 'transition'){
 				data = this.getAnimateFrameData(frame)
 			}
 
@@ -205,7 +205,7 @@ return {
 				if(time >= frame.startTime && time < frame.startTime + frame.framedata.duration){
 					frame.time = time - frame.startTime
 
-					if(frame.framedata.name == 'animate'){
+					if(frame.framedata.name == 'transition'){
 						framedata = this.getAnimateFrameData(frame)
 
 					}else{

@@ -5,7 +5,7 @@
 	background-repeat:no-repeat;
 	.none;
 
-	&.animate, &.normal{
+	&.transition, &.normal{
 		.block;
 	}
 }
