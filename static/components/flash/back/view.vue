@@ -9,7 +9,7 @@
 	}
 }
 
-.viewcontrol{
+.controls{
 	.pa;z-index:100;top:60%;right:0px;
 	.bgc(white);
 }
@@ -80,15 +80,16 @@
 	</div>
 </div>
 
+
+<div class="controls">
+	<controls :itemsdata="itemsdata"></controls>
+</div>
+
 <div class="settings">
 	<flash v-ref:flash :focus_track="focus_track" :itemsdata="itemsdata" :formatdata="formatdata" :keybroad="keybroad"></flash>
 
 	<original :focus_item="focus_item" :formatdata="formatdata.original"></original>
 	<framesetting :focus_item="focus_item" :formatdata="formatdata"></framesetting>
-
-	<div class="viewcontrol">
-		<div @click="addItem">addItem</div>
-	</div>
 </div>
 
 </template>
@@ -136,6 +137,7 @@ var flash = require('flash/back/flash.vue')
 var item = require('flash/back/item.vue')
 var original = require('flash/back/settings/original.vue')
 var framesetting = require('flash/back/settings/frame.vue')
+var controls = require('flash/back/controls.vue')
 
 return {
   components : {
@@ -143,6 +145,7 @@ return {
 		, flash : flash
 		, original : original
 		, framesetting : framesetting
+		, controls : controls
   }
 	, props:['itemsdata', 'keybroad']
 	, data : function(){
@@ -177,19 +180,6 @@ return {
 			this.$set('pagestyle["margin-left"]', printdata.width * printdata.scale/-2 + 'px')
 			this.$set('pagestyle["margin-top"]', printdata.height * printdata.scale/-2 + 'px')
     }
-		, addItem : function(){
-			var itemdata = {
-				original : {
-					width : 100
-					, height : 100
-				}
-			}
-			this.itemsdata.push(itemdata)
-
-			this.$nextTick(function(){
-				this.$dispatch('loadTime')
-			})
-		}
 	}
 	, events : {
 		setFocusItem : function(item){
