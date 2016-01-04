@@ -95,7 +95,7 @@
 	</div>
 </div>
 
-<flashsetting :focus_track="focus_track" :focus_item="focus_item" :timedata="timedata"></flashsetting>
+<flashsetting :focus_track="focus_track" :timedata="timedata"></flashsetting>
 
 </template>
 
@@ -111,7 +111,7 @@ return {
 		, name : name
 		, flashsetting : flashsetting
   }
-	, props:['itemsdata', 'formatdata', 'keybroad', 'focus_track', 'focus_item']
+	, props:['itemsdata', 'formatdata', 'keybroad', 'focus_track']
 	, data : function(){
 
 		return {
