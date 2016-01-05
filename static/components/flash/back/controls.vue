@@ -1,14 +1,25 @@
 <style>
 .controls{
+	div{
+		.inline;
+		.pr;.hidden;
+
+		.pl(4px);.pr(4px);.border-r(2px);
+		.ml(2px);.mr(2px);
+		.bgc(#9900FF);.fc(white);
+
+		input{
+			.opacity(0);
+			.pa;left:0px;right:0px;bottom:0px;top:0px;
+		}
+	}
 }
 
 </style>
 
 
 <template>
-
-	<div id="addItem">addImage<input type="file" @change="changeImage"/></div>
-
+	<div id="addItem">添加图片<input type="file" @change="addImage"/></div>
 </template>
 
 
@@ -22,46 +33,14 @@ return {
 		}
 	}
 	, methods : {
-		changeImage : function(event){
+		addImage : function(event){
 			var mSelf = this
-			var files = event.target.files
-				,file
+			this.$dispatch('changeImage', event, function(itemdata){
+				mSelf.itemsdata.push(itemdata)
 
-			if(!files || !files.length)
-				return;
-
-			file = files[0]
-			console.log(file)	
-
-			if(file.size > 1024 * 200) {
-        alert('图片大小不能超过 200K!');
-        return false;
-      }
-
-			var URL = window.URL || window.webkitURL
-			var imgURL = URL.createObjectURL(file)
-
-			var img = new Image()
-			img.onload = function(){
-				var itemdata = {
-					original : {
-						width : img.width
-						, height : img.height
-						, imageUrl : imgURL
-					}
-				}
-
-				mSelf.addImage(itemdata)
-			}
-			img.src = imgURL
-			
-		}
-		, addImage : function(itemdata){
-
-			this.itemsdata.push(itemdata)
-
-			this.$nextTick(function(){
-				this.$dispatch('loadTime')
+				mSelf.$nextTick(function(){
+					this.$dispatch('loadTime')
+				})
 			})
 		}
 	}

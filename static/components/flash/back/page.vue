@@ -1,7 +1,16 @@
 <style>
+@controlsHeight:24px;
+
+.controls{
+	z-index:100;
+	.h(@controlsHeight);.l(@controlsHeight);
+	.pa;top:0px;right:0px;left:0px;
+	.bgc(#333); .fc(#ccc);
+}
+
 
 .view, .settings{
-	top:0px;
+	top:@controlsHeight;
 }
 
 .view{
@@ -73,6 +82,11 @@
 
 
 <template>
+
+<div class="controls">
+	<controls :itemsdata="itemsdata"></controls>
+</div>
+
 <div class="view" @click="blurItem">
 	<div class="page" :style="pagestyle">
 		<item v-ref:item v-for="itemdata in itemsdata" :itemdata="itemdata" :index="$index" :focus_item="focus_item" :printdata="printdata" :formatdata="formatdata" :keybroad="keybroad"></item>
@@ -133,12 +147,15 @@ var item = require('flash/back/item.vue')
 var original = require('flash/back/settings/original.vue')
 var framesetting = require('flash/back/settings/frame.vue')
 
+var controls = require('flash/back/controls.vue')
+
 return {
   components : {
     item : item
 		, flash : flash
 		, original : original
 		, framesetting : framesetting
+		, controls : controls
   }
 	, props:['itemsdata', 'keybroad']
 	, data : function(){
@@ -173,6 +190,9 @@ return {
 			this.$set('pagestyle["margin-left"]', printdata.width * printdata.scale/-2 + 'px')
 			this.$set('pagestyle["margin-top"]', printdata.height * printdata.scale/-2 + 'px')
     }
+		, loadTime : function(){
+			this.$refs.flash.$emit('loadTime')
+		}
 	}
 	, events : {
 		setFocusItem : function(item){
@@ -188,12 +208,45 @@ return {
       this.$broadcast('focusTrackById', item_id)
 		} 
 		, loadTime : function(){
-			this.$refs.flash.$emit('loadTime')
+			this.loadTime()
 		}
 		, loadItemByFrame : function(item_id, framedata){
       this.$broadcast('loadItemByFrame', item_id, framedata)
 		}
+		, changeImage : function(event, cbk){
+			var mSelf = this
+			var files = event.target.files
+				,file
 
+			if(!files || !files.length)
+				return;
+
+			file = files[0]
+			console.log(file)	
+
+			if(file.size > 1024 * 200) {
+        alert('图片大小不能超过 200K!');
+        return false;
+      }
+
+			var URL = window.URL || window.webkitURL
+			var imgURL = URL.createObjectURL(file)
+
+			var img = new Image()
+			img.onload = function(){
+				var itemdata = {
+					original : {
+						width : img.width
+						, height : img.height
+						, imageUrl : imgURL
+					}
+				}
+
+				console.log(itemdata)
+				cbk && cbk(itemdata)
+			}
+			img.src = imgURL
+		}
 	}
 	, created : function(){
 		this.resizePrint({
