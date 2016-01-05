@@ -82,7 +82,7 @@
 		padding:2px 4px;
 		.border-r(2px);
 		.ml(2px);.mr(2px);
-		.bgc(#333);.fc(#ccc);
+		.bgc(#444);.fc(#ccc);
 		border:1px solid #222;
 		.cursor;
 	}
