@@ -7,9 +7,7 @@
 
 <template>
 
-<div class="controls">
 	<div id="addItem">addImage<input type="file" @change="changeImage"/></div>
-</div>
 
 </template>
 

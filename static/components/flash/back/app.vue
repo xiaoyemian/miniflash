@@ -17,9 +17,9 @@ body{
 }
 .controls{
 	z-index:100;
-	.h(@controlsHeight);
+	.h(@controlsHeight);.l(@controlsHeight);
 	.pa;top:-@controlsHeight;right:0px;left:0px;
-	.bgc(#333);
+	.bgc(#333); .fc(#ccc);
 }
 
 .keybroad{
@@ -47,9 +47,11 @@ body{
 		<div @click="save">保存</div>
 	</div>
 
-	<controls :itemsdata="pagedata.items"></controls>
+	<div class="controls">
+		<controls :itemsdata="pagedata.items"></controls>
+	</div>
 
-	<view v-ref:view :itemsdata="pagedata.items" :keybroad="keybroad"></view>
+	<page v-ref:page :itemsdata="pagedata.items" :keybroad="keybroad"></page>
 
 </div>
 </template>
@@ -61,7 +63,7 @@ require('jqui/draggable')
 require('jqui/resizable')
 require('jqui/sortable')
 
-var view = require('flash/back/view.vue')
+var page = require('flash/back/page.vue')
 var controls = require('flash/back/controls.vue')
 
 var keyCode = {
@@ -72,7 +74,7 @@ var keyCode = {
 }
 return {
   components: {
-		view : view
+		page : page 
 		, controls : controls
   }
 	, props:['pages','number']
