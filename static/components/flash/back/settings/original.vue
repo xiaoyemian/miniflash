@@ -2,7 +2,7 @@
 .settingOriginal{
 	img{.w(100%);.left;}	
 	.uploadBtn{
-		.w(40%);
+		.w(40%);.left;
 	}
 }
 </style>
@@ -10,7 +10,7 @@
 <template>
 <div class="settingOriginal" v-if="focus_item && focus_item.itemdata.original">
 	<div class="inputArea">
-		<div class="btn uploadBtn" v-if="focus_item.itemdata.original.imageUrl">
+		<div class="uploadBtn" v-if="focus_item.itemdata.original.imageUrl">
 			<img src="{{focus_item.itemdata.original.imageUrl}}"/>
 			<input type="file" @change="changeImage"/>
 		</div>
