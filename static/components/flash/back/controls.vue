@@ -1,15 +1,14 @@
 <style>
 .controls{
-	.pa;z-index:100;top:60%;right:0px;
-	.bgc(white);
 }
+
 </style>
 
 
 <template>
 
-<div>addImage
-	<input type="file" @change="changeImage"/>
+<div class="controls">
+	<div id="addItem">addImage<input type="file" @change="changeImage"/></div>
 </div>
 
 </template>

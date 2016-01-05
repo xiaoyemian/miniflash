@@ -1,7 +1,11 @@
 <style>
 
+.view, .settings{
+	top:0px;
+}
+
 .view{
-	.pa;left:0px;right:50%;top:0px;bottom:0px;
+	.pa;left:0px;right:50%;bottom:0px;
 	box-sizing:border-box;
 
 	.page{
@@ -9,15 +13,10 @@
 	}
 }
 
-.controls{
-	.pa;z-index:100;top:60%;right:0px;
-	.bgc(white);
-}
-
 .settings{
-	.h(100%);
 	overflow:auto;
-	.pa;right:0px;top:0px;.w(50%);
+	.pa;right:0px;.w(50%);
+	bottom:0px;
 	z-index:10;
 	box-sizing:border-box;
 
@@ -81,10 +80,6 @@
 </div>
 
 
-<div class="controls">
-	<controls :itemsdata="itemsdata"></controls>
-</div>
-
 <div class="settings">
 	<flash v-ref:flash :focus_track="focus_track" :itemsdata="itemsdata" :formatdata="formatdata" :keybroad="keybroad"></flash>
 
@@ -137,7 +132,6 @@ var flash = require('flash/back/flash.vue')
 var item = require('flash/back/item.vue')
 var original = require('flash/back/settings/original.vue')
 var framesetting = require('flash/back/settings/frame.vue')
-var controls = require('flash/back/controls.vue')
 
 return {
   components : {
@@ -145,7 +139,6 @@ return {
 		, flash : flash
 		, original : original
 		, framesetting : framesetting
-		, controls : controls
   }
 	, props:['itemsdata', 'keybroad']
 	, data : function(){

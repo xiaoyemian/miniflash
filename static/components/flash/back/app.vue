@@ -1,4 +1,7 @@
 <style>
+@headtopHeight:26px;
+@controlsHeight:24px;
+
 body{
 	.bgc(#393939);
 	.f(12px);
@@ -6,12 +9,19 @@ body{
 }
 .app{
 	.pa;
-	bottom:0px;left:0px;top:26px;right:0px;
+	bottom:0px;left:0px;top:@controlsHeight + @headtopHeight;right:0px;
 }
 .headtop{
 	z-index:99;
-	.f(14px);.l(26px);.h(26px);.pf;top:0px;left:0px;right:0px;.pl(4px);.pr(4px);.bgc(#535353);.fc(white);
+	.f(14px);.l(@headtopHeight);.h(@headtopHeight);.pf;top:0px;left:0px;right:0px;.pl(4px);.pr(4px);.bgc(#535353);.fc(white);
 }
+.controls{
+	z-index:100;
+	.h(@controlsHeight);
+	.pa;top:-@controlsHeight;right:0px;left:0px;
+	.bgc(#333);
+}
+
 .keybroad{
 	.c;.f(12px);.pa;left:0px;right:0px;
 	span{
@@ -37,8 +47,9 @@ body{
 		<div @click="save">保存</div>
 	</div>
 
-	<view v-ref:view :itemsdata="pagedata.items" :keybroad="keybroad"></view>
+	<controls :itemsdata="pagedata.items"></controls>
 
+	<view v-ref:view :itemsdata="pagedata.items" :keybroad="keybroad"></view>
 
 </div>
 </template>
@@ -51,6 +62,7 @@ require('jqui/resizable')
 require('jqui/sortable')
 
 var view = require('flash/back/view.vue')
+var controls = require('flash/back/controls.vue')
 
 var keyCode = {
 	'91' : 'command'
@@ -61,6 +73,7 @@ var keyCode = {
 return {
   components: {
 		view : view
+		, controls : controls
   }
 	, props:['pages','number']
 	, data : function(){
