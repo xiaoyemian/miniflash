@@ -3,7 +3,8 @@
 	.pr;.hidden;
 	input{
 		.opacity(0);
-		.pa;left:0px;right:0px;bottom:0px;top:0px;
+		.pa;left:0px;top:0px;
+		.w(100%);.h(100%);
 	}
 }
 
@@ -78,7 +79,7 @@
 	}
 
 	.btn{
-		.inline;
+		.i_block;
 		padding:2px 4px;
 		.border-r(2px);
 		.ml(2px);.mr(2px);
