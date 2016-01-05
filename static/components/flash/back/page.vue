@@ -1,4 +1,12 @@
 <style>
+.uploadBtn{
+	.pr;.hidden;
+	input{
+		.opacity(0);
+		.pa;left:0px;right:0px;bottom:0px;top:0px;
+	}
+}
+
 @controlsHeight:24px;
 
 .controls{
@@ -68,6 +76,16 @@
 	label {
 		.i_block; .tr;
 	}
+
+	.btn{
+		.inline;
+		padding:2px 4px;
+		.border-r(2px);
+		.ml(2px);.mr(2px);
+		.bgc(#333);.fc(#ccc);
+		border:1px solid #222;
+		.cursor;
+	}
 }
 
 
@@ -97,8 +115,8 @@
 <div class="settings">
 	<flash v-ref:flash :focus_track="focus_track" :itemsdata="itemsdata" :formatdata="formatdata" :keybroad="keybroad"></flash>
 
-	<original :focus_item="focus_item" :formatdata="formatdata.original"></original>
 	<framesetting :focus_item="focus_item" :formatdata="formatdata"></framesetting>
+	<original :focus_item="focus_item"></original>
 </div>
 
 </template>
@@ -107,12 +125,6 @@
 <script>
 
 var formatdata = {}
-formatdata.original = {
-/*
-	width : {label : '原始宽度', unit : 'px'}
-	, height : {label : '原始高度', unit : 'px'}
-	, */imageUrl : {label : '图片地址', type : 'text'}
-}
 formatdata.resize = {
 	width : {label : '宽度', unit : 'px'}
 	, height : {label : '高度', unit : 'px'}
@@ -242,7 +254,6 @@ return {
 					}
 				}
 
-				console.log(itemdata)
 				cbk && cbk(itemdata)
 			}
 			img.src = imgURL

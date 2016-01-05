@@ -87,15 +87,6 @@ return {
 		, setFocusItem : function(){
 			this.$dispatch('setFocusItem', this)
 		}
-		, loadItemOriginal : function(){
-			var original = this.itemdata.original
-
-			this.originalstyle = {
-				width : original.width * this.printdata.scale + 'px'
-				, height : original.height * this.printdata.scale + 'px'
-				, 'background-image' : 'url("' + original.imageUrl + '")'
-			}
-		}
 		, getStyleByFrame : function(framedata){
 			var formatdata = this.formatdata
 			var transformList = []
@@ -133,6 +124,15 @@ return {
 			style.transform = transformList.join(' ')
 			
 			return style
+		}
+		, loadItemOriginal : function(){
+			var original = this.itemdata.original
+
+			this.originalstyle = {
+				width : original.width * this.printdata.scale + 'px'
+				, height : original.height * this.printdata.scale + 'px'
+				, 'background-image' : 'url("' + original.imageUrl + '")'
+			}
 		}
 		, loadItemStyle : function(){
 			this.framestyle = this.getStyleByFrame(this.framedata)

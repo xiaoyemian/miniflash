@@ -3,9 +3,8 @@
 
 <template>
 <div class="settingOriginal" v-if="focus_item && focus_item.itemdata.original">
-	<div class="inputArea" v-for="(key, value) in formatdata">
-		<label for="{{key}}">{{value.label || key}}:</label>
-		<input type="{{value.type||'number'}}" @keyup="updateItem" id="{{key}}" placeholder="" value="{{focus_item.itemdata.original[key]}}" disabled/>{{value.unit}}
+	<div class="inputArea">
+		<div class="btn uploadBtn">更新图片<input type="file" @change="changeImage"/></div>
 	</div>
 </div>
 </template>
@@ -19,19 +18,17 @@ return {
 		}
 	}
 	, methods : {
-		updateItem : function(event){
-			var setting = event.target
-			var type = setting.id.split('|')
-			var value = setting.value
+		changeImage : function(event){
+			var mSelf = this
+			this.$dispatch('changeImage', event, function(itemdata){
+				var original = itemdata.original
+				mSelf.$set('focus_item.itemdata.original', original)
+				mSelf.$set('focus_item.framedata.resize.height', original.height)
+				mSelf.$set('focus_item.framedata.resize.width', original.width)
 
-			var arr = []
-			for(var i in type){
-				arr.push('["' + type[i] + '"]')
-			}
-
-			this.$set('focus_item.itemdata.original' + arr.join(''), value||0)
-
-			this.focus_item.loadItemStyle()
+				mSelf.focus_item.loadItemOriginal()
+				mSelf.focus_item.loadItemStyle()
+			})
 		}
 	}
 }

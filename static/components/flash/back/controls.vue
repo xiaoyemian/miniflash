@@ -2,16 +2,11 @@
 .controls{
 	div{
 		.inline;
-		.pr;.hidden;
-
-		.pl(4px);.pr(4px);.border-r(2px);
+		padding:2px 4px;
+		.border-r(2px);
 		.ml(2px);.mr(2px);
 		.bgc(#9900FF);.fc(white);
 
-		input{
-			.opacity(0);
-			.pa;left:0px;right:0px;bottom:0px;top:0px;
-		}
 	}
 }
 
@@ -19,7 +14,7 @@
 
 
 <template>
-	<div id="addItem">添加图片<input type="file" @change="addImage"/></div>
+	<div class="uploadBtn">添加图片<input type="file" @change="addImage"/></div>
 </template>
 
 
