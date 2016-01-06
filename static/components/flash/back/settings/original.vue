@@ -11,7 +11,7 @@
 <div class="settingOriginal" v-if="focus_item && focus_item.itemdata.original">
 	<div class="inputArea">
 		<div class="uploadBtn" v-if="focus_item.itemdata.original.imageUrl">
-			<img src="{{focus_item.itemdata.original.imageUrl}}"/>
+			<img :src="focus_item.itemdata.original.imageUrl"/>
 			<input type="file" @change="changeImage"/>
 		</div>
 	</div>
