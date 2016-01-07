@@ -57,7 +57,7 @@ return {
 			this.$dispatch('setTime', time)	
 
 			if(this.keybroad.command){
-				this.$emit('addKeyFrame', time)	
+				this.$emit('addFrame', time)	
 			}
 		}
 		, getAnimateFrameData : function(frame){
@@ -98,12 +98,6 @@ return {
 				this.formatKeyFrameData(framedata.keyframes[i])
 			}
 
-			var duration = 0
-			for(var i in framedata.keyframes){
-				duration += framedata.keyframes[i].duration
-			}
-			Vue.set(framedata, 'duration', duration)
-
 			if(!framedata['timing-function'])
 				Vue.set(framedata, 'timing-function', 'linear')
 
@@ -115,7 +109,7 @@ return {
 			var formatdata = this.formatdata
 
 			if(!keyframe.duration)
-				Vue.set(keyframe, 'duration', 3)
+				Vue.set(keyframe, 'duration', 1)
 
 			if(!keyframe.resize)
 				Vue.set(keyframe, 'resize', {})
@@ -164,21 +158,26 @@ return {
 		, formatFrameData : function(framedata){
 			this.formatFrameData(framedata)
 		}
-		, addKeyFrame : function(time){
+		, addFrame : function(time){
 			var frames = this.$refs.frame
 			var len = frames.length
 			var endframe = frames[len-1]
-			endframe.framedata.duration = time - endframe.startTime 
 
 			var framedatanew = JSON.parse(JSON.stringify({
-				resize : endframe.framedata.resize
-				, transform : endframe.framedata.transform
+				keyframes:[{
+					resize : endframe.framedata.resize
+					, transform : endframe.framedata.transform
+				}]
 			}))
 			this.formatFrameData(framedatanew)
 			this.itemdata.frames.push(framedatanew)
 
 			this.$nextTick(function(){
-				this.$dispatch('setTime', time)	
+
+				var frames = this.$refs.frame
+				var len = frames.length
+				var endframe = frames[len-1]
+				this.$dispatch('setTime', endframe.startTime)	
 			})
 		}
 		, splitKeyFrame : function(frame){
