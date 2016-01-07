@@ -96,7 +96,7 @@
 </div>
 
 <blocksetting :focus="focus" :timedata="timedata"></blocksetting>
-<blocksetting :focus="focus" :timedata="timedata"></blocksetting>
+<framesetting :focus="focus" :timedata="timedata"></framesetting>
 
 </template>
 
@@ -105,14 +105,14 @@
 var track = require('flash/back/track.vue')
 var name = require('flash/back/name.vue')
 var blocksetting = require('flash/back/settings/block.vue')
-var blocksetting = require('flash/back/settings/frame.vue')
+var framesetting = require('flash/back/settings/frame.vue')
 
 return {
   components : {
 		track : track
 		, name : name
 		, blocksetting : blocksetting
-		, blocksetting : blocksetting
+		, framesetting : framesetting
   }
 	, props:['itemsdata', 'formatdata', 'keybroad', 'focus']
 	, data : function(){

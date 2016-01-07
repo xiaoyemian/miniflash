@@ -7,10 +7,10 @@
 		<label for="{{key}}">{{value.label}}:</label>
 
 		<select id="{{key}}" @change="updateFrame" v-if="value.options">
-			<option value="{{option}}" selected="{{option == focus.block.framedata[key]}}" v-for="(name, option) in value.options">{{option}}</option>
+			<option value="{{option}}" selected="{{option == focus.block.blockdata[key]}}" v-for="(name, option) in value.options">{{option}}</option>
 		</select>
 
-		<input v-else type="{{value.type||'number'}}" @keyup="updateFrame" id="{{key}}" min="1" placeholder="" value="{{focus.block.framedata[key]}}" />{{value.unit}}
+		<input v-else type="{{value.type||'number'}}" @keyup="updateFrame" id="{{key}}" min="1" placeholder="" value="{{focus.block.blockdata[key]}}" />{{value.unit}}
 	</div>
 
 </div>
@@ -49,7 +49,7 @@ return {
 				arr.push('["' + type[i] + '"]')
 			}
 
-			this.$set('focus.block.framedata' + arr.join(''), value||0)
+			this.$set('focus.block.blockdata' + arr.join(''), value||0)
 		}
 	}
 }
