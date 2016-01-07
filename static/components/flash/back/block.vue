@@ -54,7 +54,7 @@ return {
 		setStartTime : function(){
 			this.startTime = Math.floor(($(this.$el).position().left + this.timedata.scrollleft) / this.timedata.framewidth) 
 		}
-		, focusTrackByKeyFrame : function(keyframe){
+		, focusTrackByFrame : function(keyframe){
 			this.time = keyframe.time + keyframe.startTime 
 			this.$set('keyframe', keyframe)
 			this.$dispatch('setTime', this.startTime + this.time)

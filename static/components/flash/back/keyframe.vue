@@ -12,7 +12,7 @@
 </style>
 
 <template>
-<div class="keyframe" @click.stop="selectKeyFrame" :style="{width:keyframedata.duration * timedata.framewidth + 'px'}"></div>
+<div class="keyframe" @click.stop="selectFrame" :style="{width:keyframedata.duration * timedata.framewidth + 'px'}"></div>
 </template>
 
 
@@ -27,9 +27,9 @@ return {
 		}
 	}
 	, methods : {
-		selectKeyFrame : function(event){
+		selectFrame : function(event){
 			this.time = Math.floor(event.offsetX / this.timedata.framewidth)
-			this.$dispatch('focusTrackByKeyFrame', this)
+			this.$dispatch('focusTrackByFrame', this)
 		}
 	}
 	, events : {
