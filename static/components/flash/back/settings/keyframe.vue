@@ -2,16 +2,12 @@
 </style>
 
 <template>
-<div class="settingFlash" v-if="focus.track && focus.track.frame && focus.track.frame.keyframe">
+<div class="settingFlash" v-if="focus.keyframe">
 
 	<div class="inputArea" v-for="(key, value) in formatdata">
 		<label for="{{key}}">{{value.label}}:</label>
 
-		<select id="{{key}}" @change="updateFrame" v-if="value.options">
-			<option value="{{option}}" selected="{{option == focus.track.frame.keyframe.keyframedata[key]}}" v-for="(name, option) in value.options">{{option}}</option>
-		</select>
-
-		<input v-else type="{{value.type||'number'}}" @keyup="updateFrame" id="{{key}}" min="1" placeholder="" value="{{focus.track.frame.keyframe.keyframedata[key]}}" />{{value.unit}}
+		<input v-else type="{{value.type||'number'}}" @keyup="updateFrame" id="{{key}}" min="1" placeholder="" value="{{focus.keyframe.keyframedata[key]}}" />{{value.unit}}
 	</div>
 
 </div>
@@ -42,8 +38,7 @@ return {
 				arr.push('["' + type[i] + '"]')
 			}
 
-			console.log(value)
-			this.$set('focus.track.frame.keyframe' + arr.join(''), value||0)
+			this.$set('focus.keyframe.keyframedata' + arr.join(''), value||0)
 		}
 	}
 }

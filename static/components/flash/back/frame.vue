@@ -45,7 +45,6 @@ return {
 		return {
 			startTime : 0
 			, time : 0
-			, keyframe : null 
 		}
 	}
 	, methods : {
@@ -56,7 +55,6 @@ return {
 		}
 		, focusTrackByKeyFrame : function(keyframe){
 			this.time = keyframe.time + keyframe.startTime 
-			this.keyframe = keyframe
 			this.$dispatch('setTime', this.startTime + this.time)
 			this.$dispatch('focusTrackByFrame', this)
 		}

@@ -51,7 +51,8 @@ return {
 	, methods : {
 		selectTrack : function(event){
 			var time = Math.floor(event.offsetX / this.timedata.framewidth)
-			this.$set('focus.track', this)
+			this.setFocus()
+
 			this.$dispatch('focusItemById', this.itemdata.item_id)
 			this.$dispatch('setTime', time)	
 
@@ -136,11 +137,18 @@ return {
 		, loadItemByFrame : function(framedata){
 			this.$dispatch('loadItemByFrame', this.itemdata.item_id, framedata)
 		}
+		, setFocus : function(){
+
+			this.$set('focus.track', this)
+			this.$set('focus.frame', this.frame)
+			this.$set('focus.keyframe', this.frame.keyframe)
+		}
 	}
 	, events : {
 		focusTrackByFrame : function(frame){
 			this.$set('frame', frame)
-			this.$set('focus.track', this)
+
+			this.setFocus()
 			this.$dispatch('focusItemById', this.itemdata.item_id)
 		}
 		, focusTrackById : function(item_id){
