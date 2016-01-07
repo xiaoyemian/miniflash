@@ -40,6 +40,10 @@ return {
 	, watch : {
 		'keyframedata.duration' : function(){
 			this.keyframedata.duration -= 0
+			this.$nextTick(function(){
+				this.$parent.$broadcast('setStartTime')	
+				this.$parent.$parent.$broadcast('setStartTime')	
+			})
 		}
 	}
 	, ready : function(){
