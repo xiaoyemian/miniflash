@@ -43,13 +43,15 @@ return {
 	, props : ['timedata', 'itemdata', 'keybroad', 'formatdata', 'focus']
 	, data : function(){
 		return {
-			frame : null 
 		}
 	}
 	, methods : {
 		selectTrack : function(event){
 			var time = Math.floor(event.offsetX / this.timedata.framewidth)
-			this.setFocus()
+
+			this.$set('focus.track', this)
+			this.$set('focus.frame', null)
+			this.$set('focus.keyframe', null)
 
 			this.$dispatch('focusItemById', this.itemdata.item_id)
 			this.$dispatch('setTime', time)	
@@ -135,17 +137,13 @@ return {
 		, loadItemByFrame : function(framedata){
 			this.$dispatch('loadItemByFrame', this.itemdata.item_id, framedata)
 		}
-		, setFocus : function(){
-			this.$set('focus.track', this)
-			this.$set('focus.frame', this.frame)
-			this.$set('focus.keyframe', this.frame.keyframe)
-		}
 	}
 	, events : {
 		focusTrackByFrame : function(frame){
-			this.$set('frame', frame)
+			this.$set('focus.track', this)
+			this.$set('focus.frame', frame)
+			this.$set('focus.keyframe', frame.keyframe)
 
-			this.setFocus()
 			this.$dispatch('focusItemById', this.itemdata.item_id)
 		}
 		, focusTrackById : function(item_id){
@@ -233,7 +231,6 @@ return {
 				framedata = frame.framedata.keyframes[0]
 			}
 			this.loadItemByFrame(framedata)
-			this.$set('frame', frame)
 		}
 	}
 	, ready : function(){
