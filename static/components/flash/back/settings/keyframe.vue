@@ -7,7 +7,7 @@
 	<div class="inputArea" v-for="(key, value) in formatdata">
 		<label for="{{key}}">{{value.label}}:</label>
 
-		<input v-else type="{{value.type||'number'}}" @keyup="updateFrame" id="{{key}}" min="1" placeholder="" value="{{focus.keyframe.keyframedata[key]}}" />{{value.unit}}
+		<input v-else type="{{value.type||'number'}}" @keyup="updateFrame" id="{{key}}" min="1" placeholder="" value="{{focus.keyframe.framedata[key]}}" />{{value.unit}}
 	</div>
 
 </div>
@@ -38,7 +38,7 @@ return {
 				arr.push('["' + type[i] + '"]')
 			}
 
-			this.$set('focus.keyframe.keyframedata' + arr.join(''), value||0)
+			this.$set('focus.keyframe.framedata' + arr.join(''), value||0)
 		}
 	}
 }

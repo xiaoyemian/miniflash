@@ -27,7 +27,7 @@
 
 <template>
 <div class="frame" :class="[framedata['iteration-count'] == 'infinite' ? 'infinite' : '', framedata.name, timedata.time == startTime + time ? 'focus' : '']">
-	<keyframe v-ref:keyframe v-for="keyframedata in framedata.keyframes" :index="$index" :keyframedata="keyframedata" :timedata="timedata"></keyframe>
+	<keyframe v-ref:keyframe v-for="framedata in framedata.frames" :index="$index" :framedata="framedata" :timedata="timedata"></keyframe>
 </div>
 </template>
 

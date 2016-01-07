@@ -84,25 +84,25 @@ return {
 			}
 			return framedata
 		}
-		, formatBlockData : function(framedata){
+		, formatBlockData : function(data){
 			var formatdata = this.formatdata
 
-			if(!framedata.name)
-				Vue.set(framedata, 'name', 'normal')
+			if(!data.name)
+				Vue.set(data, 'name', 'normal')
 
-			if(!framedata['keyframes']){
-				Vue.set(framedata, 'keyframes', [ {} , {} ])
+			if(!data['frames']){
+				Vue.set(data, 'frames', [ {} , {} ])
 			}
 
-			for(var i in framedata.keyframes){
-				this.formatFrameData(framedata.keyframes[i])
+			for(var i in data.frames){
+				this.formatFrameData(data.frames[i])
 			}
 
-			if(!framedata['timing-function'])
-				Vue.set(framedata, 'timing-function', 'linear')
+			if(!data['timing-function'])
+				Vue.set(data, 'timing-function', 'linear')
 
-			if(!framedata['iteration-count'])
-				Vue.set(framedata, 'iteration-count', 1)
+			if(!data['iteration-count'])
+				Vue.set(data, 'iteration-count', 1)
 
 		}
 		, formatFrameData : function(keyframe){
@@ -160,7 +160,7 @@ return {
 			var endframe = frames[len-1]
 
 			var framedatanew = JSON.parse(JSON.stringify({
-				keyframes:[{
+				frames:[{
 					resize : endframe.framedata.resize
 					, transform : endframe.framedata.transform
 				}]
@@ -227,16 +227,15 @@ return {
 							framedata = this.getAnimateFrameData(frame)
 
 						}else{
-							framedata = keyframe.keyframedata
+							framedata = keyframe.framedata
 						}
 
-						console.log(framedata)
 						break;
 					}
 				}
 			}
 			if(!framedata){
-				framedata = keyframe.keyframedata
+				framedata = keyframe.framedata
 			}
 			this.loadItemByFrame(framedata)
 		}

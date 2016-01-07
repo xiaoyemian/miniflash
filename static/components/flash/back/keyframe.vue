@@ -12,14 +12,14 @@
 </style>
 
 <template>
-<div class="keyframe" @click.stop="selectFrame" :style="{width:keyframedata.duration * timedata.framewidth + 'px'}"></div>
+<div class="keyframe" @click.stop="selectFrame" :style="{width:framedata.duration * timedata.framewidth + 'px'}"></div>
 </template>
 
 
 <script>
 
 return {
-	props : ['keyframedata', 'timedata']
+	props : ['framedata', 'timedata']
 	, data : function(){
 		return {
 			startTime : 0
@@ -38,8 +38,8 @@ return {
 		}
 	}
 	, watch : {
-		'keyframedata.duration' : function(){
-			this.keyframedata.duration -= 0
+		'framedata.duration' : function(){
+			this.framedata.duration -= 0
 			this.$nextTick(function(){
 				this.$parent.$broadcast('setStartTime')	
 				this.$parent.$parent.$broadcast('setStartTime')	
