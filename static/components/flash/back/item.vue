@@ -55,7 +55,7 @@
 </style>
 
 <template>
-<div class="item" @click.stop="selectItem" :class="[focus.item && focus.item.itemdata.item_id == itemdata.item_id ? 'focus' : '']" :style="[originalstyle, framestyle]">
+<div class="item" @click.stop="selectItem" :class="[focus.item && focus.item.itemdata.item_id == itemdata.item_id ? 'focus' : '']" :style="[originalstyle, blockstyle]">
 	<div class="handel">
 		<div @click.stop="aspectRatio" class="aspectRatioBtn"></div>
 	</div>
@@ -71,7 +71,7 @@ return {
 		return {
 			framedata : null
 			, originalstyle : {}
-			, framestyle : {} 
+			, blockstyle : {} 
 		}
 	}
 	, methods : {
@@ -127,7 +127,7 @@ return {
 			}
 		}
 		, loadItemStyle : function(){
-			this.framestyle = this.getStyleByFrame(this.framedata)
+			this.blockstyle = this.getStyleByFrame(this.framedata)
 		}
 		, aspectRatio : function(){
 			var resize = this.framedata.resize
@@ -158,11 +158,11 @@ return {
 				delete itemdata.scale
 			}
 
-			if(!itemdata.frames)
-				this.$set('itemdata.frames', [])
+			if(!itemdata.blocks)
+				this.$set('itemdata.blocks', [])
 
-			if(itemdata.frames.length == 0){
-				itemdata.frames.push({name:'normal'})
+			if(itemdata.blocks.length == 0){
+				itemdata.blocks.push({name:'normal'})
 			}
 
 		}

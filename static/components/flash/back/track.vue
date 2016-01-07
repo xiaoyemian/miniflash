@@ -29,7 +29,7 @@
 <template>
 <div class="track" @click.stop="selectTrack" :class="{focus : focus.track && focus.track.itemdata.item_id == itemdata.item_id}">
 	<div class="focusframe" v-if="focus.track && focus.track.itemdata.item_id == itemdata.item_id" :style="{width:timedata.framewidth + 'px', left:timedata.time * timedata.framewidth + 'px'}"></div>
-	<block v-ref:frame v-for="framedata in itemdata.frames" :index="$index" :framedata="framedata" :timedata="timedata" :keybroad="keybroad"></block>
+	<block v-ref:block v-for="blockdata in itemdata.blocks" :index="$index" :blockdata="blockdata" :timedata="timedata" :keybroad="keybroad"></block>
 </div>
 
 </template>
@@ -65,7 +65,7 @@ return {
 				return frame.framedata
 			}
 
-			var enddata = this.itemdata.frames[frame.index+1]
+			var enddata = this.itemdata.blocks[frame.index+1]
 			if(!enddata){
 				return frame.framedata
 			}
@@ -90,49 +90,46 @@ return {
 			if(!data.name)
 				Vue.set(data, 'name', 'normal')
 
-			if(!data['frames']){
-				Vue.set(data, 'frames', [ {} , {} ])
-			}
-
-			for(var i in data.frames){
-				this.formatFrameData(data.frames[i])
-			}
-
 			if(!data['timing-function'])
 				Vue.set(data, 'timing-function', 'linear')
 
 			if(!data['iteration-count'])
 				Vue.set(data, 'iteration-count', 1)
 
+			if(!data['frames']){
+				Vue.set(data, 'frames', [ {} , {} ])
+			}
 		}
-		, formatFrameData : function(keyframe){
+		, formatFrameData : function(framedata){
 			var formatdata = this.formatdata
 
-			if(!keyframe.duration)
-				Vue.set(keyframe, 'duration', 1)
+			if(!framedata.duration)
+				Vue.set(framedata, 'duration', 1)
 
-			if(!keyframe.resize)
-				Vue.set(keyframe, 'resize', {})
+			if(!framedata.resize)
+				Vue.set(framedata, 'resize', {})
 
-			if(!keyframe.transform)
-				Vue.set(keyframe, 'transform', {})
+			if(!framedata.transform)
+				Vue.set(framedata, 'transform', {})
 
 			for(var i in formatdata.transform){
-				if(!keyframe.transform[i]){
+				if(!framedata.transform[i]){
 					var data = {}
 					for(var j in formatdata.transform[i].opts){
 						var value = formatdata.transform[i].opts[j]
 						data[value[0]] = value[2] || 0
 					}
-					Vue.set(keyframe.transform, i, data)
+					Vue.set(framedata.transform, i, data)
 				}
 			}
 
 			for(var i in formatdata.resize){
-				if(!keyframe.resize[i]){
-					Vue.set(keyframe.resize, i, 0)
+				if(!framedata.resize[i]){
+					Vue.set(framedata.resize, i, 0)
 				}
 			}
+
+			console.log(framedata)
 		}
 		, loadItemByFrame : function(framedata){
 			this.$dispatch('loadItemByFrame', this.itemdata.item_id, framedata)
@@ -142,7 +139,7 @@ return {
 		focusTrackByBlock : function(frame){
 			this.$set('focus.track', this)
 			this.$set('focus.block', frame)
-			this.$set('focus.frame', frame.keyframe)
+			this.$set('focus.frame', frame.frame)
 
 			this.$dispatch('focusItemById', this.itemdata.item_id)
 		}
@@ -151,11 +148,14 @@ return {
 				this.$set('focus.track', this)
 			}
 		}
-		, formatBlockData : function(framedata){
-			this.formatBlockData(framedata)
+		, formatBlockData : function(data){
+			this.formatBlockData(data)
+		}
+		, formatFrameData : function(data){
+			this.formatFrameData(data)
 		}
 		, addFrame : function(){
-			var frames = this.$refs.frame
+			var frames = this.$refs.block
 			var len = frames.length
 			var endframe = frames[len-1]
 
@@ -170,7 +170,7 @@ return {
 
 			this.$nextTick(function(){
 
-				var frames = this.$refs.frame
+				var frames = this.$refs.block
 				var len = frames.length
 				var endframe = frames[len-1]
 				this.$dispatch('setTime', endframe.startTime)	
@@ -210,34 +210,36 @@ return {
 			})
 		}
 		, loadItemByTime : function(time){
-			var frames = this.$refs.frame
+			var frames = this.$refs.block
 			var frame
-			var keyframe
-			var framedata
+			var data
 
 			for(var i in frames){
-				frame = frames[i]
-				for(var j in frame.$refs.keyframe){
-					keyframe = frame.$refs.keyframe[j]
+				var block = frames[i]
+				console.log(block)
 
-					if(time >= frame.startTime && time <= frame.startTime + keyframe.startTime){
-						frame.time = time - frame.startTime
+				for(var j in block.$refs.frame){
+					frame = block.$refs.frame[j]
 
-						if(frame.framedata.name == 'transition'){
-							framedata = this.getAnimateFrameData(frame)
+					if(time >= block.startTime && time <= block.startTime + frame.startTime){
+						block.time = time - block.startTime
+
+						if(block.blockdata.name == 'transition'){
+							data = this.getAnimateFrameData(block)
 
 						}else{
-							framedata = keyframe.framedata
+							data = frame.framedata
 						}
 
 						break;
 					}
 				}
 			}
-			if(!framedata){
-				framedata = keyframe.framedata
+			return;
+			if(!data){
+				data = frame.framedata
 			}
-			this.loadItemByFrame(framedata)
+			this.loadItemByFrame(data)
 		}
 	}
 	, ready : function(){

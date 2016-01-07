@@ -21,7 +21,7 @@
 		min-width:100%;
 	}
 
-	.trackframes{
+	.trackblocks{
 		min-width:100%;
 	}
 	.tracknames{
@@ -87,7 +87,7 @@
 				</div>
 
 
-				<div class="trackframes">
+				<div class="trackblocks">
 					<track v-ref:track v-for="itemdata in itemsdata" :index="$index" :itemdata="itemdata" :focus="focus" :timedata="timedata" :keybroad="keybroad" :formatdata="formatdata" :style="{height:timedata.frameheight + 'px', 'padding-right':timedata.min * 2 * timedata.framewidth + 'px'}"></track>
 				</div>
 			</div>
@@ -96,7 +96,7 @@
 </div>
 
 <blocksetting :focus="focus" :timedata="timedata"></blocksetting>
-<framesetting :focus="focus" :timedata="timedata"></framesetting>
+<blocksetting :focus="focus" :timedata="timedata"></blocksetting>
 
 </template>
 
@@ -105,14 +105,14 @@
 var track = require('flash/back/track.vue')
 var name = require('flash/back/name.vue')
 var blocksetting = require('flash/back/settings/block.vue')
-var framesetting = require('flash/back/settings/frame.vue')
+var blocksetting = require('flash/back/settings/frame.vue')
 
 return {
   components : {
 		track : track
 		, name : name
 		, blocksetting : blocksetting
-		, framesetting : framesetting
+		, blocksetting : blocksetting
   }
 	, props:['itemsdata', 'formatdata', 'keybroad', 'focus']
 	, data : function(){

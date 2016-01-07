@@ -1,7 +1,6 @@
 <style>
-.frame{
-
-	.pr; .bgc(#333);
+.block{
+	.pr; .bgc(#333);.h(100%);
 	&:before, &:after{ content:'';.pa;.h(100%);.w(1px);.bgc(#222);}
 	&:after{right:0px;}
 	&:before{
@@ -26,26 +25,26 @@
 </style>
 
 <template>
-<div class="frame" :class="[framedata['iteration-count'] == 'infinite' ? 'infinite' : '', framedata.name, timedata.time == startTime + time ? 'focus' : '']">
-	<keyframe v-ref:keyframe v-for="framedata in framedata.frames" :index="$index" :framedata="framedata" :timedata="timedata"></keyframe>
+<div class="block" :class="[blockdata['iteration-count'] == 'infinite' ? 'infinite' : '', blockdata.name, timedata.time == startTime + time ? 'focus' : '']">
+	<frameitem v-ref:frame v-for="framedata in blockdata.frames" :index="$index" :framedata="framedata" :timedata="timedata"></frameitem>
 </div>
 </template>
 
 
 <script>
 
-var keyframe = require('flash/back/keyframe.vue')
+var frame = require('flash/back/frame.vue')
 
 return {
   components : {
-    keyframe : keyframe
+    frameitem : frame
 	}
-	, props : ['framedata', 'timedata', 'keybroad']
+	, props : ['blockdata', 'timedata', 'keybroad']
 	, data : function(){
 		return {
 			startTime : 0
 			, time : 0
-			, keyframe : null
+			, frame : null
 		}
 	}
 	, methods : {
@@ -54,15 +53,15 @@ return {
 		setStartTime : function(){
 			this.startTime = Math.floor(($(this.$el).position().left + this.timedata.scrollleft) / this.timedata.framewidth) 
 		}
-		, focusTrackByFrame : function(keyframe){
-			this.time = keyframe.time + keyframe.startTime 
-			this.$set('keyframe', keyframe)
+		, focusTrackByFrame : function(frame){
+			this.time = frame.time + frame.startTime 
+			this.$set('frame', frame)
 			this.$dispatch('setTime', this.startTime + this.time)
 			this.$dispatch('focusTrackByBlock', this)
 		}
 	}
 	, created : function(){
-		this.$dispatch('formatBlockData', this.framedata)
+		this.$dispatch('formatBlockData', this.blockdata)
 	}
 	, ready : function(){
 		this.$emit('setStartTime')

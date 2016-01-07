@@ -1,5 +1,5 @@
 <style>
-.keyframe{
+.frame{
 	.left;.pr;
 	.h(100%);
 	z-index:3;
@@ -12,7 +12,7 @@
 </style>
 
 <template>
-<div class="keyframe" @click.stop="selectFrame" :style="{width:framedata.duration * timedata.framewidth + 'px'}"></div>
+<div class="frame" @click.stop="selectFrame" :style="{width:framedata.duration * timedata.framewidth + 'px'}"></div>
 </template>
 
 
@@ -48,6 +48,9 @@ return {
 	}
 	, ready : function(){
 		this.$emit('setStartTime')
+	}
+	, created : function(){
+		this.$dispatch('formatFrameData', this.framedata)
 	}
 }
 </script>
