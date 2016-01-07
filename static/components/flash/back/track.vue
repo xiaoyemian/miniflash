@@ -212,23 +212,31 @@ return {
 		, loadItemByTime : function(time){
 			var frames = this.$refs.frame
 			var frame
+			var keyframe
 			var framedata
+
 			for(var i in frames){
 				frame = frames[i]
-				if(time >= frame.startTime && time < frame.startTime + frame.framedata.duration){
-					frame.time = time - frame.startTime
+				for(var j in frame.$refs.keyframe){
+					keyframe = frame.$refs.keyframe[j]
 
-					if(frame.framedata.name == 'transition'){
-						framedata = this.getAnimateFrameData(frame)
+					if(time >= frame.startTime && time <= frame.startTime + keyframe.startTime){
+						frame.time = time - frame.startTime
 
-					}else{
-						framedata = frame.framedata.keyframes[0]
+						if(frame.framedata.name == 'transition'){
+							framedata = this.getAnimateFrameData(frame)
+
+						}else{
+							framedata = keyframe.keyframedata
+						}
+
+						console.log(framedata)
+						break;
 					}
-					break;
 				}
 			}
 			if(!framedata){
-				framedata = frame.framedata.keyframes[0]
+				framedata = keyframe.keyframedata
 			}
 			this.loadItemByFrame(framedata)
 		}
