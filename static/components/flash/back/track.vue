@@ -50,8 +50,8 @@ return {
 			var time = Math.floor(event.offsetX / this.timedata.framewidth)
 
 			this.$set('focus.track', this)
+			this.$set('focus.block', null)
 			this.$set('focus.frame', null)
-			this.$set('focus.keyframe', null)
 
 			this.$dispatch('focusItemById', this.itemdata.item_id)
 			this.$dispatch('setTime', time)	
@@ -141,8 +141,8 @@ return {
 	, events : {
 		focusTrackByBlock : function(frame){
 			this.$set('focus.track', this)
-			this.$set('focus.frame', frame)
-			this.$set('focus.keyframe', frame.keyframe)
+			this.$set('focus.block', frame)
+			this.$set('focus.frame', frame.keyframe)
 
 			this.$dispatch('focusItemById', this.itemdata.item_id)
 		}
