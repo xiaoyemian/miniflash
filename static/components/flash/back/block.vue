@@ -58,11 +58,11 @@ return {
 			this.time = keyframe.time + keyframe.startTime 
 			this.$set('keyframe', keyframe)
 			this.$dispatch('setTime', this.startTime + this.time)
-			this.$dispatch('focusTrackByFrame', this)
+			this.$dispatch('focusTrackByBlock', this)
 		}
 	}
 	, created : function(){
-		this.$dispatch('formatFrameData', this.framedata)
+		this.$dispatch('formatBlockData', this.framedata)
 	}
 	, ready : function(){
 		this.$emit('setStartTime')

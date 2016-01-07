@@ -71,7 +71,7 @@ return {
 			}
 				
 			var framedata = {name:'transition'}
-			this.formatFrameData(framedata)
+			this.formatBlockData(framedata)
 
 			var line = frame.time / frame.framedata.duration
 			for(var i in frame.framedata.resize){
@@ -84,7 +84,7 @@ return {
 			}
 			return framedata
 		}
-		, formatFrameData : function(framedata){
+		, formatBlockData : function(framedata){
 			var formatdata = this.formatdata
 
 			if(!framedata.name)
@@ -95,7 +95,7 @@ return {
 			}
 
 			for(var i in framedata.keyframes){
-				this.formatKeyFrameData(framedata.keyframes[i])
+				this.formatFrameData(framedata.keyframes[i])
 			}
 
 			if(!framedata['timing-function'])
@@ -105,7 +105,7 @@ return {
 				Vue.set(framedata, 'iteration-count', 1)
 
 		}
-		, formatKeyFrameData : function(keyframe){
+		, formatFrameData : function(keyframe){
 			var formatdata = this.formatdata
 
 			if(!keyframe.duration)
@@ -139,7 +139,7 @@ return {
 		}
 	}
 	, events : {
-		focusTrackByFrame : function(frame){
+		focusTrackByBlock : function(frame){
 			this.$set('focus.track', this)
 			this.$set('focus.frame', frame)
 			this.$set('focus.keyframe', frame.keyframe)
@@ -151,8 +151,8 @@ return {
 				this.$set('focus.track', this)
 			}
 		}
-		, formatFrameData : function(framedata){
-			this.formatFrameData(framedata)
+		, formatBlockData : function(framedata){
+			this.formatBlockData(framedata)
 		}
 		, addFrame : function(){
 			var frames = this.$refs.frame
@@ -165,7 +165,7 @@ return {
 					, transform : endframe.framedata.transform
 				}]
 			}))
-			this.formatFrameData(framedatanew)
+			this.formatBlockData(framedatanew)
 			this.itemdata.frames.push(framedatanew)
 
 			this.$nextTick(function(){
@@ -176,7 +176,7 @@ return {
 				this.$dispatch('setTime', endframe.startTime)	
 			})
 		}
-		, splitKeyFrame : function(frame){
+		, splitFrame : function(frame){
 			var data = frame.framedata
 			if(frame.framedata.name == 'transition'){
 				data = this.getAnimateFrameData(frame)
@@ -188,14 +188,14 @@ return {
 			frame.framedata.duration = frame.time
 			frame.time = 0
 
-			this.formatFrameData(framedatanew)
+			this.formatBlockData(framedatanew)
 			this.itemdata.frames.splice(frame.index+1, 0, framedatanew)
 
 			this.$nextTick(function(){
 				this.$dispatch('loadTime')
 			})
 		}
-		, clearKeyFrame : function(frame, keepTime){
+		, clearFrame : function(frame, keepTime){
 			var framesdata = this.itemdata.frames
 			var framedata = frame.framedata
 			var index = frame.index
