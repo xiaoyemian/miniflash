@@ -14,7 +14,6 @@
 		box-sizing:border-box;
 	}
 
-/*
 	&.focus{
 		.opacity(100);
 		.frame{
@@ -24,7 +23,6 @@
 			}
 		}
 	}
-*/
 }
 </style>
 
@@ -138,7 +136,6 @@ return {
 			this.$dispatch('loadItemByFrame', this.itemdata.item_id, framedata)
 		}
 		, setFocus : function(){
-
 			this.$set('focus.track', this)
 			this.$set('focus.frame', this.frame)
 			this.$set('focus.keyframe', this.frame.keyframe)
