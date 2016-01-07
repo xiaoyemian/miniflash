@@ -14,7 +14,7 @@
 		box-sizing:border-box;
 	}
 
-
+/*
 	&.focus{
 		.opacity(100);
 		.frame{
@@ -24,6 +24,7 @@
 			}
 		}
 	}
+*/
 }
 </style>
 
@@ -55,7 +56,7 @@ return {
 			this.$dispatch('setTime', time)	
 
 			if(this.keybroad.command){
-				this.$emit('addFrame', time)	
+				this.$emit('addFrame')	
 			}
 		}
 		, getAnimateFrameData : function(frame){
@@ -150,7 +151,7 @@ return {
 		, formatFrameData : function(framedata){
 			this.formatFrameData(framedata)
 		}
-		, addFrame : function(time){
+		, addFrame : function(){
 			var frames = this.$refs.frame
 			var len = frames.length
 			var endframe = frames[len-1]

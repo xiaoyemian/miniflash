@@ -95,7 +95,8 @@
 	</div>
 </div>
 
-<flashsetting :focus="focus" :timedata="timedata"></flashsetting>
+<framesetting :focus="focus" :timedata="timedata"></framesetting>
+<keyframesetting :focus="focus" :timedata="timedata"></keyframesetting>
 
 </template>
 
@@ -103,13 +104,15 @@
 <script>
 var track = require('flash/back/track.vue')
 var name = require('flash/back/name.vue')
-var flashsetting = require('flash/back/settings/flash.vue')
+var framesetting = require('flash/back/settings/frame.vue')
+var keyframesetting = require('flash/back/settings/keyframe.vue')
 
 return {
   components : {
 		track : track
 		, name : name
-		, flashsetting : flashsetting
+		, framesetting : framesetting
+		, keyframesetting : keyframesetting
   }
 	, props:['itemsdata', 'formatdata', 'keybroad', 'focus']
 	, data : function(){
