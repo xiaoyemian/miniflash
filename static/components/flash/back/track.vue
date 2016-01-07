@@ -29,16 +29,16 @@
 <template>
 <div class="track" @click.stop="selectTrack" :class="{focus : focus.track && focus.track.itemdata.item_id == itemdata.item_id}">
 	<div class="focusframe" v-if="focus.track && focus.track.itemdata.item_id == itemdata.item_id" :style="{width:timedata.framewidth + 'px', left:timedata.time * timedata.framewidth + 'px'}"></div>
-	<frameitem v-ref:frame v-for="framedata in itemdata.frames" :index="$index" :framedata="framedata" :timedata="timedata" :keybroad="keybroad"></frameitem>
+	<block v-ref:frame v-for="framedata in itemdata.frames" :index="$index" :framedata="framedata" :timedata="timedata" :keybroad="keybroad"></block>
 </div>
 
 </template>
 
 <script>
-var frame = require('flash/back/frame.vue')
+var block = require('flash/back/block.vue')
 return {
   components : {
-    frameitem : frame
+    block : block
 	}
 	, props : ['timedata', 'itemdata', 'keybroad', 'formatdata', 'focus']
 	, data : function(){
