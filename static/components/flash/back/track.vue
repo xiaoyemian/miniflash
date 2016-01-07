@@ -212,7 +212,7 @@ return {
 		, loadItemByTime : function(time){
 			var frames = this.$refs.block
 			var frame
-			var data
+			var framedata
 
 			for(var i in frames){
 				var block = frames[i]
@@ -225,21 +225,20 @@ return {
 						block.time = time - block.startTime
 
 						if(block.blockdata.name == 'transition'){
-							data = this.getAnimateFrameData(block)
+							framedata = this.getAnimateFrameData(block)
 
 						}else{
-							data = frame.framedata
+							framedata = frame.framedata
 						}
 
 						break;
 					}
 				}
 			}
-			return;
-			if(!data){
-				data = frame.framedata
+			if(!framedata){
+				framedata = frame.framedata
 			}
-			this.loadItemByFrame(data)
+			this.loadItemByFrame(framedata)
 		}
 	}
 	, ready : function(){
