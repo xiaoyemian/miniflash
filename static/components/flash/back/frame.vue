@@ -45,6 +45,7 @@ return {
 		return {
 			startTime : 0
 			, time : 0
+			, keyframe : null 
 		}
 	}
 	, methods : {

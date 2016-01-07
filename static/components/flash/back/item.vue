@@ -76,11 +76,8 @@ return {
 	}
 	, methods : {
 		selectItem : function(){
-			this.setFocusItem()
+			this.$set('focus.item', this)
 			this.$dispatch('focusTrackById', this.itemdata.item_id)
-		}
-		, setFocusItem : function(){
-			this.$dispatch('setFocusItem', this)
 		}
 		, getStyleByFrame : function(framedata){
 			var formatdata = this.formatdata
@@ -199,7 +196,7 @@ return {
 		}
 		, focusItemById : function(item_id){
 			if(item_id == this.itemdata.item_id){
-				this.setFocusItem()
+				this.$set('focus.item', this)
 			}
 		}
 	}

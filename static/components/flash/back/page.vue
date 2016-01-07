@@ -207,14 +207,7 @@ return {
 		}
 	}
 	, events : {
-
-		setFocusItem : function(item){
-			this.$set('focus.item', item)
-		}
-		, setFocusTrack : function(track){
-			this.$set('focus.track', track)
-		}
-		, focusItemById : function(item_id){
+		focusItemById : function(item_id){
       this.$broadcast('focusItemById', item_id)
 		} 
 		, focusTrackById : function(item_id){

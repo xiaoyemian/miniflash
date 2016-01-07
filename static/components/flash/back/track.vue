@@ -17,14 +17,12 @@
 
 	&.focus{
 		.opacity(100);
-/*
 		.frame{
 			.opacity(20);
 			&.focus{
 				.opacity(100);
 			}
 		}
-*/
 	}
 }
 </style>
@@ -52,7 +50,7 @@ return {
 	, methods : {
 		selectTrack : function(event){
 			var time = Math.floor(event.offsetX / this.timedata.framewidth)
-			this.setFocusTrack()
+			this.$set('focus.track', this)
 			this.$dispatch('focusItemById', this.itemdata.item_id)
 			this.$dispatch('setTime', time)	
 
@@ -137,22 +135,16 @@ return {
 		, loadItemByFrame : function(framedata){
 			this.$dispatch('loadItemByFrame', this.itemdata.item_id, framedata)
 		}
-		, setFocusFrame : function(frame){
-			this.$set('frame', frame)
-		}
-		, setFocusTrack : function(){
-			this.$dispatch('setFocusTrack', this)
-		}
 	}
 	, events : {
 		focusTrackByFrame : function(frame){
-			this.setFocusFrame(frame)
-			this.setFocusTrack()
+			this.$set('frame', frame)
+			this.$set('focus.track', this)
 			this.$dispatch('focusItemById', this.itemdata.item_id)
 		}
 		, focusTrackById : function(item_id){
 			if(item_id == this.itemdata.item_id){
-				this.setFocusTrack()
+				this.$set('focus.track', this)
 			}
 		}
 		, formatFrameData : function(framedata){
@@ -235,7 +227,7 @@ return {
 				framedata = frame.framedata.keyframes[0]
 			}
 			this.loadItemByFrame(framedata)
-			this.setFocusFrame(frame)
+			this.$set('frame', frame)
 		}
 	}
 	, ready : function(){
