@@ -16,7 +16,7 @@
 
 	&.focus{
 		.opacity(100);
-		.frame{
+		.block{
 			.opacity(20);
 			&.focus{
 				.opacity(100);
