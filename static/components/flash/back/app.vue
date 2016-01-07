@@ -83,6 +83,8 @@ return {
 			console.log(items)
 		}
 	}
+	, events : {
+	}
 	, created: function(){
 		var mSelf = this
 

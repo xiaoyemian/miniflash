@@ -9,8 +9,8 @@
 </style>
 
 <template>
-<div class="settingOriginal" v-if="focus_item && focus_item.itemdata.original">
-	<div class="uploadBtn" v-if="focus_item.itemdata.original.imageUrl" :style="{'background-image':'url('+focus_item.itemdata.original.imageUrl+')'}">
+<div class="settingOriginal" v-if="focus.item && focus.item.itemdata.original">
+	<div class="uploadBtn" v-if="focus.item.itemdata.original.imageUrl" :style="{'background-image':'url('+focus.item.itemdata.original.imageUrl+')'}">
 		<input type="file" @change="changeImage"/>
 	</div>
 	<div class="inputArea">
@@ -21,7 +21,7 @@
 <script>
 
 return {
-	props : ['focus_item', 'formatdata']
+	props : ['focus', 'formatdata']
 	, data : function(){
 		return {
 		}
@@ -31,12 +31,12 @@ return {
 			var mSelf = this
 			this.$dispatch('changeImage', event, function(itemdata){
 				var original = itemdata.original
-				mSelf.$set('focus_item.itemdata.original', original)
-				mSelf.$set('focus_item.framedata.resize.height', original.height)
-				mSelf.$set('focus_item.framedata.resize.width', original.width)
+				mSelf.$set('focus.item.itemdata.original', original)
+				mSelf.$set('focus.item.framedata.resize.height', original.height)
+				mSelf.$set('focus.item.framedata.resize.width', original.width)
 
-				mSelf.focus_item.loadItemOriginal()
-				mSelf.focus_item.loadItemStyle()
+				mSelf.focus.item.loadItemOriginal()
+				mSelf.focus.item.loadItemStyle()
 			})
 		}
 	}

@@ -108,16 +108,15 @@
 
 <div class="view" @click="blurItem">
 	<div class="page" :style="pagestyle">
-		<item v-ref:item v-for="itemdata in itemsdata" :itemdata="itemdata" :index="$index" :focus_item="focus_item" :printdata="printdata" :formatdata="formatdata" :keybroad="keybroad"></item>
+		<item v-ref:item v-for="itemdata in itemsdata" :itemdata="itemdata" :index="$index" :focus="focus" :printdata="printdata" :formatdata="formatdata" :keybroad="keybroad"></item>
 	</div>
 </div>
 
-
 <div class="settings">
-	<flash v-ref:flash :focus_track="focus_track" :itemsdata="itemsdata" :formatdata="formatdata" :keybroad="keybroad"></flash>
+	<flash v-ref:flash :itemsdata="itemsdata" :formatdata="formatdata" :keybroad="keybroad" :focus="focus"></flash>
 
-	<framesetting :focus_item="focus_item" :formatdata="formatdata"></framesetting>
-	<original :focus_item="focus_item"></original>
+	<framesetting :formatdata="formatdata" :focus="focus"></framesetting>
+	<original :focus="focus"></original>
 </div>
 
 </template>
@@ -174,20 +173,20 @@ return {
 	, data : function(){
 
 		return {
-			focus_item : null
-			, focus_track : null
-			, printdata : {
+			printdata : {
 				width : 0
 				, height : 0
 				, scale : 0
 			}
 			, pagestyle : {}
 			, formatdata : formatdata
+
+			, focus : {}
 		}
 	}
 	, methods : {
 		blurItem : function(){
-			this.$set('focus_item', null)
+			this.$set('focus.item', null)
 		}
 		, resizePrint : function(printdata){
 			for(var i in printdata){
@@ -208,11 +207,12 @@ return {
 		}
 	}
 	, events : {
+
 		setFocusItem : function(item){
-			this.$set('focus_item', item)
+			this.$set('focus.item', item)
 		}
 		, setFocusTrack : function(track){
-			this.$set('focus_track', track)
+			this.$set('focus.track', track)
 		}
 		, focusItemById : function(item_id){
       this.$broadcast('focusItemById', item_id)

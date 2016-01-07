@@ -8,7 +8,7 @@
 </style>
 
 <template>
-<div class="name" :class="{focus : focus_track && focus_track.itemdata.item_id == item_id}">
+<div class="name" :class="{focus : focus.track && focus.track.itemdata.item_id == item_id}">
 	<div>{{item_name}}</div>
 </div>
 
@@ -18,7 +18,7 @@
 return {
   components : {
 	}
-	, props : ['item_id', 'focus_track']
+	, props : ['item_id', 'focus']
 	, data : function(){
 
 		var item_name = this.item_id

@@ -2,17 +2,17 @@
 </style>
 
 <template>
-<div class="settingFrame" v-if="focus_item">
+<div class="settingFrame" v-if="focus.item">
 	<div class="inputArea" v-for="(key, value) in formatdata.resize">
 		<label for="resize|{{key}}">{{value.label || key}}:</label>
-		<input type="{{value.type||'number'}}" @keyup="updateItem" id="resize|{{key}}" placeholder="" value="{{focus_item.framedata.resize[key]}}"/>{{value.unit}}
+		<input type="{{value.type||'number'}}" @keyup="updateItem" id="resize|{{key}}" placeholder="" value="{{focus.item.framedata.resize[key]}}"/>{{value.unit}}
 	</div>
 
 	<div class="inputArea" v-for="(key, transform) in formatdata.transform">
 		<div class="inputLabel">{{transform.label || key}}:</div>
 		<div class="inputBox" v-for="value in transform.opts">
 			<label for="transform|{{key}}|{{value[0]}}">{{value[0]}}:</label>
-			<input type="number" step="{{value[3]}}" @keyup="updateItem" id="transform|{{key}}|{{value[0]}}" placeholder="" value="{{ focus_item.framedata.transform[key][value[0]] }}"/>{{value[1]||''}}
+			<input type="number" step="{{value[3]}}" @keyup="updateItem" id="transform|{{key}}|{{value[0]}}" placeholder="" value="{{ focus.item.framedata.transform[key][value[0]] }}"/>{{value[1]||''}}
 		</div>
 	</div>
 </div>
@@ -21,7 +21,7 @@
 <script>
 
 return {
-	props : ['focus_item', 'formatdata']
+	props : ['focus', 'formatdata']
 	, data : function(){
 		return {
 		}
@@ -37,10 +37,10 @@ return {
 				arr.push('["' + type[i] + '"]')
 			}
 
-			this.$set('focus_item.framedata' + arr.join(''), value||0)
-			console.log(this.focus_item.framedata, value||0)
+			this.$set('focus.item.framedata' + arr.join(''), value||0)
+			console.log(this.focus.item.framedata, value||0)
 
-			this.focus_item.loadItemStyle()
+			this.focus.item.loadItemStyle()
 		}
 	}
 }
