@@ -90,8 +90,19 @@ return {
 			if(!framedata.name)
 				Vue.set(framedata, 'name', 'normal')
 
-			if(!framedata.duration)
-				Vue.set(framedata, 'duration', 1)
+			if(!framedata['keyframes']){
+				Vue.set(framedata, 'keyframes', [ {} , {} ])
+			}
+
+			for(var i in framedata.keyframes){
+				this.formatKeyFrameData(framedata.keyframes[i])
+			}
+
+			var duration = 0
+			for(var i in framedata.keyframes){
+				duration += framedata.keyframes[i].duration
+			}
+			Vue.set(framedata, 'duration', duration)
 
 			if(!framedata['timing-function'])
 				Vue.set(framedata, 'timing-function', 'linear')
@@ -99,26 +110,33 @@ return {
 			if(!framedata['iteration-count'])
 				Vue.set(framedata, 'iteration-count', 1)
 
-			if(!framedata.resize)
-				Vue.set(framedata, 'resize', {})
+		}
+		, formatKeyFrameData : function(keyframe){
+			var formatdata = this.formatdata
 
-			if(!framedata.transform)
-				Vue.set(framedata, 'transform', {})
+			if(!keyframe.duration)
+				Vue.set(keyframe, 'duration', 3)
+
+			if(!keyframe.resize)
+				Vue.set(keyframe, 'resize', {})
+
+			if(!keyframe.transform)
+				Vue.set(keyframe, 'transform', {})
 
 			for(var i in formatdata.transform){
-				if(!framedata.transform[i]){
+				if(!keyframe.transform[i]){
 					var data = {}
 					for(var j in formatdata.transform[i].opts){
 						var value = formatdata.transform[i].opts[j]
 						data[value[0]] = value[2] || 0
 					}
-					Vue.set(framedata.transform, i, data)
+					Vue.set(keyframe.transform, i, data)
 				}
 			}
 
 			for(var i in formatdata.resize){
-				if(!framedata.resize[i]){
-					Vue.set(framedata.resize, i, 0)
+				if(!keyframe.resize[i]){
+					Vue.set(keyframe.resize, i, 0)
 				}
 			}
 		}
@@ -209,25 +227,16 @@ return {
 						framedata = this.getAnimateFrameData(frame)
 
 					}else{
-						framedata = frame.framedata
+						framedata = frame.framedata.keyframes[0]
 					}
 					break;
 				}
 			}
 			if(!framedata){
-				framedata = frame.framedata
+				framedata = frame.framedata.keyframes[0]
 			}
 			this.loadItemByFrame(framedata)
 			this.setFocusFrame(frame)
-		}
-	}
-	, watch : {
-		'itemdata.frames' : function(frames){
-			var len = frames.length
-			if(len){
-				var enddata = frames[len-1]
-				enddata.duration = 1
-			}
 		}
 	}
 	, ready : function(){

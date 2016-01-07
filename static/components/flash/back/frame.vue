@@ -5,7 +5,7 @@
 	&:before{ content:'';.pa;.h(100%);.w(1px);.bgc(#222);right:0px;}
 
 	.keyframe{
-		.pa;
+		.left;.pr;
 		.h(100%);
 		z-index:3;
 
@@ -14,7 +14,7 @@
 			left:-1px;.h(100%);.w(1px);.bgc(#222);
 		}
 		&:after{
-			top:50%;left:50%;.w(4px);.h(4px);.mt(-2px);.ml(-2px);.bgc(#000); .border-r(8px);
+			top:50%;left:6px;.w(4px);.h(4px);.mt(-2px);.ml(-2px);.bgc(#000); .border-r(8px);
 		}
 	}
 
@@ -36,8 +36,8 @@
 </style>
 
 <template>
-<div class="frame" :class="[framedata['iteration-count'] == 'infinite' ? 'infinite' : '', framedata.name, timedata.time == startTime + time ? 'focus' : '', timedata.time < startTime + time ? 'next' : '']" @click.stop="selectFrame" :style="{width:framedata.duration * timedata.framewidth + 'px'}">
-	<div class="keyframe" @click.stop="selectKeyFrame" :style="{width:timedata.framewidth + 'px'}"></div>
+<div class="frame" :class="[framedata['iteration-count'] == 'infinite' ? 'infinite' : '', framedata.name, timedata.time == startTime + time ? 'focus' : '', timedata.time < startTime + time ? 'next' : '']" @click.stop="selectFrame">
+	<div class="keyframe" v-for="keyframe in framedata.keyframes" @click.stop="selectKeyFrame" :style="{width:timedata.framewidth + 'px', 'margin-right':(keyframe.duration-1) * timedata.framewidth + 'px'}"></div>
 </div>
 </template>
 
@@ -50,6 +50,7 @@ return {
 		return {
 			startTime : 0
 			, time : 0
+			, keyframe : null
 		}
 	}
 	, methods : {
@@ -112,6 +113,7 @@ return {
 	}
 	, watch : {
 		'framedata.duration' : function(){
+			console.log(arguments)
 			this.framedata.duration -= 0
 			this.$nextTick(function(){
 				this.$parent.$broadcast('setStartTime')
@@ -121,6 +123,8 @@ return {
 	}
 	, created : function(){
 		this.$dispatch('formatFrameData', this.framedata)
+		console.log(this.framedata)
+		console.log(this.framedata.duration)
 	}
 	, ready : function(){
 		this.$emit('setStartTime')

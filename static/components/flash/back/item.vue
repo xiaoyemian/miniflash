@@ -3,11 +3,6 @@
 	.pa;
 	background-size:100% 100%;
 	background-repeat:no-repeat;
-	.none;
-
-	&.transition, &.normal{
-		.block;
-	}
 
 	&.focus{
 		.handel{
@@ -60,7 +55,7 @@
 </style>
 
 <template>
-<div class="item" @click.stop="selectItem" :class="[framedata && framedata.name, focus_item && focus_item.itemdata.item_id == itemdata.item_id ? 'focus' : '']" :style="[originalstyle, framestyle]">
+<div class="item" @click.stop="selectItem" :class="[focus_item && focus_item.itemdata.item_id == itemdata.item_id ? 'focus' : '']" :style="[originalstyle, framestyle]">
 	<div class="handel">
 		<div @click.stop="aspectRatio" class="aspectRatioBtn"></div>
 	</div>
