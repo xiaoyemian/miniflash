@@ -37,6 +37,11 @@ return {
 			this.startTime = Math.floor($(this.$el).position().left / this.timedata.framewidth) 
 		}
 	}
+	, watch : {
+		'keyframedata.duration' : function(){
+			this.keyframedata.duration -= 0
+		}
+	}
 	, ready : function(){
 		this.$emit('setStartTime')
 	}
