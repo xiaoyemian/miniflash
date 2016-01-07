@@ -1,19 +1,19 @@
 <style>
 .settingOriginal{
-	img{.w(100%);.left;}	
 	.uploadBtn{
-		.w(40%);.left;
+		.h(200px);.w(50%);.left;
+		background-size:contain;
+		background-repeat:no-repeat;
 	}
 }
 </style>
 
 <template>
 <div class="settingOriginal" v-if="focus_item && focus_item.itemdata.original">
+	<div class="uploadBtn" v-if="focus_item.itemdata.original.imageUrl" :style="{'background-image':'url('+focus_item.itemdata.original.imageUrl+')'}">
+		<input type="file" @change="changeImage"/>
+	</div>
 	<div class="inputArea">
-		<div class="uploadBtn" v-if="focus_item.itemdata.original.imageUrl">
-			<img :src="focus_item.itemdata.original.imageUrl"/>
-			<input type="file" @change="changeImage"/>
-		</div>
 	</div>
 </div>
 </template>
