@@ -9,6 +9,7 @@
 			padding:2px 4px;
 			.border-r(2px);
 			.fc(white);
+			.cursor;
 		}
 	}
 	.itemBox{ .bgc(#9900FF); }
@@ -28,16 +29,14 @@
 	<div @click="addBlock" class="blockBox">添加动作</div>
 </div>
 
-<div class="btnBox" v-if="focus.block">
-	<div @click="removeBlock" class="blockBox" v-if="focus.item.itemdata.blocks.length > 1">删除动作</div>
+<div class="btnBox" v-if="focus.track && focus.block">
+	<div @click="removeBlock" class="blockBox" v-if="focus.track.itemdata.blocks.length > 1">删除动作</div>
 	<div @click="addFrame" class="frameBox">添加帧</div>
 </div>
 
 <div class="btnBox" v-if="focus.block && focus.frame">
 	<div @click="removeFrame" class="frameBox" v-if="focus.block.blockdata.frames.length > 1">删除帧</div>
 </div>
-
-
 
 </template>
 
@@ -76,17 +75,17 @@ return {
 		}
 		, addBlock : function(){
 			var endblock
+			var len = this.focus.track.itemdata.blocks.length
 
 			if(this.focus.block){
 				endblock = this.focus.block.blockdata
 
 			}else{
-				var len = this.focus.item.itemdata.blocks.length
-				endblock = this.focus.item.itemdata.blocks[len-1]
+				endblock = this.focus.track.itemdata.blocks[len-1]
 			}
 
-			var len = endblock.frames.length
-			var endframe = endblock.frames[len-1] 
+			var framelen = endblock.frames.length
+			var endframe = endblock.frames[framelen-1] 
 
 			var blockdatanew = JSON.parse(JSON.stringify({
 				frames:[{
@@ -95,31 +94,24 @@ return {
 				}]
 			}))
 			this.focus.track.formatBlockData(blockdatanew)
-			this.focus.item.itemdata.blocks.push(blockdatanew)
+			this.focus.track.itemdata.blocks.push(blockdatanew)
 
 			this.$nextTick(function(){
-
-				var len = this.focus.item.itemdata.blocks.length
-				endblock = this.focus.item.itemdata.blocks[len-1]
-
-				this.$dispatch('setTime', endblock.startTime)	
+				var block = this.focus.track.$refs.block[len]
+				this.$dispatch('setTime', block.startTime)	
 			})
 		}
-		, removeFrame : function(frame, keepTime){
+		, removeFrame : function(){
 			var framesdata = this.itemdata.frames
 			var framedata = frame.framedata
 			var index = frame.index
 
-			if(index != 0 && keepTime){
-				framesdata[index-1].duration += framedata.duration
-			}
 			framesdata.splice(index, 1)
 
 			this.$nextTick(function(){
 				this.$dispatch('loadTime')
 			})
 		}
-
 	}
 }
 </script>

@@ -205,9 +205,6 @@ return {
 			this.$set('pagestyle["margin-left"]', printdata.width * printdata.scale/-2 + 'px')
 			this.$set('pagestyle["margin-top"]', printdata.height * printdata.scale/-2 + 'px')
     }
-		, loadTime : function(){
-			this.$refs.flash.$emit('loadTime')
-		}
 	}
 	, events : {
 		focusItemById : function(item_id){
@@ -217,7 +214,7 @@ return {
       this.$broadcast('focusTrackById', item_id)
 		} 
 		, loadTime : function(){
-			this.loadTime()
+			this.$refs.flash.$emit('loadTime')
 		}
 		, loadItemByFrame : function(item_id, framedata){
       this.$broadcast('loadItemByFrame', item_id, framedata)
