@@ -8,31 +8,33 @@
 			.inline;
 			padding:2px 4px;
 			.border-r(2px);
-			.bgc(#9900FF);.fc(white);
-
+			.fc(white);
 		}
 	}
+	.itemBox{ .bgc(#9C27B0); }
+	.blockBox{ .bgc(#3F51B5); }
+	.frameBox{ .bgc(#607D8B); }
 }
 </style>
 
 
 <template>
 <div class="btnBox">
-	<div class="uploadBtn" v-if="focus.item">修改图片<input type="file" @change="changeImage"/></div>
-	<div class="uploadBtn" v-else>添加图片<input type="file" @change="addImage"/></div>
+	<div class="uploadBtn itemBox" v-if="focus.item">修改图片<input type="file" @change="changeImage"/></div>
+	<div class="uploadBtn itemBox" v-else>添加图片<input type="file" @change="addImage"/></div>
 </div>
 
 <div class="btnBox" v-if="focus.track">
-	<div @click="addBlock">添加动作</div>
+	<div @click="addBlock" class="blockBox">添加动作</div>
 </div>
 
 <div class="btnBox" v-if="focus.block">
-	<div @click="removeBlock" v-if="focus.item.itemdata.blocks.length > 1">删除动作</div>
-	<div @click="addFrame">添加关键帧</div>
+	<div @click="removeBlock" class="blockBox" v-if="focus.item.itemdata.blocks.length > 1">删除动作</div>
+	<div @click="addFrame" class="frameBox">添加关键帧</div>
 </div>
 
 <div class="btnBox" v-if="focus.block && focus.frame">
-	<div @click="removeFrame" v-if="focus.block.blockdata.frames.length > 1">删除关键帧</div>
+	<div @click="removeFrame" class="frameBox" v-if="focus.block.blockdata.frames.length > 1">删除关键帧</div>
 </div>
 
 
