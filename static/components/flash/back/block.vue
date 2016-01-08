@@ -47,9 +47,6 @@ return {
 	}
 	, methods : {
 		focusBlock : function(){
-			if(!this.frame)
-				this.$set('frame', this.$refs.frame[0])
-
 			this.time = this.frame.time + this.frame.startTime 
 			this.$dispatch('setTime', this.startTime + this.time)
 			this.$dispatch('focusTrackByBlock', this)
@@ -68,6 +65,9 @@ return {
 		this.$dispatch('formatBlockData', this.blockdata)
 	}
 	, ready : function(){
+		if(!this.frame)
+			this.$set('frame', this.$refs.frame[0])
+
 		this.$emit('setStartTime')
 	}
 }

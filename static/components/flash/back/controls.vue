@@ -33,11 +33,11 @@
 	<div @click="removeBlock" class="blockBox" v-if="focus.track.itemdata.blocks.length > 1">删除动作</div>
 	<div @click="changeBlock2Normal" class="blockBox" v-if="focus.block.blockdata.name == 'transition'">转换为逐帧动画</div>
 	<div @click="changeBlock2Transition" class="blockBox" v-if="focus.block.blockdata.name == 'normal'">转换为过渡动画</div>
-	<div @click="addFrame" class="frameBox">添加帧</div>
+	<div @click="addFrame" class="frameBox" v-if="focus.block.blockdata.name == 'transition'">添加帧</div>
 </div>
 
 <div class="btnBox" v-if="focus.block && focus.block.frame">
-	<div @click="removeFrame" class="frameBox" v-if="focus.block.blockdata.frames.length > 1">删除帧</div>
+	<div @click="removeFrame" class="frameBox" v-if="focus.block.blockdata.name == 'transition' && focus.block.blockdata.frames.length > 1">删除帧</div>
 </div>
 
 </template>

@@ -57,7 +57,10 @@ return {
 			this.$dispatch('focusItemById', this.itemdata.item_id)
 			this.$dispatch('setTime', time)	
 		}
-		, getAnimateFrameData : function(frame){
+		, getAnimateFrameData : function(block){
+			var framedata = block.frame.framedata
+
+/*
 			if(frame.time == 0){
 				return frame.framedata
 			}
@@ -79,13 +82,12 @@ return {
 					framedata.transform[i][j] = enddata.transform[i][j] * line + frame.framedata.transform[i][j] * (1-line)
 				}
 			}
+*/
+
 			return framedata
 		}
 		, formatBlockData : function(data){
 			var formatdata = this.formatdata
-
-			if(!data.name)
-				Vue.set(data, 'name', 'normal')
 
 			if(!data['timing-function'])
 				Vue.set(data, 'timing-function', 'linear')
@@ -96,6 +98,11 @@ return {
 			if(!data['frames']){
 				Vue.set(data, 'frames', [ {} , {} ])
 			}
+
+			data.frames.length > 1
+				? Vue.set(data, 'name', 'transition')
+				: Vue.set(data, 'name', 'normal')
+
 		}
 		, formatFrameData : function(framedata){
 			var formatdata = this.formatdata
