@@ -77,7 +77,7 @@ return {
 			var endblock
 
 			if(this.focus.block){
-				endblock = this.focus.block
+				endblock = this.focus.block.blockdata
 
 			}else{
 				var len = this.focus.item.itemdata.blocks.length
