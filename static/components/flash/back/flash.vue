@@ -113,33 +113,17 @@ return {
 		, blocksetting : blocksetting
 		, framesetting : framesetting
   }
-	, props:['itemsdata', 'formatdata', 'focus']
+	, props:['itemsdata', 'formatdata', 'focus', 'timedata']
 	, data : function(){
 
 		return {
-			timedata : {
-				min : 8 
-				, step : 100
-				, framewidth : 16
-				, frameheight : 22
-				, namewidth : 66
-				, scrollleft : null
-				, time : null
-			}
 		}
 	}
 	, events : {
-		setTime : function(time){
-			this.timedata.time = time
-			this.$emit('loadTime')
-		}
-		, loadTime : function(){
-			this.$broadcast('loadItemByTime', this.timedata.time)
-		}
 	}
 	, ready : function(){
 
-		this.$emit('setTime', 0)
+		this.$dispatch('setTime', 0)
 
 		var mSelf = this
 
@@ -159,7 +143,7 @@ return {
 			, drag : function(event, ui){
 				var time = ((ui.position.left-mSelf.timedata.namewidth)/mSelf.timedata.framewidth)|0
 				if(mSelf.timedata.time != time)
-					mSelf.$emit('setTime', time)
+					mSelf.$dispatch('setTime', time)
 			}
 			, stop : function(event, ui){
 			}

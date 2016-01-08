@@ -113,7 +113,7 @@
 </div>
 
 <div class="settings">
-	<flash v-ref:flash :itemsdata="itemsdata" :formatdata="formatdata" :focus="focus"></flash>
+	<flash v-ref:flash :itemsdata="itemsdata" :formatdata="formatdata" :focus="focus" :timedata="timedata"></flash>
 	<resizesetting :formatdata="formatdata" :focus="focus"></resizesetting>
 	<original :focus="focus"></original>
 </div>
@@ -179,8 +179,16 @@ return {
 			}
 			, pagestyle : {}
 			, formatdata : formatdata
-
 			, focus : {}
+			, timedata : {
+				min : 8 
+				, step : 100
+				, framewidth : 16
+				, frameheight : 22
+				, namewidth : 66
+				, scrollleft : null
+				, time : null
+			}
 		}
 	}
 	, methods : {
@@ -213,8 +221,12 @@ return {
 		, focusTrackById : function(item_id){
       this.$broadcast('focusTrackById', item_id)
 		} 
+		, setTime : function(time){
+			this.timedata.time = time
+			this.$emit('loadTime')
+		}
 		, loadTime : function(){
-			this.$refs.flash.$emit('loadTime')
+			this.$broadcast('loadItemByTime', this.timedata.time)
 		}
 		, loadItemByFrame : function(item_id, framedata){
       this.$broadcast('loadItemByFrame', item_id, framedata)
