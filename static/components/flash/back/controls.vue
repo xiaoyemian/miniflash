@@ -27,13 +27,12 @@
 </div>
 
 <div class="btnBox" v-if="focus.block">
-	<div @click="spliceBlock">拆分动作</div>
-	<div @click="removeBlock">删除动作</div>
+	<div @click="removeBlock" v-if="focus.item.itemdata.blocks.length > 1">删除动作</div>
 	<div @click="addFrame">添加关键帧</div>
 </div>
 
-<div class="btnBox" v-if="focus.frame">
-	<div @click="removeFrame">删除关键帧</div>
+<div class="btnBox" v-if="focus.block && focus.frame">
+	<div @click="removeFrame" v-if="focus.block.blockdata.frames.length > 1">删除关键帧</div>
 </div>
 
 
@@ -102,25 +101,6 @@ return {
 				endblock = this.focus.item.itemdata.blocks[len-1]
 
 				this.$dispatch('setTime', endblock.startTime)	
-			})
-		}
-		, splitFrame : function(frame){
-			var data = frame.framedata
-			if(frame.framedata.name == 'transition'){
-				data = this.getAnimateFrameData(frame)
-			}
-
-			var framedatanew = JSON.parse(JSON.stringify(data))
-
-			framedatanew.duration = frame.framedata.duration - frame.time
-			frame.framedata.duration = frame.time
-			frame.time = 0
-
-			this.formatBlockData(framedatanew)
-			this.itemdata.frames.splice(frame.index+1, 0, framedatanew)
-
-			this.$nextTick(function(){
-				this.$dispatch('loadTime')
 			})
 		}
 		, removeFrame : function(frame, keepTime){
