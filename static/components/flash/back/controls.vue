@@ -99,6 +99,7 @@ return {
 
 			this.$nextTick(function(){
 				var block = this.focus.track.$refs.block[len]
+				block.$refs.frame[0].focusFrame()
 				this.$dispatch('setTime', block.startTime)	
 			})
 		}

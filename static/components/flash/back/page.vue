@@ -197,7 +197,6 @@ return {
 			this.$set('focus.track', null)
 			this.$set('focus.block', null)
 			this.$set('focus.frame', null)
-
 		}
 		, resizePrint : function(printdata){
 			for(var i in printdata){
@@ -234,7 +233,7 @@ return {
 		, changeImage : function(event, cbk){
 			var mSelf = this
 			var files = event.target.files
-				,file
+				, file
 
 			if(!files || !files.length)
 				return;

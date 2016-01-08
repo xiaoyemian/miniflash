@@ -29,6 +29,9 @@ return {
 	, methods : {
 		selectFrame : function(event){
 			this.time = Math.floor(event.offsetX / this.timedata.framewidth)
+			this.focusFrame()
+		}
+		, focusFrame : function(){
 			this.$dispatch('focusTrackByFrame', this)
 		}
 	}
