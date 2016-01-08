@@ -102,14 +102,14 @@
 
 <template>
 
-<div class="controls">
-	<controls :itemsdata="itemsdata"></controls>
-</div>
-
 <div class="view" @click="blurItem">
 	<div class="page" :style="pagestyle">
 		<item v-ref:item v-for="itemdata in itemsdata" :itemdata="itemdata" :index="$index" :focus="focus" :printdata="printdata" :formatdata="formatdata" :keybroad="keybroad"></item>
 	</div>
+</div>
+
+<div class="controls">
+	<controls :itemsdata="itemsdata" :keybroad="keybroad" :focus="focus"></controls>
 </div>
 
 <div class="settings">
@@ -186,6 +186,10 @@ return {
 	, methods : {
 		blurItem : function(){
 			this.$set('focus.item', null)
+			this.$set('focus.track', null)
+			this.$set('focus.block', null)
+			this.$set('focus.frame', null)
+
 		}
 		, resizePrint : function(printdata){
 			for(var i in printdata){

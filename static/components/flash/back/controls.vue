@@ -14,14 +14,15 @@
 
 
 <template>
-	<div class="uploadBtn">添加图片<input type="file" @change="addImage"/></div>
+<div class="uploadBtn" v-if="focus.item">修改图片<input type="file" @change="changeImage"/></div>
+<div class="uploadBtn" v-else>添加图片<input type="file" @change="addImage"/></div>
 </template>
 
 
 <script>
 
 return {
-	props:['itemsdata']
+	props:['itemsdata', 'keybroad', 'focus']
 	, data : function(){
 
 		return {
@@ -36,6 +37,18 @@ return {
 				mSelf.$nextTick(function(){
 					this.$dispatch('loadTime')
 				})
+			})
+		}
+		, changeImage : function(event){
+			var mSelf = this
+			this.$dispatch('changeImage', event, function(itemdata){
+				var original = itemdata.original
+				mSelf.$set('focus.item.itemdata.original', original)
+				mSelf.$set('focus.item.framedata.resize.height', original.height)
+				mSelf.$set('focus.item.framedata.resize.width', original.width)
+
+				mSelf.focus.item.loadItemOriginal()
+				mSelf.focus.item.loadItemStyle()
 			})
 		}
 	}
