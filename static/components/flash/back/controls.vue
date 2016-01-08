@@ -13,8 +13,10 @@
 		}
 	}
 	.itemBox{ .bgc(#9900FF); }
-	.blockBox{ .bgc(#0099FF); }
 	.frameBox{ .bgc(#FF9900); }
+	.animationBox{ .bgc(#0099FF); }
+	.transitionBox{ .bgc(#33B666); }
+	.normalBox{ .bgc(#666); }
 }
 </style>
 
@@ -31,8 +33,9 @@
 
 <div class="btnBox" v-if="focus.track && focus.block">
 	<div @click="removeBlock" class="itemBox" v-if="focus.track.itemdata.blocks.length > 1">删除动作块</div>
-	<div @click="changeBlock2Normal" class="blockBox" v-if="focus.block.blockdata.name == 'transition'">转换为逐帧动画</div>
-	<div @click="changeBlock2Transition" class="blockBox" v-if="focus.block.blockdata.name == 'normal'">转换为过渡动画</div>
+	<div @click="changeBlock2Normal" class="normalBox" v-if="focus.block.blockdata.name != 'normal'">转换为逐帧动画</div>
+	<div @click="changeBlock2Transition" class="transitionBox" v-if="focus.block.blockdata.name != 'transition'">转换为过渡动画</div>
+	<div @click="changeBlock2Animation" class="animationBox" v-if="focus.block.blockdata.name != 'animation'">转换为预设动画</div>
 	<div @click="addFrame" class="frameBox">添加帧</div>
 </div>
 

@@ -6,7 +6,7 @@
 	&:after{right:0px;}
 
 	&.normal{
-		.bgc(#999);
+		.bgc(#666);
 	}
 	&.transition{
 		.bgc(#33B666);
