@@ -170,11 +170,15 @@ return {
 						break;
 					}
 				}
+
+				if(framedata)
+					break;
+				
 			}
 			if(!framedata){
 				framedata = frame.framedata
 			}
-			console.log(time, block.startTime, frame.startTime, framedata.resize.top, framedata)
+
 			this.$dispatch('loadItemByFrame', this.itemdata.item_id, framedata)
 		}
 	}
