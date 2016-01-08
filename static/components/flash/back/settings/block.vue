@@ -23,11 +23,7 @@ return {
 	, data : function(){
 		return {
 			formatdata : {
-				name : {
-					label : '帧类型'
-					, options : ['normal', 'transition']
-				}
-				, 'timing-function' : {
+				'timing-function' : {
 					label : '速度曲线'
 					, options : ['linear', 'ease', 'ease-in', 'ease-out', 'ease-in-out']
 				}
