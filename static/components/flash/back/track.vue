@@ -127,9 +127,6 @@ return {
 				}
 			}
 		}
-		, loadItemByFrame : function(framedata){
-			this.$dispatch('loadItemByFrame', this.itemdata.item_id, framedata)
-		}
 	}
 	, events : {
 		focusTrackByBlock : function(block){
@@ -151,15 +148,16 @@ return {
 			this.formatFrameData(data)
 		}
 		, loadItemByTime : function(time){
-			var frames = this.$refs.block
+			var blocks = this.$refs.block
 			var frame
 			var framedata
 
-			for(var i in frames){
-				var block = frames[i]
+			for(var i in blocks){
+				var block = blocks[i]
+				var frames = block.$refs.frame
 
-				for(var j in block.$refs.frame){
-					frame = block.$refs.frame[j]
+				for(var j in frames){
+					frame = frames[j]
 
 					if(time >= block.startTime && time <= block.startTime + frame.startTime){
 						block.time = time - block.startTime
@@ -178,7 +176,8 @@ return {
 			if(!framedata){
 				framedata = frame.framedata
 			}
-			this.loadItemByFrame(framedata)
+			console.log(time, block.startTime, frame.startTime, framedata.resize.top, framedata)
+			this.$dispatch('loadItemByFrame', this.itemdata.item_id, framedata)
 		}
 	}
 	, ready : function(){

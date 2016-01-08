@@ -46,16 +46,22 @@ return {
 		}
 	}
 	, methods : {
+		focusBlock : function(){
+			if(!this.frame)
+				this.$set('frame', this.$refs.frame[0])
+
+			this.time = this.frame.time + this.frame.startTime 
+			this.$dispatch('setTime', this.startTime + this.time)
+			this.$dispatch('focusTrackByBlock', this)
+		}
 	}
 	, events : {
 		setStartTime : function(){
 			this.startTime = Math.floor(($(this.$el).position().left + this.timedata.scrollleft) / this.timedata.framewidth) 
 		}
 		, focusTrackByFrame : function(frame){
-			this.time = frame.time + frame.startTime 
 			this.$set('frame', frame)
-			this.$dispatch('setTime', this.startTime + this.time)
-			this.$dispatch('focusTrackByBlock', this)
+			this.focusBlock()
 		}
 	}
 	, created : function(){

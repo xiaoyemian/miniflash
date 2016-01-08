@@ -222,7 +222,7 @@ return {
 		} 
 		, setTime : function(time){
 			this.timedata.time = time
-			this.$emit('loadTime')
+			this.$broadcast('loadItemByTime', this.timedata.time)
 		}
 		, loadTime : function(){
 			this.$broadcast('loadItemByTime', this.timedata.time)
