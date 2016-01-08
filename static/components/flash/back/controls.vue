@@ -74,14 +74,15 @@ return {
 			})
 		}
 		, addBlock : function(){
+			var blocksdata = this.focus.track.itemdata.blocks
+			var len = blocksdata.length
 			var endblock
-			var len = this.focus.track.itemdata.blocks.length
 
 			if(this.focus.block){
 				endblock = this.focus.block.blockdata
 
 			}else{
-				endblock = this.focus.track.itemdata.blocks[len-1]
+				endblock = blocksdata[len-1]
 			}
 
 			var framelen = endblock.frames.length
@@ -94,7 +95,7 @@ return {
 				}]
 			}))
 			this.focus.track.formatBlockData(blockdatanew)
-			this.focus.track.itemdata.blocks.push(blockdatanew)
+			blocksdata.push(blockdatanew)
 
 			this.$nextTick(function(){
 				var block = this.focus.track.$refs.block[len]
@@ -102,12 +103,11 @@ return {
 			})
 		}
 		, removeBlock : function(){
+			var blocksdata = this.focus.track.itemdata.blocks
 			var block = this.focus.block
 			var index = block.index
-			console.log(block, index)
-return;
 
-			framesdata.splice(index, 1)
+			blocksdata.splice(index, 1)
 
 			this.$nextTick(function(){
 				this.$dispatch('loadTime')
