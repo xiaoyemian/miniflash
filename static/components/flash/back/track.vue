@@ -16,12 +16,14 @@
 
 	&.focus{
 		.opacity(100);
+/*
 		.block{
 			.opacity(20);
 			&.focus{
 				.opacity(100);
 			}
 		}
+*/
 	}
 }
 </style>
@@ -55,10 +57,6 @@ return {
 
 			this.$dispatch('focusItemById', this.itemdata.item_id)
 			this.$dispatch('setTime', time)	
-
-			if(this.keybroad.command){
-				this.$emit('addFrame')	
-			}
 		}
 		, getAnimateFrameData : function(frame){
 			if(frame.time == 0){
@@ -153,61 +151,6 @@ return {
 		}
 		, formatFrameData : function(data){
 			this.formatFrameData(data)
-		}
-		, addFrame : function(){
-			var frames = this.$refs.block
-			var len = frames.length
-			var endframe = frames[len-1]
-
-			var framedatanew = JSON.parse(JSON.stringify({
-				frames:[{
-					resize : endframe.framedata.resize
-					, transform : endframe.framedata.transform
-				}]
-			}))
-			this.formatBlockData(framedatanew)
-			this.itemdata.frames.push(framedatanew)
-
-			this.$nextTick(function(){
-
-				var frames = this.$refs.block
-				var len = frames.length
-				var endframe = frames[len-1]
-				this.$dispatch('setTime', endframe.startTime)	
-			})
-		}
-		, splitFrame : function(frame){
-			var data = frame.framedata
-			if(frame.framedata.name == 'transition'){
-				data = this.getAnimateFrameData(frame)
-			}
-
-			var framedatanew = JSON.parse(JSON.stringify(data))
-
-			framedatanew.duration = frame.framedata.duration - frame.time
-			frame.framedata.duration = frame.time
-			frame.time = 0
-
-			this.formatBlockData(framedatanew)
-			this.itemdata.frames.splice(frame.index+1, 0, framedatanew)
-
-			this.$nextTick(function(){
-				this.$dispatch('loadTime')
-			})
-		}
-		, clearFrame : function(frame, keepTime){
-			var framesdata = this.itemdata.frames
-			var framedata = frame.framedata
-			var index = frame.index
-
-			if(index != 0 && keepTime){
-				framesdata[index-1].duration += framedata.duration
-			}
-			framesdata.splice(index, 1)
-
-			this.$nextTick(function(){
-				this.$dispatch('loadTime')
-			})
 		}
 		, loadItemByTime : function(time){
 			var frames = this.$refs.block

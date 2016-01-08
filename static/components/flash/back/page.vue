@@ -8,7 +8,7 @@
 	}
 }
 
-@controlsHeight:24px;
+@controlsHeight:34px;
 
 .controls{
 	z-index:100;
