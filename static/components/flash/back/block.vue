@@ -1,12 +1,12 @@
 <style>
 .block{
 	.pr; .bgc(#333);.h(100%);
-	&:before, &:after{ content:'';.pa;.h(100%);.w(1px);.bgc(#222);}
+	&:before, &:after{ content:'';.pa;.h(100%);.w(2px);.bgc(#222);}
 	&:before{left:-1px;}
-	&:after{right:0px;}
+	&:after{right:-1px;}
 
 	&.normal{
-		.bgc(#666);
+		.bgc(#999);
 	}
 	&.transition{
 		.bgc(#33B666);

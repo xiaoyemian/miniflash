@@ -16,7 +16,7 @@
 	.frameBox{ .bgc(#FF9900); }
 	.animationBox{ .bgc(#0099FF); }
 	.transitionBox{ .bgc(#33B666); }
-	.normalBox{ .bgc(#666); }
+	.normalBox{ .bgc(#999); }
 }
 </style>
 

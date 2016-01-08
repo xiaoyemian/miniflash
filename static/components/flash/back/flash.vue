@@ -71,7 +71,7 @@
 
 <template>
 
-<div class="flash" :style="{height:(timedata.frameheight+1) * (timedata.min+1) + 1 + 'px', 'line-height':timedata.frameheight + 'px'}">
+<div class="flash" @click="blurItem" :style="{height:(timedata.frameheight+1) * (timedata.min+1) + 1 + 'px', 'line-height':timedata.frameheight + 'px'}">
 	<div class="flashbox" v-el:flashbox>
 		<div class="trackbox">
 			<div class="times" :style="{'margin-left':timedata.namewidth + 'px', height:timedata.frameheight + 'px'}">
@@ -117,6 +117,11 @@ return {
 	, data : function(){
 
 		return {
+		}
+	}
+	, methods : {
+		blurItem : function(){
+			this.$dispatch('blurItem')
 		}
 	}
 	, events : {

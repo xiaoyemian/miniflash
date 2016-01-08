@@ -186,7 +186,7 @@ return {
 				min : 8 
 				, step : 100
 				, framewidth : 16
-				, frameheight : 22
+				, frameheight : 26
 				, namewidth : 66
 				, scrollleft : null
 				, time : null
@@ -215,7 +215,10 @@ return {
     }
 	}
 	, events : {
-		focusItemById : function(item_id){
+		blurItem : function(){
+			this.blurItem()
+		}
+		, focusItemById : function(item_id){
       this.$broadcast('focusItemById', item_id)
 		} 
 		, focusTrackById : function(item_id){
