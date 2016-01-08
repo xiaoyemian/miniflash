@@ -101,10 +101,11 @@ return {
 				this.$dispatch('setTime', block.startTime)	
 			})
 		}
-		, removeFrame : function(){
-			var framesdata = this.itemdata.frames
-			var framedata = frame.framedata
-			var index = frame.index
+		, removeBlock : function(){
+			var block = this.focus.block
+			var index = block.index
+			console.log(block, index)
+return;
 
 			framesdata.splice(index, 1)
 

@@ -19,7 +19,7 @@
 <script>
 
 return {
-	props : ['framedata', 'timedata']
+	props : ['framedata', 'timedata', 'index']
 	, data : function(){
 		return {
 			startTime : 0

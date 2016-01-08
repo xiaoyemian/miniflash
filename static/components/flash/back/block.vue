@@ -37,7 +37,7 @@ return {
   components : {
     frameitem : frame
 	}
-	, props : ['blockdata', 'timedata']
+	, props : ['blockdata', 'timedata', 'index']
 	, data : function(){
 		return {
 			startTime : 0
