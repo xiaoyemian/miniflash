@@ -25,7 +25,7 @@ return {
 			formatdata : {
 				name : {
 					label : '帧类型'
-					, options : [ 'normal', 'transition', 'blank']
+					, options : ['normal', 'transition']
 				}
 				, 'timing-function' : {
 					label : '速度曲线'

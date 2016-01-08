@@ -75,18 +75,19 @@ return {
 		}
 		, addBlock : function(){
 			var blocksdata = this.focus.track.itemdata.blocks
-			var len = blocksdata.length
-			var endblock
+			var block = this.focus.block
 
-			if(this.focus.block){
-				endblock = this.focus.block.blockdata
+			var blocks = this.focus.track.$refs.block
+			var len = blocks.length
 
-			}else{
-				endblock = blocksdata[len-1]
+			if(!block){
+				block = blocks[len-1]
 			}
 
-			var framelen = endblock.frames.length
-			var endframe = endblock.frames[framelen-1] 
+			var index = block.index
+
+			var framelen = block.blockdata.frames.length
+			var endframe = block.blockdata.frames[framelen-1] 
 
 			var blockdatanew = JSON.parse(JSON.stringify({
 				frames:[{
@@ -95,10 +96,11 @@ return {
 				}]
 			}))
 			this.focus.track.formatBlockData(blockdatanew)
-			blocksdata.push(blockdatanew)
+
+			blocksdata.splice(index+1, 0, blockdatanew)
 
 			this.$nextTick(function(){
-				var block = this.focus.track.$refs.block[len]
+				var block = this.focus.track.$refs.block[index+1]
 				block.$refs.frame[0].focusFrame()
 				this.$dispatch('setTime', block.startTime)	
 			})
