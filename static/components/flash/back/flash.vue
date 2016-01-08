@@ -28,9 +28,8 @@
 		.pr;z-index:10;
 	}
 
-	.frame, .ui-state-highlight{.h(100%);}
-
 	.ui-state-highlight{
+		.h(100%);
 		.bgc(#222);.w(24px);
 	}
 
@@ -123,7 +122,7 @@ return {
 				, step : 100
 				, framewidth : 22
 				, frameheight : 22
-				, namewidth : 60
+				, namewidth : 66
 				, scrollleft : null
 				, time : null
 			}

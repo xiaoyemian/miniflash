@@ -73,26 +73,35 @@ return {
 				mSelf.focus.item.loadItemStyle()
 			})
 		}
-		, addFrame : function(){
-			var frames = this.$refs.block
-			var len = frames.length
-			var endframe = frames[len-1]
+		, addBlock : function(){
+			var endblock
 
-			var framedatanew = JSON.parse(JSON.stringify({
+			if(this.focus.block){
+				endblock = this.focus.block
+
+			}else{
+				var len = this.focus.item.itemdata.blocks.length
+				endblock = this.focus.item.itemdata.blocks[len-1]
+			}
+
+			var len = endblock.frames.length
+			var endframe = endblock.frames[len-1] 
+
+			var blockdatanew = JSON.parse(JSON.stringify({
 				frames:[{
-					resize : endframe.framedata.resize
-					, transform : endframe.framedata.transform
+					resize : endframe.resize
+					, transform : endframe.transform
 				}]
 			}))
-			this.formatBlockData(framedatanew)
-			this.itemdata.frames.push(framedatanew)
+			this.focus.track.formatBlockData(blockdatanew)
+			this.focus.item.itemdata.blocks.push(blockdatanew)
 
 			this.$nextTick(function(){
 
-				var frames = this.$refs.block
-				var len = frames.length
-				var endframe = frames[len-1]
-				this.$dispatch('setTime', endframe.startTime)	
+				var len = this.focus.item.itemdata.blocks.length
+				endblock = this.focus.item.itemdata.blocks[len-1]
+
+				this.$dispatch('setTime', endblock.startTime)	
 			})
 		}
 		, splitFrame : function(frame){

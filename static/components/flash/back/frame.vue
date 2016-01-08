@@ -1,11 +1,11 @@
 <style>
 .frame{
 	.left;.pr;
-	.h(100%);
 	z-index:3;
+	.h(100%);
 
-	&:before, &:after{ content:'';.pa;z-index:1; }
 	&:after{
+		content:'';.pa;z-index:1;
 		top:50%;left:50%;.ml(-2px);.w(4px);.h(4px);.mt(-2px);.ml(-2px);.bgc(#000); .border-r(8px);
 	}
 }

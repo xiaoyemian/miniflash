@@ -2,10 +2,8 @@
 .block{
 	.pr; .bgc(#333);.h(100%);
 	&:before, &:after{ content:'';.pa;.h(100%);.w(1px);.bgc(#222);}
+	&:before{left:-1px;}
 	&:after{right:0px;}
-	&:before{
-		left:-1px;
-	}
 
 	&.normal{
 		.bgc(#999);
