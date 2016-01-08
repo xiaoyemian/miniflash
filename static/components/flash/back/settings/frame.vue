@@ -38,7 +38,7 @@ return {
 				arr.push('["' + type[i] + '"]')
 			}
 
-			this.$set('focus.track.frame.framedata' + arr.join(''), value||0)
+			this.$set('focus.block.frame.framedata' + arr.join(''), value||0)
 		}
 	}
 }

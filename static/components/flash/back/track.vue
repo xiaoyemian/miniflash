@@ -1,6 +1,6 @@
 <style>
 .track{
-	.opacity(60);
+//	.opacity(60);
 	.pr;
 
 	.focusframe{
@@ -13,17 +13,17 @@
 		box-sizing:border-box;
 	}
 
+/*
 	&.focus{
 		.opacity(100);
-/*
 		.block{
 			.opacity(20);
 			&.focus{
 				.opacity(100);
 			}
 		}
-*/
 	}
+*/
 }
 </style>
 
