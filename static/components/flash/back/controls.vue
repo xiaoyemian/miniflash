@@ -34,7 +34,7 @@
 	<div @click="addFrame" class="frameBox">添加帧</div>
 </div>
 
-<div class="btnBox" v-if="focus.block && focus.frame">
+<div class="btnBox" v-if="focus.block && focus.block.frame">
 	<div @click="removeFrame" class="frameBox" v-if="focus.block.blockdata.frames.length > 1">删除帧</div>
 </div>
 

@@ -29,7 +29,7 @@
 
 <template>
 <div class="track" @click.stop="selectTrack" :class="{focus : focus.track && focus.track.itemdata.item_id == itemdata.item_id}">
-	<div class="focusframe" v-if="focus.frame && focus.item.itemdata.item_id == itemdata.item_id" :style="{width:timedata.framewidth + 'px', left:timedata.time * timedata.framewidth + 'px'}"></div>
+	<div class="focusframe" v-if="focus.block && focus.block.frame && focus.item.itemdata.item_id == itemdata.item_id" :style="{width:timedata.framewidth + 'px', left:timedata.time * timedata.framewidth + 'px'}"></div>
 
 	<block v-ref:block v-for="blockdata in itemdata.blocks" :index="$index" :blockdata="blockdata" :timedata="timedata"></block>
 </div>
@@ -53,7 +53,6 @@ return {
 
 			this.$set('focus.track', this)
 			this.$set('focus.block', null)
-			this.$set('focus.frame', null)
 
 			this.$dispatch('focusItemById', this.itemdata.item_id)
 			this.$dispatch('setTime', time)	
@@ -132,7 +131,6 @@ return {
 		focusTrackByBlock : function(block){
 			this.$set('focus.track', this)
 			this.$set('focus.block', block)
-			this.$set('focus.frame', block.frame)
 
 			this.$dispatch('focusItemById', this.itemdata.item_id)
 		}

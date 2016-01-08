@@ -196,7 +196,6 @@ return {
 			this.$set('focus.item', null)
 			this.$set('focus.track', null)
 			this.$set('focus.block', null)
-			this.$set('focus.frame', null)
 		}
 		, resizePrint : function(printdata){
 			for(var i in printdata){
