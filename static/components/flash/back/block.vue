@@ -39,7 +39,7 @@ return {
   components : {
     frameitem : frame
 	}
-	, props : ['blockdata', 'timedata', 'keybroad']
+	, props : ['blockdata', 'timedata']
 	, data : function(){
 		return {
 			startTime : 0

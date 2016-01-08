@@ -88,7 +88,7 @@
 
 
 				<div class="trackblocks">
-					<track v-ref:track v-for="itemdata in itemsdata" :index="$index" :itemdata="itemdata" :focus="focus" :timedata="timedata" :keybroad="keybroad" :formatdata="formatdata" :style="{height:timedata.frameheight + 'px', 'padding-right':timedata.min * 2 * timedata.framewidth + 'px'}"></track>
+					<track v-ref:track v-for="itemdata in itemsdata" :index="$index" :itemdata="itemdata" :focus="focus" :timedata="timedata" :formatdata="formatdata" :style="{height:timedata.frameheight + 'px', 'padding-right':timedata.min * 2 * timedata.framewidth + 'px'}"></track>
 				</div>
 			</div>
 		</div>
@@ -114,14 +114,14 @@ return {
 		, blocksetting : blocksetting
 		, framesetting : framesetting
   }
-	, props:['itemsdata', 'formatdata', 'keybroad', 'focus']
+	, props:['itemsdata', 'formatdata', 'focus']
 	, data : function(){
 
 		return {
 			timedata : {
 				min : 8 
 				, step : 100
-				, framewidth : 12
+				, framewidth : 22
 				, frameheight : 22
 				, namewidth : 60
 				, scrollleft : null

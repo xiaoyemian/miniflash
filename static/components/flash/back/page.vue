@@ -104,16 +104,16 @@
 
 <div class="view" @click="blurItem">
 	<div class="page" :style="pagestyle">
-		<item v-ref:item v-for="itemdata in itemsdata" :itemdata="itemdata" :index="$index" :focus="focus" :printdata="printdata" :formatdata="formatdata" :keybroad="keybroad"></item>
+		<item v-ref:item v-for="itemdata in itemsdata" :itemdata="itemdata" :index="$index" :focus="focus" :printdata="printdata" :formatdata="formatdata"></item>
 	</div>
 </div>
 
 <div class="controls">
-	<controls :itemsdata="itemsdata" :keybroad="keybroad" :focus="focus"></controls>
+	<controls :itemsdata="itemsdata" :focus="focus"></controls>
 </div>
 
 <div class="settings">
-	<flash v-ref:flash :itemsdata="itemsdata" :formatdata="formatdata" :keybroad="keybroad" :focus="focus"></flash>
+	<flash v-ref:flash :itemsdata="itemsdata" :formatdata="formatdata" :focus="focus"></flash>
 	<resizesetting :formatdata="formatdata" :focus="focus"></resizesetting>
 	<original :focus="focus"></original>
 </div>
@@ -168,7 +168,7 @@ return {
 		, resizesetting : resizesetting 
 		, controls : controls
   }
-	, props:['itemsdata', 'keybroad']
+	, props:['itemsdata']
 	, data : function(){
 
 		return {

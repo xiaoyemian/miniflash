@@ -6,7 +6,7 @@
 
 	&:before, &:after{ content:'';.pa;z-index:1; }
 	&:after{
-		top:50%;left:6px;.w(4px);.h(4px);.mt(-2px);.ml(-2px);.bgc(#000); .border-r(8px);
+		top:50%;left:50%;.ml(-2px);.w(4px);.h(4px);.mt(-2px);.ml(-2px);.bgc(#000); .border-r(8px);
 	}
 }
 </style>

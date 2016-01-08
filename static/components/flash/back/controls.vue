@@ -44,7 +44,7 @@
 <script>
 
 return {
-	props:['itemsdata', 'keybroad', 'focus']
+	props:['itemsdata', 'focus']
 	, data : function(){
 
 		return {

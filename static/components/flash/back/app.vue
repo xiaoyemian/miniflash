@@ -32,14 +32,12 @@ body{
 	<div class="headtop">
 		<div class="keybroad">
 			<span class="keypress" v-for="keydata in keybroad" v-if="keydata">{{$key}}</span>
-			<span v-if="keybroad.command && keybroad.alt">清除关键帧</span>
-			<span v-if="keybroad.command && !keybroad.alt">转换关键帧类型/插入关键帧</span>
 		</div>
 
 		<div @click="save">保存</div>
 	</div>
 
-	<page v-ref:page :itemsdata="itemsdata" :keybroad="keybroad"></page>
+	<page v-ref:page :itemsdata="itemsdata"></page>
 
 </div>
 </template>

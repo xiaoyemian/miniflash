@@ -31,7 +31,7 @@
 <template>
 <div class="track" @click.stop="selectTrack" :class="{focus : focus.track && focus.track.itemdata.item_id == itemdata.item_id}">
 	<div class="focusframe" v-if="focus.frame && focus.item.itemdata.item_id == itemdata.item_id" :style="{width:timedata.framewidth + 'px', left:timedata.time * timedata.framewidth + 'px'}"></div>
-	<block v-ref:block v-for="blockdata in itemdata.blocks" :index="$index" :blockdata="blockdata" :timedata="timedata" :keybroad="keybroad"></block>
+	<block v-ref:block v-for="blockdata in itemdata.blocks" :index="$index" :blockdata="blockdata" :timedata="timedata"></block>
 </div>
 
 </template>
@@ -42,7 +42,7 @@ return {
   components : {
     block : block
 	}
-	, props : ['timedata', 'itemdata', 'keybroad', 'formatdata', 'focus']
+	, props : ['timedata', 'itemdata', 'formatdata', 'focus']
 	, data : function(){
 		return {
 		}
