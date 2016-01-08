@@ -23,7 +23,7 @@
 
 <template>
 <div class="btnBox">
-	<div class="uploadBtn itemBox" v-if="focus.item">修改图片<input type="file" @change="changeImage"/></div>
+	<div class="uploadBtn itemBox" v-if="focus.item">替换图片<input type="file" @change="changeImage"/></div>
 	<div class="uploadBtn itemBox" v-else>添加图片<input type="file" @change="addImage"/></div>
 </div>
 
