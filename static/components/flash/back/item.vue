@@ -186,18 +186,14 @@ return {
 			framedata.resize.top = framedata.resize.top || original.top || 0
 			framedata.resize.left = framedata.resize.left || original.left || 0
 		}
-	}
-	, events : {
-		loadItemByFrame : function(item_id, framedata){
-			if(item_id != this.itemdata.item_id)
-				return;
-
+		, loadItemByFrame : function(framedata){
 			this.framedata = framedata
-
 			this.formatResizeByOriginal()
 			this.loadItemStyle()
 		}
-		, bindTrackItem : function(track){
+	}
+	, events : {
+		bindTrackItem : function(track){
 			if(track.itemdata.item_id == this.itemdata.item_id){
 				Vue.set(track, 'item', this)
 				this.$set('track', track)

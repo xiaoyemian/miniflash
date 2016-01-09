@@ -177,7 +177,7 @@ return {
 				framedata = frame.framedata
 			}
 
-			this.$dispatch('loadItemByFrame', this.itemdata.item_id, framedata)
+			this.item.loadItemByFrame(framedata)
 		}
 	}
 	, ready : function(){

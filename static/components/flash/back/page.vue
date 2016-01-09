@@ -255,9 +255,6 @@ return {
 		, loadTime : function(){
 			this.loadTime()
 		}
-		, loadItemByFrame : function(item_id, framedata){
-      this.$broadcast('loadItemByFrame', item_id, framedata)
-		}
 		, changeImage : function(event, cbk){
 			var mSelf = this
 			var files = event.target.files
