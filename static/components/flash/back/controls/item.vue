@@ -1,3 +1,9 @@
+<style>
+.controlItem{
+	.itemBox{ .bgc(#9900FF); }
+}
+</style>
+
 <template>
 <div class="controlItem">
 	<div @click.stop="" class="uploadBtn itemBox" v-if="global.item">替换图片<input type="file" @change.stop="changeImage"/></div>

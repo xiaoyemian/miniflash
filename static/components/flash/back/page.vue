@@ -50,8 +50,6 @@
 		.cursor;
 	}
 
-	.itemBox{ .bgc(#9900FF); }
-	.frameBox{ .bgc(#FF9900); }
 }
 
 .settingFrame, .settingOriginal, .settingFlash{

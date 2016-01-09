@@ -10,10 +10,10 @@
 		<input v-else type="{{value.type||'number'}}" @keyup="updateFrame" id="{{key}}" min="1" placeholder="" value="{{global.item.track.block.frame.framedata[key]}}" />{{value.unit}}
 	</div>
 
-	<div class="controlBlock" v-if="global.item && global.item.track && global.item.track.block && global.item.track.block.blockdata.name == 'transition'">
+	<div class="controlBlock" v-if="global.item.track.block.blockdata.name == 'transition'">
 		<span>帧:</span>
-		<div @click.stop="addFrame" class="frameBox">添加帧</div>
-		<div @click.stop="removeFrame" class="frameBox" v-if="global.item.track.block.blockdata.frames.length > 1">删除帧</div>
+		<div @click.stop="addFrame" class="transitionBox">添加帧</div>
+		<div @click.stop="removeFrame" class="transitionBox" v-if="global.item.track.block.blockdata.frames.length > 1">删除帧</div>
 	</div>
 
 
