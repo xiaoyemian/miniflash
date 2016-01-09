@@ -82,6 +82,9 @@ return {
 		, focusItem : function(){
 			this.$set('focus.item', this)
 		}
+		, blurItem : function(){
+			this.$set('focus.item', null)
+		}
 		, getStyleByFrame : function(framedata){
 			var formatdata = this.formatdata
 			var transformList = []

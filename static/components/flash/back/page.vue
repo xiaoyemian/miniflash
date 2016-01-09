@@ -213,11 +213,7 @@ return {
 	}
 	, methods : {
 		blurItem : function(){
-			this.$set('focus.item', null)
-			this.blurBlock()
-		}
-		, blurBlock : function(){
-			this.$set('focus.block', null)
+			this.focus.item && this.focus.item.blurItem()
 		}
 		, resizePrint : function(printdata){
 			for(var i in printdata){
@@ -239,13 +235,7 @@ return {
 		}
 	}
 	, events : {
-		blurItem : function(){
-			this.blurItem()
-		}
-		, blurBlock : function(){
-			this.blurBlock()
-		}
-		, bindTrackItem : function(track){
+		bindTrackItem : function(track){
 			this.$broadcast('bindTrackItem', track)
 		}
 		, setTime : function(time){

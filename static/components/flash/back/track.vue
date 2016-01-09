@@ -52,7 +52,7 @@ return {
 	, methods : {
 		selectTrack : function(event){
 			var time = Math.floor(event.offsetX / this.timedata.framewidth)
-			this.$dispatch('blurBlock')
+			this.focus.item && this.focus.item.blurItem()
 			this.item.focusItem()
 			this.$dispatch('setTime', time)	
 		}

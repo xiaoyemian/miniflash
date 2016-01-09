@@ -112,7 +112,7 @@ return {
 	}
 	, methods : {
 		blurItem : function(){
-			this.$dispatch('blurItem')
+			this.focus.item && this.focus.item.blurItem()
 		}
 	}
 	, events : {

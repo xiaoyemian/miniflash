@@ -53,6 +53,9 @@ return {
 			this.$dispatch('setTime', this.startTime + this.time)
 			this.$dispatch('setBlock', this)
 		}
+		, blurBlock : function(){
+			this.$dispatch('setBlock', null)
+		}
 		, setStartTime : function(){
 			this.startTime = Math.floor(($(this.$el).position().left + this.timedata.scrollleft) / this.timedata.framewidth) 
 		}
