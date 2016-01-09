@@ -275,7 +275,6 @@ return {
 	}
 	, watch : {
 		'global.time' : function(time){
-			console.log(time)
 			this.$broadcast('loadItemByTime', time)
 		}
 	}
