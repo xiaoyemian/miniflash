@@ -47,14 +47,19 @@ return {
 	}
 	, methods : {
 		focusBlock : function(){
+			this.setStartTime()
 			this.time = this.frame.time + this.frame.startTime 
+
 			this.$dispatch('setTime', this.startTime + this.time)
 			this.$dispatch('focusTrackByBlock', this)
+		}
+		, setStartTime : function(){
+			this.startTime = Math.floor(($(this.$el).position().left + this.timedata.scrollleft) / this.timedata.framewidth) 
 		}
 	}
 	, events : {
 		setStartTime : function(){
-			this.startTime = Math.floor(($(this.$el).position().left + this.timedata.scrollleft) / this.timedata.framewidth) 
+			this.setStartTime()
 		}
 		, focusTrackByFrame : function(frame){
 			this.$set('frame', frame)
@@ -65,9 +70,7 @@ return {
 		this.$dispatch('formatBlockData', this.blockdata)
 	}
 	, ready : function(){
-		if(!this.frame)
-			this.$set('frame', this.$refs.frame[0])
-
+		this.$set('frame', this.$refs.frame[0])
 		this.$emit('setStartTime')
 	}
 }

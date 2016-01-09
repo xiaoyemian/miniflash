@@ -8,20 +8,10 @@
 	}
 }
 
-@controlsHeight:34px;
-
-.controls{
-	z-index:100;
-	.h(@controlsHeight);.l(@controlsHeight);
-	.pa;top:0px;right:0px;left:0px;
-	.bgc(#333); .fc(#ccc);
-}
-
-
-@settingsWidth:200px;
+@settingsWidth:210px;
 
 .view, .settings{
-	top:@controlsHeight;
+	top:0px;
 }
 
 .view{
@@ -44,6 +34,29 @@
 	border:1px solid #222;
 
 }
+
+.controlItem, .controlBlock{
+	.hidden;
+	padding:4px;
+
+	div{
+		.left;
+		padding:2px 4px;
+		margin:2px;
+		.border-r(2px);
+		.fc(white);
+		.cursor;
+	}
+	.itemBox{ .bgc(#9900FF); }
+	.frameBox{ .bgc(#FF9900); }
+	.animationBox{ .bgc(#0099FF); }
+	.transitionBox{ .bgc(#33B666); }
+	.normalBox{ .bgc(#999); }
+}
+.controlBlock{
+	border-bottom:1px solid #222;
+}
+
 .settingFrame, .settingOriginal, .settingFlash{
 	.hidden;
 	border-bottom:1px solid #222;
@@ -91,7 +104,6 @@
 	}
 }
 
-
 .ui-resizable{
 	&-se, &-e, &-s{.pa;z-index:90;}
 	&-se{cursor:se-resize;}
@@ -105,23 +117,21 @@
 <template>
 
 <div class="view" @click="blurItem">
+	<itemcontrol :itemsdata="itemsdata" :focus="focus"></itemcontrol>
 	<div class="page" :style="pagestyle">
 		<item v-ref:item v-for="itemdata in itemsdata" :itemdata="itemdata" :index="$index" :focus="focus" :printdata="printdata" :formatdata="formatdata"></item>
 	</div>
 </div>
 
-<div class="controls">
-	<controls :itemsdata="itemsdata" :focus="focus"></controls>
-</div>
 
 <div class="settings">
 	<flash v-ref:flash :itemsdata="itemsdata" :formatdata="formatdata" :focus="focus" :timedata="timedata"></flash>
 
+	<blockcontrol :focus="focus" :timedata="timedata"></blockcontrol>
 	<blocksetting :focus="focus" :timedata="timedata"></blocksetting>
 	<framesetting :focus="focus" :timedata="timedata"></framesetting>
-
 	<resizesetting :formatdata="formatdata" :focus="focus"></resizesetting>
-	<original :focus="focus"></original>
+
 </div>
 
 </template>
@@ -161,22 +171,22 @@ formatdata.transform = {
 
 var flash = require('flash/back/flash.vue')
 var item = require('flash/back/item.vue')
-var original = require('flash/back/settings/original.vue')
 var resizesetting = require('flash/back/settings/resize.vue')
 var blocksetting = require('flash/back/settings/block.vue')
 var framesetting = require('flash/back/settings/frame.vue')
 
-var controls = require('flash/back/controls.vue')
+var itemcontrol = require('flash/back/controls/item.vue')
+var blockcontrol = require('flash/back/controls/block.vue')
 
 return {
   components : {
     item : item
 		, flash : flash
-		, original : original
 		, resizesetting : resizesetting 
 		, blocksetting : blocksetting
 		, framesetting : framesetting
-		, controls : controls
+		, blockcontrol : blockcontrol
+		, itemcontrol : itemcontrol
   }
 	, props:['itemsdata']
 	, data : function(){
@@ -193,9 +203,9 @@ return {
 			, timedata : {
 				min : 8 
 				, step : 100
-				, framewidth : 16
+				, framewidth : 14
 				, frameheight : 26
-				, namewidth : 66
+				, namewidth : 36
 				, scrollleft : null
 				, time : null
 			}

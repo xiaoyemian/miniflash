@@ -1,40 +1,8 @@
-<style>
-.controls{
-	.btnBox{
-		.left;
-		.ml(2px);.mr(2px);
-
-		div{
-			.inline;
-			padding:2px 4px;
-			.border-r(2px);
-			.fc(white);
-			.cursor;
-		}
-	}
-	.itemBox{ .bgc(#9900FF); }
-	.frameBox{ .bgc(#FF9900); }
-	.animationBox{ .bgc(#0099FF); }
-	.transitionBox{ .bgc(#33B666); }
-	.normalBox{ .bgc(#999); }
-}
-</style>
-
-
 <template>
-<div class="btnBox">
+<div class="controlItem">
 	<div class="uploadBtn itemBox" v-if="focus.item">替换图片<input type="file" @change="changeImage"/></div>
 	<div class="uploadBtn itemBox" v-else>添加图片<input type="file" @change="addImage"/></div>
-
-	<div @click="addBlock" class="itemBox" v-if="focus.track">添加动作</div>
-	<div @click="removeBlock" class="itemBox" v-if="focus.track && focus.track.itemdata.blocks.length > 1">删除动作</div>
-
-	<div @click="changeBlock2Normal" class="normalBox" v-if="focus.block && focus.block.blockdata.name != 'normal'">转换为逐帧动画</div>
-	<div @click="changeBlock2Transition" class="transitionBox" v-if="focus.block && focus.block.blockdata.name != 'transition'">转换为过渡动画</div>
-	<div @click="changeBlock2Animation" class="animationBox" v-if="focus.block && focus.block.blockdata.name != 'animation'">转换为预设动画</div>
-
-	<div @click="addFrame" class="frameBox" v-if="focus.block && focus.block.blockdata.name == 'transition'"">添加帧</div>
-	<div @click="removeFrame" class="frameBox" v-if="focus.block && focus.block.blockdata.frames.length > 1">删除帧</div>
+	<div @click.stop="addBlock" class="itemBox" v-if="focus.track">添加动作</div>
 </div>
 
 </template>
@@ -100,17 +68,6 @@ return {
 			this.$nextTick(function(){
 				var block = this.focus.track.$refs.block[index+1]
 				block.focusBlock()
-			})
-		}
-		, removeBlock : function(){
-			var blocksdata = this.focus.track.itemdata.blocks
-			var block = this.focus.block
-			var index = block.index
-
-			blocksdata.splice(index, 1)
-
-			this.$nextTick(function(){
-				this.$dispatch('loadTime')
 			})
 		}
 	}
