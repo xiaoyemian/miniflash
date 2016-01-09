@@ -21,7 +21,7 @@
 <script>
 
 return {
-	props : ['global', 'formatdata']
+	props : ['global']
 	, data : function(){
 		return {
 		}
