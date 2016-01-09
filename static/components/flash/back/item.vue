@@ -55,7 +55,7 @@
 </style>
 
 <template>
-<div class="item" @click.stop="selectItem" :class="[focus.item && focus.item.itemdata.item_id == itemdata.item_id ? 'focus' : '']" :style="[originalstyle, blockstyle]">
+<div class="item" @click.stop="selectItem" :class="[global.item && global.item.itemdata.item_id == itemdata.item_id ? 'focus' : '']" :style="[originalstyle, blockstyle]">
 	<div class="handel">
 		<div @click.stop="aspectRatio" class="aspectRatioBtn"></div>
 	</div>
@@ -66,7 +66,7 @@
 <script>
 
 return {
-	props:['focus', 'itemdata', 'index', 'printdata', 'formatdata']
+	props:['global', 'itemdata', 'index', 'printdata', 'formatdata']
 	, data:function(){
 		return {
 			framedata : null
@@ -80,10 +80,10 @@ return {
 			this.focusItem()
 		}
 		, focusItem : function(){
-			this.$set('focus.item', this)
+			this.$set('global.item', this)
 		}
 		, blurItem : function(){
-			this.$set('focus.item', null)
+			this.$set('global.item', null)
 		}
 		, getStyleByFrame : function(framedata){
 			var formatdata = this.formatdata

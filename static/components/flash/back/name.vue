@@ -8,7 +8,7 @@
 </style>
 
 <template>
-<div class="name" :class="{focus : focus.item && focus.item.itemdata.item_id == item_id}">
+<div class="name" :class="{focus : global.item && global.item.itemdata.item_id == item_id}">
 	<div>{{item_name}}</div>
 </div>
 
@@ -18,7 +18,7 @@
 return {
   components : {
 	}
-	, props : ['item_id', 'focus']
+	, props : ['item_id', 'global']
 	, data : function(){
 
 		var item_name = this.item_id

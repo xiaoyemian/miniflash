@@ -79,11 +79,11 @@
 
 			<div class="tracks" :style="{'padding-bottom':timedata.frameheight + 'px'}">
 				<div class="tracknames" :style="{width:timedata.namewidth + 'px'}">
-					<name v-ref:name v-for="itemdata in itemsdata" :index="$index" :item_id="itemdata.item_id" :focus="focus" :style="{height:timedata.frameheight + 'px'}"></name>
+					<name v-ref:name v-for="itemdata in itemsdata" :index="$index" :item_id="itemdata.item_id" :global="global" :style="{height:timedata.frameheight + 'px'}"></name>
 				</div>
 
 				<div class="trackblocks">
-					<track v-ref:track v-for="itemdata in itemsdata" :index="$index" :itemdata="itemdata" :focus="focus" :timedata="timedata" :formatdata="formatdata" :style="{height:timedata.frameheight + 'px', 'padding-right':timedata.min * 2 * timedata.framewidth + 'px'}"></track>
+					<track v-ref:track v-for="itemdata in itemsdata" :index="$index" :itemdata="itemdata" :global="global" :timedata="timedata" :formatdata="formatdata" :style="{height:timedata.frameheight + 'px', 'padding-right':timedata.min * 2 * timedata.framewidth + 'px'}"></track>
 				</div>
 			</div>
 		</div>
@@ -101,7 +101,7 @@ return {
 		track : track
 		, name : name
   }
-	, props:['itemsdata', 'formatdata', 'focus', 'timedata']
+	, props:['itemsdata', 'formatdata', 'global', 'timedata']
 	, data : function(){
 
 		return {
@@ -109,7 +109,7 @@ return {
 	}
 	, methods : {
 		blurItem : function(){
-			this.focus.item && this.focus.item.blurItem()
+			this.global.item && this.global.item.blurItem()
 		}
 	}
 	, events : {

@@ -1,8 +1,8 @@
 <template>
 <div class="controlItem">
-	<div @click.stop="" class="uploadBtn itemBox" v-if="focus.item">替换图片<input type="file" @change.stop="changeImage"/></div>
+	<div @click.stop="" class="uploadBtn itemBox" v-if="global.item">替换图片<input type="file" @change.stop="changeImage"/></div>
 	<div @click.stop="" class="uploadBtn itemBox" v-else>添加图片<input type="file" @change.stop="addImage"/></div>
-	<div @click.stop="addBlock" class="itemBox" v-if="focus.item">添加动作</div>
+	<div @click.stop="addBlock" class="itemBox" v-if="global.item">添加动作</div>
 </div>
 
 </template>
@@ -11,7 +11,7 @@
 <script>
 
 return {
-	props:['itemsdata', 'focus']
+	props:['itemsdata', 'global']
 	, data : function(){
 
 		return {
@@ -32,19 +32,19 @@ return {
 			var mSelf = this
 			this.$dispatch('changeImage', event, function(itemdata){
 				var original = itemdata.original
-				mSelf.$set('focus.item.itemdata.original', original)
-				mSelf.$set('focus.item.framedata.resize.height', original.height)
-				mSelf.$set('focus.item.framedata.resize.width', original.width)
+				mSelf.$set('global.item.itemdata.original', original)
+				mSelf.$set('global.item.framedata.resize.height', original.height)
+				mSelf.$set('global.item.framedata.resize.width', original.width)
 
-				mSelf.focus.item.loadItemOriginal()
-				mSelf.focus.item.loadItemStyle()
+				mSelf.global.item.loadItemOriginal()
+				mSelf.global.item.loadItemStyle()
 			})
 		}
 		, addBlock : function(){
-			var blocksdata = this.focus.item.itemdata.blocks
-			var block = this.focus.item.track.block
+			var blocksdata = this.global.item.itemdata.blocks
+			var block = this.global.item.track.block
 
-			var blocks = this.focus.item.track.$refs.block
+			var blocks = this.global.item.track.$refs.block
 			var len = blocks.length
 
 			if(!block){
@@ -60,13 +60,13 @@ return {
 					, transform : endframe.transform
 				}]
 			}))
-			this.focus.item.track.formatBlockData(blockdatanew)
+			this.global.item.track.formatBlockData(blockdatanew)
 
 			var index = block.index
 			blocksdata.splice(index+1, 0, blockdatanew)
 
 			this.$nextTick(function(){
-				var block = this.focus.item.track.$refs.block[index+1]
+				var block = this.global.item.track.$refs.block[index+1]
 				block.focusBlock()
 			})
 		}

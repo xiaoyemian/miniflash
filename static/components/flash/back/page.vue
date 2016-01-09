@@ -117,20 +117,20 @@
 <template>
 
 <div class="view" @click="blurItem">
-	<itemcontrol :itemsdata="itemsdata" :focus="focus"></itemcontrol>
+	<itemcontrol :itemsdata="itemsdata" :global="global"></itemcontrol>
 	<div class="page" :style="pagestyle">
-		<item v-ref:item v-for="itemdata in itemsdata" :itemdata="itemdata" :index="$index" :focus="focus" :printdata="printdata" :formatdata="formatdata"></item>
+		<item v-ref:item v-for="itemdata in itemsdata" :itemdata="itemdata" :index="$index" :global="global" :printdata="printdata" :formatdata="formatdata"></item>
 	</div>
 </div>
 
 
 <div class="settings">
-	<flash v-ref:flash :itemsdata="itemsdata" :formatdata="formatdata" :focus="focus" :timedata="timedata"></flash>
+	<flash v-ref:flash :itemsdata="itemsdata" :formatdata="formatdata" :global="global" :timedata="timedata"></flash>
 
-	<blockcontrol :focus="focus"></blockcontrol>
-	<blocksetting :focus="focus"></blocksetting>
-	<framesetting :focus="focus" :timedata="timedata"></framesetting>
-	<resizesetting :formatdata="formatdata" :focus="focus"></resizesetting>
+	<blockcontrol :global="global"></blockcontrol>
+	<blocksetting :global="global"></blocksetting>
+	<framesetting :global="global" :timedata="timedata"></framesetting>
+	<resizesetting :formatdata="formatdata" :global="global"></resizesetting>
 
 </div>
 
@@ -199,7 +199,7 @@ return {
 			}
 			, pagestyle : {}
 			, formatdata : formatdata
-			, focus : {}
+			, global : {}
 			, timedata : {
 				min : 8 
 				, step : 100
@@ -213,7 +213,7 @@ return {
 	}
 	, methods : {
 		blurItem : function(){
-			this.focus.item && this.focus.item.blurItem()
+			this.global.item && this.global.item.blurItem()
 		}
 		, resizePrint : function(printdata){
 			for(var i in printdata){
