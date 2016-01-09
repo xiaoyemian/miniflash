@@ -1,5 +1,6 @@
 <style>
 .block{
+	display:-webkit-box;
 	.pr; .bgc(#333);.h(100%);
 	&:before, &:after{ content:'';.pa;.h(100%);.w(2px);.bgc(#222);}
 	&:before{left:-1px;}

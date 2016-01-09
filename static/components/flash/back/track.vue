@@ -1,5 +1,6 @@
 <style>
 .track{
+	display:-webkit-box;
 //	.opacity(60);
 	.pr;
 

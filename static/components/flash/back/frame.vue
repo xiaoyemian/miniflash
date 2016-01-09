@@ -1,6 +1,6 @@
 <style>
 .frame{
-	.left;.pr;
+	.pr;
 	z-index:3;
 	.h(100%);
 

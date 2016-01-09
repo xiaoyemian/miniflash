@@ -12,9 +12,6 @@
 		}
 	}
 
-	.track{
-		display:-webkit-box;
-	}
 	.trackbox{
 		.left;
 		.h(100%);

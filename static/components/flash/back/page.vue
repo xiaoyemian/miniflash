@@ -8,7 +8,7 @@
 	}
 }
 
-@settingsWidth:400px;
+@settingsWidth:220px;
 
 .view, .settings{
 	top:0px;
