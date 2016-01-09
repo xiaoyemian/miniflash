@@ -41,10 +41,11 @@ return {
 			})
 		}
 		, addBlock : function(){
-			var blocksdata = this.global.item.itemdata.blocks
-			var block = this.global.item.track.block
+			var track = this.global.item.track
+			var blocksdata = track.itemdata.blocks
+			var block = track.block
 
-			var blocks = this.global.item.track.$refs.block
+			var blocks = track.$refs.block
 			var len = blocks.length
 
 			if(!block){
@@ -60,13 +61,13 @@ return {
 					, transform : endframe.transform
 				}]
 			}))
-			this.global.item.track.formatBlockData(blockdatanew)
+			track.formatBlockData(blockdatanew)
 
 			var index = block.index
 			blocksdata.splice(index+1, 0, blockdatanew)
 
 			this.$nextTick(function(){
-				var block = this.global.item.track.$refs.block[index+1]
+				var block = track.$refs.block[index+1]
 				block.focusBlock()
 			})
 		}

@@ -18,57 +18,93 @@
 return {
 	props:['itemsdata', 'global']
 	, data : function(){
-
 		return {
 		}
 	}
 	, methods : {
 		removeBlock : function(){
-			var blocksdata = this.global.item.itemdata.blocks
-			var block = this.global.item.track.block
+			var track = this.global.item.track
+			var blocksdata = track.itemdata.blocks
+			var block = track.block
 			var index = block.index
 
 			blocksdata.splice(index, 1)
 
 			this.$nextTick(function(){
-				this.global.item.track.$broadcast('setStartTime')	
+				track.$broadcast('setStartTime')	
 				this.$dispatch('loadTime')
 			})
 		}
+		, changeBlock2Normal : function(){
+			var track = this.global.item.track
+			var blocksdata = track.itemdata.blocks
+			var block = track.block
+			var framesdata = block.blockdata.frames
+			
+
+
+			var blockdatanew = JSON.parse(JSON.stringify({
+				frames:[{
+					resize : endframe.resize
+					, transform : endframe.transform
+				}]
+			}))
+			track.formatBlockData(blockdatanew)
+
+			var index = block.index
+			blocksdata.splice(index+1, 0, blockdatanew)
+
+			this.$nextTick(function(){
+				var block = track.$refs.block[index+1]
+				block.focusBlock()
+			})
+
+
+
+
+		}
+		, changeBlock2Transition : function(){
+			
+		}
+		, changeBlock2Animation : function(){
+			
+		}
 		, addFrame : function(){
-			var framesdata = this.global.item.track.block.blockdata.frames
-			var frame = this.global.item.track.block.frame
+			var track = this.global.item.track
+			var framesdata = track.block.blockdata.frames
+			var frame = track.block.frame
 
 			var framedatanew = JSON.parse(JSON.stringify({
 				resize : frame.framedata.resize
 				, transform : frame.framedata.transform
 			}))
-			this.global.item.track.formatFrameData(framedatanew)
+			track.formatFrameData(framedatanew)
 
 			var index = frame.index
 			framesdata.splice(index+1, 0, framedatanew)
 
 			this.$nextTick(function(){
-				this.global.item.track.$broadcast('setStartTime')	
-				this.global.item.track.block.$broadcast('setStartTime')	
+				track.$broadcast('setStartTime')	
+				track.block.$broadcast('setStartTime')	
 
-				var frames = this.global.item.track.block.$refs.frame
+				var frames = track.block.$refs.frame
 				var frame = frames[index+1]
 				frame.focusFrame()
 			})
 		}
 		, removeFrame : function(){
-			var framesdata = this.global.item.track.block.blockdata.frames
-			var frame = this.global.item.track.block.frame
+			var track = this.global.item.track
+			var framesdata = track.block.blockdata.frames
+			var frame = track.block.frame
 			var index = frame.index
 
 			framesdata.splice(index, 1)
 
 			this.$nextTick(function(){
-				this.global.item.track.$broadcast('setStartTime')	
-				this.global.item.track.block.$broadcast('setStartTime')	
+				track.$broadcast('setStartTime')	
+				track.block.$broadcast('setStartTime')	
 
-				var frames = this.global.item.track.block.$refs.frame
+				var frames = track.block.$refs.frame
 				var frame = index == frames.length ? frames[index-1] : frames[index]
 				frame.focusFrame()
 			})
