@@ -154,35 +154,38 @@ return {
 
 			for(var i in blocks){
 				block = blocks[i]
+
+				if(block.startTime > time){
+					block = blocks[i-1]
+					break;
+				}
+
 				var frames = block.$refs.frame
 
 				for(var j in frames){
 					frame = frames[j]
 
-					if(time >= block.startTime && time <= block.startTime + frame.startTime + frame.time){
-						block.time = time - block.startTime
-
-						if(block.blockdata.name == 'transition'){
-							framedata = this.getAnimateFrameData(block)
-
-						}else{
-							framedata = frame.framedata
-						}
-
-						this.$set('block', block)
-						this.$set('block.frame', frame)
-
+					if(frame.startTime > time - block.startTime){
+						frame = frames[j-1]
 						break;
 					}
 				}
-
-				if(framedata){
-					break;
-				}
 			}
 
-			if(!framedata){
+			block.time = time - block.startTime
+
+			if(block.blockdata.name == 'transition'){
+				framedata = this.getAnimateFrameData(block)
+
+			}else{
 				framedata = frame.framedata
+			}
+
+			if(frame){
+				this.$set('block', block)
+				this.$set('block.frame', frame)
+
+			}else{
 				this.$set('block', null)
 			}
 
