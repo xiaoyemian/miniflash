@@ -18,7 +18,7 @@
 }
 
 
-@settingsWidth:33%;
+@settingsWidth:200px;
 
 .view, .settings{
 	top:@controlsHeight;
