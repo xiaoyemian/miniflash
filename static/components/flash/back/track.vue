@@ -140,6 +140,7 @@ return {
 		setBlock : function(block){
 			this.$set('block', block)
 			this.$set('global.time', this.block.startTime + this.block.time)
+			this.$dispatch('loadTime')
 			this.item.focusItem()
 		}
 		, formatBlockData : function(data){
