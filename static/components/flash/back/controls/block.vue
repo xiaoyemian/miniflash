@@ -53,6 +53,7 @@ return {
 				this.global.item.track.block.$broadcast('setStartTime')	
 				var frame = this.global.item.track.block.$refs.frame[index+1]
 				frame.focusFrame()
+				this.$dispatch('loadTime')
 			})
 		}
 		, removeFrame : function(){
