@@ -4,7 +4,7 @@
 <template>
 <div class="settingFlash" v-if="global.item && global.item.track && global.item.track.block && global.item.track.block.frame">
 
-	<div class="inputArea" v-for="(key, value) in formatdata" v-if="!(global.item.track.block.index == global.item.track.itemdata.blocks.length-1 && global.item.track.block.frame.index == global.item.track.block.blockdata.frames.length -1)">
+	<div class="inputArea" v-for="(key, value) in formatdata">
 		<label for="{{key}}">{{value.label}}:</label>
 
 		<input v-else type="{{value.type||'number'}}" @keyup="updateFrame" id="{{key}}" min="1" placeholder="" value="{{global.item.track.block.frame.framedata[key]}}" />{{value.unit}}
