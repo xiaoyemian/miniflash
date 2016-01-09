@@ -234,6 +234,9 @@ return {
 		bindTrackItem : function(track){
 			this.$broadcast('bindTrackItem', track)
 		}
+		, loadTime : function(time){
+			this.$broadcast('loadItemByTime', time)
+		}
 		, setTime : function(time){
 			this.timedata.time = time
 		}
