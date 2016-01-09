@@ -2,7 +2,7 @@
 </style>
 
 <template>
-<div class="settingFrame" v-if="focus.item && focus.item.track && focus.item.track.block">
+<div class="settingFrame" v-if="focus.item && focus.item.track && focus.item.track.block && focus.item.track.block.frame">
 	<div class="inputArea" v-for="(key, value) in formatdata.resize">
 		<label for="resize|{{key}}">{{value.label || key}}:</label>
 		<input type="{{value.type||'number'}}" @keyup="updateItem" id="resize|{{key}}" placeholder="" value="{{focus.item.framedata.resize[key]}}"/>{{value.unit}}
