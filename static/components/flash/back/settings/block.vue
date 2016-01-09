@@ -1,4 +1,11 @@
 <style>
+.controlBlock{
+	.animationBox{ .bgc(#0099FF); }
+	.transitionBox{ .bgc(#33B666); }
+	.normalBox{ .bgc(#999); }
+
+	.focus{.none;}
+}
 </style>
 
 <template>
@@ -6,9 +13,9 @@
 
 	<div class="controlBlock" v-if="global.item && global.item.track && global.item.track.block">
 		<span>转换为:</span>
-		<div @click.stop="changeBlock2Normal" class="normalBox" v-if="global.item.track.block.blockdata.name != 'normal'">逐帧动画</div>
-		<div @click.stop="changeBlock2Transition" class="transitionBox" v-if="global.item.track.block.blockdata.name != 'transition'">过渡动画</div>
-		<div @click.stop="changeBlock2Animation" class="animationBox" v-if="global.item.track.block.blockdata.name != 'animation'">预设动画</div>
+		<div @click.stop="changeBlock2Normal" class="normalBox" :class="{focus : global.item.track.block.blockdata.name == 'normal'}">逐帧动画</div>
+		<div @click.stop="changeBlock2Transition" class="transitionBox" :class="{focus : global.item.track.block.blockdata.name == 'transition'}">过渡动画</div>
+		<div @click.stop="changeBlock2Animation" class="animationBox" :class="{focus : global.item.track.block.blockdata.name == 'animation'}">预设动画</div>
 	</div>
 
 
@@ -59,8 +66,13 @@ return {
 		}
 		, changeBlock2Normal : function(){
 			var track = this.global.item.track
-			var blocksdata = track.itemdata.blocks
 			var block = track.block
+
+			if(block.blockdata.name == 'normal'){
+				return;
+			}
+
+			var blocksdata = track.itemdata.blocks
 			var index = block.index
 			var framesdata = block.blockdata.frames
 			var len = framesdata.length
@@ -91,6 +103,10 @@ return {
 		, changeBlock2Transition : function(){
 			var track = this.global.item.track
 			var block = track.block
+
+			if(block.blockdata.name == 'transition'){
+				return;
+			}
 
 			Vue.set(block.blockdata, 'name', 'transition')
 		}

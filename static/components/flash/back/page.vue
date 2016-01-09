@@ -8,7 +8,7 @@
 	}
 }
 
-@settingsWidth:210px;
+@settingsWidth:240px;
 
 .view, .settings{
 	top:0px;
@@ -38,11 +38,11 @@
 .controlItem, .controlBlock{
 	.hidden;
 	padding:4px;
-	.l(20px);
+	.l(14px);
 
-	span{.fc(#ccc);}
+	span{.left;.mr(4px);.fc(#ccc);padding:2px 0px;}
 	div{
-		.inline;
+		.left;
 		padding:2px 4px;
 		.ml(2px);.mr(2px);
 		.border-r(2px);
@@ -52,10 +52,6 @@
 
 	.itemBox{ .bgc(#9900FF); }
 	.frameBox{ .bgc(#FF9900); }
-
-	.animationBox{ .bgc(#0099FF); }
-	.transitionBox{ .bgc(#33B666); }
-	.normalBox{ .bgc(#999); }
 }
 
 .settingFrame, .settingOriginal, .settingFlash{
