@@ -51,6 +51,7 @@ return {
 			this.$nextTick(function(){
 				this.global.item.track.$broadcast('setStartTime')	
 				this.global.item.track.block.$broadcast('setStartTime')	
+
 				var frame = this.global.item.track.block.$refs.frame[index+1]
 				frame.focusFrame()
 				this.$dispatch('loadTime')
@@ -66,6 +67,9 @@ return {
 			this.$nextTick(function(){
 				this.global.item.track.$broadcast('setStartTime')	
 				this.global.item.track.block.$broadcast('setStartTime')	
+
+				var frame = this.global.item.track.block.$refs.frame[index]
+				frame.focusFrame()
 				this.$dispatch('loadTime')
 			})
 		}
