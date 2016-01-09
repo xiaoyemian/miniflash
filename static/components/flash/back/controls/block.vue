@@ -1,13 +1,15 @@
 <template>
 <div class="controlBlock" v-if="global.item && global.item.track && global.item.track.block">
-	<div @click.stop="changeBlock2Normal" class="normalBox" v-if="global.item.track.block.blockdata.name != 'normal'">转换为逐帧动画</div>
-	<div @click.stop="changeBlock2Transition" class="transitionBox" v-if="global.item.track.block.blockdata.name != 'transition'">转换为过渡动画</div>
-	<div @click.stop="changeBlock2Animation" class="animationBox" v-if="global.item.track.block.blockdata.name != 'animation'">转换为预设动画</div>
+	<span>转换为:</span>
+	<div @click.stop="changeBlock2Normal" class="normalBox" v-if="global.item.track.block.blockdata.name != 'normal'">逐帧动画</div>
+	<div @click.stop="changeBlock2Transition" class="transitionBox" v-if="global.item.track.block.blockdata.name != 'transition'">过渡动画</div>
+	<div @click.stop="changeBlock2Animation" class="animationBox" v-if="global.item.track.block.blockdata.name != 'animation'">预设动画</div>
+</div>
 
-	<div @click.stop="addFrame" class="frameBox" v-if="global.item.track.block.blockdata.name == 'transition'">添加帧</div>
-	<div @click.stop="removeFrame" class="frameBox" v-if="global.item.track.block.blockdata.name == 'transition' && global.item.track.block.blockdata.frames.length > 1">删除帧</div>
-
-	<div @click.stop="removeBlock" class="itemBox" v-if="global.item && global.item.itemdata.blocks.length > 1">删除动作</div>
+<div class="controlBlock" v-if="global.item && global.item.track && global.item.track.block && global.item.track.block.blockdata.name == 'transition'">
+	<span>帧:</span>
+	<div @click.stop="addFrame" class="frameBox">添加帧</div>
+	<div @click.stop="removeFrame" class="frameBox" v-if="global.item.track.block.blockdata.frames.length > 1">删除帧</div>
 </div>
 
 </template>
@@ -22,20 +24,7 @@ return {
 		}
 	}
 	, methods : {
-		removeBlock : function(){
-			var track = this.global.item.track
-			var blocksdata = track.itemdata.blocks
-			var block = track.block
-			var index = block.index
-
-			blocksdata.splice(index, 1)
-
-			this.$nextTick(function(){
-				track.$broadcast('setStartTime')	
-				this.$dispatch('loadTime')
-			})
-		}
-		, changeBlock2Normal : function(){
+		changeBlock2Normal : function(){
 			var track = this.global.item.track
 			var blocksdata = track.itemdata.blocks
 			var block = track.block

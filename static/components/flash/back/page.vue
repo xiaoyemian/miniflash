@@ -37,18 +37,21 @@
 
 .controlItem, .controlBlock{
 	.hidden;
-	padding:4px;
+	padding:6px 2px;
 
+	span{.fc(#ccc);.left;padding:2px 4px;}
 	div{
 		.left;
 		padding:2px 4px;
-		margin:3px;
+		.ml(2px);.mr(2px);
 		.border-r(2px);
 		.fc(white);
 		.cursor;
 	}
+
 	.itemBox{ .bgc(#9900FF); }
 	.frameBox{ .bgc(#FF9900); }
+
 	.animationBox{ .bgc(#0099FF); }
 	.transitionBox{ .bgc(#33B666); }
 	.normalBox{ .bgc(#999); }
@@ -60,6 +63,7 @@
 .settingFrame, .settingOriginal, .settingFlash{
 	.hidden;
 	border-bottom:1px solid #222;
+	padding:2px;
 
 	.inputArea, .inputBox, .inputLabel{
 		.f(12px);.fc(#ccc); .l(20px);

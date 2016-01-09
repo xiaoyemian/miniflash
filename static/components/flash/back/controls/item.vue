@@ -3,6 +3,7 @@
 	<div @click.stop="" class="uploadBtn itemBox" v-if="global.item">替换图片<input type="file" @change.stop="changeImage"/></div>
 	<div @click.stop="" class="uploadBtn itemBox" v-else>添加图片<input type="file" @change.stop="addImage"/></div>
 	<div @click.stop="addBlock" class="itemBox" v-if="global.item">添加动作</div>
+	<div @click.stop="removeBlock" class="itemBox" v-if="global.item && global.item.itemdata.blocks.length > 1">删除动作</div>
 </div>
 
 </template>
@@ -71,6 +72,20 @@ return {
 				block.focusBlock()
 			})
 		}
+		, removeBlock : function(){
+			var track = this.global.item.track
+			var blocksdata = track.itemdata.blocks
+			var block = track.block
+			var index = block.index
+
+			blocksdata.splice(index, 1)
+
+			this.$nextTick(function(){
+				track.$broadcast('setStartTime')	
+				this.$dispatch('loadTime')
+			})
+		}
+
 	}
 }
 </script>
