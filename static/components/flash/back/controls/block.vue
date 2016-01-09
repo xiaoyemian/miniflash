@@ -35,6 +35,12 @@ return {
 				this.$dispatch('loadTime')
 			})
 		}
+		, addFrame : function(){
+			var framesdata = this.global.item.track.block.blockdata.frames
+			var frame = this.global.item.track.block.frame
+			var index = frame.index
+
+		}
 	}
 }
 </script>
