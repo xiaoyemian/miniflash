@@ -67,8 +67,9 @@ return {
 			this.$nextTick(function(){
 				this.global.item.track.$broadcast('setStartTime')	
 				this.global.item.track.block.$broadcast('setStartTime')	
+				var frames = this.global.item.track.block.$refs.frame
+				var frame = index == frames.length ? frames[index-1] : frames[index]
 
-				var frame = this.global.item.track.block.$refs.frame[index]
 				frame.focusFrame()
 				this.$dispatch('loadTime')
 			})
