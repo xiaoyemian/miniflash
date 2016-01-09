@@ -39,28 +39,30 @@ return {
 			var track = this.global.item.track
 			var blocksdata = track.itemdata.blocks
 			var block = track.block
+			var index = block.index
 			var framesdata = block.blockdata.frames
 			
+			for(var i in framesdata){
+				var framedata = framesdata[i]
 
+				var blockdatanew = JSON.parse(JSON.stringify({
+					frames:[{
+						resize : framedata.resize
+						, transform : framedata.transform
+						, duration : framedata.duration
+					}]
+				}))
+				track.formatBlockData(blockdatanew)
 
-			var blockdatanew = JSON.parse(JSON.stringify({
-				frames:[{
-					resize : endframe.resize
-					, transform : endframe.transform
-				}]
-			}))
-			track.formatBlockData(blockdatanew)
+				blocksdata.splice(index+1+i, 0, blockdatanew)
+			}
 
-			var index = block.index
-			blocksdata.splice(index+1, 0, blockdatanew)
+			blocksdata.splice(index, 1)
 
 			this.$nextTick(function(){
-				var block = track.$refs.block[index+1]
+				var block = track.$refs.block[index]
 				block.focusBlock()
 			})
-
-
-
 
 		}
 		, changeBlock2Transition : function(){
