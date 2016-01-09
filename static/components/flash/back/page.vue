@@ -116,6 +116,10 @@
 
 <div class="settings">
 	<flash v-ref:flash :itemsdata="itemsdata" :formatdata="formatdata" :focus="focus" :timedata="timedata"></flash>
+
+	<blocksetting :focus="focus" :timedata="timedata"></blocksetting>
+	<framesetting :focus="focus" :timedata="timedata"></framesetting>
+
 	<resizesetting :formatdata="formatdata" :focus="focus"></resizesetting>
 	<original :focus="focus"></original>
 </div>
@@ -159,6 +163,8 @@ var flash = require('flash/back/flash.vue')
 var item = require('flash/back/item.vue')
 var original = require('flash/back/settings/original.vue')
 var resizesetting = require('flash/back/settings/resize.vue')
+var blocksetting = require('flash/back/settings/block.vue')
+var framesetting = require('flash/back/settings/frame.vue')
 
 var controls = require('flash/back/controls.vue')
 
@@ -168,6 +174,8 @@ return {
 		, flash : flash
 		, original : original
 		, resizesetting : resizesetting 
+		, blocksetting : blocksetting
+		, framesetting : framesetting
 		, controls : controls
   }
 	, props:['itemsdata']
