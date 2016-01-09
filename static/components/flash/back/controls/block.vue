@@ -68,7 +68,6 @@ return {
 		}
 		, changeBlock2Transition : function(){
 			var track = this.global.item.track
-			var blocksdata = track.itemdata.blocks
 			var block = track.block
 
 			Vue.set(block.blockdata, 'name', 'transition')
