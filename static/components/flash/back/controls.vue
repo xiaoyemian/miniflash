@@ -25,22 +25,16 @@
 <div class="btnBox">
 	<div class="uploadBtn itemBox" v-if="focus.item">替换图片<input type="file" @change="changeImage"/></div>
 	<div class="uploadBtn itemBox" v-else>添加图片<input type="file" @change="addImage"/></div>
-</div>
 
-<div class="btnBox" v-if="focus.track">
-	<div @click="addBlock" class="itemBox">添加动作</div>
-</div>
+	<div @click="addBlock" class="itemBox" v-if="focus.track">添加动作</div>
+	<div @click="removeBlock" class="itemBox" v-if="focus.track && focus.track.itemdata.blocks.length > 1">删除动作</div>
 
-<div class="btnBox" v-if="focus.track && focus.block">
-	<div @click="removeBlock" class="itemBox" v-if="focus.track.itemdata.blocks.length > 1">删除动作</div>
-	<div @click="changeBlock2Normal" class="normalBox" v-if="focus.block.blockdata.name != 'normal'">转换为逐帧动画</div>
-	<div @click="changeBlock2Transition" class="transitionBox" v-if="focus.block.blockdata.name != 'transition'">转换为过渡动画</div>
-	<div @click="changeBlock2Animation" class="animationBox" v-if="focus.block.blockdata.name != 'animation'">转换为预设动画</div>
-</div>
+	<div @click="changeBlock2Normal" class="normalBox" v-if="focus.block && focus.block.blockdata.name != 'normal'">转换为逐帧动画</div>
+	<div @click="changeBlock2Transition" class="transitionBox" v-if="focus.block && focus.block.blockdata.name != 'transition'">转换为过渡动画</div>
+	<div @click="changeBlock2Animation" class="animationBox" v-if="focus.block && focus.block.blockdata.name != 'animation'">转换为预设动画</div>
 
-<div class="btnBox" v-if="focus.block && focus.block.blockdata.name == 'transition'">
-	<div @click="addFrame" class="frameBox">添加帧</div>
-	<div @click="removeFrame" class="frameBox" v-if="focus.block.blockdata.frames.length > 1">删除帧</div>
+	<div @click="addFrame" class="frameBox" v-if="focus.block && focus.block.blockdata.name == 'transition'"">添加帧</div>
+	<div @click="removeFrame" class="frameBox" v-if="focus.block && focus.block.blockdata.frames.length > 1">删除帧</div>
 </div>
 
 </template>
