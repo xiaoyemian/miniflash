@@ -234,6 +234,10 @@ return {
 			this.$set('pagestyle["margin-left"]', printdata.width * printdata.scale/-2 + 'px')
 			this.$set('pagestyle["margin-top"]', printdata.height * printdata.scale/-2 + 'px')
     }
+		, loadTime : function(){
+			console.log(111, this.focus)
+			this.$broadcast('loadItemByTime', this.timedata.time)
+		}
 	}
 	, events : {
 		blurItem : function(){
@@ -250,10 +254,10 @@ return {
 		} 
 		, setTime : function(time){
 			this.timedata.time = time
-			this.$broadcast('loadItemByTime', this.timedata.time)
+			this.loadTime()
 		}
 		, loadTime : function(){
-			this.$broadcast('loadItemByTime', this.timedata.time)
+			this.loadTime()
 		}
 		, loadItemByFrame : function(item_id, framedata){
       this.$broadcast('loadItemByFrame', item_id, framedata)

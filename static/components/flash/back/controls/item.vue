@@ -2,7 +2,7 @@
 <div class="controlItem">
 	<div class="uploadBtn itemBox" v-if="focus.item">替换图片<input type="file" @change="changeImage"/></div>
 	<div class="uploadBtn itemBox" v-else>添加图片<input type="file" @change="addImage"/></div>
-	<div @click.stop="addBlock" class="itemBox" v-if="focus.track">添加动作</div>
+	<div @click.stop="addBlock" class="itemBox" v-if="focus.item">添加动作</div>
 </div>
 
 </template>
@@ -41,7 +41,7 @@ return {
 			})
 		}
 		, addBlock : function(){
-			var blocksdata = this.focus.track.itemdata.blocks
+			var blocksdata = this.focus.item.itemdata.blocks
 			var block = this.focus.block
 
 			var blocks = this.focus.track.$refs.block

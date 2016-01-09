@@ -28,7 +28,7 @@
 </style>
 
 <template>
-<div class="track" @click.stop="selectTrack" :class="{focus : focus.track && focus.track.itemdata.item_id == itemdata.item_id}">
+<div class="track" @click.stop="selectTrack" :class="{focus : focus.item && focus.item.itemdata.item_id == itemdata.item_id}">
 	<div class="focusframe" v-if="focus.block && focus.block.frame && focus.item.itemdata.item_id == itemdata.item_id" :style="{width:timedata.framewidth + 'px', left:timedata.time * timedata.framewidth + 'px'}"></div>
 
 	<block v-ref:block v-for="blockdata in itemdata.blocks" :index="$index" :blockdata="blockdata" :timedata="timedata"></block>
@@ -50,13 +50,13 @@ return {
 	, methods : {
 		selectTrack : function(event){
 			var time = Math.floor(event.offsetX / this.timedata.framewidth)
-
-			this.$set('focus.track', this)
-
+			this.focusTrack()
 			this.$dispatch('blurBlock')
-
 			this.$dispatch('focusItemById', this.itemdata.item_id)
 			this.$dispatch('setTime', time)	
+		}
+		, focusTrack : function(){
+			this.$set('focus.track', this)
 		}
 		, getAnimateFrameData : function(block){
 			var framedata = block.frame.framedata
@@ -137,14 +137,14 @@ return {
 	}
 	, events : {
 		focusTrackByBlock : function(block){
-			this.$set('focus.track', this)
+			this.focusTrack()
 			this.$set('focus.block', block)
 
 			this.$dispatch('focusItemById', this.itemdata.item_id)
 		}
 		, focusTrackById : function(item_id){
 			if(item_id == this.itemdata.item_id){
-				this.$set('focus.track', this)
+				this.focusTrack()
 			}
 		}
 		, formatBlockData : function(data){

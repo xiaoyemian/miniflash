@@ -8,7 +8,7 @@
 </style>
 
 <template>
-<div class="name" :class="{focus : focus.track && focus.track.itemdata.item_id == item_id}">
+<div class="name" :class="{focus : focus.item && focus.item.itemdata.item_id == item_id}">
 	<div>{{item_name}}</div>
 </div>
 
