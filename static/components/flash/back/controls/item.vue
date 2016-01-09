@@ -32,7 +32,7 @@ return {
 			var mSelf = this
 			this.$dispatch('changeImage', event, function(itemdata){
 				var original = itemdata.original
-				mSelf.$set('focus.track.itemdata.original', original)
+				mSelf.$set('focus.track.item.itemdata.original', original)
 				mSelf.$set('focus.track.item.framedata.resize.height', original.height)
 				mSelf.$set('focus.track.item.framedata.resize.width', original.width)
 

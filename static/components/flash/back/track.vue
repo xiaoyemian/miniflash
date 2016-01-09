@@ -28,8 +28,8 @@
 </style>
 
 <template>
-<div class="track" @click.stop="selectTrack" :class="{focus : focus.track && focus.track.itemdata.item_id == itemdata.item_id}">
-	<div class="focusframe" v-if="focus.block && focus.block.frame && focus.track.itemdata.item_id == itemdata.item_id" :style="{width:timedata.framewidth + 'px', left:timedata.time * timedata.framewidth + 'px'}"></div>
+<div class="track" @click.stop="selectTrack" :class="{focus : focus.track && focus.track.item && focus.track.item.itemdata.item_id == itemdata.item_id}">
+	<div class="focusframe" v-if="focus.block && focus.block.frame && focus.track.item && focus.track.item.itemdata.item_id == itemdata.item_id" :style="{width:timedata.framewidth + 'px', left:timedata.time * timedata.framewidth + 'px'}"></div>
 
 	<block v-ref:block v-for="blockdata in itemdata.blocks" :index="$index" :blockdata="blockdata" :timedata="timedata"></block>
 </div>

@@ -9,8 +9,8 @@
 </style>
 
 <template>
-<div class="settingOriginal" v-if="focus.track && focus.track.itemdata.original">
-	<div class="uploadBtn" v-if="focus.track.itemdata.original.imageUrl" :style="{'background-image':'url('+focus.track.itemdata.original.imageUrl+')'}">
+<div class="settingOriginal" v-if="focus.track && focus.track.item && focus.track.item.itemdata.original">
+	<div class="uploadBtn" v-if="focus.track.item && focus.track.item.itemdata.original.imageUrl" :style="{'background-image':'url('+focus.track.item.itemdata.original.imageUrl+')'}">
 		<input type="file" @change="changeImage"/>
 	</div>
 	<div class="inputArea">
@@ -31,7 +31,7 @@ return {
 			var mSelf = this
 			this.$dispatch('changeImage', event, function(itemdata){
 				var original = itemdata.original
-				mSelf.$set('focus.track.itemdata.original', original)
+				mSelf.$set('focus.track.item.itemdata.original', original)
 				mSelf.$set('focus.track.item.framedata.resize.height', original.height)
 				mSelf.$set('focus.track.item.framedata.resize.width', original.width)
 
