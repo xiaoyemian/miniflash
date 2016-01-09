@@ -41,10 +41,11 @@ return {
 			var block = track.block
 			var index = block.index
 			var framesdata = block.blockdata.frames
-			
+			var len = framesdata.length
+
 			blocksdata.splice(index, 1)
 
-			for(var i in framesdata){
+			for(var i = len-1; i>=0; i--){
 				var framedata = framesdata[i]
 
 				var blockdatanew = JSON.parse(JSON.stringify({
@@ -56,9 +57,8 @@ return {
 				}))
 				track.formatBlockData(blockdatanew)
 
-				blocksdata.splice(index+i, 0, blockdatanew)
+				blocksdata.splice(index, 0, blockdatanew)
 			}
-
 
 			this.$nextTick(function(){
 				var block = track.$refs.block[index]
