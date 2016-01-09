@@ -147,41 +147,37 @@ return {
 			this.formatFrameData(data)
 		}
 		, loadItemByTime : function(time){
+			console.log(time)
 			var blocks = this.$refs.block
 			var block
 			var frame
 			var framedata
+			var flag
 
 			for(var i in blocks){
 				block = blocks[i]
-
-				if(block.startTime > time){
-					block = blocks[i-1]
-					break;
-				}
 
 				var frames = block.$refs.frame
 
 				for(var j in frames){
 					frame = frames[j]
 
-					if(frame.startTime > time - block.startTime){
-						frame = frames[j-1]
+					var line = frame.startTime + block.startTime
+					if(time <= line){
+
+						if(time < line)
+							frame = frames[j-1]
+
+						flag = 1
 						break;
 					}
 				}
+
+				if(flag)
+					break;
 			}
 
-			block.time = time - block.startTime
-
-			if(block.blockdata.name == 'transition'){
-				framedata = this.getAnimateFrameData(block)
-
-			}else{
-				framedata = frame.framedata
-			}
-
-			if(frame){
+			if(flag){
 				this.$set('block', block)
 				this.$set('block.frame', frame)
 
@@ -189,6 +185,12 @@ return {
 				this.$set('block', null)
 			}
 
+			if(block.blockdata.name == 'transition'){
+				framedata = this.getAnimateFrameData(block)
+
+			}else{
+				framedata = frame.framedata
+			}
 			this.item.loadItemByFrame(framedata)
 		}
 	}
