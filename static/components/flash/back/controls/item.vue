@@ -42,7 +42,7 @@ return {
 		}
 		, addBlock : function(){
 			var blocksdata = this.focus.item.itemdata.blocks
-			var block = this.focus.block
+			var block = this.focus.item.track.block
 
 			var blocks = this.focus.item.track.$refs.block
 			var len = blocks.length

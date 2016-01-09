@@ -2,12 +2,12 @@
 </style>
 
 <template>
-<div class="settingFlash" v-if="focus.block && focus.block.frame">
+<div class="settingFlash" v-if="focus.item && focus.item.track && focus.item.track.block && focus.item.track.block.frame">
 
 	<div class="inputArea" v-for="(key, value) in formatdata">
 		<label for="{{key}}">{{value.label}}:</label>
 
-		<input v-else type="{{value.type||'number'}}" @keyup="updateFrame" id="{{key}}" min="1" placeholder="" value="{{focus.block.frame.framedata[key]}}" />{{value.unit}}
+		<input v-else type="{{value.type||'number'}}" @keyup="updateFrame" id="{{key}}" min="1" placeholder="" value="{{focus.item.track.block.frame.framedata[key]}}" />{{value.unit}}
 	</div>
 
 </div>
@@ -38,7 +38,7 @@ return {
 				arr.push('["' + type[i] + '"]')
 			}
 
-			this.$set('focus.block.frame.framedata' + arr.join(''), value||0)
+			this.$set('focus.item.track.block.frame.framedata' + arr.join(''), value||0)
 		}
 	}
 }

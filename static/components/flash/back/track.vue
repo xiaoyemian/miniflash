@@ -29,7 +29,7 @@
 
 <template>
 <div class="track" @click.stop="selectTrack" :class="{focus : focus.item && focus.item.itemdata.item_id == itemdata.item_id}">
-	<div class="focusframe" v-if="focus.block && focus.block.frame && focus.item && focus.item.itemdata.item_id == itemdata.item_id" :style="{width:timedata.framewidth + 'px', left:timedata.time * timedata.framewidth + 'px'}"></div>
+	<div class="focusframe" v-if="focus.item && focus.item.itemdata.item_id == itemdata.item_id" :style="{width:timedata.framewidth + 'px', left:timedata.time * timedata.framewidth + 'px'}"></div>
 
 	<block v-ref:block v-for="blockdata in itemdata.blocks" :index="$index" :blockdata="blockdata" :timedata="timedata"></block>
 </div>
@@ -46,6 +46,7 @@ return {
 	, data : function(){
 		return {
 			item : null
+			, block : null
 		}
 	}
 	, methods : {
@@ -134,7 +135,7 @@ return {
 	}
 	, events : {
 		setBlock : function(block){
-			this.$set('focus.block', block)
+			this.$set('block', block)
 			this.item.focusItem()
 		}
 		, formatBlockData : function(data){
