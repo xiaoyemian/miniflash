@@ -52,8 +52,8 @@ return {
 	, methods : {
 		selectTrack : function(event){
 			var time = Math.floor(event.offsetX / this.timedata.framewidth)
-			this.focus.item && this.focus.item.blurItem()
 			this.item.focusItem()
+			this.item.track.block && this.item.track.block.blurBlock()
 			this.$dispatch('setTime', time)	
 		}
 		, getAnimateFrameData : function(block){
