@@ -55,7 +55,7 @@
 </style>
 
 <template>
-<div class="item" @click.stop="selectItem" :class="[focus.track && focus.track.item && focus.track.item.itemdata.item_id == itemdata.item_id ? 'focus' : '']" :style="[originalstyle, blockstyle]">
+<div class="item" @click.stop="selectItem" :class="[focus.item && focus.item.itemdata.item_id == itemdata.item_id ? 'focus' : '']" :style="[originalstyle, blockstyle]">
 	<div class="handel">
 		<div @click.stop="aspectRatio" class="aspectRatioBtn"></div>
 	</div>
@@ -77,9 +77,10 @@ return {
 	}
 	, methods : {
 		selectItem : function(){
-			this.$dispatch('focusTrackById', this.itemdata.item_id)
+			this.focusItem()
 		}
 		, focusItem : function(){
+			this.$set('focus.item', this)
 		}
 		, getStyleByFrame : function(framedata){
 			var formatdata = this.formatdata
@@ -196,8 +197,8 @@ return {
 			this.formatResizeByOriginal()
 			this.loadItemStyle()
 		}
-		, bindItem : function(track){
-			if(track.item.itemdata.item_id == this.itemdata.item_id){
+		, bindTrackItem : function(track){
+			if(track.itemdata.item_id == this.itemdata.item_id){
 				Vue.set(track, 'item', this)
 				this.$set('track', track)
 			}

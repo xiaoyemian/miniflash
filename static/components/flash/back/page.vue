@@ -213,7 +213,7 @@ return {
 	}
 	, methods : {
 		blurItem : function(){
-			this.$set('focus.track', null)
+			this.$set('focus.item', null)
 			this.blurBlock()
 		}
 		, blurBlock : function(){
@@ -245,12 +245,9 @@ return {
 		, blurBlock : function(){
 			this.blurBlock()
 		}
-		, bindItem : function(track){
-			this.$broadcast('bindItem', track)
+		, bindTrackItem : function(track){
+			this.$broadcast('bindTrackItem', track)
 		}
-		, focusTrackById : function(item_id){
-      this.$broadcast('focusTrackById', item_id)
-		} 
 		, setTime : function(time){
 			this.timedata.time = time
 			this.loadTime()

@@ -1,8 +1,8 @@
 <template>
 <div class="controlItem">
-	<div class="uploadBtn itemBox" v-if="focus.track">替换图片<input type="file" @change="changeImage"/></div>
+	<div class="uploadBtn itemBox" v-if="focus.item">替换图片<input type="file" @change="changeImage"/></div>
 	<div class="uploadBtn itemBox" v-else>添加图片<input type="file" @change="addImage"/></div>
-	<div @click.stop="addBlock" class="itemBox" v-if="focus.track">添加动作</div>
+	<div @click.stop="addBlock" class="itemBox" v-if="focus.item">添加动作</div>
 </div>
 
 </template>
@@ -32,19 +32,19 @@ return {
 			var mSelf = this
 			this.$dispatch('changeImage', event, function(itemdata){
 				var original = itemdata.original
-				mSelf.$set('focus.track.item.itemdata.original', original)
-				mSelf.$set('focus.track.item.framedata.resize.height', original.height)
-				mSelf.$set('focus.track.item.framedata.resize.width', original.width)
+				mSelf.$set('focus.item.itemdata.original', original)
+				mSelf.$set('focus.item.framedata.resize.height', original.height)
+				mSelf.$set('focus.item.framedata.resize.width', original.width)
 
-				mSelf.focus.track.item.loadItemOriginal()
-				mSelf.focus.track.item.loadItemStyle()
+				mSelf.focus.item.loadItemOriginal()
+				mSelf.focus.item.loadItemStyle()
 			})
 		}
 		, addBlock : function(){
-			var blocksdata = this.focus.track.item.itemdata.blocks
+			var blocksdata = this.focus.item.itemdata.blocks
 			var block = this.focus.block
 
-			var blocks = this.focus.track.$refs.block
+			var blocks = this.focus.item.track.$refs.block
 			var len = blocks.length
 
 			if(!block){
@@ -60,13 +60,13 @@ return {
 					, transform : endframe.transform
 				}]
 			}))
-			this.focus.track.formatBlockData(blockdatanew)
+			this.focus.item.track.formatBlockData(blockdatanew)
 
 			var index = block.index
 			blocksdata.splice(index+1, 0, blockdatanew)
 
 			this.$nextTick(function(){
-				var block = this.focus.track.$refs.block[index+1]
+				var block = this.focus.item.track.$refs.block[index+1]
 				block.focusBlock()
 			})
 		}

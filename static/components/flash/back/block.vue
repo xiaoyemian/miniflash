@@ -51,7 +51,7 @@ return {
 			this.time = this.frame.time + this.frame.startTime 
 
 			this.$dispatch('setTime', this.startTime + this.time)
-			this.$dispatch('focusTrackByBlock', this)
+			this.$dispatch('setBlock', this)
 		}
 		, setStartTime : function(){
 			this.startTime = Math.floor(($(this.$el).position().left + this.timedata.scrollleft) / this.timedata.framewidth) 
@@ -61,7 +61,7 @@ return {
 		setStartTime : function(){
 			this.setStartTime()
 		}
-		, focusTrackByFrame : function(frame){
+		, setFrame : function(frame){
 			this.$set('frame', frame)
 			this.focusBlock()
 		}
