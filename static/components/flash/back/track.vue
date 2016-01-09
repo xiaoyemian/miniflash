@@ -162,11 +162,9 @@ return {
 				for(var j in frames){
 					frame = frames[j]
 
-					var line = frame.startTime + block.startTime
-					if(time <= line){
+					var start = frame.startTime + block.startTime
 
-						if(time < line)
-							frame = frames[j-1]
+					if(time >= start && time < start + frame.framedata.duration){
 
 						flag = 1
 						break;
