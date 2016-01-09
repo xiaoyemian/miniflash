@@ -113,7 +113,7 @@
 <template>
 
 <div class="view" @click="blurItem">
-	<itemcontrol :itemsdata="itemsdata" :global="global"></itemcontrol>
+	<itemsetting :itemsdata="itemsdata" :global="global"></itemsetting>
 	<div class="page" :style="pagestyle">
 		<item v-ref:item v-for="itemdata in itemsdata" :itemdata="itemdata" :index="$index" :global="global" :printdata="printdata"></item>
 	</div>
@@ -169,7 +169,7 @@ var item = require('flash/back/item.vue')
 var resizesetting = require('flash/back/settings/resize.vue')
 var blocksetting = require('flash/back/settings/block.vue')
 var framesetting = require('flash/back/settings/frame.vue')
-var itemcontrol = require('flash/back/controls/item.vue')
+var itemsetting = require('flash/back/settings/item.vue')
 
 return {
   components : {
@@ -178,7 +178,7 @@ return {
 		, resizesetting : resizesetting 
 		, blocksetting : blocksetting
 		, framesetting : framesetting
-		, itemcontrol : itemcontrol
+		, itemsetting : itemsetting
   }
 	, props:['itemsdata']
 	, data : function(){
