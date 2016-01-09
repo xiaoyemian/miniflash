@@ -42,6 +42,8 @@ return {
 			var index = block.index
 			var framesdata = block.blockdata.frames
 			
+			blocksdata.splice(index, 1)
+
 			for(var i in framesdata){
 				var framedata = framesdata[i]
 
@@ -54,10 +56,9 @@ return {
 				}))
 				track.formatBlockData(blockdatanew)
 
-				blocksdata.splice(index+1+i, 0, blockdatanew)
+				blocksdata.splice(index+i, 0, blockdatanew)
 			}
 
-			blocksdata.splice(index, 1)
 
 			this.$nextTick(function(){
 				var block = track.$refs.block[index]
@@ -66,7 +67,11 @@ return {
 
 		}
 		, changeBlock2Transition : function(){
-			
+			var track = this.global.item.track
+			var blocksdata = track.itemdata.blocks
+			var block = track.block
+
+			Vue.set(block.blockdata, 'name', 'transition')
 		}
 		, changeBlock2Animation : function(){
 			
