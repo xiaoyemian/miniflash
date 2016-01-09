@@ -66,7 +66,7 @@
 <script>
 
 return {
-	props:['global', 'itemdata', 'index', 'printdata', 'formatdata']
+	props:['global', 'itemdata', 'index', 'printdata']
 	, data:function(){
 		return {
 			framedata : null
@@ -86,7 +86,7 @@ return {
 			this.$set('global.item', null)
 		}
 		, getStyleByFrame : function(framedata){
-			var formatdata = this.formatdata
+			var formatdata = this.global.formatdata
 			var transformList = []
 
 			var style = {}
@@ -143,7 +143,7 @@ return {
 			this.loadItemStyle()
 		}
 		, upgradeItemData: function(){
-			var formatdata = this.formatdata
+			var formatdata = this.global.formatdata
 			var itemdata = this.itemdata
 
 			if(itemdata.style && itemdata.style['padding-top']){

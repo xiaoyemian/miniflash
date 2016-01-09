@@ -43,7 +43,7 @@ return {
   components : {
     block : block
 	}
-	, props : ['itemdata', 'formatdata', 'global']
+	, props : ['itemdata', 'global']
 	, data : function(){
 		return {
 			item : null
@@ -88,7 +88,7 @@ return {
 			return framedata
 		}
 		, formatBlockData : function(data){
-			var formatdata = this.formatdata
+			var formatdata = this.global.formatdata
 
 			if(!data['timing-function'])
 				Vue.set(data, 'timing-function', 'linear')
@@ -106,7 +106,7 @@ return {
 
 		}
 		, formatFrameData : function(framedata){
-			var formatdata = this.formatdata
+			var formatdata = this.global.formatdata
 
 			if(!framedata.duration)
 				Vue.set(framedata, 'duration', 1)

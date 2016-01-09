@@ -83,7 +83,7 @@
 				</div>
 
 				<div class="trackblocks">
-					<track v-ref:track v-for="itemdata in itemsdata" :index="$index" :itemdata="itemdata" :global="global" :formatdata="formatdata" :style="{height:global.frameheight + 'px', 'padding-right':global.min * 2 * global.framewidth + 'px'}"></track>
+					<track v-ref:track v-for="itemdata in itemsdata" :index="$index" :itemdata="itemdata" :global="global" :style="{height:global.frameheight + 'px', 'padding-right':global.min * 2 * global.framewidth + 'px'}"></track>
 				</div>
 			</div>
 		</div>
@@ -101,7 +101,7 @@ return {
 		track : track
 		, name : name
   }
-	, props:['itemsdata', 'formatdata', 'global']
+	, props:['itemsdata', 'global']
 	, data : function(){
 
 		return {

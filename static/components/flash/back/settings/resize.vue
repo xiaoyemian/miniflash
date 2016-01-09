@@ -3,12 +3,12 @@
 
 <template>
 <div class="settingFrame" v-if="global.item">
-	<div class="inputArea" v-for="(key, value) in formatdata.resize">
+	<div class="inputArea" v-for="(key, value) in global.formatdata.resize">
 		<label for="resize|{{key}}">{{value.label || key}}:</label>
 		<input type="{{value.type||'number'}}" @keyup="updateItem" id="resize|{{key}}" placeholder="" value="{{global.item.framedata.resize[key]}}"/>{{value.unit}}
 	</div>
 
-	<div class="inputArea" v-for="(key, transform) in formatdata.transform">
+	<div class="inputArea" v-for="(key, transform) in global.formatdata.transform">
 		<div class="inputLabel">{{transform.label || key}}:</div>
 		<div class="inputBox" v-for="value in transform.opts">
 			<label for="transform|{{key}}|{{value[0]}}">{{value[0]}}:</label>
@@ -21,7 +21,7 @@
 <script>
 
 return {
-	props : ['global', 'formatdata']
+	props : ['global']
 	, data : function(){
 		return {
 		}

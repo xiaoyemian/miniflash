@@ -119,18 +119,18 @@
 <div class="view" @click="blurItem">
 	<itemcontrol :itemsdata="itemsdata" :global="global"></itemcontrol>
 	<div class="page" :style="pagestyle">
-		<item v-ref:item v-for="itemdata in itemsdata" :itemdata="itemdata" :index="$index" :global="global" :printdata="printdata" :formatdata="formatdata"></item>
+		<item v-ref:item v-for="itemdata in itemsdata" :itemdata="itemdata" :index="$index" :global="global" :printdata="printdata"></item>
 	</div>
 </div>
 
 
 <div class="settings">
-	<flash v-ref:flash :itemsdata="itemsdata" :formatdata="formatdata" :global="global"></flash>
+	<flash v-ref:flash :itemsdata="itemsdata" :global="global"></flash>
 
 	<blockcontrol :global="global"></blockcontrol>
 	<blocksetting :global="global"></blocksetting>
 	<framesetting :global="global"></framesetting>
-	<resizesetting :formatdata="formatdata" :global="global"></resizesetting>
+	<resizesetting :global="global"></resizesetting>
 
 </div>
 
@@ -198,15 +198,15 @@ return {
 				, scale : 0
 			}
 			, pagestyle : {}
-			, formatdata : formatdata
 			, global : {
-				min : 8 
+				time : null
+				, min : 8 
 				, step : 100
 				, framewidth : 14
 				, frameheight : 26
 				, namewidth : 36
 				, scrollleft : null
-				, time : null
+				, formatdata : formatdata
 			}
 		}
 	}
