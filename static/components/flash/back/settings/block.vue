@@ -3,6 +3,16 @@
 
 <template>
 <div class="settingFlash" v-if="global.item && global.item.track && global.item.track.block">
+
+	<div class="controlBlock" v-if="global.item && global.item.track && global.item.track.block">
+		<span>转换为:</span>
+		<div @click.stop="changeBlock2Normal" class="normalBox" v-if="global.item.track.block.blockdata.name != 'normal'">逐帧动画</div>
+		<div @click.stop="changeBlock2Transition" class="transitionBox" v-if="global.item.track.block.blockdata.name != 'transition'">过渡动画</div>
+		<div @click.stop="changeBlock2Animation" class="animationBox" v-if="global.item.track.block.blockdata.name != 'animation'">预设动画</div>
+	</div>
+
+
+
 	<div class="inputArea" v-for="(key, value) in formatdata">
 		<label for="{{key}}">{{value.label}}:</label>
 
@@ -46,6 +56,46 @@ return {
 			}
 
 			this.$set('global.item.track.block.blockdata' + arr.join(''), value||0)
+		}
+		, changeBlock2Normal : function(){
+			var track = this.global.item.track
+			var blocksdata = track.itemdata.blocks
+			var block = track.block
+			var index = block.index
+			var framesdata = block.blockdata.frames
+			var len = framesdata.length
+
+			blocksdata.splice(index, 1)
+
+			for(var i = len-1; i>=0; i--){
+				var framedata = framesdata[i]
+
+				var blockdatanew = JSON.parse(JSON.stringify({
+					frames:[{
+						resize : framedata.resize
+						, transform : framedata.transform
+						, duration : framedata.duration
+					}]
+				}))
+				track.formatBlockData(blockdatanew)
+
+				blocksdata.splice(index, 0, blockdatanew)
+			}
+
+			this.$nextTick(function(){
+				var block = track.$refs.block[index]
+				block.focusBlock()
+			})
+
+		}
+		, changeBlock2Transition : function(){
+			var track = this.global.item.track
+			var block = track.block
+
+			Vue.set(block.blockdata, 'name', 'transition')
+		}
+		, changeBlock2Animation : function(){
+			
 		}
 	}
 }

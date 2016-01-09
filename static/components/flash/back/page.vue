@@ -37,11 +37,12 @@
 
 .controlItem, .controlBlock{
 	.hidden;
-	padding:6px 2px;
+	padding:4px;
+	.l(20px);
 
-	span{.fc(#ccc);.left;padding:2px 4px;}
+	span{.fc(#ccc);}
 	div{
-		.left;
+		.inline;
 		padding:2px 4px;
 		.ml(2px);.mr(2px);
 		.border-r(2px);
@@ -56,9 +57,6 @@
 	.transitionBox{ .bgc(#33B666); }
 	.normalBox{ .bgc(#999); }
 }
-.controlBlock{
-	border-bottom:1px solid #222;
-}
 
 .settingFrame, .settingOriginal, .settingFlash{
 	.hidden;
@@ -71,7 +69,7 @@
 	.inputArea{
 		padding:4px;
 		//border-bottom:1px solid #2E2E2E;
-		.left;
+		//.left;
 
 		&:nth-last-child(1){
 			border:0 none;
@@ -131,8 +129,6 @@
 <div class="settings">
 	<flash v-ref:flash :itemsdata="itemsdata" :global="global"></flash>
 
-	<blockcontrol :global="global"></blockcontrol>
-	<blocksetting :global="global"></blocksetting>
 	<framesetting :global="global"></framesetting>
 	<resizesetting :global="global"></resizesetting>
 
@@ -179,9 +175,6 @@ var resizesetting = require('flash/back/settings/resize.vue')
 var blocksetting = require('flash/back/settings/block.vue')
 var framesetting = require('flash/back/settings/frame.vue')
 
-var itemcontrol = require('flash/back/controls/item.vue')
-var blockcontrol = require('flash/back/controls/block.vue')
-
 return {
   components : {
     item : item
@@ -189,8 +182,6 @@ return {
 		, resizesetting : resizesetting 
 		, blocksetting : blocksetting
 		, framesetting : framesetting
-		, blockcontrol : blockcontrol
-		, itemcontrol : itemcontrol
   }
 	, props:['itemsdata']
 	, data : function(){
