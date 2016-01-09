@@ -52,9 +52,9 @@ return {
 				this.global.item.track.$broadcast('setStartTime')	
 				this.global.item.track.block.$broadcast('setStartTime')	
 
-				var frame = this.global.item.track.block.$refs.frame[index+1]
+				var frames = this.global.item.track.block.$refs.frame
+				var frame = frames[index+1]
 				frame.focusFrame()
-				this.$dispatch('loadTime')
 			})
 		}
 		, removeFrame : function(){
@@ -67,11 +67,10 @@ return {
 			this.$nextTick(function(){
 				this.global.item.track.$broadcast('setStartTime')	
 				this.global.item.track.block.$broadcast('setStartTime')	
+
 				var frames = this.global.item.track.block.$refs.frame
 				var frame = index == frames.length ? frames[index-1] : frames[index]
-
 				frame.focusFrame()
-				this.$dispatch('loadTime')
 			})
 		}
 
