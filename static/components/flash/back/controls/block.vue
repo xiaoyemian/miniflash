@@ -31,6 +31,7 @@ return {
 			blocksdata.splice(index, 1)
 
 			this.$nextTick(function(){
+				this.focus.item.track.$broadcast('setStartTime')	
 				this.$dispatch('loadTime')
 			})
 		}
