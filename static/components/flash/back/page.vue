@@ -8,7 +8,7 @@
 	}
 }
 
-@settingsWidth:220px;
+@settingsWidth:210px;
 
 .view, .settings{
 	top:0px;
@@ -42,7 +42,7 @@
 	div{
 		.left;
 		padding:2px 4px;
-		margin:2px;
+		margin:3px;
 		.border-r(2px);
 		.fc(white);
 		.cursor;
