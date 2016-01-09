@@ -68,22 +68,22 @@
 
 <template>
 
-<div class="flash" @click="blurItem" :style="{height:(timedata.frameheight+1) * (timedata.min+1) + 1 + 'px', 'line-height':timedata.frameheight + 'px'}">
+<div class="flash" @click="blurItem" :style="{height:(global.frameheight+1) * (global.min+1) + 1 + 'px', 'line-height':global.frameheight + 'px'}">
 	<div class="flashbox" v-el:flashbox>
 		<div class="trackbox">
-			<div class="times" :style="{'margin-left':timedata.namewidth + 'px', height:timedata.frameheight + 'px'}">
-				<div class="timecontrol" v-el:timecontrol :style="{left:timedata.namewidth + timedata.framewidth * timedata.time + timedata.framewidth/2 + 'px'}">
-					<span :style="{height:timedata.frameheight + 'px', width:timedata.framewidth + 'px', left: -(timedata.framewidth)/2 + 'px'}"></span>
+			<div class="times" :style="{'margin-left':global.namewidth + 'px', height:global.frameheight + 'px'}">
+				<div class="timecontrol" v-el:timecontrol :style="{left:global.namewidth + global.framewidth * global.time + global.framewidth/2 + 'px'}">
+					<span :style="{height:global.frameheight + 'px', width:global.framewidth + 'px', left: -(global.framewidth)/2 + 'px'}"></span>
 				</div>
 			</div>
 
-			<div class="tracks" :style="{'padding-bottom':timedata.frameheight + 'px'}">
-				<div class="tracknames" :style="{width:timedata.namewidth + 'px'}">
-					<name v-ref:name v-for="itemdata in itemsdata" :index="$index" :item_id="itemdata.item_id" :global="global" :style="{height:timedata.frameheight + 'px'}"></name>
+			<div class="tracks" :style="{'padding-bottom':global.frameheight + 'px'}">
+				<div class="tracknames" :style="{width:global.namewidth + 'px'}">
+					<name v-ref:name v-for="itemdata in itemsdata" :index="$index" :item_id="itemdata.item_id" :global="global" :style="{height:global.frameheight + 'px'}"></name>
 				</div>
 
 				<div class="trackblocks">
-					<track v-ref:track v-for="itemdata in itemsdata" :index="$index" :itemdata="itemdata" :global="global" :timedata="timedata" :formatdata="formatdata" :style="{height:timedata.frameheight + 'px', 'padding-right':timedata.min * 2 * timedata.framewidth + 'px'}"></track>
+					<track v-ref:track v-for="itemdata in itemsdata" :index="$index" :itemdata="itemdata" :global="global" :formatdata="formatdata" :style="{height:global.frameheight + 'px', 'padding-right':global.min * 2 * global.framewidth + 'px'}"></track>
 				</div>
 			</div>
 		</div>
@@ -101,7 +101,7 @@ return {
 		track : track
 		, name : name
   }
-	, props:['itemsdata', 'formatdata', 'global', 'timedata']
+	, props:['itemsdata', 'formatdata', 'global']
 	, data : function(){
 
 		return {
@@ -120,10 +120,10 @@ return {
 
 		var mSelf = this
 
-		this.timedata.scrollleft = 0
+		this.global.scrollleft = 0
 		var $flashbox = $(this.$els.flashbox)
 		$flashbox.on('scroll', function(){
-			mSelf.timedata.scrollleft = $(this).scrollLeft()
+			mSelf.global.scrollleft = $(this).scrollLeft()
 		})
 
 
@@ -134,8 +134,8 @@ return {
 			start : function(event, ui){
 			}
 			, drag : function(event, ui){
-				var time = ((ui.position.left-mSelf.timedata.namewidth)/mSelf.timedata.framewidth)|0
-				if(mSelf.timedata.time != time)
+				var time = ((ui.position.left-mSelf.global.namewidth)/mSelf.global.framewidth)|0
+				if(mSelf.global.time != time)
 					mSelf.$dispatch('setTime', time)
 			}
 			, stop : function(event, ui){
@@ -143,7 +143,7 @@ return {
 			, cursor: "move"
 			, containment : "parent"
 			, scroll : true
-			, grid: [ mSelf.timedata.framewidth, 0 ]
+			, grid: [ mSelf.global.framewidth, 0 ]
 		})
 	}
 }

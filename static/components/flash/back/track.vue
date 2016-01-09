@@ -30,9 +30,9 @@
 
 <template>
 <div class="track" @click.stop="selectTrack" :class="{focus : global.item && global.item.itemdata.item_id == itemdata.item_id}">
-	<div class="focusframe" v-if="global.item && global.item.itemdata.item_id == itemdata.item_id" :style="{width:timedata.framewidth + 'px', left:timedata.time * timedata.framewidth + 'px'}"></div>
+	<div class="focusframe" v-if="global.item && global.item.itemdata.item_id == itemdata.item_id" :style="{width:global.framewidth + 'px', left:global.time * global.framewidth + 'px'}"></div>
 
-	<block v-ref:block v-for="blockdata in itemdata.blocks" :index="$index" :blockdata="blockdata" :timedata="timedata"></block>
+	<block v-ref:block v-for="blockdata in itemdata.blocks" :index="$index" :blockdata="blockdata" :global="global"></block>
 </div>
 
 </template>
@@ -43,7 +43,7 @@ return {
   components : {
     block : block
 	}
-	, props : ['timedata', 'itemdata', 'formatdata', 'global']
+	, props : ['itemdata', 'formatdata', 'global']
 	, data : function(){
 		return {
 			item : null
@@ -52,7 +52,7 @@ return {
 	}
 	, methods : {
 		selectTrack : function(event){
-			var time = Math.floor(event.offsetX / this.timedata.framewidth)
+			var time = Math.floor(event.offsetX / this.global.framewidth)
 			this.$set('block', null)
 			this.item.focusItem()
 
@@ -138,7 +138,7 @@ return {
 	, events : {
 		setBlock : function(block){
 			this.$set('block', block)
-			this.$set('timedata.time', this.block.startTime + this.block.time)
+			this.$set('global.time', this.block.startTime + this.block.time)
 			this.item.focusItem()
 		}
 		, formatBlockData : function(data){

@@ -12,14 +12,14 @@
 </style>
 
 <template>
-<div class="frame" @click.stop="selectFrame" :style="{width:framedata.duration * timedata.framewidth + 'px'}"></div>
+<div class="frame" @click.stop="selectFrame" :style="{width:framedata.duration * global.framewidth + 'px'}"></div>
 </template>
 
 
 <script>
 
 return {
-	props : ['framedata', 'timedata', 'index']
+	props : ['framedata', 'global', 'index']
 	, data : function(){
 		return {
 			startTime : 0
@@ -28,13 +28,13 @@ return {
 	}
 	, methods : {
 		selectFrame : function(event){
-			this.time = Math.floor(event.offsetX / this.timedata.framewidth)
+			this.time = Math.floor(event.offsetX / this.global.framewidth)
 			this.$dispatch('setFrame', this)
 		}
 	}
 	, events : {
 		setStartTime : function(){
-			this.startTime = Math.floor($(this.$el).position().left / this.timedata.framewidth) 
+			this.startTime = Math.floor($(this.$el).position().left / this.global.framewidth) 
 		}
 	}
 	, watch : {

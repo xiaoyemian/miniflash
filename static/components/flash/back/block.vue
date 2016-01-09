@@ -24,8 +24,8 @@
 </style>
 
 <template>
-<div class="block" :class="[blockdata['iteration-count'] == 'infinite' ? 'infinite' : '', blockdata.name, timedata.time == startTime + time ? 'focus' : '']">
-	<frameitem v-ref:frame v-for="framedata in blockdata.frames" :index="$index" :framedata="framedata" :timedata="timedata"></frameitem>
+<div class="block" :class="[blockdata['iteration-count'] == 'infinite' ? 'infinite' : '', blockdata.name, global.time == startTime + time ? 'focus' : '']">
+	<frameitem v-ref:frame v-for="framedata in blockdata.frames" :index="$index" :framedata="framedata" :global="global"></frameitem>
 </div>
 </template>
 
@@ -38,7 +38,7 @@ return {
   components : {
     frameitem : frame
 	}
-	, props : ['blockdata', 'timedata', 'index']
+	, props : ['blockdata', 'global', 'index']
 	, data : function(){
 		return {
 			startTime : 0
@@ -55,7 +55,7 @@ return {
 			this.$dispatch('setBlock', this)
 		}
 		, setStartTime : function(){
-			this.startTime = Math.floor(($(this.$el).position().left + this.timedata.scrollleft) / this.timedata.framewidth) 
+			this.startTime = Math.floor(($(this.$el).position().left + this.global.scrollleft) / this.global.framewidth) 
 		}
 	}
 	, events : {

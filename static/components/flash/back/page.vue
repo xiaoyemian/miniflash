@@ -125,11 +125,11 @@
 
 
 <div class="settings">
-	<flash v-ref:flash :itemsdata="itemsdata" :formatdata="formatdata" :global="global" :timedata="timedata"></flash>
+	<flash v-ref:flash :itemsdata="itemsdata" :formatdata="formatdata" :global="global"></flash>
 
 	<blockcontrol :global="global"></blockcontrol>
 	<blocksetting :global="global"></blocksetting>
-	<framesetting :global="global" :timedata="timedata"></framesetting>
+	<framesetting :global="global"></framesetting>
 	<resizesetting :formatdata="formatdata" :global="global"></resizesetting>
 
 </div>
@@ -199,8 +199,7 @@ return {
 			}
 			, pagestyle : {}
 			, formatdata : formatdata
-			, global : {}
-			, timedata : {
+			, global : {
 				min : 8 
 				, step : 100
 				, framewidth : 14
@@ -238,7 +237,7 @@ return {
 			this.$broadcast('loadItemByTime', time)
 		}
 		, setTime : function(time){
-			this.timedata.time = time
+			this.global.time = time
 		}
 		, changeImage : function(event, cbk){
 			var mSelf = this
@@ -275,7 +274,7 @@ return {
 		}
 	}
 	, watch : {
-		'timedata.time' : function(time){
+		'global.time' : function(time){
 			this.$broadcast('loadItemByTime', time)
 		}
 	}

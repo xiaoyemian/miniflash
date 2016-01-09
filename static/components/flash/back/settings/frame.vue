@@ -16,13 +16,13 @@
 <script>
 
 return {
-	props : ['global', 'timedata']
+	props : ['global']
 	, data : function(){
 		return {
 			formatdata : {
 				duration : {
 					label : '时长'
-					, unit : '*' + this.timedata.step + '毫秒'
+					, unit : '*' + this.global.step + '毫秒'
 				}
 			}
 		}
