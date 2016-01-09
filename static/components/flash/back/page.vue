@@ -18,14 +18,14 @@
 }
 
 
-@settingsWidth:36%;
+@settingsWidth:33%;
 
 .view, .settings{
 	top:@controlsHeight;
 }
 
 .view{
-	.pa;left:0px;right:@settingsWidth;bottom:0px;
+	.pa;right:0px;left:@settingsWidth;bottom:0px;
 	box-sizing:border-box;
 
 	.page{
@@ -35,7 +35,7 @@
 
 .settings{
 	overflow:auto;
-	.pa;right:0px;.w(@settingsWidth);
+	.pa;left:0px;.w(@settingsWidth);
 	bottom:0px;
 	z-index:10;
 	box-sizing:border-box;
