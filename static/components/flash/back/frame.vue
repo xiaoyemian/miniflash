@@ -31,6 +31,10 @@ return {
 			this.time = Math.floor(event.offsetX / this.global.framewidth)
 			this.$dispatch('setFrame', this)
 		}
+		, focusFrame : function(){
+			this.time = 0
+			this.$dispatch('setFrame', this)
+		}
 	}
 	, events : {
 		setStartTime : function(){

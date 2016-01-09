@@ -38,9 +38,37 @@ return {
 		, addFrame : function(){
 			var framesdata = this.global.item.track.block.blockdata.frames
 			var frame = this.global.item.track.block.frame
+
+			var framedatanew = JSON.parse(JSON.stringify({
+				resize : frame.framedata.resize
+				, transform : frame.framedata.transform
+			}))
+			this.global.item.track.formatFrameData(framedatanew)
+
+			var index = frame.index
+			framesdata.splice(index+1, 0, framedatanew)
+
+			this.$nextTick(function(){
+				this.global.item.track.$broadcast('setStartTime')	
+				this.global.item.track.block.$broadcast('setStartTime')	
+				var frame = this.global.item.track.block.$refs.frame[index+1]
+				frame.focusFrame()
+			})
+		}
+		, removeFrame : function(){
+			var framesdata = this.global.item.track.block.blockdata.frames
+			var frame = this.global.item.track.block.frame
 			var index = frame.index
 
+			framesdata.splice(index, 1)
+
+			this.$nextTick(function(){
+				this.global.item.track.$broadcast('setStartTime')	
+				this.global.item.track.block.$broadcast('setStartTime')	
+				this.$dispatch('loadTime')
+			})
 		}
+
 	}
 }
 </script>
