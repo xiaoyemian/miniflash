@@ -127,8 +127,8 @@
 <div class="settings">
 	<flash v-ref:flash :itemsdata="itemsdata" :formatdata="formatdata" :focus="focus" :timedata="timedata"></flash>
 
-	<blockcontrol :focus="focus" :timedata="timedata"></blockcontrol>
-	<blocksetting :focus="focus" :timedata="timedata"></blocksetting>
+	<blockcontrol :focus="focus"></blockcontrol>
+	<blocksetting :focus="focus"></blocksetting>
 	<framesetting :focus="focus" :timedata="timedata"></framesetting>
 	<resizesetting :formatdata="formatdata" :focus="focus"></resizesetting>
 
@@ -215,6 +215,9 @@ return {
 		blurItem : function(){
 			this.$set('focus.item', null)
 			this.$set('focus.track', null)
+			this.blurBlock()
+		}
+		, blurBlock : function(){
 			this.$set('focus.block', null)
 		}
 		, resizePrint : function(printdata){
@@ -235,6 +238,9 @@ return {
 	, events : {
 		blurItem : function(){
 			this.blurItem()
+		}
+		, blurBlock : function(){
+			this.blurBlock()
 		}
 		, focusItemById : function(item_id){
       this.$broadcast('focusItemById', item_id)

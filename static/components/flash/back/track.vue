@@ -52,7 +52,8 @@ return {
 			var time = Math.floor(event.offsetX / this.timedata.framewidth)
 
 			this.$set('focus.track', this)
-			this.$set('focus.block', null)
+
+			this.$dispatch('blurBlock')
 
 			this.$dispatch('focusItemById', this.itemdata.item_id)
 			this.$dispatch('setTime', time)	

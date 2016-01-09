@@ -19,7 +19,7 @@
 <script>
 
 return {
-	props : ['focus', 'timedata']
+	props : ['focus']
 	, data : function(){
 		return {
 			formatdata : {
