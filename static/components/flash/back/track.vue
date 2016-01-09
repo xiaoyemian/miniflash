@@ -159,7 +159,7 @@ return {
 				for(var j in frames){
 					frame = frames[j]
 
-					if(time >= block.startTime && time <= block.startTime + frame.startTime){
+					if(time >= block.startTime && time <= block.startTime + frame.startTime + frame.time){
 						block.time = time - block.startTime
 
 						if(block.blockdata.name == 'transition'){
@@ -179,8 +179,8 @@ return {
 				if(framedata){
 					break;
 				}
-				
 			}
+
 			if(!framedata){
 				framedata = frame.framedata
 				this.$set('block', null)
