@@ -58,12 +58,14 @@ return {
 		}
 	}
 	, events : {
-		setStartTime : function(){
-			this.setStartTime()
-		}
-		, setFrame : function(frame){
+		setFrame : function(frame){
 			this.$set('frame', frame)
-			this.focusBlock()
+			this.setStartTime()
+			this.time = this.frame.time + this.frame.startTime 
+			this.$dispatch('setBlock', this)
+		}
+		, setStartTime : function(){
+			this.setStartTime()
 		}
 	}
 	, created : function(){

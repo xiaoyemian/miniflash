@@ -52,16 +52,10 @@ return {
 	, methods : {
 		selectTrack : function(event){
 			var time = Math.floor(event.offsetX / this.timedata.framewidth)
-			this.blurBlock()
+			this.$set('block', null)
 			this.item.focusItem()
 
 			this.$dispatch('setTime', time)	
-		}
-		, setBlock : function(block){
-			this.$set('block', block)
-		}
-		, blurBlock : function(){
-			this.$set('block', null)
 		}
 		, getAnimateFrameData : function(block){
 			var framedata = block.frame.framedata
@@ -142,7 +136,8 @@ return {
 	}
 	, events : {
 		setBlock : function(block){
-			this.setBlock(block)
+			this.$set('block', block)
+			this.$set('timedata.time', this.block.startTime + this.block.time)
 			this.item.focusItem()
 		}
 		, formatBlockData : function(data){
@@ -174,7 +169,8 @@ return {
 							framedata = frame.framedata
 						}
 
-						this.setBlock(block)
+						this.$set('block', block)
+						this.$set('block.frame', frame)
 
 						break;
 					}
@@ -187,7 +183,7 @@ return {
 			}
 			if(!framedata){
 				framedata = frame.framedata
-				this.blurBlock()
+				this.$set('block', null)
 			}
 
 			this.item.loadItemByFrame(framedata)

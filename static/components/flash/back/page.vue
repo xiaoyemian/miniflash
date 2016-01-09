@@ -229,10 +229,6 @@ return {
 			this.$set('pagestyle["margin-left"]', printdata.width * printdata.scale/-2 + 'px')
 			this.$set('pagestyle["margin-top"]', printdata.height * printdata.scale/-2 + 'px')
     }
-		, loadTime : function(){
-			console.log(111, this.focus)
-			this.$broadcast('loadItemByTime', this.timedata.time)
-		}
 	}
 	, events : {
 		bindTrackItem : function(track){
@@ -240,10 +236,6 @@ return {
 		}
 		, setTime : function(time){
 			this.timedata.time = time
-			this.loadTime()
-		}
-		, loadTime : function(){
-			this.loadTime()
 		}
 		, changeImage : function(event, cbk){
 			var mSelf = this
@@ -277,6 +269,11 @@ return {
 				cbk && cbk(itemdata)
 			}
 			img.src = imgURL
+		}
+	}
+	, watch : {
+		'timedata.time' : function(time){
+			this.$broadcast('loadItemByTime', time)
 		}
 	}
 	, created : function(){
