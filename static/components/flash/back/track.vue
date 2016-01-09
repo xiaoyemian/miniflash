@@ -148,7 +148,6 @@ return {
 			this.formatFrameData(data)
 		}
 		, loadItemByTime : function(time){
-			console.log(time)
 			var blocks = this.$refs.block
 			var block
 			var frame
@@ -162,11 +161,9 @@ return {
 
 				for(var j in frames){
 					frame = frames[j]
-
 					var start = frame.startTime + block.startTime
 
 					if(time >= start && time < start + frame.framedata.duration){
-
 						flag = 1
 						break;
 					}
