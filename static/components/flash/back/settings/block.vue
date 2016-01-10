@@ -1,11 +1,4 @@
 <style>
-.controlBlock{
-	.animationBox{ .bgc(#0099FF); }
-	.transitionBox{ .bgc(#33B666); }
-	.normalBox{ .bgc(#999); }
-
-	.focus{.none;}
-}
 </style>
 
 <template>

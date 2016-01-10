@@ -10,6 +10,10 @@
 	<div @click.stop="" class="uploadBtn itemBox" v-else>添加图片<input type="file" @change.stop="addImage"/></div>
 	<div @click.stop="addBlock" class="itemBox" v-if="global.item">添加动作</div>
 	<div @click.stop="removeBlock" class="itemBox" v-if="global.item && global.item.itemdata.blocks.length > 1">删除动作</div>
+
+	<div @click.stop="addFrame" class="transitionBox" v-if="global.item && global.item.track.block.blockdata.name == 'transition'">添加帧</div>
+	<div @click.stop="removeFrame" class="transitionBox" v-if="global.item && global.item.track.block.blockdata.name == 'transition' && global.item.track.block.blockdata.frames.length > 1">删除帧</div>
+
 </div>
 
 </template>
@@ -91,6 +95,47 @@ return {
 				this.$dispatch('loadTime')
 			})
 		}
+		, addFrame : function(){
+			var track = this.global.item.track
+			var framesdata = track.block.blockdata.frames
+			var frame = track.block.frame
+
+			var framedatanew = JSON.parse(JSON.stringify({
+				resize : frame.framedata.resize
+				, transform : frame.framedata.transform
+			}))
+			track.formatFrameData(framedatanew)
+
+			var index = frame.index
+			framesdata.splice(index+1, 0, framedatanew)
+
+			this.$nextTick(function(){
+				track.$broadcast('setStartTime')	
+				track.block.$broadcast('setStartTime')	
+
+				var frames = track.block.$refs.frame
+				var frame = frames[index+1]
+				frame.focusFrame()
+			})
+		}
+		, removeFrame : function(){
+			var track = this.global.item.track
+			var framesdata = track.block.blockdata.frames
+			var frame = track.block.frame
+			var index = frame.index
+
+			framesdata.splice(index, 1)
+
+			this.$nextTick(function(){
+				track.$broadcast('setStartTime')	
+				track.block.$broadcast('setStartTime')	
+
+				var frames = track.block.$refs.frame
+				var frame = index == frames.length ? frames[index-1] : frames[index]
+				frame.focusFrame()
+			})
+		}
+
 
 	}
 }

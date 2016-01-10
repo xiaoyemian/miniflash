@@ -49,7 +49,11 @@
 		.fc(white);
 		.cursor;
 	}
+	.animationBox{ .bgc(#0099FF); }
+	.transitionBox{ .bgc(#33B666); }
+	.normalBox{ .bgc(#999); }
 
+	.focus{.none;}
 }
 
 .settingFrame, .settingOriginal, .settingFlash{
@@ -123,8 +127,8 @@
 <div class="settings">
 	<flash v-ref:flash :itemsdata="itemsdata" :global="global"></flash>
 
-	<framesetting :global="global"></framesetting>
 	<blocksetting :global="global"></blocksetting>
+	<framesetting :global="global"></framesetting>
 	<resizesetting :global="global"></resizesetting>
 
 </div>
