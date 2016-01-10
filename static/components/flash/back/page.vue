@@ -123,8 +123,8 @@
 <div class="settings">
 	<flash v-ref:flash :itemsdata="itemsdata" :global="global"></flash>
 
-	<blocksetting :global="global"></blocksetting>
 	<framesetting :global="global"></framesetting>
+	<blocksetting :global="global"></blocksetting>
 	<resizesetting :global="global"></resizesetting>
 
 </div>
