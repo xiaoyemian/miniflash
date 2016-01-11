@@ -14,7 +14,7 @@
 	}
 
 	&.infinite{
-		&:after{ content:'循环';.pa;.w(100%);.c;.fc(#222);left:0px;}
+		.bgc(#9900FF);
 	}
 }
 </style>
@@ -52,7 +52,6 @@ return {
 		}
 		, setStartTime : function(){
 			this.startTime = Math.floor(($(this.$el).position().left) / this.global.framewidth) 
-			console.log(this.startTime)
 		}
 		, setFrame : function(frame){
 			this.$set('frame', frame)
