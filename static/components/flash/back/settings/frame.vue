@@ -2,7 +2,7 @@
 </style>
 
 <template>
-<div class="settingFlash" v-if="global.item && global.item.track && global.item.track.block && global.item.track.block.frame">
+<div class="settingFlash" v-if="global.item && global.item.track && global.item.track.inTrack && global.item.track.block && global.item.track.block.frame">
 
 	<div class="inputArea" v-for="(key, value) in formatdata">
 		<label for="{{key}}">{{value.label}}:</label>

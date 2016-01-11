@@ -49,6 +49,7 @@ return {
 		return {
 			item : null
 			, block : null
+			, inTrack : null
 		}
 	}
 	, methods : {
@@ -59,27 +60,38 @@ return {
 
 			this.$dispatch('setTime', time)	
 		}
-		, getTransitionFrameData : function(block, flag){
+		, getTransitionFrameData : function(){
+			var block = this.block
+			var blocks = this.$refs.block
+			var blockindex = block.index
+			var blockslen = blocks.length
+
+			var frame = block.frame
 			var frames = block.$refs.frame
-				, frameslen = frames.length
+			var frameindex = frame.index
+			var frameslen = frames.length
+			var nextframe = frame
 	
-			if(flag){
-				frame = block.frame 
+			if(this.inTrack){
+				if(frameindex == frameslen-1){
+					if(blockindex == blockslen-1){
+						nextframe = frames[frameslen-1] 
 
-			}else{
-				frame = frames[frameslen-1]
+					}else{
+						nextframe = blocks[blockindex+1].$refs.frame[0]
+					}
 
+				}else{
+					nextframe = frames[frameindex+1]
+				}
 			}
+
+			console.log(nextframe)
+
+			var framedata = frame.framedata
+
 			
-			return frame.framedata
-
-
-
-/*
-			if(frame.time == 0){
-				return frame.framedata
-			}
-
+	/*		
 			var enddata = this.itemdata.blocks[frame.index+1]
 			if(!enddata){
 				return frame.framedata
@@ -98,8 +110,8 @@ return {
 				}
 			}
 
-			return framedata
 */
+			return framedata
 		}
 		, formatBlockData : function(data){
 			var formatdata = this.global.formatdata
@@ -170,7 +182,8 @@ return {
 			var block
 			var frame
 			var framedata
-			var flag
+
+			this.inTrack = false
 
 			for(var i in blocks){
 				block = blocks[i]
@@ -182,31 +195,26 @@ return {
 					var start = frame.startTime + block.startTime
 
 					if(time >= start && time < start + frame.framedata.duration){
-						flag = 1
+						this.inTrack = true
 						break;
 					}
 				}
 
-				if(flag)
+				if(this.inTrack)
 					break;
 			}
 
-			if(flag){
-				block.setFrame(frame)
-				this.setBlock(block)
-
-			}else{
-				this.$set('block', null)
-			}
+			block.setFrame(frame)
+			this.setBlock(block)
 
 			if(block.blockdata.name == 'transition'){
-				framedata = this.getTransitionFrameData(block, flag)
+				framedata = this.getTransitionFrameData()
 
 			}else{
 				framedata = frame.framedata
 			}
 
-			if(!flag){
+			if(!this.inTrack){
 				framedata = JSON.parse(JSON.stringify(framedata))
 			}
 

@@ -2,7 +2,7 @@
 </style>
 
 <template>
-<div class="settingFlash" v-if="global.item && global.item.track && global.item.track.block">
+<div class="settingFlash" v-if="global.item && global.item.track && global.item.track.inTrack && global.item.track.block">
 
 	<div class="controlBlock">
 		<span>转换为:</span>

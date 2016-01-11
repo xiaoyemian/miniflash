@@ -9,10 +9,10 @@
 	<div @click.stop="" class="uploadBtn itemBox" v-if="global.item">替换图片<input type="file" @change.stop="changeImage"/></div>
 	<div @click.stop="" class="uploadBtn itemBox" v-else>添加图片<input type="file" @change.stop="addImage"/></div>
 	<div @click.stop="addBlock" class="itemBox" v-if="global.item">添加动作</div>
-	<div @click.stop="removeBlock" class="itemBox" v-if="global.item && global.item.track && global.item.track.block && global.item.itemdata.blocks.length > 1">删除动作</div>
+	<div @click.stop="removeBlock" class="itemBox" v-if="global.item && global.item.track && global.item.track.inTrack && global.item.itemdata.blocks.length > 1">删除动作</div>
 
-	<div @click.stop="addFrame" class="transitionBox" v-if="global.item && global.item.track && global.item.track.block && global.item.track.block.blockdata.name == 'transition'">添加帧</div>
-	<div @click.stop="removeFrame" class="transitionBox" v-if="global.item && global.item.track && global.item.track.block && global.item.track.block.blockdata.name == 'transition' && global.item.track.block.blockdata.frames.length > 1">删除帧</div>
+	<div @click.stop="addFrame" class="transitionBox" v-if="global.item && global.item.track && global.item.track.inTrack && global.item.track.block && global.item.track.block.blockdata.name == 'transition'">添加帧</div>
+	<div @click.stop="removeFrame" class="transitionBox" v-if="global.item && global.item.track && global.item.track.inTrack && global.item.track.block && global.item.track.block.blockdata.frames.length > 1">删除帧</div>
 
 </div>
 
