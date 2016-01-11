@@ -205,7 +205,13 @@ return {
 				framedata = this.getAnimateFrameData(block, flag)
 
 			}else{
-				framedata = frame.framedata
+				if(flag){
+					framedata = frame.framedata
+
+				}else{
+					framedata = JSON.parse(JSON.stringify(frame.framedata))
+
+				}
 			}
 
 			this.item.loadItemByFrame(framedata)
