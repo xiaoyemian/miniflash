@@ -106,7 +106,7 @@ return {
 				}
 			}
 
-			return frame.framedata
+			return framedata
 		}
 		, formatBlockData : function(data){
 			var formatdata = this.global.formatdata
