@@ -2,9 +2,9 @@
 .block{
 	display:-webkit-box;
 	.pr; .bgc(#333);.h(100%);
-	&:before, &:after{ content:'';.pa;.h(100%);.w(2px);.bgc(#222);}
-	&:before{left:-1px;}
-	&:after{right:-1px;}
+	&:before, &:after{ content:'';.pa;.h(100%);.w(2px);}
+	&:before{left:-1px;border-left:2px solid #222;}
+	&:after{right:-1px;border-right:2px solid #222;}
 
 	&.normal{
 		.bgc(#999);
@@ -14,11 +14,7 @@
 	}
 
 	&.infinite{
-		&:after{ content:'无限循环';.pa;.w(100%);.c;.fc(#222);left:0px;}
-
-		&+.next{
-			.opacity(10);
-		}
+		&:after{ content:'循环';.pa;.w(100%);.c;.fc(#222);left:0px;}
 	}
 }
 </style>
