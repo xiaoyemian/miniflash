@@ -66,10 +66,13 @@ return {
 			var framelen = block.blockdata.frames.length
 			var endframe = block.blockdata.frames[framelen-1] 
 
+			var duration = this.global.time - (block.startTime , endframe.startTime , endframe.duration)
+
 			var blockdatanew = JSON.parse(JSON.stringify({
 				frames:[{
 					resize : endframe.resize
 					, transform : endframe.transform
+					, duration : duration
 				}]
 			}))
 			track.formatBlockData(blockdatanew)
