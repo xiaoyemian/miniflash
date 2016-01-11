@@ -59,22 +59,20 @@ return {
 
 			this.$dispatch('setTime', time)	
 		}
-		, getAnimateFrameData : function(block, flag){
+		, getTransitionFrameData : function(block, flag){
 			var frames = block.$refs.frame
 				, frameslen = frames.length
 	
 			if(flag){
 				frame = block.frame 
 
-				return frame.framedata
-
 			}else{
 				frame = frames[frameslen-1]
 
-				return JSON.parse(JSON.stringify(frame.framedata))
-
 			}
 			
+			return frame.framedata
+
 
 
 /*
@@ -202,16 +200,14 @@ return {
 			}
 
 			if(block.blockdata.name == 'transition'){
-				framedata = this.getAnimateFrameData(block, flag)
+				framedata = this.getTransitionFrameData(block, flag)
 
 			}else{
-				if(flag){
-					framedata = frame.framedata
+				framedata = frame.framedata
+			}
 
-				}else{
-					framedata = JSON.parse(JSON.stringify(frame.framedata))
-
-				}
+			if(!flag){
+				framedata = JSON.parse(JSON.stringify(framedata))
 			}
 
 			this.item.loadItemByFrame(framedata)
