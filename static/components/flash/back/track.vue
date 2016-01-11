@@ -225,12 +225,12 @@ return {
 			}
 			, stop : function(event, ui){
 				sortStop = ui.item.index()-1
-				var framesdata = mSelf.itemdata.frames
-				framesdata.splice(sortStop, 0, framesdata.splice(sortStart,1)[0])
+				var blocksdata = mSelf.itemdata.blocks
+				blocksdata.splice(sortStop, 0, blocksdata.splice(sortStart,1)[0])
 
-				mSelf.itemdata.frames = []	
+				mSelf.itemdata.blocks = []	
 				mSelf.$nextTick(function(){
-					this.itemdata.frames = framesdata
+					this.itemdata.blocks = blocksdata
 					this.$nextTick(function(){
 						this.$dispatch('loadTime')
 					})
