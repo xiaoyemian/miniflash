@@ -120,14 +120,6 @@ return {
 
 		var mSelf = this
 
-		this.global.scrollleft = 0
-		var $flashbox = $(this.$els.flashbox)
-		$flashbox.on('scroll', function(){
-			mSelf.global.scrollleft = $(this).scrollLeft()
-		})
-
-
-
 		var $timecontrol = $(this.$els.timecontrol)
 
 		$timecontrol.draggable({

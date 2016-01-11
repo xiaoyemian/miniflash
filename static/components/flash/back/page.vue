@@ -201,7 +201,6 @@ return {
 				, framewidth : 14
 				, frameheight : 26
 				, namewidth : 36
-				, scrollleft : null
 				, formatdata : formatdata
 			}
 		}
