@@ -229,7 +229,6 @@ return {
 			this.$broadcast('bindTrackItem', track)
 		}
 		, loadTime : function(){
-			console.log('a')
 			this.$broadcast('loadItemByTime', this.global.time)
 		}
 		, setTime : function(time){
@@ -244,7 +243,6 @@ return {
 				return;
 
 			file = files[0]
-			console.log(file)	
 
 			if(file.size > 1024 * 200) {
         alert('图片大小不能超过 200K!');
