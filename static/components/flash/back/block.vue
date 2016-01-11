@@ -57,12 +57,15 @@ return {
 		, setStartTime : function(){
 			this.startTime = Math.floor(($(this.$el).position().left + this.global.scrollleft) / this.global.framewidth) 
 		}
-	}
-	, events : {
-		setFrame : function(frame){
+		, setFrame : function(frame){
 			this.$set('frame', frame)
 			this.setStartTime()
 			this.time = this.frame.time + this.frame.startTime 
+		}
+	}
+	, events : {
+		setFrame : function(frame){
+			this.setFrame(frame)
 			this.$dispatch('setBlock', this)
 		}
 		, setStartTime : function(){

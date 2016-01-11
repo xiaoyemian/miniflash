@@ -59,8 +59,23 @@ return {
 
 			this.$dispatch('setTime', time)	
 		}
-		, getAnimateFrameData : function(block){
-			var framedata = block.frame.framedata
+		, getAnimateFrameData : function(block, flag){
+			var frames = block.$refs.frame
+				, frameslen = frames.length
+	
+			if(flag){
+				frame = block.frame 
+
+				return frame.framedata
+
+			}else{
+				frame = frames[frameslen-1]
+
+				return JSON.parse(JSON.stringify(frame.framedata))
+
+			}
+			
+
 
 /*
 			if(frame.time == 0){
@@ -84,9 +99,9 @@ return {
 					framedata.transform[i][j] = enddata.transform[i][j] * line + frame.framedata.transform[i][j] * (1-line)
 				}
 			}
-*/
 
 			return framedata
+*/
 		}
 		, formatBlockData : function(data){
 			var formatdata = this.global.formatdata
@@ -135,10 +150,13 @@ return {
 				}
 			}
 		}
+		, setBlock : function(block){
+			this.$set('block', block)
+		}
 	}
 	, events : {
 		setBlock : function(block){
-			this.$set('block', block)
+			this.setBlock(block)
 			this.$set('global.time', this.block.startTime + this.block.time)
 			this.$dispatch('loadTime')
 			this.item.focusItem()
@@ -176,19 +194,20 @@ return {
 			}
 
 			if(flag){
-				this.$set('block', block)
-				this.$set('block.frame', frame)
+				block.setFrame(frame)
+				this.setBlock(block)
 
 			}else{
 				this.$set('block', null)
 			}
 
 			if(block.blockdata.name == 'transition'){
-				framedata = this.getAnimateFrameData(block)
+				framedata = this.getAnimateFrameData(block, flag)
 
 			}else{
 				framedata = frame.framedata
 			}
+
 			this.item.loadItemByFrame(framedata)
 		}
 	}

@@ -9,7 +9,7 @@
 	<div @click.stop="" class="uploadBtn itemBox" v-if="global.item">替换图片<input type="file" @change.stop="changeImage"/></div>
 	<div @click.stop="" class="uploadBtn itemBox" v-else>添加图片<input type="file" @change.stop="addImage"/></div>
 	<div @click.stop="addBlock" class="itemBox" v-if="global.item">添加动作</div>
-	<div @click.stop="removeBlock" class="itemBox" v-if="global.item && global.item.itemdata.blocks.length > 1">删除动作</div>
+	<div @click.stop="removeBlock" class="itemBox" v-if="global.item && global.item.track && global.item.track.block && global.item.itemdata.blocks.length > 1">删除动作</div>
 
 	<div @click.stop="addFrame" class="transitionBox" v-if="global.item && global.item.track && global.item.track.block && global.item.track.block.blockdata.name == 'transition'">添加帧</div>
 	<div @click.stop="removeFrame" class="transitionBox" v-if="global.item && global.item.track && global.item.track.block && global.item.track.block.blockdata.name == 'transition' && global.item.track.block.blockdata.frames.length > 1">删除帧</div>
@@ -53,32 +53,32 @@ return {
 		}
 		, addBlock : function(){
 			var track = this.global.item.track
-			var blocksdata = track.itemdata.blocks
-			var block = track.block
-
 			var blocks = track.$refs.block
-			var len = blocks.length
+			var block = track.block
+			var framedata = this.global.item.framedata
 
-			if(!block){
-				block = blocks[len-1]
+			if(!track.block){
+				var blockslen = blocks.length
+				block = blocks[blockslen-1]
 			}
 
 			var frames = block.$refs.frame
-			var frameslen = frames.length
-			var endframe = frames[frameslen-1]
+			var endframe = frames[frames.length-1]
 
-			endframe.framedata.duration = this.global.time - (block.startTime + endframe.startTime)
+			if(!track.block){
+				endframe.framedata.duration = this.global.time - (block.startTime + endframe.startTime)
+			}
 
 			var blockdatanew = JSON.parse(JSON.stringify({
 				frames:[{
-					resize : endframe.framedata.resize
-					, transform : endframe.framedata.transform
+					resize : framedata.resize
+					, transform : framedata.transform
 				}]
 			}))
 			track.formatBlockData(blockdatanew)
 
 			var index = block.index
-			blocksdata.splice(index+1, 0, blockdatanew)
+			track.itemdata.blocks.splice(index+1, 0, blockdatanew)
 
 			this.$nextTick(function(){
 				var block = track.$refs.block[index+1]
@@ -87,11 +87,10 @@ return {
 		}
 		, removeBlock : function(){
 			var track = this.global.item.track
-			var blocksdata = track.itemdata.blocks
 			var block = track.block
 			var index = block.index
 
-			blocksdata.splice(index, 1)
+			track.itemdata.blocks.splice(index, 1)
 
 			this.$nextTick(function(){
 				track.$broadcast('setStartTime')	
