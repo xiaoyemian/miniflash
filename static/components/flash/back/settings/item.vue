@@ -83,6 +83,7 @@ return {
 			this.$nextTick(function(){
 				var block = track.$refs.block[index+1]
 				block.focusBlock()
+				this.$dispatch('loadTime')
 			})
 		}
 		, removeBlock : function(){
