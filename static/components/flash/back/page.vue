@@ -229,6 +229,7 @@ return {
 			this.$broadcast('bindTrackItem', track)
 		}
 		, loadTime : function(){
+			console.log('a')
 			this.$broadcast('loadItemByTime', this.global.time)
 		}
 		, setTime : function(time){
@@ -270,6 +271,7 @@ return {
 	}
 	, watch : {
 		'global.time' : function(time){
+			console.log('b')
 			this.$broadcast('loadItemByTime', time)
 		}
 	}

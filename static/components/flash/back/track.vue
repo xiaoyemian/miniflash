@@ -86,7 +86,7 @@ return {
 				}
 			}
 
-			console.log(nextframe)
+			//console.log(nextframe)
 
 			var framedata = frame.framedata
 
@@ -168,7 +168,6 @@ return {
 		setBlock : function(block){
 			this.setBlock(block)
 			this.$set('global.time', this.block.startTime + this.block.time)
-			this.$dispatch('loadTime')
 			this.item.focusItem()
 		}
 		, formatBlockData : function(data){
@@ -178,6 +177,7 @@ return {
 			this.formatFrameData(data)
 		}
 		, loadItemByTime : function(time){
+			console.log(time)
 			var blocks = this.$refs.block
 			var block
 			var frame
