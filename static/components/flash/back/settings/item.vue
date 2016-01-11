@@ -57,7 +57,7 @@ return {
 			var block = track.block
 			var framedata = this.global.item.framedata
 
-			if(!track.block){
+			if(!track.inTrack){
 				var blockslen = blocks.length
 				block = blocks[blockslen-1]
 			}
@@ -65,7 +65,7 @@ return {
 			var frames = block.$refs.frame
 			var endframe = frames[frames.length-1]
 
-			if(!track.block){
+			if(!track.inTrack){
 				endframe.framedata.duration = this.global.time - (block.startTime + endframe.startTime)
 			}
 
