@@ -70,9 +70,15 @@ return {
 			var frames = block.$refs.frame
 			var frameindex = frame.index
 			var frameslen = frames.length
+
+			if(frame.time == 0){
+				return frame.framedata
+			}
+
 			var nextframe = frame
-	
+
 			if(this.inTrack){
+		
 				if(frameindex == frameslen-1){
 					if(blockindex == blockslen-1){
 						nextframe = frames[frameslen-1] 
@@ -86,32 +92,21 @@ return {
 				}
 			}
 
-			//console.log(nextframe)
-
-			var framedata = frame.framedata
-
-			
-	/*		
-			var enddata = this.itemdata.blocks[frame.index+1]
-			if(!enddata){
-				return frame.framedata
-			}
-				
-			var framedata = {name:'transition'}
-			this.formatBlockData(framedata)
+			var framedata = {}
+			this.formatFrameData(framedata)
 
 			var line = frame.time / frame.framedata.duration
+
 			for(var i in frame.framedata.resize){
-				framedata.resize[i] = enddata.resize[i] * line + frame.framedata.resize[i] * (1-line)
+				framedata.resize[i] = nextframe.framedata.resize[i] * line + frame.framedata.resize[i] * (1-line)
 			}
 			for(var i in frame.framedata.transform){
 				for(var j in frame.framedata.transform[i]){
-					framedata.transform[i][j] = enddata.transform[i][j] * line + frame.framedata.transform[i][j] * (1-line)
+					framedata.transform[i][j] = nextframe.framedata.transform[i][j] * line + frame.framedata.transform[i][j] * (1-line)
 				}
 			}
 
-*/
-			return framedata
+			return frame.framedata
 		}
 		, formatBlockData : function(data){
 			var formatdata = this.global.formatdata
