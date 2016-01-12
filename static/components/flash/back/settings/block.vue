@@ -6,9 +6,10 @@
 
 	<div class="controlBlock">
 		<span>转换为:</span>
-		<div @click.stop="changeBlock2Normal" class="normalBox" :class="{focus : global.item.track.block.blockdata.name == 'normal'}">逐帧动画</div>
 		<div @click.stop="changeBlock2Transition" class="transitionBox" :class="{focus : global.item.track.block.blockdata.name == 'transition'}">过渡动画</div>
 		<div @click.stop="changeBlock2Animation" class="animationBox" :class="{focus : global.item.track.block.blockdata.name == 'animation'}">预设动画</div>
+		<div @click.stop="changeBlock2Normal" class="normalBox" :class="{focus : global.item.track.block.blockdata.name == 'normal'}">关键帧</div>
+		<div @click.stop="changeBlock2Blank" class="blankBox" :class="{focus : global.item.track.block.blockdata.name == 'blank'}">空白帧</div>
 	</div>
 
 
@@ -58,12 +59,22 @@ return {
 			this.$set('global.item.track.block.blockdata' + arr.join(''), value||0)
 		}
 		, changeBlock2Normal : function(){
+			this.block2Frame()
+			this.setName('normal')
+		}
+		, changeBlock2Blank : function(){
+			this.block2Frame()
+			this.setName('blank')
+		}
+		, changeBlock2Transition : function(){
+			this.setName('transition')
+		}
+		, changeBlock2Animation : function(){
+			this.setName('animation')
+		}
+		, block2Frame : function(){
 			var track = this.global.item.track
 			var block = track.block
-
-			if(block.blockdata.name == 'normal'){
-				return;
-			}
 
 			var blocksdata = track.itemdata.blocks
 			var blockindex = block.index
@@ -89,23 +100,16 @@ return {
 			}
 
 			this.$nextTick(function(){
-				var block = track.$refs.block[frameindex]
+				var block = track.$refs.block[blockindex + frameindex]
 				block.focusBlock()
 			})
 
 		}
-		, changeBlock2Transition : function(){
+		, setName : function(name){
 			var track = this.global.item.track
 			var block = track.block
 
-			if(block.blockdata.name == 'transition'){
-				return;
-			}
-
-			Vue.set(block.blockdata, 'name', 'transition')
-		}
-		, changeBlock2Animation : function(){
-			
+			Vue.set(block.blockdata, 'name', name)
 		}
 	}
 }

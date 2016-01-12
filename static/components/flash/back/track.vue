@@ -7,8 +7,6 @@
 	.focusframe{
 		.pa;
 		.h(100%);
-		.bgc(#FF7070);
-		.opacity(60);
 		.eventNone;
 		z-index:2;
 		border:1px solid red;
