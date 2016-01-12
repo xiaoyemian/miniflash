@@ -28,12 +28,15 @@ return {
 	}
 	, methods : {
 		selectFrame : function(event){
-			this.time = Math.floor(event.offsetX / this.global.framewidth)
+			this.setTime(Math.floor(event.offsetX / this.global.framewidth))
 			this.$dispatch('setFrame', this)
 		}
 		, focusFrame : function(){
 			this.time = 0
 			this.$dispatch('setFrame', this)
+		}
+		, setTime : function(time){
+			this.time = time
 		}
 	}
 	, events : {

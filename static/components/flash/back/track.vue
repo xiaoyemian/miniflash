@@ -184,9 +184,11 @@ return {
 
 				for(var j in frames){
 					frame = frames[j]
-					var start = frame.startTime + block.startTime
 
-					if(time >= start && time < start + frame.framedata.duration){
+					var frametime = time - (frame.startTime + block.startTime)
+					frame.setTime(frametime)
+
+					if(frametime >= 0 && frametime < frame.framedata.duration){
 						this.inTrack = true
 						break;
 					}
@@ -210,7 +212,7 @@ return {
 				framedata = JSON.parse(JSON.stringify(framedata))
 			}
 
-			this.item.loadItemByFrame(framedata, block.blockdata.name)
+			this.item.loadItemByFrame(framedata)
 		}
 	}
 	, ready : function(){
