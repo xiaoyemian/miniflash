@@ -22,53 +22,32 @@
 }}
 </style>
 
-<style v-if="framedata && enddata">
+<style v-if="blockdata && blockdata.keyframes">
 {{
 '.' + itemdata.item_id + '{'
-+ '-webkit-animation:' + itemdata.item_id + frameindex + ' ' + framedata.duration * timedata.step + 'ms ' + framedata['timing-function'] + ' 0ms ' + framedata['iteration-count'] + ' normal;'
++ '-webkit-animation:' + itemdata.item_id + blockindex + ' ' + blockdata['duration'] * global.step + 'ms ' + blockdata['timing-function'] + ' 0ms ' + blockdata['iteration-count'] + ' normal;'
 + '-webkit-animation-fill-mode:both;'
 + '}'
 }}
 
 {{
-'@-webkit-keyframes ' + itemdata.item_id + frameindex + '{'
-	+ 'from {'
-		+'width:' + framedata.resize.width * printdata.scale + 'px' + ';'
-		+'height:' + framedata.resize.height * printdata.scale + 'px' + ';'
-		+'top:' + framedata.resize.top * printdata.scale + 'px' + ';'
-		+'left:' + framedata.resize.left * printdata.scale + 'px' + ';'
-		+'transform:'
-			+ 'rotate(' + framedata.transform.rotate.angle + 'deg)'
-			+ ' skew(' + framedata.transform.skew['x-angle'] + 'deg,' + framedata.transform.skew['y-angle'] + 'deg)'
-			+ ';'
-	+ '}'
-	+ 'to {'
-		+'width:' + enddata.resize.width * printdata.scale + 'px' + ';'
-		+'height:' + enddata.resize.height * printdata.scale + 'px' + ';'
-		+'top:' + enddata.resize.top * printdata.scale + 'px' + ';'
-		+'left:' + enddata.resize.left * printdata.scale + 'px' + ';'
-		+'transform:'
-			+ 'rotate(' + enddata.transform.rotate.angle + 'deg)'
-			+ ' skew(' + enddata.transform.skew['x-angle'] + 'deg,' + enddata.transform.skew['y-angle'] + 'deg)'
-			+ ';'
-	+ '}'
-+ '}'
+'@-webkit-keyframes ' + itemdata.item_id + blockindex + '{' + blockdata.keyframes + '}'
 }} 
 </style>
 
-<div class="item" v-el:item :class="[itemdata.item_id, framedata && framedata.name]">
+<div class="item" v-el:item :class="[itemdata.item_id, blockdata && blockdata.name]">
 </div>
 </template>
 
 <script>
 
 return {
-	props:['itemdata', 'printdata', 'timedata']
+	props:['itemdata', 'printdata', 'global']
 	, data:function(){
 		return {
-			framedata : null
-			, enddata : null
-			, frameindex : null
+			blockdata : null
+			, blockindex : null
+			, blockslen : this.itemdata.blocks.length
 		}
 	}
 	, methods : {
@@ -81,26 +60,113 @@ return {
 			}
 			img.src = this.itemdata.original.imageUrl
 		}
+		, getStyleByFrame : function(framedata){
+			var formatdata = this.global.formatdata
+			var transformList = []
+
+			var style = {}
+
+			for(var i in framedata.resize){
+				var value = framedata.resize[i] || 0
+				var unit = formatdata.resize[i].unit || ''
+				
+				if(unit == 'px'){
+					value *= this.printdata.scale
+				}
+				style[i] = value + unit 
+			}
+
+			for(var i in framedata.transform){
+				var transform = framedata.transform[i]
+				var opts = formatdata.transform[i].opts
+				var arr = []
+				for(var j in opts){
+					var opt = opts[j]
+
+					var value = transform[opt[0]] || opt[2] || 0
+					var unit = opt[1] || ''
+
+					if(unit == 'px'){
+						value *= this.printdata.scale
+					}
+					arr.push(value + unit)
+				}
+				transformList.push(i + '(' + arr.join(',') + ')')
+			}
+
+			style.transform = transformList.join(' ')
+			
+			return style
+		}
+
+		, getStyleStringByFrame : function(frame){
+			var style = this.getStyleByFrame(frame)
+			var string = ''
+			for(var i in style){
+				string += i + ':' + style[i] + ';'
+			}
+
+			return string;
+		}
+
 	}
 	, events : {
 		startFrame : function(){
-			this.frameindex = 0
+			this.blockindex = 0
 		}
 	}
 	, watch : {
-		'frameindex' : function(index){
-			var len = this.itemdata.frames.length
-			if(index >= len)
+		'blockindex' : function(index){
+
+			if(index >= this.blockslen)
 				return;
 
-			this.framedata = this.itemdata.frames[index] 
+			var blocksdata = this.itemdata.blocks
+			var blockdata = blocksdata[index] 
+			var framesdata = blockdata.frames
+			var framedata = framesdata[0]
 
-			if(this.framedata.duration > 1 && index+1 < len){
-				this.enddata = this.itemdata.frames[index+1]
+			blockdata.duration = 0 
 
-			}else{
-				this.enddata = this.framedata 
+			for(var i in framesdata){
+				blockdata['duration'] += framesdata[i]['duration']
 			}
+
+			if(blockdata.name == 'blank'){
+			}
+
+			if(blockdata.name == 'animation'){
+			}
+
+			if(blockdata.name == 'normal'){
+				var keyframes = []
+				var style = this.getStyleStringByFrame(framedata)
+				keyframes.push('0% {' + style + '}')
+				keyframes.push('100% {' + style + '}')
+				blockdata.keyframes = keyframes.join(' ')
+			}
+
+			if(blockdata.name == 'transition'){
+				var keyframes = []
+				var line = 0
+				var style
+
+				for(var i in framesdata){
+					framedata = framesdata[i]
+					style = this.getStyleStringByFrame(framedata)
+					keyframes.push(line * 100 + '% {' + style + '}')
+					line += framedata.duration / blockdata.duration
+				}
+
+				if(index < this.blockslen){
+					style = this.getStyleStringByFrame(blocksdata[index+1].frames[0])
+				}
+
+				keyframes.push('100% {' + style + '}')
+				blockdata.keyframes = keyframes.join(' ')
+			}
+
+			this.blockdata = blockdata
 		}
 	}
 	, created : function(){
@@ -110,7 +176,8 @@ return {
 		var mSelf = this
 		$(this.$els.item)
 			.on('webkitAnimationEnd', function(){
-				mSelf.frameindex++;
+				if(mSelf.blockindex < mSelf.blockslen - 1)
+					mSelf.blockindex++;
 			})
 	}
 }

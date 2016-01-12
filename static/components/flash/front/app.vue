@@ -22,7 +22,7 @@ body{
 
 	<div class="view">
 		<div class="page" :style="{width:printdata.width * printdata.scale + 'px', height:printdata.height * printdata.scale + 'px'}">
-			<item v-ref:item v-for="itemdata in items" :itemdata="itemdata" :printdata="printdata" :timedata="timedata"></item>
+			<item v-ref:item v-for="itemdata in items" :itemdata="itemdata" :printdata="printdata" :global="global"></item>
 		</div>
 	</div>
 
@@ -34,6 +34,35 @@ body{
 require('zepto')
 
 var item = require('flash/front/item.vue')
+
+var formatdata = {}
+formatdata.resize = {
+	width : {label : '宽度', unit : 'px'}
+	, height : {label : '高度', unit : 'px'}
+	, top : {label : '上边距', unit : 'px'}
+	, left : {label : '左边距', unit : 'px'}
+//	, 'border-radius' : {label : '圆角', unit : 'px'}
+}
+formatdata.transform = {
+/*
+	translate : {
+		label : '偏移'
+		, opts : [['x', 'px'],['y', 'px']]
+	}
+	, scale : {
+		label : '缩放'
+		, opts : [['x', '', '1', '0.1'],['y', '', '1', '0.1']]
+	}
+	, */rotate : {
+		label : '旋转'
+		, opts : [['angle', 'deg']]
+	}
+	, skew : {
+		label : '倾斜'
+		, opts : [['x-angle', 'deg'], ['y-angle', 'deg']]
+	}
+}
+
 
 return {
   components: {
@@ -52,8 +81,9 @@ return {
 				, height : 0
 				, scale : 0
 			}
-			, timedata : {
-				step :100
+			, global : {
+				step : 100
+				, formatdata : formatdata
 			}
 		}
 	}

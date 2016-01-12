@@ -21,7 +21,7 @@
 	}
 
 	&.infinite{
-		.bgc(#9900FF);
+		
 	}
 }
 </style>

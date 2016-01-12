@@ -8,7 +8,7 @@
 </style>
 
 <template>
-<div class="name" :class="{focus : global.item && global.item.itemdata.item_id == item_id}">
+<div class="name" @click.stop="selectTrack" :class="{focus : global.item && global.item.itemdata.item_id == item_id}">
 	<div>{{item_name}}</div>
 </div>
 
@@ -28,6 +28,9 @@ return {
 		}
 	}
 	, methods : {
+		selectTrack : function(){
+			
+		}
 	}
 	, ready : function(){
 	}
