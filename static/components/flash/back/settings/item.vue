@@ -102,10 +102,11 @@ return {
 			var track = this.global.item.track
 			var framesdata = track.block.blockdata.frames
 			var frame = track.block.frame
+			var framedata = this.global.item.framedata
 
 			var framedatanew = JSON.parse(JSON.stringify({
-				resize : frame.framedata.resize
-				, transform : frame.framedata.transform
+				resize : framedata.resize
+				, transform : framedata.transform
 			}))
 			track.formatFrameData(framedatanew)
 

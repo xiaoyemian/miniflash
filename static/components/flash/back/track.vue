@@ -118,7 +118,7 @@ return {
 				Vue.set(data, 'iteration-count', 1)
 
 			if(!data['frames']){
-				Vue.set(data, 'frames', [ {} , {} ])
+				Vue.set(data, 'frames', [ {} ])
 			}
 
 			data.frames.length > 1
