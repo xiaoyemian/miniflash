@@ -6,10 +6,10 @@
 
 	<div class="controlBlock">
 		<span>转换为:</span>
-		<div @click.stop="changeBlock2Transition" class="transitionBox" :class="{focus : global.item.track.block.blockdata.name == 'transition'}">过渡动画</div>
-		<div @click.stop="changeBlock2Animation" class="animationBox" :class="{focus : global.item.track.block.blockdata.name == 'animation'}">预设动画</div>
 		<div @click.stop="changeBlock2Normal" class="normalBox" :class="{focus : global.item.track.block.blockdata.name == 'normal'}">关键帧</div>
 		<div @click.stop="changeBlock2Blank" class="blankBox" :class="{focus : global.item.track.block.blockdata.name == 'blank'}">空白帧</div>
+		<div @click.stop="changeBlock2Transition" class="transitionBox" :class="{focus : global.item.track.block.blockdata.name == 'transition'}">过渡动画</div>
+		<div @click.stop="changeBlock2Animation" class="animationBox" :class="{focus : global.item.track.block.blockdata.name == 'animation'}">预设动画</div>
 	</div>
 
 
@@ -59,20 +59,22 @@ return {
 			this.$set('global.item.track.block.blockdata' + arr.join(''), value||0)
 		}
 		, changeBlock2Normal : function(){
-			this.block2Frame()
-			this.setName('normal')
+			this.block2Frame('normal')
 		}
 		, changeBlock2Blank : function(){
-			this.block2Frame()
-			this.setName('blank')
+			this.block2Frame('blank')
 		}
 		, changeBlock2Transition : function(){
-			this.setName('transition')
+			var track = this.global.item.track
+			var block = track.block
+			block.setName('transition')
 		}
 		, changeBlock2Animation : function(){
-			this.setName('animation')
+			var track = this.global.item.track
+			var block = track.block
+			block.setName('animation')
 		}
-		, block2Frame : function(){
+		, block2Frame : function(name){
 			var track = this.global.item.track
 			var block = track.block
 
@@ -101,15 +103,10 @@ return {
 
 			this.$nextTick(function(){
 				var block = track.$refs.block[blockindex + frameindex]
+				block.setName(name)
 				block.focusBlock()
 			})
 
-		}
-		, setName : function(name){
-			var track = this.global.item.track
-			var block = track.block
-
-			Vue.set(block.blockdata, 'name', name)
 		}
 	}
 }

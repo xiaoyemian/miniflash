@@ -49,9 +49,10 @@
 		.fc(white);
 		.cursor;
 	}
-	.animationBox{ .bgc(#0099FF); }
-	.transitionBox{ .bgc(#33B666); }
-	.normalBox{ .bgc(#999); }
+	.animationBox{ .bgc(#0099FF); border:1px solid #0099FF;}
+	.transitionBox{ .bgc(#33B666); border:1px solid #33B666;}
+	.normalBox{ .bgc(#999); border:1px solid #999;}
+	.blankBox{ .bgc(#333);border:1px solid #222; }
 
 	.focus{.none;}
 }

@@ -6,11 +6,18 @@
 	&:before{left:-1px;border-left:2px solid #222;}
 	&:after{right:-1px;border-right:2px solid #222;}
 
+	&.blank{
+		.bgc(#333);
+	}
 	&.normal{
 		.bgc(#999);
 	}
 	&.transition{
 		.bgc(#33B666);
+	}
+
+	&.animation{
+		.bgc(#0099FF);
 	}
 
 	&.infinite{
@@ -57,6 +64,9 @@ return {
 			this.$set('frame', frame)
 			this.setStartTime()
 			this.time = this.frame.time + this.frame.startTime 
+		}
+		, setName : function(name){
+			this.$set('blockdata.name', name)
 		}
 	}
 	, events : {
