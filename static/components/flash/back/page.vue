@@ -129,7 +129,6 @@
 	<flash v-ref:flash :itemsdata="itemsdata" :global="global"></flash>
 
 	<blocksetting :global="global"></blocksetting>
-	<framesetting :global="global"></framesetting>
 	<resizesetting :global="global"></resizesetting>
 
 </div>
@@ -173,7 +172,6 @@ var flash = require('flash/back/flash.vue')
 var item = require('flash/back/item.vue')
 var resizesetting = require('flash/back/settings/resize.vue')
 var blocksetting = require('flash/back/settings/block.vue')
-var framesetting = require('flash/back/settings/frame.vue')
 var itemsetting = require('flash/back/settings/item.vue')
 
 return {
@@ -182,7 +180,6 @@ return {
 		, flash : flash
 		, resizesetting : resizesetting 
 		, blocksetting : blocksetting
-		, framesetting : framesetting
 		, itemsetting : itemsetting
   }
 	, props:['itemsdata']

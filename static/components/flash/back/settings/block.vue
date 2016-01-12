@@ -13,8 +13,15 @@
 	</div>
 
 
+	<div class="inputArea" v-for="(key, value) in formatdata.frame" v-if="global.item.track.block.frame">
+		<label for="{{key}}">{{value.label}}:</label>
 
-	<div class="inputArea" v-for="(key, value) in formatdata" v-if="global.item.track.block.blockdata.name == 'transition'">
+		<input v-else type="{{value.type||'number'}}" @keyup="updateFrame" id="{{key}}" min="1" placeholder="" value="{{global.item.track.block.frame.framedata[key]}}" />{{value.unit}}
+	</div>
+
+
+
+	<div class="inputArea" v-for="(key, value) in formatdata.block" v-if="global.item.track.block.blockdata.name == 'transition'">
 		<label for="{{key}}">{{value.label}}:</label>
 
 		<select id="{{key}}" @change="updateFrame" v-if="value.options">
@@ -28,21 +35,32 @@
 </template>
 
 <script>
+var formatdata = {}
+formatdata.block = {
+	'iteration-count' : {
+		label : '次数'
+		, options : [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 'infinite']
+	}
+	, 'timing-function' : {
+		label : '速度曲线'
+		, options : ['linear', 'ease', 'ease-in', 'ease-out', 'ease-in-out']
+	}
+}
+
 
 return {
 	props : ['global']
 	, data : function(){
-		return {
-			formatdata : {
-				'timing-function' : {
-					label : '速度曲线'
-					, options : ['linear', 'ease', 'ease-in', 'ease-out', 'ease-in-out']
-				}
-				, 'iteration-count' : {
-					label : '次数'
-					, options : [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 'infinite']
-				}
+
+		formatdata.frame = {
+			duration : {
+				label : '时长'
+				, unit : '*' + this.global.step + 'ms'
 			}
+		}
+
+		return {
+			formatdata : formatdata 
 		}
 	}
 	, methods : {
@@ -108,6 +126,20 @@ return {
 			})
 
 		}
+		, updateFrame : function(event){
+			var setting = event.target
+			var type = setting.id.split('|')
+			var value = setting.value
+
+			var arr = []
+			for(var i in type){
+				arr.push('["' + type[i] + '"]')
+			}
+
+			this.$set('global.item.track.block.frame.framedata' + arr.join(''), value||0)
+		}
+
+
 	}
 }
 </script>
