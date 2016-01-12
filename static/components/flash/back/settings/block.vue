@@ -7,9 +7,9 @@
 	<div class="controlBlock">
 		<span>转换为:</span>
 		<div @click.stop="changeBlock2Normal" class="normalBox" :class="{focus : global.item.track.block.blockdata.name == 'normal'}">关键帧</div>
-		<div @click.stop="changeBlock2Blank" class="blankBox" :class="{focus : global.item.track.block.blockdata.name == 'blank'}">空白帧</div>
 		<div @click.stop="changeBlock2Transition" class="transitionBox" :class="{focus : global.item.track.block.blockdata.name == 'transition'}">过渡动画</div>
 		<div @click.stop="changeBlock2Animation" class="animationBox" :class="{focus : global.item.track.block.blockdata.name == 'animation'}">预设动画</div>
+		<div @click.stop="changeBlock2Blank" class="blankBox" :class="{focus : global.item.track.block.blockdata.name == 'blank'}">空白帧</div>
 	</div>
 
 

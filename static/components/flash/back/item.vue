@@ -4,6 +4,8 @@
 	background-size:100% 100%;
 	background-repeat:no-repeat;
 
+	&.blank{.none;}
+
 	&.focus{
 		.handel{
 			.pa;
@@ -55,7 +57,7 @@
 </style>
 
 <template>
-<div class="item" @click.stop="selectItem" :class="[global.item && global.item.itemdata.item_id == itemdata.item_id ? 'focus' : '']" :style="[originalstyle, blockstyle]">
+<div class="item" @click.stop="selectItem" :class="[track && track.block && track.block.blockdata.name, global.item && global.item.itemdata.item_id == itemdata.item_id ? 'focus' : '']" :style="[originalstyle, blockstyle]">
 	<div class="handel">
 		<div @click.stop="aspectRatio" class="aspectRatioBtn"></div>
 	</div>
@@ -85,7 +87,8 @@ return {
 		, blurItem : function(){
 			this.$set('global.item', null)
 		}
-		, getStyleByFrame : function(framedata){
+		, getStyleByFrame : function(){
+			var framedata = this.framedata
 			var formatdata = this.global.formatdata
 			var transformList = []
 
@@ -133,7 +136,7 @@ return {
 			}
 		}
 		, loadItemStyle : function(){
-			this.blockstyle = this.getStyleByFrame(this.framedata)
+			this.blockstyle = this.getStyleByFrame()
 		}
 		, aspectRatio : function(){
 			var resize = this.framedata.resize

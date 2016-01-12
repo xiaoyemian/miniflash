@@ -210,7 +210,7 @@ return {
 				framedata = JSON.parse(JSON.stringify(framedata))
 			}
 
-			this.item.loadItemByFrame(framedata)
+			this.item.loadItemByFrame(framedata, block.blockdata.name)
 		}
 	}
 	, ready : function(){
