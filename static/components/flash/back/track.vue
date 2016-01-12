@@ -229,8 +229,7 @@ return {
 			, stop : function(event, ui){
 				sortStop = ui.item.index()-1
 
-				if(sortStop == sortStart)
-					return;
+				if(sortStop < 0) sortStop = 0
 				
 				var blocksdata = mSelf.itemdata.blocks
 				blocksdata.splice(sortStop, 0, blocksdata.splice(sortStart,1)[0])

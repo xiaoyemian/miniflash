@@ -126,10 +126,10 @@ return {
 			var framesdata = blockdata.frames
 			var framedata = framesdata[0]
 
-			blockdata.duration = 0 
+			var duration = 0
 
 			for(var i in framesdata){
-				blockdata['duration'] += framesdata[i]['duration']
+				duration += framesdata[i]['duration']
 			}
 
 			if(blockdata.name == 'blank'){
@@ -137,7 +137,7 @@ return {
 				var t = setTimeout(function(){
 					mSelf.blockindex++;
 					
-				}, blockdata['duration']*100)
+				}, duration * this.global.step)
 			}
 
 			if(blockdata.name == 'animation'){
@@ -160,7 +160,7 @@ return {
 					framedata = framesdata[i]
 					style = this.getStyleStringByFrame(framedata)
 					keyframes.push(line * 100 + '% {' + style + '}')
-					line += framedata.duration / blockdata.duration
+					line += framedata.duration / duration
 				}
 
 				if(index < this.blockslen){
@@ -171,6 +171,7 @@ return {
 				blockdata.keyframes = keyframes.join(' ')
 			}
 
+			blockdata['duration'] = duration
 			this.blockdata = blockdata
 		}
 	}
