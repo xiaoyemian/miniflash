@@ -5,7 +5,7 @@
 	background-repeat:no-repeat;
 	.none;
 
-	&.transition, &.normal{
+	&.transition, &.normal, &.animation{
 		.block;
 	}
 }
@@ -133,6 +133,11 @@ return {
 			}
 
 			if(blockdata.name == 'blank'){
+				var mSelf = this
+				var t = setTimeout(function(){
+					mSelf.blockindex++;
+					
+				}, blockdata['duration']*100)
 			}
 
 			if(blockdata.name == 'animation'){
