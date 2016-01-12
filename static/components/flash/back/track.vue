@@ -119,10 +119,9 @@ return {
 				Vue.set(data, 'frames', [ {} ])
 			}
 
-			data.frames.length > 1
-				? Vue.set(data, 'name', 'transition')
-				: Vue.set(data, 'name', 'normal')
-
+			if(!data['name']){
+				Vue.set(data, 'name', 'normal')
+			}
 		}
 		, formatFrameData : function(framedata){
 			var formatdata = this.global.formatdata

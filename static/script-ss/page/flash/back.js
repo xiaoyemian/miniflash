@@ -2,14 +2,15 @@ Vue.config.debug = true
 
 var app = require('flash/back/app.vue')
 
-var pages = require('data/pages')
+//var pages = require('data/pages')
 
-/*
 var pageConfigStr = localStorage.getItem("pageConfig")
 var pages = [JSON.parse(pageConfigStr)]
+/*
 */
+console.log(pages)
 
-var number = 2
+var number = 0
 
 var vm = new Vue({
   el: 'body'
