@@ -194,7 +194,7 @@ return {
 			, pagestyle : {}
 			, global : {
 				time : null
-				, min : 10 
+				, min : 3 
 				, step : 100
 				, framewidth : 14
 				, frameheight : 26

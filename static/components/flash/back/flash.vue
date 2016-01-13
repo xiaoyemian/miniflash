@@ -8,7 +8,7 @@
 	}
 
 	.track, .name{
-		border-top:1px solid #222;
+		&:before{content:'';.pa;top:0px;.w(100%);border-top:1px solid #222;z-index:1;}
 
 		&:nth-last-child(1){
 			border-bottom:1px solid #222;
@@ -73,7 +73,7 @@
 
 <template>
 
-<div class="flash" @click="blurItem" :style="{height:(global.frameheight) * (global.min+1) + 'px', 'line-height':global.frameheight-1 + 'px'}">
+<div class="flash" @click="blurItem" :style="{height:(global.frameheight) * (global.min+1) + 'px', 'line-height':global.frameheight + 'px'}">
 	<div class="flashbox" v-el:flashbox>
 		<div class="trackbox">
 			<div class="times" :style="{height:global.frameheight + 'px'}">
@@ -82,12 +82,12 @@
 				</div>
 			</div>
 
-			<div class="tracks" :style="{'margin-top':global.frameheight + 'px', height:global.min * (global.frameheight) + 1 + 'px'}">
+			<div class="tracks" :style="{'margin-top':global.frameheight + 'px', height:global.min * (global.frameheight) + 'px'}">
 				<div class="tracknames">
 					<name v-ref:name v-for="itemdata in itemsdata" :index="$index" :item_id="itemdata.item_id" :global="global" :style="{height:global.frameheight + 'px'}"></name>
 				</div>
 
-				<div class="trackblockbox" v-el:trackblockbox @scroll="setScrollLeft" :style="{height:itemsdata.length * (global.frameheight) + 1 + 'px'}">
+				<div class="trackblockbox" v-el:trackblockbox @scroll="setScrollLeft" :style="{height:itemsdata.length * (global.frameheight) + 'px'}">
 					<div class="trackblocks">
 						<track v-ref:track v-for="itemdata in itemsdata" :index="$index" :itemdata="itemdata" :global="global" :style="{height:global.frameheight + 'px', 'padding-right':global.min * global.framewidth + 'px'}"></track>
 					</div>
