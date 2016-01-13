@@ -24,11 +24,11 @@
 	<div class="inputArea" v-for="(key, value) in formatdata.block" v-if="global.item.track.block.blockdata.name == 'transition'">
 		<label for="{{key}}">{{value.label}}:</label>
 
-		<select id="{{key}}" @change="updateFrame" v-if="value.options">
+		<select id="{{key}}" @change="updateBlock" v-if="value.options">
 			<option value="{{option}}" selected="{{option == global.item.track.block.blockdata[key]}}" v-for="(name, option) in value.options">{{option}}</option>
 		</select>
 
-		<input v-else type="{{value.type||'number'}}" @keyup="updateFrame" id="{{key}}" min="1" placeholder="" value="{{global.item.track.block.blockdata[key]}}" />{{value.unit}}
+		<input v-else type="{{value.type||'number'}}" @keyup="updateBlock" id="{{key}}" min="1" placeholder="" value="{{global.item.track.block.blockdata[key]}}" />{{value.unit}}
 	</div>
 
 </div>
@@ -64,7 +64,7 @@ return {
 		}
 	}
 	, methods : {
-		updateFrame : function(event){
+		updateBlock : function(event){
 			var setting = event.target
 			var type = setting.id.split('|')
 			var value = setting.value
@@ -136,6 +136,7 @@ return {
 				arr.push('["' + type[i] + '"]')
 			}
 
+			console.log(value)
 			this.$set('global.item.track.block.frame.framedata' + arr.join(''), value||0)
 		}
 

@@ -163,7 +163,7 @@ return {
 					line += framedata.duration / duration
 				}
 
-				if(index < this.blockslen){
+				if(index < this.blockslen-1){
 					style = this.getStyleStringByFrame(blocksdata[index+1].frames[0])
 				}
 
