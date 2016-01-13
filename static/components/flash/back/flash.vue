@@ -79,7 +79,7 @@
 	<div class="flashbox" v-el:flashbox>
 		<div class="trackbox">
 			<div class="times" :style="{height:global.frameheight + 'px'}">
-				<div class="timecontrol" v-el:timecontrol :style="{height:(global.frameheight) * (global.min+1) + 'px',left:global.framewidth * global.time + global.framewidth/2 + 'px'}">
+				<div class="timecontrol" v-el:timecontrol :style="{height:(global.frameheight) * (global.min+1) + 'px',left:-global.scrollLeft + global.framewidth * global.time + global.framewidth/2 + 'px'}">
 					<span :style="{height:global.frameheight + 'px', width:global.framewidth + 'px', left: -(global.framewidth)/2 + 'px'}"></span>
 				</div>
 			</div>
