@@ -28,6 +28,9 @@
 		.left;
 		.w(10%);
 		.pr;z-index:10;
+		&:after{
+			content:'';.pa;top:0px;right:0px;border-right:1px solid #222;.h(100%);
+		}
 	}
 	.trackblockbox{
 		.w(90%);
