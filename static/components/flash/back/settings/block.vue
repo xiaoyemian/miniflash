@@ -16,11 +16,11 @@
 	<div class="inputArea" v-for="(key, value) in formatdata.frame" v-if="global.item.track.block.frame">
 		<label for="{{key}}">{{value.label}}:</label>
 
-		<select id="{{key}}" @change="updateFrame" v-if="value.options">
+		<select id="{{key}}" @change="updateFrame" v-if="value.options && global.item.track.block.frame">
 			<option value="{{option}}" selected="{{option == global.item.track.block.frame.framedata[key]}}" v-for="(name, option) in value.options">{{option}}</option>
 		</select>
 
-		<input v-else type="{{value.type||'number'}}" @keyup="updateFrame" id="{{key}}" min="1" placeholder="" value="{{global.item.track.block.frame.framedata[key]}}" />{{value.unit}}
+		<input v-if="!value.options && global.item.track.block.frame" type="{{value.type||'number'}}" @keyup="updateFrame" id="{{key}}" min="1" placeholder="" value="{{global.item.track.block.frame.framedata[key]}}" />{{value.unit}}
 	</div>
 
 

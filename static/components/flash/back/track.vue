@@ -57,6 +57,7 @@ return {
 			this.item.focusItem()
 
 			this.$dispatch('setTime', time)	
+			console.log(this.global.item.track.block)
 		}
 		, getTransitionFrameData : function(){
 			var block = this.block
