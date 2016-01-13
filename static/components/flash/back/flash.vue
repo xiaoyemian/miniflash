@@ -68,7 +68,7 @@
 
 <template>
 
-<div class="flash" @click="blurItem" :style="{height:(global.frameheight+1) * (global.min+1) + 1 + 'px', 'line-height':global.frameheight + 'px'}">
+<div class="flash" @click="blurItem" :style="{height:(global.frameheight+1) * (global.min+1+.5) + 1 + 'px', 'line-height':global.frameheight + 'px'}">
 	<div class="flashbox" v-el:flashbox>
 		<div class="trackbox">
 			<div class="times" :style="{'margin-left':global.namewidth + 'px', height:global.frameheight + 'px'}">
@@ -77,7 +77,7 @@
 				</div>
 			</div>
 
-			<div class="tracks" :style="{'padding-bottom':global.frameheight + 'px'}">
+			<div class="tracks" :style="{height:global.min * (global.frameheight+1) + 1 + 'px'}">
 				<div class="tracknames" :style="{width:global.namewidth + 'px'}">
 					<name v-ref:name v-for="itemdata in itemsdata" :index="$index" :item_id="itemdata.item_id" :global="global" :style="{height:global.frameheight + 'px'}"></name>
 				</div>
