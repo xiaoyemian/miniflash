@@ -33,9 +33,9 @@
 	}
 	.trackblockbox{
 		.w(90%);
+		.h(100%);
 		.hidden;
 		overflow-x:auto;
-		.pb(20px);
 	}
 
 	.ui-state-highlight{
@@ -87,7 +87,7 @@
 					<name v-ref:name v-for="itemdata in itemsdata" :index="$index" :item_id="itemdata.item_id" :global="global" :style="{height:global.frameheight + 'px'}"></name>
 				</div>
 
-				<div class="trackblockbox" v-el:trackblockbox @scroll="setScrollLeft" :style="{height:itemsdata.length * (global.frameheight) + 'px'}">
+				<div class="trackblockbox" v-el:trackblockbox @scroll="setScrollLeft" :style="{'padding-bottom':global.frameheight + 'px'}">
 					<div class="trackblocks">
 						<track v-ref:track v-for="itemdata in itemsdata" :index="$index" :itemdata="itemdata" :global="global" :style="{height:global.frameheight + 'px', 'padding-right':global.min * global.framewidth + 'px'}"></track>
 					</div>
