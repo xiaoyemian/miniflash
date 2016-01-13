@@ -201,6 +201,7 @@ return {
 				, namewidth : 36
 				, formatdata : formatdata
 				, scrollLeft : 0
+				, dtime : 0
 			}
 		}
 	}

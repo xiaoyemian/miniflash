@@ -6,7 +6,6 @@
 	.tracks{
 		overflow-y:auto;
 	}
-	.track{.pr(100px);}
 
 	.track, .name{
 		border-top:1px solid #222;
@@ -57,18 +56,17 @@
 	.times{
 		.pa;left:10%;right:0px;top:0px;
 		.timecontrol{
-			.pa;z-index:4;.w(1px);
-			.bgc(red);
+			.bgc(#FF7070);z-index:10;
+			border:1px solid red;
+			box-sizing:border-box;
+			.pa;top:0px;
 
-			span{.pa;top:0px;
-				.bgc(#FF7070);z-index:10;
-				border:1px solid red;
-				box-sizing:border-box;
+			span{
+				.pa;z-index:4;.w(1px);
+				.bgc(red);
 			}
-			
 		}
 	}
-
 }
 </style>
 
@@ -79,8 +77,8 @@
 	<div class="flashbox" v-el:flashbox>
 		<div class="trackbox">
 			<div class="times" :style="{height:global.frameheight + 'px'}">
-				<div class="timecontrol" v-el:timecontrol :style="{height:(global.frameheight) * (global.min+1) + 'px',left:-global.scrollLeft + global.framewidth * global.time + global.framewidth/2 + 'px'}">
-					<span :style="{height:global.frameheight + 'px', width:global.framewidth + 'px', left: -(global.framewidth)/2 + 'px'}"></span>
+				<div class="timecontrol" v-el:timecontrol :style="{height:global.frameheight + 'px', left:-global.scrollLeft + global.framewidth * global.time + 'px', width: global.framewidth + 'px'}">
+					<span :style="{top:global.frameheight+'px',height:(global.frameheight) * (global.min) + 'px', left:(global.framewidth-2)/2 + 'px'}"></span>
 				</div>
 			</div>
 
@@ -91,7 +89,7 @@
 
 				<div class="trackblockbox" v-el:trackblockbox @scroll="setScrollLeft" :style="{height:itemsdata.length * (global.frameheight) + 1 + 'px'}">
 					<div class="trackblocks">
-						<track v-ref:track v-for="itemdata in itemsdata" :index="$index" :itemdata="itemdata" :global="global" :style="{height:global.frameheight + 'px'}"></track>
+						<track v-ref:track v-for="itemdata in itemsdata" :index="$index" :itemdata="itemdata" :global="global" :style="{height:global.frameheight + 'px', 'padding-right':global.min * global.framewidth + 'px'}"></track>
 					</div>
 				</div>
 			</div>
@@ -122,8 +120,14 @@ return {
 		}
 		, setScrollLeft : function(event){
 			this.$set('global.scrollLeft', event.target.scrollLeft)
-
-			console.log(this.global.scrollLeft)
+		}
+	}
+	, watch : {
+		'global.scrollLeft' : function(scrollLeft){
+			var dtime = Math.floor(scrollLeft/this.global.framewidth)
+			this.$set('global.dtime', dtime)
+		}
+		, 'global.dtime' : function(time){
 		}
 	}
 	, events : {
@@ -141,7 +145,7 @@ return {
 			start : function(event, ui){
 			}
 			, drag : function(event, ui){
-				var time = (ui.position.left/mSelf.global.framewidth)|0
+				var time = Math.floor((ui.position.left + mSelf.global.scrollLeft)/mSelf.global.framewidth)
 				if(mSelf.global.time != time)
 					mSelf.$dispatch('setTime', time)
 			}
@@ -150,7 +154,7 @@ return {
 			, cursor: "move"
 			, containment : "parent"
 			, scroll : true
-			, grid: [ mSelf.global.framewidth, 0 ]
+			, grid: [mSelf.global.framewidth, 0 ]
 		})
 	}
 }
