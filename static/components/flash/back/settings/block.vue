@@ -16,6 +16,10 @@
 	<div class="inputArea" v-for="(key, value) in formatdata.frame" v-if="global.item.track.block.frame">
 		<label for="{{key}}">{{value.label}}:</label>
 
+		<select id="{{key}}" @change="updateFrame" v-if="value.options">
+			<option value="{{option}}" selected="{{option == global.item.track.block.frame.framedata[key]}}" v-for="(name, option) in value.options">{{option}}</option>
+		</select>
+
 		<input v-else type="{{value.type||'number'}}" @keyup="updateFrame" id="{{key}}" min="1" placeholder="" value="{{global.item.track.block.frame.framedata[key]}}" />{{value.unit}}
 	</div>
 
@@ -76,6 +80,19 @@ return {
 
 			this.$set('global.item.track.block.blockdata' + arr.join(''), value||0)
 		}
+		, updateFrame : function(event){
+			var setting = event.target
+			var type = setting.id.split('|')
+			var value = setting.value
+
+			var arr = []
+			for(var i in type){
+				arr.push('["' + type[i] + '"]')
+			}
+
+			this.$set('global.item.track.block.frame.framedata' + arr.join(''), value||0)
+		}
+
 		, changeBlock2Normal : function(){
 			this.block2Frame('normal')
 		}
@@ -126,21 +143,6 @@ return {
 			})
 
 		}
-		, updateFrame : function(event){
-			var setting = event.target
-			var type = setting.id.split('|')
-			var value = setting.value
-
-			var arr = []
-			for(var i in type){
-				arr.push('["' + type[i] + '"]')
-			}
-
-			console.log(value)
-			this.$set('global.item.track.block.frame.framedata' + arr.join(''), value||0)
-		}
-
-
 	}
 }
 </script>
