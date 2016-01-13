@@ -17,7 +17,7 @@
 		<label for="{{key}}">{{value.label}}:</label>
 
 		<select id="{{key}}" @change="updateFrame" v-if="value.options && global.item.track.block.frame">
-			<option value="{{option}}" selected="{{option == global.item.track.block.frame.framedata[key]}}" v-for="(name, option) in value.options">{{option}}</option>
+			<option value="{{option}}" selected="{{option == global.item.track.block.frame.framedata[key]}}" v-for="(name, option) in value.options">{{name}}</option>
 		</select>
 
 		<input v-if="!value.options && global.item.track.block.frame" type="{{value.type||'number'}}" @keyup="updateFrame" id="{{key}}" min="1" placeholder="" value="{{global.item.track.block.frame.framedata[key]}}" />{{value.unit}}
@@ -29,7 +29,7 @@
 		<label for="{{key}}">{{value.label}}:</label>
 
 		<select id="{{key}}" @change="updateBlock" v-if="value.options">
-			<option value="{{option}}" selected="{{option == global.item.track.block.blockdata[key]}}" v-for="(name, option) in value.options">{{option}}</option>
+			<option value="{{option}}" selected="{{option == global.item.track.block.blockdata[key]}}" v-for="(name, option) in value.options">{{name}}</option>
 		</select>
 
 		<input v-else type="{{value.type||'number'}}" @keyup="updateBlock" id="{{key}}" min="1" placeholder="" value="{{global.item.track.block.blockdata[key]}}" />{{value.unit}}
@@ -43,11 +43,17 @@ var formatdata = {}
 formatdata.block = {
 	'iteration-count' : {
 		label : '次数'
-		, options : [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 'infinite']
+		, options : {'1':1, '2':2, '3':3, '4':4, '5':5, '6':6, '7':7, '8':8, '9':9, '10':10, '循环':'infinite'}
 	}
 	, 'timing-function' : {
 		label : '速度曲线'
-		, options : ['linear', 'ease', 'ease-in', 'ease-out', 'ease-in-out']
+		, options : {
+			'匀速':'linear'
+			, '低速开始 加快 结束前变慢':'ease'
+			, '低速开始':'ease-in'
+			, '低速结束':'ease-out'
+			, '低速开始和结束':'ease-in-out'
+		}
 	}
 }
 
