@@ -56,7 +56,7 @@ return {
 			var img = new Image()
 			img.onload = function(){
 				img.onload = null
-				mSelf.$dispatch('loadedImage')	
+				mSelf.$dispatch('done', 'loadedImage')	
 			}
 			img.src = this.itemdata.original.imageUrl
 		}
@@ -118,8 +118,10 @@ return {
 	, watch : {
 		'blockindex' : function(index){
 
-			if(index >= this.blockslen)
+			if(index >= this.blockslen){
+				this.$dispatch('actionDone')	
 				return;
+			}
 
 			var blocksdata = this.itemdata.blocks
 			var blockdata = blocksdata[index] 
@@ -182,8 +184,10 @@ return {
 		var mSelf = this
 		$(this.$els.item)
 			.on('webkitAnimationEnd', function(){
-				if(mSelf.blockindex < mSelf.blockslen - 1)
+				if(mSelf.blockindex < mSelf.blockslen-1)
 					mSelf.blockindex++;
+				else
+					mSelf.$dispatch('actionDone')	
 			})
 	}
 }

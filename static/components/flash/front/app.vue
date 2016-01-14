@@ -71,11 +71,11 @@ return {
 	, props:['pages','number']
 	, data : function(){
 		var items = this.pages[this.number].items
-		var len = items.length
 
 		return {
 			items : items
-			, waitNumber : len
+			, itemslen : items.length
+			, waitNumber : items.length 
 			, printdata : {
 				width : 0
 				, height : 0
@@ -93,13 +93,27 @@ return {
 				this.$set('printdata["'+i+'"]', printdata[i]||0)
 			}
 		}
+		, startFrame : function(){
+			this.$broadcast('startFrame')
+		}
 	}
 	, events : {
-		loadedImage : function(){
+		done : function(name){
 			this.waitNumber--
 
-			if(this.waitNumber === 0)
-				this.$broadcast('startFrame')
+			if(this.waitNumber != 0)
+				return;
+
+			switch(name){
+				case 'loadedImage' : 
+					this.startFrame()
+					break;
+				
+				default :
+					break;
+			}
+
+			this.waitNumber = this.itemslen
 		}
 	}
 	, created : function(){
