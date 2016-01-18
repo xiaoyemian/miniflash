@@ -29,7 +29,6 @@ return {
 	}
 	, methods : {
 		selectTrack : function(){
-			
 		}
 	}
 	, ready : function(){

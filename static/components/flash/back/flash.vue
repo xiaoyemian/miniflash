@@ -1,4 +1,6 @@
 <style>
+@namewidth:20%;
+
 .flash{
 	.pr;
 	border-bottom:1px solid #222;
@@ -25,14 +27,14 @@
 	}
 	.tracknames{
 		.left;
-		.w(10%);
+		.w(@namewidth);
 		.pr;z-index:10;
 		&:after{
 			content:'';.pa;top:0px;right:0px;border-right:1px solid #222;.h(100%);
 		}
 	}
 	.trackblockbox{
-		.w(90%);
+		.w(100%-@namewidth);
 		.h(100%);
 		.hidden;
 		overflow-x:auto;
@@ -54,7 +56,7 @@
 	}
 
 	.times{
-		.pa;left:10%;right:0px;top:0px;
+		.pa;left:@namewidth;right:0px;top:0px;
 		.timecontrol{
 			.bgc(#FF7070);z-index:10;
 			border:1px solid red;
@@ -65,6 +67,8 @@
 				.pa;z-index:4;.w(1px);
 				.bgc(red);
 			}
+
+			&.none{.none;}
 		}
 	}
 }
@@ -77,7 +81,7 @@
 	<div class="flashbox" v-el:flashbox>
 		<div class="trackbox">
 			<div class="times" :style="{height:global.frameheight + 'px'}">
-				<div class="timecontrol" v-el:timecontrol v-if="global.framewidth * global.time - global.scrollLeft >= 0" :style="{height:global.frameheight + 'px', width: global.framewidth + 'px', left:global.framewidth * global.time - global.scrollLeft + 'px'}">
+				<div class="timecontrol" v-el:timecontrol :class="{none:global.framewidth * global.time - global.scrollLeft < 0}" :style="{height:global.frameheight + 'px', width: global.framewidth + 'px', left:global.framewidth * global.time - global.scrollLeft + 'px'}">
 					<span :style="{top:global.frameheight+'px',height:(global.frameheight) * (global.min) + 'px', left:(global.framewidth-2)/2 + 'px'}"></span>
 				</div>
 			</div>
