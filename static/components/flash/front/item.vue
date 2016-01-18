@@ -35,7 +35,7 @@
 }} 
 </style>
 
-<div class="item" v-el:item :class="[itemdata.item_id, blockdata && blockdata.name]">
+<div class="item" @webkitAnimationEnd="doNextBlock" @webkitAnimationIteration="" v-el:item :class="[itemdata.item_id, blockdata && blockdata.name]">
 </div>
 </template>
 
@@ -59,6 +59,12 @@ return {
 				mSelf.$dispatch('done', 'loadedImage')	
 			}
 			img.src = this.itemdata.original.imageUrl
+		}
+		, doNextBlock : function(){
+			if(this.blockindex < this.blockslen-1)
+				this.blockindex++;
+			else
+				this.$dispatch('done', 'loadedBlock')	
 		}
 		, getStyleByFrame : function(framedata){
 			var formatdata = this.global.formatdata
@@ -117,9 +123,10 @@ return {
 	}
 	, watch : {
 		'blockindex' : function(index){
+			var mSelf = this
 
 			if(index >= this.blockslen){
-				this.$dispatch('actionDone')	
+				mSelf.$dispatch('done', 'loadedBlock')	
 				return;
 			}
 
@@ -135,7 +142,6 @@ return {
 			}
 
 			if(blockdata.name == 'blank'){
-				var mSelf = this
 				var t = setTimeout(function(){
 					mSelf.blockindex++;
 					
@@ -183,11 +189,15 @@ return {
 	, ready : function(){
 		var mSelf = this
 		$(this.$els.item)
-			.on('webkitAnimationEnd', function(){
+			.on('webkitAnimationIteration', function(){
+				if(mSelf.blockdata['iteration-count'] != 'infinite')
+					return;
+
 				if(mSelf.blockindex < mSelf.blockslen-1)
 					mSelf.blockindex++;
 				else
-					mSelf.$dispatch('actionDone')	
+					mSelf.$dispatch('done', 'loadedBlock')	
+
 			})
 	}
 }

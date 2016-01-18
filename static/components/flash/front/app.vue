@@ -71,11 +71,15 @@ return {
 	, props:['pages','number']
 	, data : function(){
 		var items = this.pages[this.number].items
+		var itemslen = items.length
 
 		return {
 			items : items
-			, itemslen : items.length
-			, waitNumber : items.length 
+			, itemslen : itemslen
+			, wait : {
+				loadedImage : itemslen
+				, loadedBlock : itemslen 
+			} 
 			, printdata : {
 				width : 0
 				, height : 0
@@ -93,27 +97,28 @@ return {
 				this.$set('printdata["'+i+'"]', printdata[i]||0)
 			}
 		}
-		, startFrame : function(){
-			this.$broadcast('startFrame')
-		}
 	}
 	, events : {
 		done : function(name){
-			this.waitNumber--
-
-			if(this.waitNumber != 0)
+			if(!this.wait[name])
+				this.$set('wait["'+name +'"]', this.itemslen)
+			
+			this.wait[name]--
+		}
+	}
+	, watch : {
+		'wait.loadedImage' : function(value){
+			if(value > 0)
 				return;
 
-			switch(name){
-				case 'loadedImage' : 
-					this.startFrame()
-					break;
-				
-				default :
-					break;
-			}
+			this.$broadcast('startFrame')
+		}
+		, 'wait.loadedBlock' : function(value){
+			console.log(value)
+			if(value > 0)
+				return;
 
-			this.waitNumber = this.itemslen
+			console.log('loadedBlock')
 		}
 	}
 	, created : function(){
