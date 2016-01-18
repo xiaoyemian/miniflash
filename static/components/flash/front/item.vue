@@ -22,7 +22,7 @@
 }}
 </style>
 
-<style v-if="blockdata && blockdata.keyframes">
+<style v-if="blockdata && keyframes.length > 0">
 {{
 '.' + itemdata.item_id + '{'
 + '-webkit-animation:' + itemdata.item_id + blockindex + ' ' + blockdata['duration'] * global.step + 'ms ' + blockdata['timing-function'] + ' 0ms ' + blockdata['iteration-count'] + ' normal;'
@@ -31,7 +31,7 @@
 }}
 
 {{
-'@-webkit-keyframes ' + itemdata.item_id + blockindex + '{' + blockdata.keyframes + '}'
+'@-webkit-keyframes ' + itemdata.item_id + blockindex + '{' + keyframes.join(' ') + '}'
 }} 
 </style>
 
@@ -46,6 +46,7 @@ return {
 	, data:function(){
 		return {
 			blockdata : null
+			, keyframes : []
 			, blockindex : null
 			, blockslen : this.itemdata.blocks.length
 		}
@@ -61,10 +62,12 @@ return {
 			img.src = this.itemdata.original.imageUrl
 		}
 		, doNextBlock : function(){
-			if(this.blockindex < this.blockslen-1)
-				this.blockindex++;
-			else
+			if(index >= this.blockslen){
 				this.$dispatch('done', 'loadedBlock')	
+				return;
+			}
+
+			this.blockindex++;
 		}
 		, getStyleByFrame : function(framedata){
 			var formatdata = this.global.formatdata
@@ -105,8 +108,8 @@ return {
 			return style
 		}
 
-		, getStyleStringByFrame : function(frame){
-			var style = this.getStyleByFrame(frame)
+		, getStyleStringByFrame : function(framedata){
+			var style = this.getStyleByFrame(framedata)
 			var string = ''
 			for(var i in style){
 				string += i + ':' + style[i] + ';'
@@ -115,23 +118,11 @@ return {
 			return string;
 		}
 
-	}
-	, events : {
-		startFrame : function(){
-			this.blockindex = 0
-		}
-	}
-	, watch : {
-		'blockindex' : function(index){
+		, setBlockdata : function(){
 			var mSelf = this
-
-			if(index >= this.blockslen){
-				mSelf.$dispatch('done', 'loadedBlock')	
-				return;
-			}
-
 			var blocksdata = this.itemdata.blocks
-			var blockdata = blocksdata[index] 
+			var blockdata = blocksdata[this.blockindex] 
+			var keyframes = []
 			var framesdata = blockdata.frames
 			var framedata = framesdata[0]
 
@@ -152,15 +143,12 @@ return {
 			}
 
 			if(blockdata.name == 'normal'){
-				var keyframes = []
 				var style = this.getStyleStringByFrame(framedata)
 				keyframes.push('0% {' + style + '}')
 				keyframes.push('100% {' + style + '}')
-				blockdata.keyframes = keyframes.join(' ')
 			}
 
 			if(blockdata.name == 'transition'){
-				var keyframes = []
 				var line = 0
 				var style
 
@@ -171,16 +159,35 @@ return {
 					line += framedata.duration / duration
 				}
 
-				if(index < this.blockslen-1){
-					style = this.getStyleStringByFrame(blocksdata[index+1].frames[0])
+				if(this.blockindex < this.blockslen-1){
+					style = this.getStyleStringByFrame(blocksdata[this.blockindex+1].frames[0])
 				}
 
 				keyframes.push('100% {' + style + '}')
-				blockdata.keyframes = keyframes.join(' ')
 			}
 
 			blockdata['duration'] = duration
 			this.blockdata = blockdata
+			this.keyframes = keyframes
+		}
+
+	}
+	, events : {
+		startFrame : function(){
+			this.blockindex = 0
+		}
+	}
+	, watch : {
+		'blockindex' : function(index){
+			if(index >= this.blockslen){
+				this.$dispatch('done', 'loadedBlock')	
+				return;
+			}
+
+			this.setBlockdata()
+		}
+		, 'printdata.scale' : function(){
+			this.setBlockdata()
 		}
 	}
 	, created : function(){
