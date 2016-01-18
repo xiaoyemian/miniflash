@@ -128,10 +128,12 @@
 <div class="settings">
 	<flash v-ref:flash :itemsdata="itemsdata" :global="global"></flash>
 
+	<pagesetting :global="global"></pagesetting>
+
 	<blocksetting :global="global"></blocksetting>
 	<resizesetting :global="global"></resizesetting>
-
 </div>
+
 
 </template>
 
@@ -170,6 +172,7 @@ formatdata.transform = {
 
 var flash = require('flash/back/flash.vue')
 var item = require('flash/back/item.vue')
+var pagesetting = require('flash/back/settings/page.vue')
 var resizesetting = require('flash/back/settings/resize.vue')
 var blocksetting = require('flash/back/settings/block.vue')
 var itemsetting = require('flash/back/settings/item.vue')
@@ -178,6 +181,7 @@ return {
   components : {
     item : item
 		, flash : flash
+		, pagesetting : pagesetting
 		, resizesetting : resizesetting 
 		, blocksetting : blocksetting
 		, itemsetting : itemsetting
