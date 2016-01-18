@@ -35,7 +35,7 @@
 }} 
 </style>
 
-<div class="item" @webkitAnimationEnd="doNextBlock" @webkitAnimationIteration="" v-el:item :class="[itemdata.item_id, blockdata && blockdata.name]">
+<div class="item" v-el:item :class="[itemdata.item_id, blockdata && blockdata.name]">
 </div>
 </template>
 
@@ -189,15 +189,13 @@ return {
 	, ready : function(){
 		var mSelf = this
 		$(this.$els.item)
-			.on('webkitAnimationIteration', function(){
-				if(mSelf.blockdata['iteration-count'] != 'infinite')
-					return;
-
-				if(mSelf.blockindex < mSelf.blockslen-1)
-					mSelf.blockindex++;
-				else
-					mSelf.$dispatch('done', 'loadedBlock')	
-
+			.on('webkitAnimationStart', function(){
+				if(mSelf.blockdata['iteration-count'] == 'infinite'){
+					mSelf.$dispatch('done', 'loadedBlock')
+				}
+			})
+			.on('webkitAnimationEnd', function(){
+				mSelf.$dispatch('done', 'loadedBlock')	
 			})
 	}
 }
