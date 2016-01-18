@@ -198,7 +198,6 @@ return {
 				, step : 100
 				, framewidth : 14
 				, frameheight : 26
-				, namewidth : 36
 				, formatdata : formatdata
 				, scrollLeft : 0
 				, dtime : 0

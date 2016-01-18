@@ -10,13 +10,10 @@ var pages = [JSON.parse(pageConfigStr)]
 */
 console.log(pages)
 
-var number = 0
-
 var vm = new Vue({
   el: 'body'
 	, data : {
 		pages : pages
-		, number : number
 	}
   , components : {
 		app : app

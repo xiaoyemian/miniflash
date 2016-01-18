@@ -37,7 +37,7 @@ body{
 		<div @click="save">保存</div>
 	</div>
 
-	<page v-ref:page :itemsdata="itemsdata"></page>
+	<page v-if="pages[number]" v-ref:page :itemsdata="pages[number].items"></page>
 
 </div>
 </template>
@@ -61,14 +61,11 @@ return {
   components: {
 		page : page 
   }
-	, props:['pages','number']
+	, props:['pages']
 	, data : function(){
-		var pagedata = this.pages[this.number]
-			, itemsdata = pagedata.items
 
 		return {
-			pagedata : pagedata 
-			, itemsdata : itemsdata 
+			number : null
 			, keybroad : {}
 		}
 	}
@@ -85,6 +82,7 @@ return {
 	}
 	, created: function(){
 		var mSelf = this
+		this.$set('number', 0)
 
 		$(window)
 			.on('keydown', function(e){
