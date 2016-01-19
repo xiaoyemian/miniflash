@@ -57,7 +57,7 @@
 	.focus{.none;}
 }
 
-.settingFrame, .settingOriginal, .settingFlash{
+.settingFrame, .settingOriginal, .settingFlash, .settingPage{
 	.hidden;
 	border-bottom:1px solid #222;
 	padding:2px;
