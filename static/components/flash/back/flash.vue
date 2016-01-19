@@ -88,12 +88,12 @@
 
 			<div class="tracks" :style="{'margin-top':global.frameheight + 'px', height:global.min * (global.frameheight) + 'px'}">
 				<div class="tracknames">
-					<name v-ref:name v-for="itemdata in itemsdata" :index="$index" :item_id="itemdata.item_id" :global="global" :style="{height:global.frameheight + 'px'}"></name>
+					<name v-ref:name v-for="itemdata in global.pages[global.number].items" :index="$index" :item_id="itemdata.item_id" :global="global" :style="{height:global.frameheight + 'px'}"></name>
 				</div>
 
 				<div class="trackblockbox" v-el:trackblockbox @scroll="setScrollLeft" :style="{'padding-bottom':global.frameheight + 'px'}">
 					<div class="trackblocks">
-						<track v-ref:track v-for="itemdata in itemsdata" :index="$index" :itemdata="itemdata" :global="global" :style="{height:global.frameheight + 'px', 'padding-right':global.min * global.framewidth + 'px'}"></track>
+						<track v-ref:track v-for="itemdata in global.pages[global.number].items" :index="$index" :itemdata="itemdata" :global="global" :style="{height:global.frameheight + 'px', 'padding-right':global.min * global.framewidth + 'px'}"></track>
 					</div>
 				</div>
 			</div>
@@ -112,7 +112,7 @@ return {
 		track : track
 		, name : name
   }
-	, props:['itemsdata', 'global']
+	, props:['global']
 	, data : function(){
 
 		return {

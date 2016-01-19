@@ -37,7 +37,7 @@ body{
 		<div @click="save">保存</div>
 	</div>
 
-	<page v-if="pages[number]" v-ref:page :itemsdata="pages[number].items"></page>
+	<page v-ref:page :global="global"></page>
 
 </div>
 </template>
@@ -57,6 +57,39 @@ var keyCode = {
 	, '16' : 'shift'
 	, '18' : 'alt'
 }
+
+
+var formatdata = {}
+formatdata.resize = {
+	width : {label : '宽度', unit : 'px'}
+	, height : {label : '高度', unit : 'px'}
+	, top : {label : '上边距', unit : 'px'}
+	, left : {label : '左边距', unit : 'px'}
+//	, 'border-radius' : {label : '圆角', unit : 'px'}
+}
+formatdata.transform = {
+/*
+	translate : {
+		label : '偏移'
+		, opts : [['x', 'px'],['y', 'px']]
+	}
+	, scale : {
+		label : '缩放'
+		, opts : [['x', '', '1', '0.1'],['y', '', '1', '0.1']]
+	}
+	, */rotate : {
+		label : '旋转'
+		, opts : [['angle', 'deg']]
+	}
+	, skew : {
+		label : '倾斜'
+		, opts : [['x-angle', 'deg'], ['y-angle', 'deg']]
+	}
+}
+
+
+
+
 return {
   components: {
 		page : page 
@@ -65,13 +98,25 @@ return {
 	, data : function(){
 
 		return {
-			number : null
+			global : {
+				pages : this.pages
+				, number : null
+				, time : null
+				, min : 10 
+				, step : 100
+				, framewidth : 14
+				, frameheight : 26
+				, formatdata : formatdata
+				, scrollLeft : 0
+				, dtime : 0
+			}
 			, keybroad : {}
+
 		}
 	}
 	, methods : {
 		save : function(){
-			var pageConfigStr = JSON.stringify(this.pages[this.number])
+			var pageConfigStr = JSON.stringify(this.global.pages[this.global.number])
 			localStorage.setItem("pageConfig",pageConfigStr)
 
 			var items = JSON.parse(pageConfigStr).items
@@ -82,7 +127,7 @@ return {
 	}
 	, created: function(){
 		var mSelf = this
-		this.$set('number', 0)
+		this.$set('global.number', 0)
 
 		$(window)
 			.on('keydown', function(e){

@@ -57,54 +57,6 @@
 	.focus{.none;}
 }
 
-.settingFrame, .settingOriginal, .settingFlash, .settingPage{
-	.hidden;
-	border-bottom:1px solid #222;
-	padding:2px;
-
-	.inputArea, .inputBox, .inputLabel{
-		.f(12px);.fc(#ccc); .l(20px);
-	}
-	.inputArea{
-		padding:4px;
-		//border-bottom:1px solid #2E2E2E;
-		//.left;
-
-		&:nth-last-child(1){
-			border:0 none;
-		}
-	}
-	.inputLabel{
-		.left;
-	}
-	.inputBox{
-		.ml(34px);
-	}
-
-	input{
-		&[type="text"],&[type="number"]{
-			.i_block;.fc(#ccc);.bgc(#383838);
-			padding:2px 0px 2px 6px;
-			border:1px solid #2E2E2E;
-		}
-		&[type="text"]{ .w(88px); }
-    &[type="number"]{ .c;.w(44px); }		
-	}
-	label {
-		.i_block; .tr;
-	}
-
-	.btn{
-		.i_block;
-		padding:2px 4px;
-		.border-r(2px);
-		.ml(2px);.mr(2px);
-		.bgc(#444);.fc(#ccc);
-		border:1px solid #222;
-		.cursor;
-	}
-}
-
 .ui-resizable{
 	&-se, &-e, &-s{.pa;z-index:90;}
 	&-se{cursor:se-resize;}
@@ -118,20 +70,17 @@
 <template>
 
 <div class="view" @click="blurItem">
-	<itemsetting :itemsdata="itemsdata" :global="global"></itemsetting>
+	<itemsetting :global="global"></itemsetting>
 	<div class="page" :style="pagestyle">
-		<item v-ref:item v-for="itemdata in itemsdata" :itemdata="itemdata" :index="$index" :global="global" :printdata="printdata"></item>
+		<item v-ref:item v-for="itemdata in global.pages[global.number].items" :itemdata="itemdata" :index="$index" :global="global" :printdata="printdata"></item>
 	</div>
 </div>
 
 
 <div class="settings">
-	<flash v-ref:flash :itemsdata="itemsdata" :global="global"></flash>
+	<flash v-ref:flash :global="global"></flash>
 
-	<pagesetting :global="global"></pagesetting>
-
-	<blocksetting :global="global"></blocksetting>
-	<resizesetting :global="global"></resizesetting>
+	<settings :global="global"></settings>
 </div>
 
 
@@ -140,53 +89,19 @@
 
 <script>
 
-var formatdata = {}
-formatdata.resize = {
-	width : {label : '宽度', unit : 'px'}
-	, height : {label : '高度', unit : 'px'}
-	, top : {label : '上边距', unit : 'px'}
-	, left : {label : '左边距', unit : 'px'}
-//	, 'border-radius' : {label : '圆角', unit : 'px'}
-}
-formatdata.transform = {
-/*
-	translate : {
-		label : '偏移'
-		, opts : [['x', 'px'],['y', 'px']]
-	}
-	, scale : {
-		label : '缩放'
-		, opts : [['x', '', '1', '0.1'],['y', '', '1', '0.1']]
-	}
-	, */rotate : {
-		label : '旋转'
-		, opts : [['angle', 'deg']]
-	}
-	, skew : {
-		label : '倾斜'
-		, opts : [['x-angle', 'deg'], ['y-angle', 'deg']]
-	}
-}
-
-
-
 var flash = require('flash/back/flash.vue')
 var item = require('flash/back/item.vue')
-var pagesetting = require('flash/back/settings/page.vue')
-var resizesetting = require('flash/back/settings/resize.vue')
-var blocksetting = require('flash/back/settings/block.vue')
+var settings = require('flash/back/settings.vue')
 var itemsetting = require('flash/back/settings/item.vue')
 
 return {
   components : {
     item : item
 		, flash : flash
-		, pagesetting : pagesetting
-		, resizesetting : resizesetting 
-		, blocksetting : blocksetting
+		, settings : settings
 		, itemsetting : itemsetting
   }
-	, props:['itemsdata']
+	, props:['global']
 	, data : function(){
 
 		return {
@@ -196,16 +111,6 @@ return {
 				, scale : 0
 			}
 			, pagestyle : {}
-			, global : {
-				time : null
-				, min : 10 
-				, step : 100
-				, framewidth : 14
-				, frameheight : 26
-				, formatdata : formatdata
-				, scrollLeft : 0
-				, dtime : 0
-			}
 		}
 	}
 	, methods : {

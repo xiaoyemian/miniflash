@@ -22,7 +22,7 @@
 <script>
 
 return {
-	props:['itemsdata', 'global']
+	props:['global']
 	, data : function(){
 
 		return {
@@ -32,7 +32,7 @@ return {
 		addImage : function(event){
 			var mSelf = this
 			this.$dispatch('changeImage', event, function(itemdata){
-				mSelf.itemsdata.push(itemdata)
+				mSelf.global.pages[mSelf.global.number].items.push(itemdata)
 
 				mSelf.$nextTick(function(){
 					this.$dispatch('loadTime')
