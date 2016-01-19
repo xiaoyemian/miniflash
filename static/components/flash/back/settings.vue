@@ -9,8 +9,6 @@
 	}
 	.inputArea{
 		padding:4px;
-		//border-bottom:1px solid #2E2E2E;
-		//.left;
 
 		&:nth-last-child(1){
 			border:0 none;

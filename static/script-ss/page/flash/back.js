@@ -8,7 +8,6 @@ var pageConfigStr = localStorage.getItem("pageConfig")
 var pages = [JSON.parse(pageConfigStr)]
 /*
 */
-console.log(pages)
 
 var vm = new Vue({
   el: 'body'

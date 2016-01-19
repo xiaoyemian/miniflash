@@ -129,6 +129,8 @@ return {
 		var mSelf = this
 		this.$set('global.number', 0)
 
+			console.log(this.global.pages)
+
 		$(window)
 			.on('keydown', function(e){
 				console.log(e.keyCode, keyCode[e.keyCode])
