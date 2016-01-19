@@ -101,12 +101,12 @@ return {
 			global : {
 				pages : this.pages
 				, number : null
+				, formatdata : formatdata
 				, time : null
 				, min : 10 
 				, step : 100
 				, framewidth : 14
 				, frameheight : 26
-				, formatdata : formatdata
 				, scrollLeft : 0
 				, dtime : 0
 			}
