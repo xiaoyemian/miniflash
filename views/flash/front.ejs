@@ -3,8 +3,7 @@
 <app v-ref:app :pages="pages" :number="number"></app>
 
 
-<script src="<%= JCSTATIC_BASE %>dist/vue.js"></script>
-<script src="<%= JCSTATIC_BASE %>dist/loader.js" data-main="page/flash/front"></script>
-<script src="<%= JCSTATIC_BASE %>dist/page/flash/front.js"></script>
+<%- loader.loadSingleJS(['vue']) %>
+<%- loader.loadJS(['page/flash/front']) %>
 
 <% include ../foot.ejs %>

@@ -6,6 +6,7 @@
 	<meta name="description" content="<%= this.meta_description%>"/>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
 	<title><%= this.pageTitle %></title>
-	<link rel="stylesheet" type="text/css" href="<%= JCSTATIC_BASE %>css/cssresetm.css"/>
+	<%- loader.loadCSS(['cssresetm']) %>
+	<%- loader.load() %>
 </head>
 <body>

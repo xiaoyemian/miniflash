@@ -5,6 +5,7 @@
 	<meta name="keywords" content="<%= this.keywords%>"/>
 	<meta name="description" content="<%= this.meta_description%>"/>
 	<title><%= this.pageTitle %></title>
-	<link rel="stylesheet" type="text/css" href="<%= JCSTATIC_BASE %>css/cssresetm.css"/>
+	<%- loader.loadCSS(['cssresetm']) %>
+	<%- loader.load() %>
 </head>
 <body>

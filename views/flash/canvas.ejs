@@ -3,8 +3,7 @@
 <app v-ref:app :pages="pages" :number="number"></app>
 
 
-<script src="<%= JCSTATIC_BASE %>dist/vue.js"></script>
-<script src="<%= JCSTATIC_BASE %>dist/loader.js" data-main="page/flash/canvas"></script>
-<script src="<%= JCSTATIC_BASE %>dist/page/flash/canvas.js"></script>
+<%- loader.loadSingleJS(['vue']) %>
+<%- loader.loadJS(['page/flash/canvas']) %>
 
 <% include ../foot.ejs %>
