@@ -1,0 +1,17 @@
+{
+    "path": {
+        "src": "./script-ss/",
+        "dist": "./script-min/",
+        "less": "./less/",
+        "css": "./css/",
+        "components": "./components/"
+    },
+    "isDebug": true,
+    "depends": {
+        "global": [
+            "jquery"
+        ]
+    },
+    "version": 23,
+    "JCSTATIC_BASE": "http://xhxiaoyemian.cello.com/"
+}
