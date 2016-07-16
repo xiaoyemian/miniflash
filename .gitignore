@@ -1,4 +1,4 @@
 .*/*
-*/static/config.json
+static/config.json
 config/*.json
 *.log

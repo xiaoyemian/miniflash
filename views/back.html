@@ -1,9 +1,8 @@
-<% include ../head5.ejs %>
+<% include frame/m/head.html %>
 
 <app v-ref:app :pages="pages" :number="number"></app>
 
 
-<%- loader.loadSingleJS(['vue']) %>
 <%- loader.loadJS(['page/flash/back']) %>
 
-<% include ../foot.ejs %>
+<% include frame/m/foot.html %>
