@@ -2,6 +2,7 @@
 
 <app v-ref:app :pages="pages" :number="number"></app>
 
+<%- loader.loadSingleJS(['core/package/zepto/zepto']) %>
 <%- loader.loadJS(['page/front']) %>
 
 <% include frame/www/foot.html %>
