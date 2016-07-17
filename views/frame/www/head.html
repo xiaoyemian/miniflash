@@ -6,8 +6,7 @@
 	<meta name="keywords" content="<%= this.keywords %>">
 	<meta name="description" content="<%= this.description %>">
 
-	<%== loader.load() %>
-	<%== loader.loadCSS(['core/cssresetwww']) %>
-
+	<%- loader.load(this.os) %>
+	<%- loader.loadCSS(['core/cssresetm']) %>
 </head>
 <body>

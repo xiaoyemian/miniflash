@@ -1,4 +1,4 @@
-var app = require('flash/front/app.vue')
+var app = require('front/app.vue')
 
 /*
 var pages = require('data/pages')

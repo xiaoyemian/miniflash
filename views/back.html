@@ -1,8 +1,9 @@
-<% include frame/m/head.html %>
+<% include frame/www/head.html %>
 
 <app v-ref:app :pages="pages" :number="number"></app>
 
 
+<%- loader.loadSingleJS(['core/package/jquery/jquery']) %>
 <%- loader.loadJS(['page/back']) %>
 
-<% include frame/m/foot.html %>
+<% include frame/www/foot.html %>

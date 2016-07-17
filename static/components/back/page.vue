@@ -89,10 +89,10 @@
 
 <script>
 
-var flash = require('flash/back/flash.vue')
-var item = require('flash/back/item.vue')
-var settings = require('flash/back/settings.vue')
-var itemsetting = require('flash/back/settings/item.vue')
+var flash = require('back/flash.vue')
+var item = require('back/item.vue')
+var settings = require('back/settings.vue')
+var itemsetting = require('back/settings/item.vue')
 
 return {
   components : {

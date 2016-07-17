@@ -28,7 +28,7 @@ body{
 <script>
 require('zepto')
 
-var item = require('flash/canvas/item.vue')
+var item = require('canvas/item.vue')
 
 return {
   components: {

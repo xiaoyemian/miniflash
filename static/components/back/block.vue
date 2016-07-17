@@ -35,7 +35,7 @@
 
 <script>
 
-var frame = require('flash/back/frame.vue')
+var frame = require('back/frame.vue')
 
 return {
   components : {

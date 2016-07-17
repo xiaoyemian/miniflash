@@ -1,4 +1,4 @@
-var app = require('flash/canvas/app.vue')
+var app = require('canvas/app.vue')
 
 /*
 var pages = require('data/pages')

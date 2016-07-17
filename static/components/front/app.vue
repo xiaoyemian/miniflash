@@ -33,7 +33,7 @@ body{
 <script>
 require('zepto')
 
-var item = require('flash/front/item.vue')
+var item = require('front/item.vue')
 
 var formatdata = {}
 formatdata.resize = {

@@ -44,12 +44,11 @@ body{
 
 
 <script>
-require('jquery')
-require('jqui/draggable')
-require('jqui/resizable')
-require('jqui/sortable')
+require('core/jqui/draggable')
+require('core/jqui/resizable')
+require('core/jqui/sortable')
 
-var page = require('flash/back/page.vue')
+var page = require('back/page.vue')
 
 var keyCode = {
 	'91' : 'command'

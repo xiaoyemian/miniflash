@@ -37,7 +37,7 @@
 </template>
 
 <script>
-var block = require('flash/back/block.vue')
+var block = require('back/block.vue')
 return {
   components : {
     block : block

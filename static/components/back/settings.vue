@@ -59,9 +59,9 @@
 
 <script>
 
-var pagesetting = require('flash/back/settings/page.vue')
-var resizesetting = require('flash/back/settings/resize.vue')
-var blocksetting = require('flash/back/settings/block.vue')
+var pagesetting = require('back/settings/page.vue')
+var resizesetting = require('back/settings/resize.vue')
+var blocksetting = require('back/settings/block.vue')
 
 return {
   components : {
